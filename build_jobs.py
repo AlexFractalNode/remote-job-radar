@@ -6,15 +6,17 @@ import html
 
 # --- KONFIGURATION ---
 OUTPUT_DIR = 'job_board'
-CACHE_FILE = 'ai_cache.json' # Hier merkt sich der Bot die Analysen
+CACHE_FILE = 'ai_cache.json'
 SITE_NAME = "RemoteRadar 📡"
-BASE_URL = "https://dein-jobboard-name.netlify.app" # URL ANPASSEN!
+BASE_URL = "https://dein-jobboard-name.netlify.app" 
 
-# API Key sicher laden (Lokal oder von GitHub)
+# SICHERHEIT: Max. 20 KI-Analysen pro Lauf, um Rate-Limits zu verhindern
+MAX_NEW_JOBS_LIMIT = 20 
+
 API_KEY = os.environ.get("GROQ_API")
 MODEL_NAME = "llama-3.1-8b-instant"
 
-# --- 1. DATEN HOLEN (ARBEITNOW) ---
+# --- 1. DATEN HOLEN ---
 print("📡 Rufe echte Job-Daten von Arbeitnow ab...")
 try:
     response = requests.get("https://arbeitnow.com/api/job-board-api")
@@ -24,7 +26,7 @@ except Exception as e:
     print(f"❌ API Fehler: {e}")
     jobs = []
 
-# --- 2. SMART CACHE LADEN ---
+# --- 2. CACHE LADEN ---
 ai_cache = {}
 if os.path.exists(CACHE_FILE):
     try:
@@ -32,18 +34,18 @@ if os.path.exists(CACHE_FILE):
             ai_cache = json.load(f)
         print(f"💾 Cache geladen: {len(ai_cache)} Jobs bereits analysiert.")
     except:
-        print("⚠️ Cache war leer oder defekt.")
+        print("⚠️ Cache leer.")
 
-# --- 3. KI-FUNKTION (MIT RETRY) ---
+# --- 3. KI-FUNKTION ---
 def analyze_job_with_ai(job):
-    if not API_KEY: return None # Ohne Key keine Analyse
-    
+    if not API_KEY: return None
     slug = job['slug']
     
-    # CHECK: Haben wir den schon?
     if slug in ai_cache:
         return ai_cache[slug]
 
+    # Hier prüfen wir das Limit NICHT, das machen wir im Loop unten
+    
     print(f"🧠 Analysiere NEUEN Job: {job['title'][:30]}...")
     
     headers = {
@@ -52,18 +54,15 @@ def analyze_job_with_ai(job):
     }
     
     prompt = f"""
-    Du bist ein HR-Experte für den deutschen Arbeitsmarkt.
-    Analysiere diese Stellenanzeige:
+    Analysiere als HR-Experte kurz:
     Titel: {job['title']}
     Firma: {job['company_name']}
-    Ort: {job['location']}
-    Beschreibung (Auszug): {job['description'][:500]}...
+    Beschreibung: {job['description'][:400]}...
     
-    AUFGABE:
-    Antworte NUR mit JSON:
+    ANTWORTE NUR JSON:
     {{
-      "salary_estimate": "Geschätztes Jahresgehalt (z.B. '45.000€ - 60.000€' oder 'Marktüblich'). Sei realistisch für Deutschland.",
-      "summary": "2 knackige Sätze, warum dieser Job spannend ist (Du-Form)."
+      "salary_estimate": "Geschätzt in Euro (z.B. '50k-60k'). Sei realistisch.",
+      "summary": "2 knackige Sätze warum man sich bewerben soll."
     }}
     """
     
@@ -74,57 +73,65 @@ def analyze_job_with_ai(job):
         "response_format": {"type": "json_object"}
     }
     
-    # Retry Loop für 429 Errors
+    # Robuster Retry
     for attempt in range(3):
         try:
             r = requests.post("https://api.groq.com/openai/v1/chat/completions", headers=headers, json=payload)
             if r.status_code == 200:
-                content = r.json()['choices'][0]['message']['content']
-                result = json.loads(content)
-                
-                # Speichern im Cache
-                ai_cache[slug] = result
-                return result
+                return json.loads(r.json()['choices'][0]['message']['content'])
             elif r.status_code == 429:
-                print("   ⏳ Rate Limit... warte 10s")
-                time.sleep(10)
+                wait = (attempt + 1) * 20 # 20s, 40s, 60s warten
+                print(f"   ⏳ Rate Limit... warte {wait}s")
+                time.sleep(wait)
             else:
-                print(f"   ❌ Fehler {r.status_code}")
                 return None
         except Exception as e:
-            print(f"   ❌ Error: {e}")
-            time.sleep(2)
-            
+            time.sleep(5)
     return None
 
-# --- 4. JOBS VERARBEITEN ---
-processed_jobs_count = 0
-for job in jobs:
-    # Nur analysieren, wenn Key da ist
-    analysis = analyze_job_with_ai(job)
+# --- 4. JOBS VERARBEITEN (MIT LIMIT) ---
+new_jobs_analyzed = 0
+
+for i, job in enumerate(jobs):
+    slug = job['slug']
     
-    # Daten anreichern
+    # Entscheiden: Dürfen wir die KI fragen?
+    # Ja, wenn:
+    # 1. Der Job schon im Cache ist (kostet nix) ODER
+    # 2. Wir das Tageslimit noch nicht erreicht haben
+    
+    if slug in ai_cache:
+        analysis = ai_cache[slug]
+    elif new_jobs_analyzed < MAX_NEW_JOBS_LIMIT:
+        analysis = analyze_job_with_ai(job)
+        if analysis:
+            ai_cache[slug] = analysis
+            new_jobs_analyzed += 1
+            time.sleep(3) # Pause zwischen Requests
+    else:
+        # Limit erreicht -> Keine KI für diesen Job heute
+        analysis = None
+
+    # Daten zuweisen
     if analysis:
-        job['salary_estimate'] = analysis.get('salary_estimate', 'Keine Angabe')
+        job['salary_estimate'] = analysis.get('salary_estimate', 'k.A.')
         job['summary'] = analysis.get('summary', '')
     else:
         job['salary_estimate'] = "Auf Anfrage"
-        job['summary'] = "Klicke für mehr Details."
-        
-    # Cache zwischendurch speichern (falls Skript abstürzt)
-    if processed_jobs_count % 5 == 0:
+        job['summary'] = "KI-Analyse folgt..."
+
+    # Alle 5 Jobs Cache speichern (Sicherheit)
+    if i % 5 == 0:
         with open(CACHE_FILE, 'w', encoding='utf-8') as f:
             json.dump(ai_cache, f, ensure_ascii=False)
-            
-    # WICHTIG: Kleine Pause, um API zu schonen
-    if job['slug'] not in ai_cache: # Nur warten, wenn wir die API wirklich genutzt haben
-        time.sleep(2)
 
-# Final Cache Save
+# Final speichern
 with open(CACHE_FILE, 'w', encoding='utf-8') as f:
     json.dump(ai_cache, f, ensure_ascii=False)
 
-# --- 5. HTML GENERIEREN (MIT NEUEN FELDERN) ---
+print(f"🏁 Fertig. Heute {new_jobs_analyzed} neue Jobs analysiert.")
+
+# --- 5. HTML GENERIEREN ---
 if not os.path.exists(OUTPUT_DIR): os.makedirs(OUTPUT_DIR)
 
 css_styles = """
@@ -218,5 +225,3 @@ index_html = f"""
 
 with open(os.path.join(OUTPUT_DIR, "index.html"), "w", encoding="utf-8") as f:
     f.write(index_html)
-    
-print("🎉 Fertig! Gehaltsschätzungen eingebaut.")
