@@ -1,0 +1,37 @@
+name: Daily Job Update
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # Jeden Tag um 06:00 Uhr morgens (UTC)
+  workflow_dispatch: # Erlaubt dir, es manuell per Klick zu starten (zum Testen)
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Code auschecken
+      uses: actions/checkout@v3
+
+    - name: Python einrichten
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Bibliotheken installieren
+      run: |
+        pip install -r requirements.txt
+
+    - name: Job-Board bauen (Skript ausführen)
+      run: |
+        python build_jobs.py
+
+    - name: Änderungen speichern und hochladen (Commit & Push)
+      run: |
+        git config --global user.name "Job-Bot 🤖"
+        git config --global user.email "bot@example.com"
+        git add job_board/
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Automatisches Job-Update 🚀" && git push)
