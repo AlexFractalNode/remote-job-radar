@@ -27,12 +27,12 @@ jobs:
 
     - name: Job-Board bauen (Mit KI)
       env:
-        GROQ_API: ${{ secrets.GROQ_API }}  # <--- HIER IST DER SCHLÜSSEL!
+        GROQ_API: ${{ secrets.GROQ_API }}
       run: |
         python build_jobs.py
 
-        - name: Änderungen speichern (Cache & HTML)
-      if: always()   # <--- WICHTIG! Das rettet deine Daten bei Fehlern
+    - name: Änderungen speichern (Cache & HTML)
+      if: always()
       run: |
         git config --global user.name "Job-Bot 🤖"
         git config --global user.email "bot@example.com"
