@@ -1,0 +1,1196 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RemoteRadar 📡 - Die besten Tech & Remote Jobs</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    
+<style>
+    :root { --primary: #2563eb; --background: #f8fafc; --card-bg: #ffffff; }
+    body { background-color: var(--background); font-family: 'Segoe UI', sans-serif; }
+    
+    /* Header */
+    nav { background: white; border-bottom: 1px solid #e2e8f0; padding: 1rem 0; }
+    .nav-content { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); text-decoration: none; }
+    
+    /* Job Cards (Index) */
+    .job-card {
+        background: var(--card-bg);
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        transition: transform 0.2s, box-shadow 0.2s;
+        display: block;
+        text-decoration: none;
+        color: inherit;
+    }
+    .job-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        border-color: var(--primary);
+    }
+    .job-title { font-size: 1.2rem; font-weight: 600; color: #1e293b; }
+    .job-meta { color: #64748b; font-size: 0.9rem; margin-top: 0.5rem; display: flex; gap: 1rem; }
+    
+    /* Badges */
+    .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
+    .badge-remote { background: #dcfce7; color: #166534; }
+    .badge-office { background: #f1f5f9; color: #475569; }
+    
+    /* Detail Page */
+    .apply-btn {
+        display: inline-block;
+        background: var(--primary); color: white;
+        padding: 12px 24px; border-radius: 6px;
+        text-decoration: none; font-weight: bold;
+        text-align: center; width: 100%;
+    }
+    .apply-btn:hover { background: #1d4ed8; }
+    .job-description { line-height: 1.6; color: #334155; margin-top: 2rem; }
+    .job-description h2 { margin-top: 1.5rem; font-size: 1.3rem; }
+    .job-description ul { margin-left: 1.5rem; }
+</style>
+
+    <script>
+    function filterJobs() {
+        var input = document.getElementById('search').value.toUpperCase();
+        var cards = document.getElementsByClassName('job-card');
+        for (var i = 0; i < cards.length; i++) {
+            var txt = cards[i].innerText;
+            cards[i].style.display = txt.toUpperCase().indexOf(input) > -1 ? "block" : "none";
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="container-fluid">
+        <div class="container nav-content">
+            <a href="#" class="logo">📡 RemoteRadar</a>
+            <div>
+                <a href="#" role="button" class="secondary outline">Für Arbeitgeber</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div style="text-align:center; padding: 3rem 0;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Finde deinen Traumjob.</h1>
+            <p style="color:#64748b;">Durchsuche hunderte aktuelle Stellenangebote aus Deutschland & Remote.</p>
+            
+            <input type="text" id="search" onkeyup="filterJobs()" placeholder="🔍 Suche nach 'Java', 'Marketing', 'Berlin'..." style="max-width: 600px; margin: 2rem auto; padding: 1rem; border-radius: 8px;">
+        </div>
+
+        <div id="job-list">
+            
+    <a href="marketing-social-media-fur-tofubar-minijob-werkstudent-in-chemnitz-381646.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Marketing / Social Media für Tofubar, Minijob/Werkstudent/in, Chemnitz</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Chemnitz</span>
+        </div>
+    </a>
+    
+    <a href="software-developer-java-groovy-scriptrunner-forge-munich-34480.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Software Developer - Java, Groovy, ScriptRunner, Forge (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Munich</span>
+        </div>
+    </a>
+    
+    <a href="software-developer-java-groovy-scriptrunner-forge-essen-339134.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Software Developer - Java, Groovy, ScriptRunner, Forge (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Essen</span>
+        </div>
+    </a>
+    
+    <a href="google-ads-growth-manager-freelance-gesucht-hamburg-310510.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Google Ads Growth Manager (m/w/d) - Freelance gesucht</div>
+            <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.8em; float:right;">Remote</span>
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Hamburg</span>
+        </div>
+    </a>
+    
+    <a href="e-commerce-manager-shopify-cro-remote-vollzeit-aachen-169293.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">E-Commerce Manager Shopify & CRO (m/w/d) - Remote (Vollzeit)</div>
+            <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.8em; float:right;">Remote</span>
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Aachen</span>
+        </div>
+    </a>
+    
+    <a href="kaufmannische-fuhrungskraft-business-development-projektleitung-in-osnabruck-153271.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Kaufmännische Führungskraft (m/w/d) Business Development & Projektleitung in Osnabrück</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Osnabrück</span>
+        </div>
+    </a>
+    
+    <a href="content-assistant-streaming-social-darmstadt-187687.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Content Assistant (Streaming & Social)</div>
+            <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.8em; float:right;">Remote</span>
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Darmstadt</span>
+        </div>
+    </a>
+    
+    <a href="regionalleiter-vertrieb-sicherheitstechnik-berlin-88026.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Regionalleiter Vertrieb (m/w/d) Sicherheitstechnik Berlin</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="it-systemelektroniker-sicherheitstechnik-berlin-37005.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">IT-Systemelektroniker (m/w/d) Sicherheitstechnik Berlin</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="kfz-mechatroniker-fur-unser-fleet-servicecenter-in-lengede-gesucht-265059.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Kfz-Mechatroniker (m/w/d) für unser Fleet-Servicecenter in Lengede gesucht!</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Lengede</span>
+        </div>
+    </a>
+    
+    <a href="global-privacy-compliance-managerin-hamburg-486433.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Global Privacy & Compliance Manager:in (d/w/m)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Hamburg</span>
+        </div>
+    </a>
+    
+    <a href="customer-service-agent-dormagen-24546.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Customer Service Agent (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Dormagen</span>
+        </div>
+    </a>
+    
+    <a href="erfolgreich-durch-startup-in-homeoffice-mit-online-business-ebay-amazon-bremen-399447.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Erfolgreich durch StartUp in HomeOffice mit online Business Ebay Amazon</div>
+            <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.8em; float:right;">Remote</span>
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Bremen</span>
+        </div>
+    </a>
+    
+    <a href="forward-deployed-engineer-berlin-234531.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Forward Deployed Engineer (f/m/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="ab-sofort-minijob-in-der-personalabteilung-essen-56774.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Ab sofort: Minijob in der Personalabteilung</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Essen</span>
+        </div>
+    </a>
+    
+    <a href="full-stack-developer-berlin-465139.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Full Stack Developer PHP/JavaScript (m/w/d) FinTech</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="online-marketing-manager-berlin-133452.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Online Marketing Manager (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="junior-online-marketing-berlin-158560.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Junior Online Marketing (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="online-marketing-medienproduktion-finanzen-berlin-176322.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Online Marketing - Medienproduktion / Finanzen (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="duales-studium-investment-analyst-trader-borse-berlin-480693.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Duales Studium - Investment Analyst / Trader - Börse (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="junior-full-stack-developer-php-javascript-berlin-331350.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Junior Full Stack Developer (PHP / JavaScript) (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="trainee-investment-analyst-coach-berlin-386164.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Trainee Investment Analyst & Coach (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="junior-investment-analyst-berlin-463416.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Junior Investment Analyst (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="senior-devops-engineer-berlin-499365.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Senior DevOps Engineer  (m/w/x)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="duales-studium-wirtschaftsinformatik-webentwickler-php-reactjs-berlin-458362.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Duales Studium Wirtschaftsinformatik - Webentwickler (PHP/React.js) (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="enterprise-account-executive-dach-munchen-156997.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Enterprise Account Executive - DACH</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 München, Bavaria, Germany</span>
+        </div>
+    </a>
+    
+    <a href="associate-manager-global-courier-pricing-berlin-287438.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Associate Manager, Global Courier Pricing</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin, Berlin, Germany</span>
+        </div>
+    </a>
+    
+    <a href="hr-manager-recruiting-operations-munich-160874.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">HR Manager Recruiting & Operations (w/m/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Munich</span>
+        </div>
+    </a>
+    
+    <a href="senior-manager-group-accounting-consolidation-grafelfing-175181.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Senior Manager Group Accounting & Consolidation (w/m/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Gräfelfing</span>
+        </div>
+    </a>
+    
+    <a href="sr-controller-grafelfing-385559.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Sr. Controller (w/m/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Gräfelfing</span>
+        </div>
+    </a>
+    
+    <a href="fullstack-developer-laravel-in-berlin-451167.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Fullstack Developer - Laravel (m/f/x) in Berlin</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="sr-sap-fi-co-consultant-munich-58251.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Sr. SAP FI/CO Consultant (w/m/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Munich</span>
+        </div>
+    </a>
+    
+    <a href="b2b-partner-account-manager-partner-success-in-koln-cologne-170542.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">B2B Partner Account Manager (m/f/x) - Partner Success in Köln</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Cologne</span>
+        </div>
+    </a>
+    
+    <a href="director-accounting-tax-grafelfing-477510.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Director Accounting & Tax (w/m/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Gräfelfing</span>
+        </div>
+    </a>
+    
+    <a href="b2b-partner-account-manager-partner-success-in-berlin-392500.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">B2B Partner Account Manager (m/f/x) - Partner Success in Berlin</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="corporate-development-manager-in-berlin-459014.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Corporate Development Manager (m/f/x) in Berlin</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="it-systemtechniker-dachau-466277.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">IT-Systemtechniker (w/m/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Dachau</span>
+        </div>
+    </a>
+    
+    <a href="corporate-development-manager-in-koln-cologne-441482.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Corporate Development Manager (m/f/x) in Köln</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Cologne</span>
+        </div>
+    </a>
+    
+    <a href="product-owner-fur-ki-projekte-mit-projektmanagement-erfahrung-munich-312076.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Product Owner (w/m/d) für KI-Projekte - mit Projektmanagement-Erfahrung</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Munich</span>
+        </div>
+    </a>
+    
+    <a href="ai-developer-munich-265721.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">AI Developer (w/m/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Munich</span>
+        </div>
+    </a>
+    
+    <a href="lead-ai-engineer-munich-396826.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Lead AI Engineer (w/m/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Munich</span>
+        </div>
+    </a>
+    
+    <a href="design-project-manager-hamburger-headquarter-befristet-fur-ein-jahr-260662.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Design Project Manager (w/m/d)* - Hamburger Headquarter // befristet für ein Jahr</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Hamburg</span>
+        </div>
+    </a>
+    
+    <a href="working-student-it-security-hamburg-320005.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Working Student (f/m/d)* IT Security</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Hamburg</span>
+        </div>
+    </a>
+    
+    <a href="data-analyst-berlin-248899.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Data Analyst</div>
+            <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.8em; float:right;">Remote</span>
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="chief-of-staff-berlin-369076.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Chief of Staff</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="head-of-energy-operations-berlin-404451.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Head of Energy Operations</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="manager-business-operations-coo-office-berlin-255805.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Manager Business Operations - COO Office</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="projektmanager-dezentrale-energieversorgung-berlin-118617.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Projektmanager - Dezentrale Energieversorgung</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="ava-experte-fur-californiax-berlin-297398.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">AVA-Experte (m/w/d) für CaliforniaX</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="senior-operations-manager-energy-solutions-berlin-398117.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">(Senior) Operations Manager - Energy Solutions</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="junior-stability-specialist-neunkirchen-12834.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Junior Stability Specialist (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Neunkirchen</span>
+        </div>
+    </a>
+    
+    <a href="senior-software-engineer-backend-typescript-mannheim-241809.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Senior Software Engineer (m/w/d) – Backend  (TypeScript)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Mannheim</span>
+        </div>
+    </a>
+    
+    <a href="head-of-growth-performance-marketing-berlin-108610.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Head of Growth & Performance Marketing (f/m/x)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="marketing-vertrieb-braunschweig-155638.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Marketing & Vertrieb</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Braunschweig</span>
+        </div>
+    </a>
+    
+    <a href="mobile-app-developer-react-native-berlin-294767.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Mobile App Developer (React Native)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="praktikantin-kundenberatung-scaling-phase-berlin-377063.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Praktikant*in Kundenberatung | Scaling Phase</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="social-media-manager-biesenthal-7012.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Social Media Manager (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Biesenthal</span>
+        </div>
+    </a>
+    
+    <a href="senior-ai-developer-bielefeld-417808.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Senior AI-Developer (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Bielefeld</span>
+        </div>
+    </a>
+    
+    <a href="werkstudentin-recruiting-hamburg-461450.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Werkstudent:in Recruiting (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Hamburg</span>
+        </div>
+    </a>
+    
+    <a href="safety-engineer-ept-batteries-aachen-411971.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Safety Engineer - ePT & Batteries (m/f/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Aachen</span>
+        </div>
+    </a>
+    
+    <a href="supplier-quality-engineer-munich-136109.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Supplier Quality Engineer (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Munich</span>
+        </div>
+    </a>
+    
+    <a href="operations-specialist-procurement-hamburg-449624.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Operations Specialist  (w/m/d)* - Procurement</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Hamburg</span>
+        </div>
+    </a>
+    
+    <a href="social-media-marketing-hofheim-267616.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Social Media Marketing</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Hofheim</span>
+        </div>
+    </a>
+    
+    <a href="grafikdesigner-webdesigner-digital-media-illustration-teilzeit-regensburg-25157.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Grafikdesigner / Webdesigner (m/w/d) - Digital Media & Illustration - Teilzeit</div>
+            <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.8em; float:right;">Remote</span>
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Regensburg</span>
+        </div>
+    </a>
+    
+    <a href="marketing-manager-full-time-munich-444935.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Marketing Manager |  Full Time (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Munich</span>
+        </div>
+    </a>
+    
+    <a href="content-creator-brand-marketing-manager-fur-no-sugar-factory-kalorienarme-und-proteinreiche-kuchen-desserts-berlin-266720.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Content Creator, Brand & Marketing Manager (m/w/d) für NO SUGAR FACTORY - kalorienarme und proteinreiche Kuchen & Desserts</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="automation-developer-emstek-112276.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Automation Developer</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Emstek</span>
+        </div>
+    </a>
+    
+    <a href="werkstudent-in-der-gebaudetechnik-heizung-kalte-luftung-sanitar-cologne-450999.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Werkstudent (m/w/d) in der Gebäudetechnik (Heizung, Kälte, Lüftung, Sanitär)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Cologne</span>
+        </div>
+    </a>
+    
+    <a href="content-creator-mulheim-255353.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Content Creator (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Mülheim</span>
+        </div>
+    </a>
+    
+    <a href="junior-artist-manager-influencer-manager-mulheim-199586.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Junior Artist Manager / Influencer Manager (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Mülheim</span>
+        </div>
+    </a>
+    
+    <a href="junior-artist-manager-influencer-manager-berlin-309139.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Junior Artist Manager / Influencer Manager (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="artist-manager-influencer-manager-mulheim-120690.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Artist Manager / Influencer Manager (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Mülheim</span>
+        </div>
+    </a>
+    
+    <a href="artist-manager-influencer-manager-berlin-119143.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Artist Manager / Influencer Manager (m/w/d) BERLIN</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="werkstudentin-administration-backoffice-das-ruckgrat-unseres-startups-dusseldorf-226083.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Werkstudent:in Administration & Backoffice - Das Rückgrat unseres Startups</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Düsseldorf</span>
+        </div>
+    </a>
+    
+    <a href="head-of-brand-dach-berlin-332717.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Head of Brand DACH (m/f/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="solution-consultant-rechnungswesen-heidelberg-108866.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Solution Consultant (Rechnungswesen)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Heidelberg</span>
+        </div>
+    </a>
+    
+    <a href="freelancer-digital-event-projektmanager-webinare-online-events-cologne-109583.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Freelancer Digital Event & Projektmanager - Webinare & Online-Events (m/w/d)</div>
+            <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.8em; float:right;">Remote</span>
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Cologne</span>
+        </div>
+    </a>
+    
+    <a href="sap-projektmanager-refnr-46152-munich-18712.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">SAP Projektmanager (m/w/d) (Ref.Nr.: 46152)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Munich</span>
+        </div>
+    </a>
+    
+    <a href="operations-lead-operative-leitung-in-passau-74042.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Operations Lead, operative Leitung (w/m/d) in Passau</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Passau</span>
+        </div>
+    </a>
+    
+    <a href="quereinsteiger-im-vertrieb-hamburg-43746.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Quereinsteiger im Vertrieb (w/m/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Hamburg</span>
+        </div>
+    </a>
+    
+    <a href="sales-manager-berlin-123209.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Sales Manager (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="quereinsteiger-im-vertrieb-berlin-106840.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Quereinsteiger im Vertrieb (w/m/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="bankkaufmann-frau-als-kreditspezialist-im-homeoffice-berlin-483238.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Bankkaufmann/-frau - als Kreditspezialist im Homeoffice (m/w/d)</div>
+            <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.8em; float:right;">Remote</span>
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="webentwickler-frontend-developer-potsdam-356204.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Webentwickler / Frontend Developer (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Potsdam</span>
+        </div>
+    </a>
+    
+    <a href="fachingenieur-fur-temporare-verkehrsplanung-bad-sackingen-295556.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Fachingenieur für temporäre Verkehrsplanung (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Bad Säckingen</span>
+        </div>
+    </a>
+    
+    <a href="java-developer-karlsruhe-24412.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Java Developer (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Karlsruhe</span>
+        </div>
+    </a>
+    
+    <a href="senior-fullstack-developer-karlsruhe-319269.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Senior Fullstack Developer (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Karlsruhe</span>
+        </div>
+    </a>
+    
+    <a href="sap-technology-manager-wiesbaden-496023.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">SAP Technology Manager (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Wiesbaden</span>
+        </div>
+    </a>
+    
+    <a href="projektleiter-m365-services-munich-292039.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Projektleiter M365 Services ( m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Munich</span>
+        </div>
+    </a>
+    
+    <a href="senior-amazon-marketplace-manager-berlin-292372.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Senior Amazon Marketplace Manager (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Berlin</span>
+        </div>
+    </a>
+    
+    <a href="video-editor-hamburg-298569.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Video Editor (m/w/d)</div>
+            <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.8em; float:right;">Remote</span>
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Hamburg</span>
+        </div>
+    </a>
+    
+    <a href="operations-managerin-manager-projektingenieurin-ingenieur-dresden-168243.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Operations Managerin (Manager) / Projektingenieurin(-ingenieur) (w/m/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Dresden</span>
+        </div>
+    </a>
+    
+    <a href="wir-suchen-einen-li-regulatory-spezialisten-ref-13633-frankfurt-am-main-469514.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Wir suchen einen LI- & Regulatory-Spezialisten (m/w/d) Ref. 1363.3</div>
+            <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.8em; float:right;">Remote</span>
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Frankfurt am Main</span>
+        </div>
+    </a>
+    
+    <a href="junior-devops-platform-engineer-dresden-73947.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Junior DevOps / Platform Engineer (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Dresden</span>
+        </div>
+    </a>
+    
+    <a href="devops-platform-engineer-dresden-137141.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">DevOps / Platform Engineer (m/w/d)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Dresden</span>
+        </div>
+    </a>
+    
+    <a href="marketing-manager-hamburg-487260.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Marketing Manager (m/w/d)</div>
+            <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.8em; float:right;">Remote</span>
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Hamburg</span>
+        </div>
+    </a>
+    
+    <a href="recruiting-spezialist-remote-straubenhardt-234887.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Recruiting Spezialist (m/w/d) - Remote</div>
+            <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.8em; float:right;">Remote</span>
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Straubenhardt</span>
+        </div>
+    </a>
+    
+    <a href="projektleiter-m365-90-remote-10-in-munchen-sowie-bundesweiten-einsatzen-bei-workshops-munich-302210.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Projektleiter M365 (m/w/d) - 90% Remote , 10 % in München sowie bundesweiten Einsätzen bei Workshops</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Munich</span>
+        </div>
+    </a>
+    
+    <a href="team-lead-marketing-mensch-hamburg-432941.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Team Lead Marketing (Mensch)</div>
+            
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Hamburg</span>
+        </div>
+    </a>
+    
+    <a href="wir-suchen-einen-operations-troubleshooting-experten-ref-13632-frankfurt-am-main-259025.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
+            <div class="job-title">Wir suchen einen Operations- & Troubleshooting-Experten (m/w/d) Ref. 1363.2</div>
+            <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.8em; float:right;">Remote</span>
+        </div>
+        <div class="job-meta">
+            <span>🏢 Unbekannt</span>
+            <span>📍 Frankfurt am Main</span>
+        </div>
+    </a>
+    
+        </div>
+        
+        <footer style="text-align:center; margin-top:4rem; color:#94a3b8;">
+            <small>&copy; 2025 RemoteRadar. Alle Jobs von Arbeitnow API.</small>
+        </footer>
+    </main>
+</body>
+</html>
