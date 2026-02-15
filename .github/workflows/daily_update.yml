@@ -31,20 +31,23 @@ jobs:
         run: |
           python build_jobs.py
 
-      # SCHRITT A: Das Gehirn (Cache) sichern!
-      # Wir speichern ai_cache.json zurück in den "main" Branch
+      # REPARIERTER SCHRITT: Cache speichern
       - name: Cache speichern (in main)
         run: |
           git config --global user.name "Job-Bot 🤖"
           git config --global user.email "bot@example.com"
+          
+          # Wir fügen explizit nur den Cache hinzu
           git add ai_cache.json
-          # Nur committen, wenn sich der Cache geändert hat
-          git diff --quiet && git diff --staged --quiet || (git commit -m "🧠 Cache Update" && git push)
+          
+          # Der Trick: Wir prüfen, ob NUR DIESE DATEI im "Staging" Bereich liegt
+          # Wenn ja (diff-index --quiet gibt Fehler zurück), dann committen.
+          # Wenn nein (keine Änderungen im Cache), passiert nichts.
+          git diff-index --quiet HEAD ai_cache.json || (git commit -m "🧠 Cache Update" && git push)
 
-      # SCHRITT B: Die Webseite veröffentlichen!
-      # Wir schieben NUR den Ordner "job_board" auf den Branch "gh-pages"
+      # Webseite veröffentlichen
       - name: Auf GitHub Pages deployen 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: job_board # Dieser Ordner wird zur Webseite
-          branch: gh-pages  # Der Zweig für die Live-Seite
+          folder: job_board
+          branch: gh-pages
