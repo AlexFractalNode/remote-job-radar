@@ -1,725 +1,1425 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-    <title>RemoteRadar 📡</title>
+    <title>RemoteRadar 📡 - Jobs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     
 <style>
-    :root { --primary: #2563eb; --background: #f8fafc; }
-    body { background: var(--background); font-family: sans-serif; }
-    .job-card { background: white; border: 1px solid #e2e8f0; padding: 1.5rem; margin-bottom: 1rem; border-radius: 8px; text-decoration: none; color: inherit; display: block; transition: transform 0.2s; }
-    .job-card:hover { transform: translateY(-3px); border-color: var(--primary); }
-    .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
-    .badge-salary { background: #fff7ed; color: #c2410c; border: 1px solid #ffedd5; }
-    .ai-summary { font-style: italic; color: #64748b; margin-top: 0.5rem; font-size: 0.9rem; border-left: 3px solid #cbd5e1; padding-left: 10px; }
+    :root { --primary: #2563eb; --background: #f8fafc; --text: #1e293b; }
+    body { background: var(--background); color: var(--text); font-family: system-ui, -apple-system, sans-serif; }
+    
+    /* Navigation */
+    nav { background: white; border-bottom: 1px solid #e2e8f0; padding: 1rem 0; margin-bottom: 2rem; }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; padding: 0 1rem; }
+    .logo { font-weight: 800; font-size: 1.5rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: #64748b; text-decoration: none; margin-left: 1rem; font-size: 0.9rem; }
+    
+    /* Filter Bar */
+    .filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem; }
+    .filter-btn { 
+        background: white; border: 1px solid #cbd5e1; padding: 6px 12px; 
+        border-radius: 20px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s;
+        color: #475569;
+    }
+    .filter-btn:hover, .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* Job Cards */
+    .job-card { 
+        background: white; border: 1px solid #e2e8f0; padding: 1.5rem; margin-bottom: 1rem; 
+        border-radius: 12px; text-decoration: none; color: inherit; display: block; 
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .job-card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .badge { display: inline-block; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; margin-right: 5px; }
+    .badge-salary { background: #fff7ed; color: #c2410c; }
+    .badge-tag { background: #eff6ff; color: #1e40af; }
+    
+    .ai-summary { background: #f1f5f9; padding: 0.8rem; border-radius: 8px; margin-top: 1rem; font-size: 0.9rem; color: #334155; }
+    
+    /* Footer */
+    footer { text-align: center; margin-top: 4rem; padding: 2rem; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid #e2e8f0; }
+    footer a { color: #64748b; }
 </style>
 
+    <script>
+    function filterSelection(c) {
+        var x, i;
+        x = document.getElementsByClassName("job-card");
+        var btns = document.getElementsByClassName("filter-btn");
+        
+        // Button Active State
+        for (i = 0; i < btns.length; i++) {
+            if (btns[i].innerText.toLowerCase().includes(c.replace('-', ' ')) || (c === 'all' && btns[i].innerText === 'Alle')) {
+                btns[i].classList.add("active");
+            } else {
+                btns[i].classList.remove("active");
+            }
+        }
+
+        if (c == "all") c = "";
+        for (i = 0; i < x.length; i++) {
+            w3RemoveClass(x[i], "show");
+            if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+        }
+    }
+    
+    function w3AddClass(element, name) {
+        var i, arr1, arr2;
+        arr1 = element.className.split(" ");
+        arr2 = name.split(" ");
+        for (i = 0; i < arr2.length; i++) {
+            if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+        }
+    }
+    
+    function w3RemoveClass(element, name) {
+        var i, arr1, arr2;
+        arr1 = element.className.split(" ");
+        arr2 = name.split(" ");
+        for (i = 0; i < arr2.length; i++) {
+            while (arr1.indexOf(arr2[i]) > -1) {
+                arr1.splice(arr1.indexOf(arr2[i]), 1);     
+            }
+        }
+        element.className = arr1.join(" ");
+    }
+    // Initial: Alle zeigen
+    window.onload = function() { filterSelection('all'); };
+    </script>
+    <style>
+    .job-card { display: none; } /* Standardmäßig versteckt */
+    .show { display: block; animation: fadeIn 0.5s; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
 </head>
 <body>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links">
+                <a href="impressum.html">Impressum</a>
+            </div>
+        </div>
+    </nav>
     <main class="container">
-        <h1 style="text-align:center; margin:3rem 0;">📡 RemoteRadar <br><small>KI-Powered Job Board</small></h1>
+        <div style="text-align:center; margin-bottom: 3rem;">
+            <h1>Finde deinen nächsten Job.</h1>
+            <p>KI-analysiert. Gehalts-geschätzt. Handverlesen.</p>
+        </div>
         
-    <a href="marketing-social-media-fur-tofubar-minijob-werkstudent-in-chemnitz-381646.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Marketing / Social Media für Tofubar, Minijob/Werkstudent/in, Chemnitz</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">tofubar • Chemnitz</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Minijob/Werkstudent/in, kein festes Gehalt erwähnt</span></div>
-        <div class="ai-summary">Echte Handwerk- und Nachhaltigkeitsbegeisterung, Teil des Teams von Tofubar, traditionelle Manufakturarbeit</div>
-    </a>
-    
-    <a href="software-developer-java-groovy-scriptrunner-forge-munich-34480.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Software Developer - Java, Groovy, ScriptRunner, Forge (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">MESKRU GmbH • Munich</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 60k-80k</span></div>
-        <div class="ai-summary">Bewirb dich, wenn du Erfahrung in Java, Groovy und ScriptRunner suchst und dich für die Entwicklung von Erweiterungen und Automatisierung von Prozessen begeistern kannst. Die MESKRU GmbH bietet eine Herausforderung für erfahrene Software-Entwickler.</div>
-    </a>
-    
-    <a href="software-developer-java-groovy-scriptrunner-forge-essen-339134.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Software Developer - Java, Groovy, ScriptRunner, Forge (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">MESKRU GmbH • Essen</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 40k-60k</span></div>
-        <div class="ai-summary">Bewirb dich, wenn du Erfahrung in Java, Groovy und ScriptRunner hast und dich für die Entwicklung von Erweiterungen für Jira und Confluence begeistern kannst. Die MESKRU GmbH bietet eine Herausforderung für erfahrene Software-Entwickler.</div>
-    </a>
-    
-    <a href="google-ads-growth-manager-freelance-gesucht-hamburg-310510.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Google Ads Growth Manager (m/w/d) - Freelance gesucht</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">ProviPanda GmbH • Hamburg</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 50k-70k</span></div>
-        <div class="ai-summary">Bewirb dich, wenn du Erfahrung in Google Ads hast und dich für ein wachsendes SaaS-Startup interessierst. Hier kannst du deine Fähigkeiten einsetzen und zum Wachstum des Unternehmens beitragen.</div>
-    </a>
-    
-    <a href="e-commerce-manager-shopify-cro-remote-vollzeit-aachen-169293.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">E-Commerce Manager Shopify & CRO (m/w/d) - Remote (Vollzeit)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Tretmann • Aachen</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 60k-80k</span></div>
-        <div class="ai-summary">Bewirb dich, wenn du Erfahrung in E-Commerce Management und Conversion Rate Optimization (CRO) hast und dich für innovative Sportgeräte begeistern kannst. Als Teil des remote organisierten Teams von KF Brands kannst du deine Fähigkeiten ausprobieren und mit Spaß Großes erreichen.</div>
-    </a>
-    
-    <a href="kaufmannische-fuhrungskraft-business-development-projektleitung-in-osnabruck-153271.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Kaufmännische Führungskraft (m/w/d) Business Development & Projektleitung in Osnabrück</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Domainprofi GmbH • Osnabrück</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 60k-80k</span></div>
-        <div class="ai-summary">Bei Domainprofi GmbH als Kaufmännische Führungskraft (m/w/d) Business Development & Projektleitung arbeiten Sie in einer dynamischen Umgebung, wo Geschwindigkeit und Unternehmungsfreudigkeit gefragt sind. Mit Ihrer Erfahrung können Sie einen bedeutenden Beitrag zum Erfolg des Unternehmens leisten.</div>
-    </a>
-    
-    <a href="content-assistant-streaming-social-darmstadt-187687.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Content Assistant (Streaming & Social)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Vybe Brothers Entertainment GmbH • Darmstadt</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 30k-40k</span></div>
-        <div class="ai-summary">Diese Stelle bietet die Möglichkeit, sich mit der Popkultur auseinanderzusetzen und innovative Inhalte für eine junge Zielgruppe zu entwickeln. Die Chance, sich an der Gestaltung nachhaltiger Karrieren von Künstlern zu beteiligen, macht diese Position besonders attraktiv.</div>
-    </a>
-    
-    <a href="regionalleiter-vertrieb-sicherheitstechnik-berlin-88026.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Regionalleiter Vertrieb (m/w/d) Sicherheitstechnik Berlin</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Stadtritter GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 60k-80k</span></div>
-        <div class="ai-summary">Bewirb dich als Regionalleiter Vertrieb bei Stadtritter GmbH und übernimm die Führung in der Region Berlin. Profitiere von der Möglichkeit, eine moderne Notruf- und Serviceleitstelle zu gestalten und zu wachsen.</div>
-    </a>
-    
-    <a href="it-systemelektroniker-sicherheitstechnik-berlin-37005.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">IT-Systemelektroniker (m/w/d) Sicherheitstechnik Berlin</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Stadtritter GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 55k-65k</span></div>
-        <div class="ai-summary">Bewirb dich, um Teil eines modernen und innovativen Teams für Sicherheitstechnik in Berlin zu werden. Erweitere deine Kenntnisse in Netzwerke und Sicherheitstechnik und unterstütze den Aufbau stabiler Infrastrukturen.</div>
-    </a>
-    
-    <a href="kfz-mechatroniker-fur-unser-fleet-servicecenter-in-lengede-gesucht-265059.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Kfz-Mechatroniker (m/w/d) für unser Fleet-Servicecenter in Lengede gesucht!</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Roos Fleetservice GmbH • Lengede</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 50k-60k</span></div>
-        <div class="ai-summary">Bei Roos Fleetservice GmbH hast du die Chance, Teil eines innovativen Teams zu werden und die Zukunft der Mobilität mitzugestalten. Du wirst als Kfz-Mechatroniker Teil eines starken Teams sein, das Verantwortung und Zusammenhalt lebt.</div>
-    </a>
-    
-    <a href="global-privacy-compliance-managerin-hamburg-486433.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Global Privacy & Compliance Manager:in (d/w/m)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">HYROX World GmbH • Hamburg</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 60k-80k</span></div>
-        <div class="ai-summary">Ideal für erfahrene HR-Experten, die globale Datenschutz- und Compliance-Themen meistern möchten. Eine Herausforderung mit großem Impact in einer dynamischen und wachsenden Sportevent-Company.</div>
-    </a>
-    
-    <a href="customer-service-agent-dormagen-24546.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Customer Service Agent (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">PTS Group GmbH • Dormagen</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 40k-55k</span></div>
-        <div class="ai-summary">Bewirb dich, wenn du Erfahrung in Kundenbetreuung und Ticket-Management suchst. Du solltest gute Kenntnisse in Zendesk und Microsoft Dynamics 365 Business Central haben.</div>
-    </a>
-    
-    <a href="erfolgreich-durch-startup-in-homeoffice-mit-online-business-ebay-amazon-bremen-399447.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Erfolgreich durch StartUp in HomeOffice mit online Business Ebay Amazon</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Ihr Brötchenbursche Saalekreis • Bremen</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 50k-70k</span></div>
-        <div class="ai-summary">Mit diesem Online-Business kannst du deine eigenen Stunden und dein eigenes Einkommen bestimmen. Du kannst deine Fähigkeiten als Unternehmer nutzen und gleichzeitig deine Freiheit in der Arbeit genießen.</div>
-    </a>
-    
-    <a href="forward-deployed-engineer-berlin-234531.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Forward Deployed Engineer (f/m/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">SPREAD GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Bewerben Sie sich, wenn Sie sich für die Schnittstelle von Technologie und Industrie begeistern und innovative Lösungen für komplexe Probleme entwickeln möchten. Als Forward Deployed Engineer bei SPREAD GmbH haben Sie die Möglichkeit, einen tiefen Einblick in die Entwicklung von AI-gestütztem Software zu gewinnen und einen wichtigen Beitrag zum Erfolg der Firma zu leisten.</div>
-    </a>
-    
-    <a href="ab-sofort-minijob-in-der-personalabteilung-essen-56774.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Ab sofort: Minijob in der Personalabteilung</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">CEYLAN GmbH • Essen</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 25k-35k</span></div>
-        <div class="ai-summary">Bewirb dich bei CEYLAN GmbH, um Teil eines innovativen Teams in der Gastronomiebranche zu werden. Mit einem Minijob in der Personalabteilung kannst du deine Fähigkeiten entwickeln und ein Unternehmen unterstützen, das Qualität und Nachhaltigkeit priorisiert.</div>
-    </a>
-    
-    <a href="full-stack-developer-berlin-465139.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Full Stack Developer PHP/JavaScript (m/w/d) FinTech</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">FinMent GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 60k-80k</span></div>
-        <div class="ai-summary">FinMent bietet eine spannende Chance, an der Zukunft der FinTech zu arbeiten und innovative Lösungen für den Geldmarkt zu entwickeln. Die Firma bietet eine dynamische und wachsende Umgebung, in der du deine Fähigkeiten weiterentwickeln und wachsen kannst.</div>
-    </a>
-    
-    <a href="online-marketing-manager-berlin-133452.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Online Marketing Manager (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">FinMent GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 60k-80k</span></div>
-        <div class="ai-summary">Bewirb dich, wenn du Erfahrung im Online Marketing hast und dich für die Demokratisierung des Finanzwissens begeistern kannst. FinMent bietet eine innovative Umgebung und Möglichkeiten zur Weiterentwicklung.</div>
-    </a>
-    
-    <a href="junior-online-marketing-berlin-158560.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Junior Online Marketing (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">FinMent GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 30k-40k</span></div>
-        <div class="ai-summary">Bewirb dich, um Teil eines schnell wachsenden FinTech-Startups in Berlin zu werden. Mit innovativen Technologien und exklusiven Strategien kannst du Dein Wissen und Deinen Zugang zur institutionellen Geldanlage demokratisieren.</div>
-    </a>
-    
-    <a href="online-marketing-medienproduktion-finanzen-berlin-176322.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Online Marketing - Medienproduktion / Finanzen (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">FinMent GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 50k-70k</span></div>
-        <div class="ai-summary">Bewerben Sie sich, wenn Sie Erfahrung im Online Marketing und Medienproduktion haben und sich für Finanzen und FinTech interessieren. FinMent bietet eine dynamische Umgebung und die Möglichkeit, an innovativen Projekten mitzuwirken.</div>
-    </a>
-    
-    <a href="duales-studium-investment-analyst-trader-borse-berlin-480693.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Duales Studium - Investment Analyst / Trader - Börse (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">FinMent GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 60k-80k</span></div>
-        <div class="ai-summary">Einzigartige Chance, in einem schnell wachsenden FinTech Startup zu arbeiten und als Investment Analyst / Trader Erfahrungen zu sammeln. Möglichkeit, innovative Technologien und Strategien zu entwickeln und zu implementieren.</div>
-    </a>
-    
-    <a href="junior-full-stack-developer-php-javascript-berlin-331350.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Junior Full Stack Developer (PHP / JavaScript) (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">FinMent GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 40k-50k</span></div>
-        <div class="ai-summary">FinMent bietet eine spannende Chance für Junior Full Stack Developer, um an innovativen FinTech-Projekten mitzuwirken und seine Fähigkeiten zu entwickeln. Die Firma bietet eine dynamische Arbeitsumgebung und Möglichkeiten zur Weiterentwicklung.</div>
-    </a>
-    
-    <a href="trainee-investment-analyst-coach-berlin-386164.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Trainee Investment Analyst & Coach (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">FinMent GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 50k-60k</span></div>
-        <div class="ai-summary">Bewirb dich, um Teil eines schnell wachsenden FinTech-Startups in Berlin zu werden und innovative Technologien und Strategien zu erlernen. Als Trainee Investment Analyst & Coach wirst du ein wichtiger Teil des Teams sein und deine Fähigkeiten in der institutionellen Geldanlage entwickeln.</div>
-    </a>
-    
-    <a href="junior-investment-analyst-berlin-463416.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Junior Investment Analyst (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">FinMent GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 30k-40k</span></div>
-        <div class="ai-summary">Als Junior Investment Analyst bei FinMent GmbH hast du die Chance, in einem schnell wachsenden FinTech-Startup zu arbeiten und deine Fähigkeiten in der institutionellen Geldanlage zu entwickeln. Du wirst Teil eines innovativen Teams, das es sich zum Ziel gesetzt hat, den Zugang zu hochwertigen Anlageprodukten zu demokratisieren.</div>
-    </a>
-    
-    <a href="senior-devops-engineer-berlin-499365.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Senior DevOps Engineer  (m/w/x)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">VertiGIS GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Bewerbe dich, wenn du Erfahrung in DevOps hast und an der Entwicklung von Softwarelösungen für Geografische Informationssysteme interessiert bist. Die VertiGIS GmbH bietet eine herausfordernde und innovative Arbeitsumgebung.</div>
-    </a>
-    
-    <a href="duales-studium-wirtschaftsinformatik-webentwickler-php-reactjs-berlin-458362.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Duales Studium Wirtschaftsinformatik - Webentwickler (PHP/React.js) (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">FinMent GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 50k-70k</span></div>
-        <div class="ai-summary">FinMent bietet eine spannende Chance als Webentwickler in einem schnell wachsenden FinTech Startup. Durch das duale Studium kannst du praktische Erfahrungen sammeln und deine Fähigkeiten in PHP und React.js weiterentwickeln.</div>
-    </a>
-    
-    <a href="enterprise-account-executive-dach-munchen-156997.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Enterprise Account Executive - DACH</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Tulip Interfaces • München, Bavaria, Germany</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Bewirb dich, wenn du Erfahrung in Vertrieb und Verhandlung hast und dich für die Zukunft der Frontline-Operations begeistern kannst. Als Teil des Teams von Tulip Interfaces wirst du die Möglichkeit haben, einzigartige Lösungen für Unternehmen zu entwickeln und deine Karriere in einem dynamischen und innovativen Umfeld zu gestalten.</div>
-    </a>
-    
-    <a href="associate-manager-global-courier-pricing-berlin-287438.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Associate Manager, Global Courier Pricing</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Wolt - English • Berlin, Berlin, Germany</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Bewirb dich, wenn du Erfahrung in Preisgestaltung und globalem Marketing suchst. Wolt bietet eine einzigartige Möglichkeit, deine Fähigkeiten in einem dynamischen und wachsenden Unternehmen einzusetzen.</div>
-    </a>
-    
-    <a href="hr-manager-recruiting-operations-munich-160874.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">HR Manager Recruiting & Operations (w/m/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Right Search • Munich</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 60k-80k</span></div>
-        <div class="ai-summary">Diese Position bietet die Möglichkeit, Recruiting und HR aktiv zu steuern und im operativen HR-Management Verantwortung zu übernehmen. Durch die Perspektive der Personalentwicklung kann man Impulse setzen und sich weiterentwickeln.</div>
-    </a>
-    
-    <a href="senior-manager-group-accounting-consolidation-grafelfing-175181.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Senior Manager Group Accounting & Consolidation (w/m/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Right Search • Gräfelfing</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Bewerben Sie sich, wenn Sie Erfahrung in Group Accounting & Consolidation haben und nach einer Herausforderung in einem renommierten Unternehmen suchen. Die Möglichkeit, 2 Tage Homeoffice zu haben, bietet eine gute Balance zwischen Arbeit und Privatleben.</div>
-    </a>
-    
-    <a href="sr-controller-grafelfing-385559.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Sr. Controller (w/m/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Right Search • Gräfelfing</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 60k-80k</span></div>
-        <div class="ai-summary">Bewerben Sie sich, wenn Sie eine Herausforderung in einer renommierten Firma suchen und Erfahrung in der Controller-Funktion haben. Ideal für ambitionierte Finanzexperten, die nach Wachstum und Entwicklung suchen.</div>
-    </a>
-    
-    <a href="fullstack-developer-laravel-in-berlin-451167.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Fullstack Developer - Laravel (m/f/x) in Berlin</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">konfetti GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Unbekannt</span></div>
-        <div class="ai-summary">Bewirb dich, um Teil einer erfolgreichen Firma zu werden und an der Weiterentwicklung einer innovativen Buchungsplattform für Workshops mitzuarbeiten.</div>
-    </a>
-    
-    <a href="sr-sap-fi-co-consultant-munich-58251.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Sr. SAP FI/CO Consultant (w/m/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Right Search • Munich</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 60k-80k</span></div>
-        <div class="ai-summary">Als erfahrener SAP FI/CO Consultant bringt ihr umfassende Kenntnisse in der Finanz- und Controlling-Implementierung mit. Ihr unterstützt Unternehmen bei der Optimierung ihrer Finanzprozesse und entwickelt innovative Lösungen für komplexe Herausforderungen.</div>
-    </a>
-    
-    <a href="b2b-partner-account-manager-partner-success-in-koln-cologne-170542.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">B2B Partner Account Manager (m/f/x) - Partner Success in Köln</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">konfetti GmbH • Cologne</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 40k-60k</span></div>
-        <div class="ai-summary">Bewirb dich, wenn du Erfahrung im B2B-Vertrieb hast und dich für die Weiterentwicklung von Software-Produkten begeistern kannst. Die konfetti GmbH bietet eine spannende Herausforderung für ambitionierte Vertriebsprofis.</div>
-    </a>
-    
-    <a href="director-accounting-tax-grafelfing-477510.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Director Accounting & Tax (w/m/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Right Search • Gräfelfing</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Als Director Accounting & Tax bei Right Search hast du die Möglichkeit, deine Fähigkeiten in der Finanzwelt einer internationalen Unternehmensgruppe zu nutzen und aktiv die Zukunft der Finanzen zu gestalten. Du übernimmst die fachliche und disziplinarische Leitung des Accounting-Teams und bist für die Weiterentwicklung der Finanzabteilung verantwortlich.</div>
-    </a>
-    
-    <a href="b2b-partner-account-manager-partner-success-in-berlin-392500.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">B2B Partner Account Manager (m/f/x) - Partner Success in Berlin</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">konfetti GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 60k-80k</span></div>
-        <div class="ai-summary">Bewirb dich, um Teil eines innovativen Teams zu werden und deine Fähigkeiten in der Entwicklung von B2B-Partnern einzusetzen. Mit konfetti kannst du deine Karriere in der digitalen Buchungsplattform-Industrie vorantreiben.</div>
-    </a>
-    
-    <a href="corporate-development-manager-in-berlin-459014.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Corporate Development Manager (m/f/x) in Berlin</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">konfetti GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Bewirb dich, um Teil eines wachsenden und innovativen Teams zu werden, das lokale Workshops und Erlebnisse mit über 2.500 Anbietern anbietet. Entwickle deine Fähigkeiten als Corporate Development Manager und trage zum Erfolg von konfetti bei.</div>
-    </a>
-    
-    <a href="it-systemtechniker-dachau-466277.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">IT-Systemtechniker (w/m/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Right Search • Dachau</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 40k-50k</span></div>
-        <div class="ai-summary">Unser Kunde im Raum Dachau sucht einen IT-Systemtechniker, der Eigenverantwortung übernimmt und Lust hat, IT wirklich zu leben. Weiterentwicklung und Teamgeist sind wichtige Aspekte dieser Position.</div>
-    </a>
-    
-    <a href="corporate-development-manager-in-koln-cologne-441482.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Corporate Development Manager (m/f/x) in Köln</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">konfetti GmbH • Cologne</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Bewirb dich, um Teil eines erfolgreichen Start-ups zu werden, das stetig wächst und sich weiterentwickelt. Mit über 2.500 Partnern und 12.000 Erlebnissen bietet konfetti eine einzigartige Chance, innovative Lösungen zu entwickeln und sich in der Branche zu etablieren.</div>
-    </a>
-    
-    <a href="product-owner-fur-ki-projekte-mit-projektmanagement-erfahrung-munich-312076.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Product Owner (w/m/d) für KI-Projekte - mit Projektmanagement-Erfahrung</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Right Search • Munich</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Diese Stelle bietet die Möglichkeit, innovative KI-Projekte zu gestalten und einen echten Business-Impact zu erzielen. Ideal für ambitionierte Projektmanager, die Herausforderungen in der KI-Branche suchen.</div>
-    </a>
-    
-    <a href="ai-developer-munich-265721.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">AI Developer (w/m/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Right Search • Munich</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 60k-80k</span></div>
-        <div class="ai-summary">Bewirb dich, wenn du als erfahrener Entwickler innovative AI-Lösungen entwickeln und in einem renommierten Unternehmen umsetzen möchtest. Wir suchen nach einer Persönlichkeit mit modernem Weitblick und Feingefühl.</div>
-    </a>
-    
-    <a href="lead-ai-engineer-munich-396826.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Lead AI Engineer (w/m/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Right Search • Munich</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Als Lead AI Engineer bei Right Search hast du die Möglichkeit, deine Expertise in KI-Lösungen zu nutzen und Unternehmen bei der Integration von Künstlicher Intelligenz in ihre Arbeitsprozesse zu unterstützen. Du übernimmst eine fachliche Führungsrolle und hast die Chance, deine Fähigkeiten in einem dynamischen und innovativen Umfeld zu entwickeln.</div>
-    </a>
-    
-    <a href="design-project-manager-hamburger-headquarter-befristet-fur-ein-jahr-260662.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Design Project Manager (w/m/d)* - Hamburger Headquarter // befristet für ein Jahr</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Engel & Völkers Holding GmbH • Hamburg</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Design Project Manager (w/m/d) gesucht, um ikonisches Shop-Konzept auf globaler Ebene zu entwickeln und die tägliche Kommunikation mit weltweiten Ansprechpartnern zu unterstützen. Einmaliges Projekt in einem renommierten Unternehmen.</div>
-    </a>
-    
-    <a href="working-student-it-security-hamburg-320005.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Working Student (f/m/d)* IT Security</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Engel & Völkers Holding GmbH • Hamburg</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Nicht explizit genannt, wahrscheinlich ein Studierendentarif</span></div>
-        <div class="ai-summary">Bewerben Sie sich, um Teil unserer Reise zu werden und von der Macht eines global erfolgreichen Marktes zu profitieren. Mit unserer internationalen Mannschaft treiben wir erste-Klasse-Dienstleistungen und kreative Lösungen voran.</div>
-    </a>
-    
-    <a href="data-analyst-berlin-248899.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Data Analyst</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">ResearchPod • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 60k-80k</span></div>
-        <div class="ai-summary">Als Data Analyst bei ResearchPod hast du die Möglichkeit, die Verbindung zwischen Forschung und Öffentlichkeit zu stärken und dabei deine analytischen Fähigkeiten einzusetzen. Du wirst ein wichtiger Teil des Teams sein, das komplexe Daten in leicht verständliche Informationen umwandelt und so die neuesten Entdeckungen in verschiedenen Bereichen zugänglich macht.</div>
-    </a>
-    
-    <a href="chief-of-staff-berlin-369076.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Chief of Staff</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">VREY • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Als Chief of Staff bei VREY entwickelst du Strategien für die Energiewende in Deutschland. Du unterstützt die Führung und baut das EnergyOS für Mehrfamilienhäuser aus.</div>
-    </a>
-    
-    <a href="head-of-energy-operations-berlin-404451.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Head of Energy Operations</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">VREY • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Als Head of Energy Operations bei VREY entwickelst du ein innovatives Energiemanagementsystem für Mehrfamilienhäuser. Du hast die Chance, einen bedeutenden Beitrag zur Energiewende in Deutschland zu leisten und ein Team von Experten zu führen.</div>
-    </a>
-    
-    <a href="manager-business-operations-coo-office-berlin-255805.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Manager Business Operations - COO Office</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">VREY • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Bewirb dich, wenn du Erfahrung in Business Operations und COO-Rollen hast und dich für die Energiewende begeistern kannst. In diesem Job kannst du deine Fähigkeiten einsetzen, um die Geschäftsprozesse von VREY zu optimieren und den Erfolg der Firma zu unterstützen.</div>
-    </a>
-    
-    <a href="projektmanager-dezentrale-energieversorgung-berlin-118617.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Projektmanager - Dezentrale Energieversorgung</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">VREY • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Bewerbe dich, wenn du Erfahrung in Projektmanagement und Energieversorgung hast. Du solltest auch ein starkes Netzwerk in der Branche haben.</div>
-    </a>
-    
-    <a href="ava-experte-fur-californiax-berlin-297398.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">AVA-Experte (m/w/d) für CaliforniaX</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Lahrssen Consulting • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Als AVA-Experte bei Lahrssen Consulting entwickeln Sie nachhaltige IT-Architekturen und unterstützen Unternehmen bei der strategischen Weiterentwicklung ihrer digitalen Infrastruktur. Sie profitieren von einer klaren Fokus auf digitale Infrastruktur und einer Kombination aus technischer Exzellenz und unternehmerischem Denken.</div>
-    </a>
-    
-    <a href="senior-operations-manager-energy-solutions-berlin-398117.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">(Senior) Operations Manager - Energy Solutions</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">VREY • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-110k</span></div>
-        <div class="ai-summary">Bewerbe dich, wenn du Erfahrung in der Energiebranche und Führungskompetenzen hast. Das Unternehmen bietet eine Herausforderung für ambitionierte Führungskräfte, die die Energiewende vorantreiben möchten.</div>
-    </a>
-    
-    <a href="junior-stability-specialist-neunkirchen-12834.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Junior Stability Specialist (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Amapharm GmbH • Neunkirchen</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 30k-40k</span></div>
-        <div class="ai-summary">Diese Stelle bietet die Möglichkeit, in einer dynamischen und innovativen Umgebung zu arbeiten und sich kontinuierlich weiterzubilden. Durch die Mitarbeit bei Amapharm kannst du deine Fähigkeiten in der Stabilitätsanalyse und -optimierung unter Beweis stellen und dich in einem lebendigen Team einbringen.</div>
-    </a>
-    
-    <a href="senior-software-engineer-backend-typescript-mannheim-241809.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Senior Software Engineer (m/w/d) – Backend  (TypeScript)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">7Assets GmbH • Mannheim</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Als Senior Software Engineer bei 7Assets GmbH hast du die Möglichkeit, direkt am Gründerteam mitzuwirken und die Weiterentwicklung der Plattform zu gestalten. Du wirst als Sparringspartner aktiv eingebunden und kannst deine Expertise einbringen.</div>
-    </a>
-    
-    <a href="head-of-growth-performance-marketing-berlin-108610.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Head of Growth & Performance Marketing (f/m/x)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">BRAINEFFECT • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Als Head of Growth & Performance Marketing bei BRAINEFFECT hast du die Chance, ein innovatives und schnell wachsendes Unternehmen zu unterstützen. Du wirst Teil eines ambitionierten Teams und hast die Möglichkeit, deine Fähigkeiten in der Mind Nutrition-Branche zu entwickeln.</div>
-    </a>
-    
-    <a href="marketing-vertrieb-braunschweig-155638.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Marketing & Vertrieb</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Sensotec Optoelektronische Systeme GmbH • Braunschweig</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Bewirb dich, wenn du Erfahrung im Marketing und Vertrieb hast und dich für innovative Lösungen in der Optoelektronik und Sensorik begeistern kannst. Ein dynamisches Team und ein Wachstumskurs warten auf dich.</div>
-    </a>
-    
-    <a href="mobile-app-developer-react-native-berlin-294767.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Mobile App Developer (React Native)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">acemate.ai • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 80k-100k</span></div>
-        <div class="ai-summary">Bewerben Sie sich, wenn Sie Erfahrung mit React Native haben und sich für die Entwicklung von mobilen Apps begeistern. Die Firma befindet sich in einem aufregenden Wachstumsphasen und bietet die Möglichkeit, an einem innovativen Projekt mit starkem Traktion zu arbeiten.</div>
-    </a>
-    
-    <a href="praktikantin-kundenberatung-scaling-phase-berlin-377063.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Praktikant*in Kundenberatung | Scaling Phase</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Matera GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Keine Angabe, aber wahrscheinlich Minijob oder Studentenjob</span></div>
-        <div class="ai-summary">Als Praktikant*in im Bereich Kundenberatung kannst du deine organisatorischen Fähigkeiten einsetzen, um Kunden zu glücklich zu machen. Du hast die Möglichkeit, in einem Office in Berlin oder flexibel hybrid zu arbeiten.</div>
-    </a>
-    
-    <a href="social-media-manager-biesenthal-7012.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Social Media Manager (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">InkuPlay UG (haftungsbeschränkt) • Biesenthal</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 40k-55k</span></div>
-        <div class="ai-summary">Bewirb dich, wenn du Erfahrung im Social Media Management hast und dich für das Gaming- und Esports-Ökosystem begeistern kannst. Wir suchen nach jemandem, der unsere Marke kanalübergreifend sichtbarer machen und unsere Community täglich begeistern kann.</div>
-    </a>
-    
-    <a href="senior-ai-developer-bielefeld-417808.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Senior AI-Developer (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">PALTRON GmbH • Bielefeld</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 60k-80k</span></div>
-        <div class="ai-summary">Als Senior AI-Developer bei PALTRON GmbH hast du die Chance, an der Entwicklung einer hochmodernen KI-Anwendung mitzuarbeiten und wegweisende Technologien voranzutreiben. Du wirst in einer dynamischen und innovativen Umgebung arbeiten und innovative Lösungen im Produktions- und Businessbereich entwickeln.</div>
-    </a>
-    
-    <a href="werkstudentin-recruiting-hamburg-461450.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Werkstudent:in Recruiting (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">1KOMMA5˚ • Hamburg</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 ungefähr 30k-40k</span></div>
-        <div class="ai-summary">Bei 1KOMMA5° kannst du Teil eines innovativen Teams sein, das die Energiewende vorantreibt. Als Werkstudent/in Recruiting unterstützt du die Suche nach talentierten Kollegen und lernst dabei viel über den Bereich der regenerativen Energie.</div>
-    </a>
-    
-    <a href="safety-engineer-ept-batteries-aachen-411971.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Safety Engineer - ePT & Batteries (m/f/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Eleo Technologies B.V. • Aachen</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Geschätzt 80k-100k Euro</span></div>
-        <div class="ai-summary">Sie sind ein sicherheitsbewusster Ingenieur mit Leidenschaft für Elektromobilität und Durchbruchstechnologien für Batterien. Sie haben die Möglichkeit, einen wichtigen Beitrag zum globalen Fortschritt sicherer, elektrischer Off-Highway-Maschinen zu leisten.</div>
-    </a>
-    
-    <a href="supplier-quality-engineer-munich-136109.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Supplier Quality Engineer (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">MY Humancapital GmbH • Munich</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="operations-specialist-procurement-hamburg-449624.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Operations Specialist  (w/m/d)* - Procurement</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Engel & Völkers Holding GmbH • Hamburg</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="social-media-marketing-hofheim-267616.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Social Media Marketing</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Challenge 4 Change GmbH • Hofheim</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="grafikdesigner-webdesigner-digital-media-illustration-teilzeit-regensburg-25157.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Grafikdesigner / Webdesigner (m/w/d) - Digital Media & Illustration - Teilzeit</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Alphatrail GmbH • Regensburg</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="marketing-manager-full-time-munich-444935.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Marketing Manager |  Full Time (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">CONROO GmbH • Munich</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="content-creator-brand-marketing-manager-fur-no-sugar-factory-kalorienarme-und-proteinreiche-kuchen-desserts-berlin-266720.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Content Creator, Brand & Marketing Manager (m/w/d) für NO SUGAR FACTORY - kalorienarme und proteinreiche Kuchen & Desserts</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">NO SUGAR FACTORY • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="automation-developer-emstek-112276.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Automation Developer</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Extra & Bold Design GmbH • Emstek</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="werkstudent-in-der-gebaudetechnik-heizung-kalte-luftung-sanitar-cologne-450999.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Werkstudent (m/w/d) in der Gebäudetechnik (Heizung, Kälte, Lüftung, Sanitär)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">sic architekten gmbh • Cologne</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="content-creator-mulheim-255353.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Content Creator (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Lionflence • Mülheim</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="junior-artist-manager-influencer-manager-mulheim-199586.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Junior Artist Manager / Influencer Manager (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Lionflence • Mülheim</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="junior-artist-manager-influencer-manager-berlin-309139.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Junior Artist Manager / Influencer Manager (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Lionflence • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="artist-manager-influencer-manager-mulheim-120690.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Artist Manager / Influencer Manager (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Lionflence • Mülheim</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="artist-manager-influencer-manager-berlin-119143.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Artist Manager / Influencer Manager (m/w/d) BERLIN</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Lionflence • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="werkstudentin-administration-backoffice-das-ruckgrat-unseres-startups-dusseldorf-226083.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Werkstudent:in Administration & Backoffice - Das Rückgrat unseres Startups</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">InterDine GmbH • Düsseldorf</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="head-of-brand-dach-berlin-332717.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Head of Brand DACH (m/f/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">KoRo Handels GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="solution-consultant-rechnungswesen-heidelberg-108866.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Solution Consultant (Rechnungswesen)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Everest Systems GmbH • Heidelberg</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="freelancer-digital-event-projektmanager-webinare-online-events-cologne-109583.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Freelancer Digital Event & Projektmanager - Webinare & Online-Events (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Webinarhelden • Cologne</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="sap-projektmanager-refnr-46152-munich-18712.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">SAP Projektmanager (m/w/d) (Ref.Nr.: 46152)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Wavestone Germany AG • Munich</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="operations-lead-operative-leitung-in-passau-74042.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Operations Lead, operative Leitung (w/m/d) in Passau</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">NETPROFIT • Passau</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="quereinsteiger-im-vertrieb-hamburg-43746.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Quereinsteiger im Vertrieb (w/m/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Smava GmbH • Hamburg</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="sales-manager-berlin-123209.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Sales Manager (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Smava GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="quereinsteiger-im-vertrieb-berlin-106840.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Quereinsteiger im Vertrieb (w/m/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Smava GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="bankkaufmann-frau-als-kreditspezialist-im-homeoffice-berlin-483238.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Bankkaufmann/-frau - als Kreditspezialist im Homeoffice (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Smava GmbH • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="webentwickler-frontend-developer-potsdam-356204.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Webentwickler / Frontend Developer (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">isLOGIC AG • Potsdam</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="fachingenieur-fur-temporare-verkehrsplanung-bad-sackingen-295556.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Fachingenieur für temporäre Verkehrsplanung (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">HERY GmbH • Bad Säckingen</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="java-developer-karlsruhe-24412.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Java Developer (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">virtual7 GmbH • Karlsruhe</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="senior-fullstack-developer-karlsruhe-319269.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Senior Fullstack Developer (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">virtual7 GmbH • Karlsruhe</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="sap-technology-manager-wiesbaden-496023.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">SAP Technology Manager (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">traze GmbH • Wiesbaden</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="projektleiter-m365-services-munich-292039.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Projektleiter M365 Services ( m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">ITconfig/all GmbH • Munich</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="senior-amazon-marketplace-manager-berlin-292372.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Senior Amazon Marketplace Manager (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Eberlein und Kunz GbR • Berlin</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="video-editor-hamburg-298569.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Video Editor (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Yunicorn • Hamburg</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="operations-managerin-manager-projektingenieurin-ingenieur-dresden-168243.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Operations Managerin (Manager) / Projektingenieurin(-ingenieur) (w/m/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">DieEnergiekoppler GmbH • Dresden</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="wir-suchen-einen-li-regulatory-spezialisten-ref-13633-frankfurt-am-main-469514.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Wir suchen einen LI- & Regulatory-Spezialisten (m/w/d) Ref. 1363.3</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">IP Systems GmbH • Frankfurt am Main</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="junior-devops-platform-engineer-dresden-73947.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Junior DevOps / Platform Engineer (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">DieEnergiekoppler GmbH • Dresden</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="devops-platform-engineer-dresden-137141.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">DevOps / Platform Engineer (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">DieEnergiekoppler GmbH • Dresden</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="marketing-manager-hamburg-487260.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Marketing Manager (m/w/d)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Yunicorn • Hamburg</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="recruiting-spezialist-remote-straubenhardt-234887.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Recruiting Spezialist (m/w/d) - Remote</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Simone Riegsinger Unternehmensberatung • Straubenhardt</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="projektleiter-m365-90-remote-10-in-munchen-sowie-bundesweiten-einsatzen-bei-workshops-munich-302210.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Projektleiter M365 (m/w/d) - 90% Remote , 10 % in München sowie bundesweiten Einsätzen bei Workshops</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">ITconfig/all GmbH • Munich</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="team-lead-marketing-mensch-hamburg-432941.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Team Lead Marketing (Mensch)</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">Eventinc GmbH • Hamburg</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
-    <a href="wir-suchen-einen-operations-troubleshooting-experten-ref-13632-frankfurt-am-main-259025.html" class="job-card">
-        <h3 style="margin:0; font-size:1.2rem;">Wir suchen einen Operations- & Troubleshooting-Experten (m/w/d) Ref. 1363.2</h3>
-        <div style="color:#64748b; margin:0.5rem 0;">IP Systems GmbH • Frankfurt am Main</div>
-        <div style="margin-top:0.5rem;"><span class="badge badge-salary">💰 Auf Anfrage</span></div>
-        <div class="ai-summary">KI-Analyse folgt...</div>
-    </a>
-    
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterSelection('all')">Alle</button><button class="filter-btn" onclick="filterSelection('marketing-and-communication')">Marketing and Communication</button><button class="filter-btn" onclick="filterSelection('remote')">Remote</button><button class="filter-btn" onclick="filterSelection('software-development')">Software Development</button><button class="filter-btn" onclick="filterSelection('engineering')">Engineering</button><button class="filter-btn" onclick="filterSelection('it')">IT</button><button class="filter-btn" onclick="filterSelection('management')">Management</button><button class="filter-btn" onclick="filterSelection('team-leader')">Team Leader</button><button class="filter-btn" onclick="filterSelection('system-and-network-administration')">System and Network Administration</button><button class="filter-btn" onclick="filterSelection('business-development')">Business Development</button><button class="filter-btn" onclick="filterSelection('credit-analysis')">Credit Analysis</button>
+        </div>
+
+        <div id="job-grid">
+            
+    <a href="marketing-social-media-fur-tofubar-minijob-werkstudent-in-chemnitz-381646.html" class="job-card social-media-manager">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Marketing / Social Media für Tofubar, Minijob/Werkstudent/in, Chemnitz</h3>
+            <small style="color:#64748b;">Chemnitz</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">tofubar</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Minijob/Werkstudent/in, kein festes Gehalt erwähnt</span>
+            <span class="badge badge-tag">Social Media Manager</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Echte Handwerk- und Nachhaltigkeitsbegeisterung, Teil des Teams von Tofubar, traditionelle Manufakturarbeit...</div>
+    </a>
+    
+    <a href="software-developer-java-groovy-scriptrunner-forge-munich-34480.html" class="job-card software-development">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Software Developer - Java, Groovy, ScriptRunner, Forge (m/w/d)</h3>
+            <small style="color:#64748b;">Munich</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">MESKRU GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Software Development</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du Erfahrung in Java, Groovy und ScriptRunner suchst und dich für die Entwicklung von Erweiterungen un...</div>
+    </a>
+    
+    <a href="software-developer-java-groovy-scriptrunner-forge-essen-339134.html" class="job-card software-development">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Software Developer - Java, Groovy, ScriptRunner, Forge (m/w/d)</h3>
+            <small style="color:#64748b;">Essen</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">MESKRU GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 40k-60k</span>
+            <span class="badge badge-tag">Software Development</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du Erfahrung in Java, Groovy und ScriptRunner hast und dich für die Entwicklung von Erweiterungen für ...</div>
+    </a>
+    
+    <a href="google-ads-growth-manager-freelance-gesucht-hamburg-310510.html" class="job-card remote marketing-manager">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Google Ads Growth Manager (m/w/d) - Freelance gesucht</h3>
+            <small style="color:#64748b;">Hamburg</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">ProviPanda GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 50k-70k</span>
+            <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Marketing Manager</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du Erfahrung in Google Ads hast und dich für ein wachsendes SaaS-Startup interessierst. Hier kannst du...</div>
+    </a>
+    
+    <a href="e-commerce-manager-shopify-cro-remote-vollzeit-aachen-169293.html" class="job-card remote marketing-and-communication">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">E-Commerce Manager Shopify & CRO (m/w/d) - Remote (Vollzeit)</h3>
+            <small style="color:#64748b;">Aachen</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Tretmann</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du Erfahrung in E-Commerce Management und Conversion Rate Optimization (CRO) hast und dich für innovat...</div>
+    </a>
+    
+    <a href="kaufmannische-fuhrungskraft-business-development-projektleitung-in-osnabruck-153271.html" class="job-card management team-leader">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Kaufmännische Führungskraft (m/w/d) Business Development & Projektleitung in Osnabrück</h3>
+            <small style="color:#64748b;">Osnabrück</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Domainprofi GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Management</span><span class="badge badge-tag">Team Leader</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bei Domainprofi GmbH als Kaufmännische Führungskraft (m/w/d) Business Development & Projektleitung arbeiten Sie in einer...</div>
+    </a>
+    
+    <a href="content-assistant-streaming-social-darmstadt-187687.html" class="job-card remote social-media-manager">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Content Assistant (Streaming & Social)</h3>
+            <small style="color:#64748b;">Darmstadt</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Vybe Brothers Entertainment GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 30k-40k</span>
+            <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Social Media Manager</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Diese Stelle bietet die Möglichkeit, sich mit der Popkultur auseinanderzusetzen und innovative Inhalte für eine junge Zi...</div>
+    </a>
+    
+    <a href="regionalleiter-vertrieb-sicherheitstechnik-berlin-88026.html" class="job-card management team-leader">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Regionalleiter Vertrieb (m/w/d) Sicherheitstechnik Berlin</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Stadtritter GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Management</span><span class="badge badge-tag">Team Leader</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich als Regionalleiter Vertrieb bei Stadtritter GmbH und übernimm die Führung in der Region Berlin. Profitiere v...</div>
+    </a>
+    
+    <a href="it-systemelektroniker-sicherheitstechnik-berlin-37005.html" class="job-card system-and-network-administration">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">IT-Systemelektroniker (m/w/d) Sicherheitstechnik Berlin</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Stadtritter GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 55k-65k</span>
+            <span class="badge badge-tag">System and Network Administration</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, um Teil eines modernen und innovativen Teams für Sicherheitstechnik in Berlin zu werden. Erweitere deine Ke...</div>
+    </a>
+    
+    <a href="kfz-mechatroniker-fur-unser-fleet-servicecenter-in-lengede-gesucht-265059.html" class="job-card automotive-engineering">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Kfz-Mechatroniker (m/w/d) für unser Fleet-Servicecenter in Lengede gesucht!</h3>
+            <small style="color:#64748b;">Lengede</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Roos Fleetservice GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 50k-60k</span>
+            <span class="badge badge-tag">Automotive Engineering</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bei Roos Fleetservice GmbH hast du die Chance, Teil eines innovativen Teams zu werden und die Zukunft der Mobilität mitz...</div>
+    </a>
+    
+    <a href="global-privacy-compliance-managerin-hamburg-486433.html" class="job-card compliance security">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Global Privacy & Compliance Manager:in (d/w/m)</h3>
+            <small style="color:#64748b;">Hamburg</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">HYROX World GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Compliance</span><span class="badge badge-tag">Security</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Ideal für erfahrene HR-Experten, die globale Datenschutz- und Compliance-Themen meistern möchten. Eine Herausforderung m...</div>
+    </a>
+    
+    <a href="customer-service-agent-dormagen-24546.html" class="job-card customer-service">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Customer Service Agent (m/w/d)</h3>
+            <small style="color:#64748b;">Dormagen</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">PTS Group GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 40k-55k</span>
+            <span class="badge badge-tag">Customer Service</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du Erfahrung in Kundenbetreuung und Ticket-Management suchst. Du solltest gute Kenntnisse in Zendesk u...</div>
+    </a>
+    
+    <a href="erfolgreich-durch-startup-in-homeoffice-mit-online-business-ebay-amazon-bremen-399447.html" class="job-card remote online-marketing">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Erfolgreich durch StartUp in HomeOffice mit online Business Ebay Amazon</h3>
+            <small style="color:#64748b;">Bremen</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Ihr Brötchenbursche Saalekreis</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 50k-70k</span>
+            <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Online Marketing</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Mit diesem Online-Business kannst du deine eigenen Stunden und dein eigenes Einkommen bestimmen. Du kannst deine Fähigke...</div>
+    </a>
+    
+    <a href="forward-deployed-engineer-berlin-234531.html" class="job-card software-development">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Forward Deployed Engineer (f/m/d)</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">SPREAD GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Software Development</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewerben Sie sich, wenn Sie sich für die Schnittstelle von Technologie und Industrie begeistern und innovative Lösungen ...</div>
+    </a>
+    
+    <a href="ab-sofort-minijob-in-der-personalabteilung-essen-56774.html" class="job-card personnel-specialist">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Ab sofort: Minijob in der Personalabteilung</h3>
+            <small style="color:#64748b;">Essen</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">CEYLAN GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 25k-35k</span>
+            <span class="badge badge-tag">Personnel Specialist</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich bei CEYLAN GmbH, um Teil eines innovativen Teams in der Gastronomiebranche zu werden. Mit einem Minijob in d...</div>
+    </a>
+    
+    <a href="full-stack-developer-berlin-465139.html" class="job-card web-development">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Full Stack Developer PHP/JavaScript (m/w/d) FinTech</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">FinMent GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Web Development</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 FinMent bietet eine spannende Chance, an der Zukunft der FinTech zu arbeiten und innovative Lösungen für den Geldmarkt z...</div>
+    </a>
+    
+    <a href="online-marketing-manager-berlin-133452.html" class="job-card marketing-and-communication">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Online Marketing Manager (m/w/d)</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">FinMent GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du Erfahrung im Online Marketing hast und dich für die Demokratisierung des Finanzwissens begeistern k...</div>
+    </a>
+    
+    <a href="junior-online-marketing-berlin-158560.html" class="job-card marketing-and-communication">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Junior Online Marketing (m/w/d)</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">FinMent GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 30k-40k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, um Teil eines schnell wachsenden FinTech-Startups in Berlin zu werden. Mit innovativen Technologien und exk...</div>
+    </a>
+    
+    <a href="online-marketing-medienproduktion-finanzen-berlin-176322.html" class="job-card marketing-and-communication">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Online Marketing - Medienproduktion / Finanzen (m/w/d)</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">FinMent GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 50k-70k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewerben Sie sich, wenn Sie Erfahrung im Online Marketing und Medienproduktion haben und sich für Finanzen und FinTech i...</div>
+    </a>
+    
+    <a href="duales-studium-investment-analyst-trader-borse-berlin-480693.html" class="job-card finance">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Duales Studium - Investment Analyst / Trader - Börse (m/w/d)</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">FinMent GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Finance</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Einzigartige Chance, in einem schnell wachsenden FinTech Startup zu arbeiten und als Investment Analyst / Trader Erfahru...</div>
+    </a>
+    
+    <a href="junior-full-stack-developer-php-javascript-berlin-331350.html" class="job-card web-development">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Junior Full Stack Developer (PHP / JavaScript) (m/w/d)</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">FinMent GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 40k-50k</span>
+            <span class="badge badge-tag">Web Development</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 FinMent bietet eine spannende Chance für Junior Full Stack Developer, um an innovativen FinTech-Projekten mitzuwirken un...</div>
+    </a>
+    
+    <a href="trainee-investment-analyst-coach-berlin-386164.html" class="job-card training development">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Trainee Investment Analyst & Coach (m/w/d)</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">FinMent GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 50k-60k</span>
+            <span class="badge badge-tag">Training</span><span class="badge badge-tag">Development</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, um Teil eines schnell wachsenden FinTech-Startups in Berlin zu werden und innovative Technologien und Strat...</div>
+    </a>
+    
+    <a href="junior-investment-analyst-berlin-463416.html" class="job-card finance">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Junior Investment Analyst (m/w/d)</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">FinMent GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 30k-40k</span>
+            <span class="badge badge-tag">Finance</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Als Junior Investment Analyst bei FinMent GmbH hast du die Chance, in einem schnell wachsenden FinTech-Startup zu arbeit...</div>
+    </a>
+    
+    <a href="senior-devops-engineer-berlin-499365.html" class="job-card internet-and-software high-school-coursework">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Senior DevOps Engineer  (m/w/x)</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">VertiGIS GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Internet and software</span><span class="badge badge-tag">high school coursework</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewerbe dich, wenn du Erfahrung in DevOps hast und an der Entwicklung von Softwarelösungen für Geografische Informations...</div>
+    </a>
+    
+    <a href="duales-studium-wirtschaftsinformatik-webentwickler-php-reactjs-berlin-458362.html" class="job-card web-development">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Duales Studium Wirtschaftsinformatik - Webentwickler (PHP/React.js) (m/w/d)</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">FinMent GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 50k-70k</span>
+            <span class="badge badge-tag">Web Development</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 FinMent bietet eine spannende Chance als Webentwickler in einem schnell wachsenden FinTech Startup. Durch das duale Stud...</div>
+    </a>
+    
+    <a href="enterprise-account-executive-dach-munchen-156997.html" class="job-card ">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Enterprise Account Executive - DACH</h3>
+            <small style="color:#64748b;">München, Bavaria, Germany</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Tulip Interfaces</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du Erfahrung in Vertrieb und Verhandlung hast und dich für die Zukunft der Frontline-Operations begeis...</div>
+    </a>
+    
+    <a href="associate-manager-global-courier-pricing-berlin-287438.html" class="job-card ">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Associate Manager, Global Courier Pricing</h3>
+            <small style="color:#64748b;">Berlin, Berlin, Germany</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Wolt - English</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du Erfahrung in Preisgestaltung und globalem Marketing suchst. Wolt bietet eine einzigartige Möglichke...</div>
+    </a>
+    
+    <a href="hr-manager-recruiting-operations-munich-160874.html" class="job-card recruitment-and-selection">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">HR Manager Recruiting & Operations (w/m/d)</h3>
+            <small style="color:#64748b;">Munich</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Right Search</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Recruitment and Selection</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Diese Position bietet die Möglichkeit, Recruiting und HR aktiv zu steuern und im operativen HR-Management Verantwortung ...</div>
+    </a>
+    
+    <a href="senior-manager-group-accounting-consolidation-grafelfing-175181.html" class="job-card management team-leader">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Senior Manager Group Accounting & Consolidation (w/m/d)</h3>
+            <small style="color:#64748b;">Gräfelfing</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Right Search</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Management</span><span class="badge badge-tag">Team Leader</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewerben Sie sich, wenn Sie Erfahrung in Group Accounting & Consolidation haben und nach einer Herausforderung in einem ...</div>
+    </a>
+    
+    <a href="sr-controller-grafelfing-385559.html" class="job-card controlling">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Sr. Controller (w/m/d)</h3>
+            <small style="color:#64748b;">Gräfelfing</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Right Search</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Controlling</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewerben Sie sich, wenn Sie eine Herausforderung in einer renommierten Firma suchen und Erfahrung in der Controller-Funk...</div>
+    </a>
+    
+    <a href="fullstack-developer-laravel-in-berlin-451167.html" class="job-card software-development">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Fullstack Developer - Laravel (m/f/x) in Berlin</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">konfetti GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Unbekannt</span>
+            <span class="badge badge-tag">Software Development</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, um Teil einer erfolgreichen Firma zu werden und an der Weiterentwicklung einer innovativen Buchungsplattfor...</div>
+    </a>
+    
+    <a href="sr-sap-fi-co-consultant-munich-58251.html" class="job-card consulting engineering">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Sr. SAP FI/CO Consultant (w/m/d)</h3>
+            <small style="color:#64748b;">Munich</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Right Search</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Consulting</span><span class="badge badge-tag">Engineering</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Als erfahrener SAP FI/CO Consultant bringt ihr umfassende Kenntnisse in der Finanz- und Controlling-Implementierung mit....</div>
+    </a>
+    
+    <a href="b2b-partner-account-manager-partner-success-in-koln-cologne-170542.html" class="job-card business-development">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">B2B Partner Account Manager (m/f/x) - Partner Success in Köln</h3>
+            <small style="color:#64748b;">Cologne</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">konfetti GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 40k-60k</span>
+            <span class="badge badge-tag">Business Development</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du Erfahrung im B2B-Vertrieb hast und dich für die Weiterentwicklung von Software-Produkten begeistern...</div>
+    </a>
+    
+    <a href="director-accounting-tax-grafelfing-477510.html" class="job-card management team-leader">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Director Accounting & Tax (w/m/d)</h3>
+            <small style="color:#64748b;">Gräfelfing</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Right Search</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Management</span><span class="badge badge-tag">Team Leader</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Als Director Accounting & Tax bei Right Search hast du die Möglichkeit, deine Fähigkeiten in der Finanzwelt einer intern...</div>
+    </a>
+    
+    <a href="b2b-partner-account-manager-partner-success-in-berlin-392500.html" class="job-card business-development">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">B2B Partner Account Manager (m/f/x) - Partner Success in Berlin</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">konfetti GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Business Development</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, um Teil eines innovativen Teams zu werden und deine Fähigkeiten in der Entwicklung von B2B-Partnern einzuse...</div>
+    </a>
+    
+    <a href="corporate-development-manager-in-berlin-459014.html" class="job-card business-development">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Corporate Development Manager (m/f/x) in Berlin</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">konfetti GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Business Development</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, um Teil eines wachsenden und innovativen Teams zu werden, das lokale Workshops und Erlebnisse mit über 2.50...</div>
+    </a>
+    
+    <a href="it-systemtechniker-dachau-466277.html" class="job-card system-and-network-administration">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">IT-Systemtechniker (w/m/d)</h3>
+            <small style="color:#64748b;">Dachau</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Right Search</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 40k-50k</span>
+            <span class="badge badge-tag">System and Network Administration</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Unser Kunde im Raum Dachau sucht einen IT-Systemtechniker, der Eigenverantwortung übernimmt und Lust hat, IT wirklich zu...</div>
+    </a>
+    
+    <a href="corporate-development-manager-in-koln-cologne-441482.html" class="job-card business-development">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Corporate Development Manager (m/f/x) in Köln</h3>
+            <small style="color:#64748b;">Cologne</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">konfetti GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Business Development</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, um Teil eines erfolgreichen Start-ups zu werden, das stetig wächst und sich weiterentwickelt. Mit über 2.50...</div>
+    </a>
+    
+    <a href="product-owner-fur-ki-projekte-mit-projektmanagement-erfahrung-munich-312076.html" class="job-card product-management">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Product Owner (w/m/d) für KI-Projekte - mit Projektmanagement-Erfahrung</h3>
+            <small style="color:#64748b;">Munich</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Right Search</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Product Management</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Diese Stelle bietet die Möglichkeit, innovative KI-Projekte zu gestalten und einen echten Business-Impact zu erzielen. I...</div>
+    </a>
+    
+    <a href="ai-developer-munich-265721.html" class="job-card software-development">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">AI Developer (w/m/d)</h3>
+            <small style="color:#64748b;">Munich</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Right Search</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Software Development</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du als erfahrener Entwickler innovative AI-Lösungen entwickeln und in einem renommierten Unternehmen u...</div>
+    </a>
+    
+    <a href="lead-ai-engineer-munich-396826.html" class="job-card software-development">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Lead AI Engineer (w/m/d)</h3>
+            <small style="color:#64748b;">Munich</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Right Search</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Software Development</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Als Lead AI Engineer bei Right Search hast du die Möglichkeit, deine Expertise in KI-Lösungen zu nutzen und Unternehmen ...</div>
+    </a>
+    
+    <a href="design-project-manager-hamburger-headquarter-befristet-fur-ein-jahr-260662.html" class="job-card marketing-and-communication">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Design Project Manager (w/m/d)* - Hamburger Headquarter // befristet für ein Jahr</h3>
+            <small style="color:#64748b;">Hamburg</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Engel & Völkers Holding GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Design Project Manager (w/m/d) gesucht, um ikonisches Shop-Konzept auf globaler Ebene zu entwickeln und die tägliche Kom...</div>
+    </a>
+    
+    <a href="working-student-it-security-hamburg-320005.html" class="job-card it">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Working Student (f/m/d)* IT Security</h3>
+            <small style="color:#64748b;">Hamburg</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Engel & Völkers Holding GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Nicht explizit genannt, wahrscheinlich ein Studierendentarif</span>
+            <span class="badge badge-tag">IT</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewerben Sie sich, um Teil unserer Reise zu werden und von der Macht eines global erfolgreichen Marktes zu profitieren. ...</div>
+    </a>
+    
+    <a href="data-analyst-berlin-248899.html" class="job-card remote data-processing data-engineer">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Data Analyst</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">ResearchPod</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Data Processing</span><span class="badge badge-tag">Data Engineer</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Als Data Analyst bei ResearchPod hast du die Möglichkeit, die Verbindung zwischen Forschung und Öffentlichkeit zu stärke...</div>
+    </a>
+    
+    <a href="chief-of-staff-berlin-369076.html" class="job-card business-operations">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Chief of Staff</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">VREY</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Business Operations</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Als Chief of Staff bei VREY entwickelst du Strategien für die Energiewende in Deutschland. Du unterstützt die Führung un...</div>
+    </a>
+    
+    <a href="head-of-energy-operations-berlin-404451.html" class="job-card management team-leader">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Head of Energy Operations</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">VREY</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Management</span><span class="badge badge-tag">Team Leader</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Als Head of Energy Operations bei VREY entwickelst du ein innovatives Energiemanagementsystem für Mehrfamilienhäuser. Du...</div>
+    </a>
+    
+    <a href="manager-business-operations-coo-office-berlin-255805.html" class="job-card business-operations">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Manager Business Operations - COO Office</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">VREY</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Business Operations</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du Erfahrung in Business Operations und COO-Rollen hast und dich für die Energiewende begeistern kanns...</div>
+    </a>
+    
+    <a href="projektmanager-dezentrale-energieversorgung-berlin-118617.html" class="job-card project-management">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Projektmanager - Dezentrale Energieversorgung</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">VREY</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Project Management</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewerbe dich, wenn du Erfahrung in Projektmanagement und Energieversorgung hast. Du solltest auch ein starkes Netzwerk i...</div>
+    </a>
+    
+    <a href="ava-experte-fur-californiax-berlin-297398.html" class="job-card consulting engineering">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">AVA-Experte (m/w/d) für CaliforniaX</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Lahrssen Consulting</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Consulting</span><span class="badge badge-tag">Engineering</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Als AVA-Experte bei Lahrssen Consulting entwickeln Sie nachhaltige IT-Architekturen und unterstützen Unternehmen bei der...</div>
+    </a>
+    
+    <a href="senior-operations-manager-energy-solutions-berlin-398117.html" class="job-card business-operations">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">(Senior) Operations Manager - Energy Solutions</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">VREY</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-110k</span>
+            <span class="badge badge-tag">Business Operations</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewerbe dich, wenn du Erfahrung in der Energiebranche und Führungskompetenzen hast. Das Unternehmen bietet eine Herausfo...</div>
+    </a>
+    
+    <a href="junior-stability-specialist-neunkirchen-12834.html" class="job-card engineering">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Junior Stability Specialist (m/w/d)</h3>
+            <small style="color:#64748b;">Neunkirchen</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Amapharm GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 30k-40k</span>
+            <span class="badge badge-tag">Engineering</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Diese Stelle bietet die Möglichkeit, in einer dynamischen und innovativen Umgebung zu arbeiten und sich kontinuierlich w...</div>
+    </a>
+    
+    <a href="senior-software-engineer-backend-typescript-mannheim-241809.html" class="job-card software-development">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Senior Software Engineer (m/w/d) – Backend  (TypeScript)</h3>
+            <small style="color:#64748b;">Mannheim</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">7Assets GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Software Development</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Als Senior Software Engineer bei 7Assets GmbH hast du die Möglichkeit, direkt am Gründerteam mitzuwirken und die Weitere...</div>
+    </a>
+    
+    <a href="head-of-growth-performance-marketing-berlin-108610.html" class="job-card marketing-and-communication">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Head of Growth & Performance Marketing (f/m/x)</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">BRAINEFFECT</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Als Head of Growth & Performance Marketing bei BRAINEFFECT hast du die Chance, ein innovatives und schnell wachsendes Un...</div>
+    </a>
+    
+    <a href="marketing-vertrieb-braunschweig-155638.html" class="job-card distribution-marketing">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Marketing & Vertrieb</h3>
+            <small style="color:#64748b;">Braunschweig</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Sensotec Optoelektronische Systeme GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Distribution Marketing</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du Erfahrung im Marketing und Vertrieb hast und dich für innovative Lösungen in der Optoelektronik und...</div>
+    </a>
+    
+    <a href="mobile-app-developer-react-native-berlin-294767.html" class="job-card software-development">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Mobile App Developer (React Native)</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">acemate.ai</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Software Development</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewerben Sie sich, wenn Sie Erfahrung mit React Native haben und sich für die Entwicklung von mobilen Apps begeistern. D...</div>
+    </a>
+    
+    <a href="praktikantin-kundenberatung-scaling-phase-berlin-377063.html" class="job-card customer-service">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Praktikant*in Kundenberatung | Scaling Phase</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Matera GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Keine Angabe, aber wahrscheinlich Minijob oder Studentenjob</span>
+            <span class="badge badge-tag">Customer Service</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Als Praktikant*in im Bereich Kundenberatung kannst du deine organisatorischen Fähigkeiten einsetzen, um Kunden zu glückl...</div>
+    </a>
+    
+    <a href="social-media-manager-biesenthal-7012.html" class="job-card social-media-manager">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Social Media Manager (m/w/d)</h3>
+            <small style="color:#64748b;">Biesenthal</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">InkuPlay UG (haftungsbeschränkt)</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 40k-55k</span>
+            <span class="badge badge-tag">Social Media Manager</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du Erfahrung im Social Media Management hast und dich für das Gaming- und Esports-Ökosystem begeistern...</div>
+    </a>
+    
+    <a href="senior-ai-developer-bielefeld-417808.html" class="job-card it">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Senior AI-Developer (m/w/d)</h3>
+            <small style="color:#64748b;">Bielefeld</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">PALTRON GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">IT</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Als Senior AI-Developer bei PALTRON GmbH hast du die Chance, an der Entwicklung einer hochmodernen KI-Anwendung mitzuarb...</div>
+    </a>
+    
+    <a href="werkstudentin-recruiting-hamburg-461450.html" class="job-card hr">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Werkstudent:in Recruiting (m/w/d)</h3>
+            <small style="color:#64748b;">Hamburg</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">1KOMMA5˚</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 ungefähr 30k-40k</span>
+            <span class="badge badge-tag">HR</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bei 1KOMMA5° kannst du Teil eines innovativen Teams sein, das die Energiewende vorantreibt. Als Werkstudent/in Recruitin...</div>
+    </a>
+    
+    <a href="safety-engineer-ept-batteries-aachen-411971.html" class="job-card engineering">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Safety Engineer - ePT & Batteries (m/f/d)</h3>
+            <small style="color:#64748b;">Aachen</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Eleo Technologies B.V.</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Geschätzt 80k-100k Euro</span>
+            <span class="badge badge-tag">Engineering</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Sie sind ein sicherheitsbewusster Ingenieur mit Leidenschaft für Elektromobilität und Durchbruchstechnologien für Batter...</div>
+    </a>
+    
+    <a href="supplier-quality-engineer-munich-136109.html" class="job-card engineering">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Supplier Quality Engineer (m/w/d)</h3>
+            <small style="color:#64748b;">Munich</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">MY Humancapital GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Engineering</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Diese Stelle bietet die Möglichkeit, sich auf die Lieferantenqualität zu spezialisieren und einen wichtigen Beitrag zur ...</div>
+    </a>
+    
+    <a href="operations-specialist-procurement-hamburg-449624.html" class="job-card finance">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Operations Specialist  (w/m/d)* - Procurement</h3>
+            <small style="color:#64748b;">Hamburg</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Engel & Völkers Holding GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Geschätzt 50k-60k Euro</span>
+            <span class="badge badge-tag">Finance</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, um Teil unserer Reise zu werden! Mit der Kraft einer global erfolgreichen Marke setzen wir bei Engel & Völk...</div>
+    </a>
+    
+    <a href="social-media-marketing-hofheim-267616.html" class="job-card marketing-and-communication">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Social Media Marketing</h3>
+            <small style="color:#64748b;">Hofheim</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Challenge 4 Change GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 ungefähr 30k-40k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du kreative Arbeit liebst und Erfahrungen im Social Media Marketing sammeln möchtest. Keine Qualifikat...</div>
+    </a>
+    
+    <a href="grafikdesigner-webdesigner-digital-media-illustration-teilzeit-regensburg-25157.html" class="job-card remote media screen-and-web-design">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Grafikdesigner / Webdesigner (m/w/d) - Digital Media & Illustration - Teilzeit</h3>
+            <small style="color:#64748b;">Regensburg</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Alphatrail GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Keine Angabe, aber wahrscheinlich im unteren Bereich (20-30k) für Teilzeit</span>
+            <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Media</span><span class="badge badge-tag">Screen and Web Design</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Wir suchen einen kreativen Grafikdesigner/Webdesigner, der unseren digitalen Auftritt mitgestalten und unsere Markenwelt...</div>
+    </a>
+    
+    <a href="marketing-manager-full-time-munich-444935.html" class="job-card marketing-manager">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Marketing Manager |  Full Time (m/w/d)</h3>
+            <small style="color:#64748b;">Munich</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">CONROO GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Marketing Manager</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du eine Herausforderung suchst, die dich zum Denken anregt und deine Fähigkeiten in der Logistik- und ...</div>
+    </a>
+    
+    <a href="content-creator-brand-marketing-manager-fur-no-sugar-factory-kalorienarme-und-proteinreiche-kuchen-desserts-berlin-266720.html" class="job-card marketing-and-communication">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Content Creator, Brand & Marketing Manager (m/w/d) für NO SUGAR FACTORY - kalorienarme und proteinreiche Kuchen & Desserts</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">NO SUGAR FACTORY</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 40k-60k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Chance, bei einer innovativen und gesunden Lebensmittelmarke mitzumachen. Möglichkeit, kreativ in der Marketing- und Bra...</div>
+    </a>
+    
+    <a href="automation-developer-emstek-112276.html" class="job-card it">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Automation Developer</h3>
+            <small style="color:#64748b;">Emstek</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Extra & Bold Design GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">IT</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du ein Teammitglied in einer innovativen Agentur sein möchtest und an der Gestaltung von Verpackungslö...</div>
+    </a>
+    
+    <a href="werkstudent-in-der-gebaudetechnik-heizung-kalte-luftung-sanitar-cologne-450999.html" class="job-card building supply safety-services-engineering">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Werkstudent (m/w/d) in der Gebäudetechnik (Heizung, Kälte, Lüftung, Sanitär)</h3>
+            <small style="color:#64748b;">Cologne</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">sic architekten gmbh</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 30k-40k</span>
+            <span class="badge badge-tag">Building</span><span class="badge badge-tag">Supply</span><span class="badge badge-tag">Safety Services Engineering</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Als Werkstudent in der Gebäudetechnik bei sic architekten gmbh kannst du deine Kenntnisse in Heizung, Kälte, Lüftung und...</div>
+    </a>
+    
+    <a href="content-creator-mulheim-255353.html" class="job-card online-marketing">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Content Creator (m/w/d)</h3>
+            <small style="color:#64748b;">Mülheim</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Lionflence</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 40k-60k</span>
+            <span class="badge badge-tag">Online Marketing</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, um in einem engagierten Team als Content Creator zu arbeiten und ein vielseitiges, anspruchsvolles Aufgaben...</div>
+    </a>
+    
+    <a href="junior-artist-manager-influencer-manager-mulheim-199586.html" class="job-card marketing-and-communication">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Junior Artist Manager / Influencer Manager (m/w/d)</h3>
+            <small style="color:#64748b;">Mülheim</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Lionflence</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 40k-60k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, um deine Karriere als Junior Artist Manager/in zu starten und dich in einem spannenden Umfeld weiterzuentwi...</div>
+    </a>
+    
+    <a href="junior-artist-manager-influencer-manager-berlin-309139.html" class="job-card marketing-and-communication">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Junior Artist Manager / Influencer Manager (m/w/d)</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Lionflence</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 40k-55k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Diese Herausforderung bietet sich ideal für ambitionierte Junior-Manager an, die sich in Artistmanagement und Influencer...</div>
+    </a>
+    
+    <a href="artist-manager-influencer-manager-mulheim-120690.html" class="job-card marketing-and-communication">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Artist Manager / Influencer Manager (m/w/d)</h3>
+            <small style="color:#64748b;">Mülheim</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Lionflence</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Diese Herausforderung bietet sich ideal für erfahrene Artist- und Influencer-Manager an, die sich weiterentwickeln und i...</div>
+    </a>
+    
+    <a href="artist-manager-influencer-manager-berlin-119143.html" class="job-card marketing-and-communication">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Artist Manager / Influencer Manager (m/w/d) BERLIN</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Lionflence</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 40k-60k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Diese Herausforderung bietet sichere Entwicklungsmöglichkeiten in Artistmanagement und Influencer Marketing sowie Zugang...</div>
+    </a>
+    
+    <a href="werkstudentin-administration-backoffice-das-ruckgrat-unseres-startups-dusseldorf-226083.html" class="job-card administration">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Werkstudent:in Administration & Backoffice - Das Rückgrat unseres Startups</h3>
+            <small style="color:#64748b;">Düsseldorf</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">InterDine GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 20k-30k</span>
+            <span class="badge badge-tag">Administration</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, um Teil eines engagierten Teams zu werden und deine Fähigkeiten in einer dynamischen und wachsenden Umgebun...</div>
+    </a>
+    
+    <a href="head-of-brand-dach-berlin-332717.html" class="job-card marketing-and-communication">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Head of Brand DACH (m/f/d)</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">KoRo Handels GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Als Head of Brand DACH hast du die Chance, ein bekanntes Marken-Image zu schaffen und KoRo zu einem Haushaltsnamen zu ma...</div>
+    </a>
+    
+    <a href="solution-consultant-rechnungswesen-heidelberg-108866.html" class="job-card business-consulting">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Solution Consultant (Rechnungswesen)</h3>
+            <small style="color:#64748b;">Heidelberg</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Everest Systems GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Business Consulting</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du Erfahrung in Rechnungswesen und KI-gestützten Systemen hast und dich für die Entwicklung einer inno...</div>
+    </a>
+    
+    <a href="freelancer-digital-event-projektmanager-webinare-online-events-cologne-109583.html" class="job-card remote marketing-and-communication">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Freelancer Digital Event & Projektmanager - Webinare & Online-Events (m/w/d)</h3>
+            <small style="color:#64748b;">Cologne</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Webinarhelden</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 40k-60k</span>
+            <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du kreative Online-Events planen und durchführen möchtest und dich für menschliche Betreuung in einer ...</div>
+    </a>
+    
+    <a href="sap-projektmanager-refnr-46152-munich-18712.html" class="job-card it">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">SAP Projektmanager (m/w/d) (Ref.Nr.: 46152)</h3>
+            <small style="color:#64748b;">Munich</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Wavestone Germany AG</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">IT</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewerben Sie sich, wenn Sie Erfahrung in SAP-Projektmanagement und -Implementierung haben und sich für die Herausforderu...</div>
+    </a>
+    
+    <a href="operations-lead-operative-leitung-in-passau-74042.html" class="job-card management team-leader">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Operations Lead, operative Leitung (w/m/d) in Passau</h3>
+            <small style="color:#64748b;">Passau</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">NETPROFIT</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 50k-70k</span>
+            <span class="badge badge-tag">Management</span><span class="badge badge-tag">Team Leader</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewerben Sie sich, wenn Sie ein Prozess-Experte sind, der Termine hält und ein starkes Team operativ führt. NETPROFIT bi...</div>
+    </a>
+    
+    <a href="quereinsteiger-im-vertrieb-hamburg-43746.html" class="job-card credit-analysis">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Quereinsteiger im Vertrieb (w/m/d)</h3>
+            <small style="color:#64748b;">Hamburg</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Smava GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 50k-70k</span>
+            <span class="badge badge-tag">Credit Analysis</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Als Quereinsteiger im Vertrieb bei smava GmbH hast du die Chance, in einer dynamischen und innovativen Umgebung zu arbei...</div>
+    </a>
+    
+    <a href="sales-manager-berlin-123209.html" class="job-card credit-analysis">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Sales Manager (m/w/d)</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Smava GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">Credit Analysis</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="quereinsteiger-im-vertrieb-berlin-106840.html" class="job-card credit-analysis">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Quereinsteiger im Vertrieb (w/m/d)</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Smava GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">Credit Analysis</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="bankkaufmann-frau-als-kreditspezialist-im-homeoffice-berlin-483238.html" class="job-card remote credit-analysis">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Bankkaufmann/-frau - als Kreditspezialist im Homeoffice (m/w/d)</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Smava GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Credit Analysis</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="webentwickler-frontend-developer-potsdam-356204.html" class="job-card it">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Webentwickler / Frontend Developer (m/w/d)</h3>
+            <small style="color:#64748b;">Potsdam</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">isLOGIC AG</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">IT</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="fachingenieur-fur-temporare-verkehrsplanung-bad-sackingen-295556.html" class="job-card engineering">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Fachingenieur für temporäre Verkehrsplanung (m/w/d)</h3>
+            <small style="color:#64748b;">Bad Säckingen</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">HERY GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">Engineering</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="java-developer-karlsruhe-24412.html" class="job-card information-technology vocational">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Java Developer (m/w/d)</h3>
+            <small style="color:#64748b;">Karlsruhe</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">virtual7 GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">Information technology</span><span class="badge badge-tag">vocational</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="senior-fullstack-developer-karlsruhe-319269.html" class="job-card information-technology vocational">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Senior Fullstack Developer (m/w/d)</h3>
+            <small style="color:#64748b;">Karlsruhe</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">virtual7 GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">Information technology</span><span class="badge badge-tag">vocational</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="sap-technology-manager-wiesbaden-496023.html" class="job-card saperp-consulting development">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">SAP Technology Manager (m/w/d)</h3>
+            <small style="color:#64748b;">Wiesbaden</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">traze GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">SAP/ERP Consulting</span><span class="badge badge-tag">Development</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="projektleiter-m365-services-munich-292039.html" class="job-card project-management">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Projektleiter M365 Services ( m/w/d)</h3>
+            <small style="color:#64748b;">Munich</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">ITconfig/all GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">Project Management</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="senior-amazon-marketplace-manager-berlin-292372.html" class="job-card online-marketing">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Senior Amazon Marketplace Manager (m/w/d)</h3>
+            <small style="color:#64748b;">Berlin</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Eberlein und Kunz GbR</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">Online Marketing</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="video-editor-hamburg-298569.html" class="job-card remote marketing-and-communication">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Video Editor (m/w/d)</h3>
+            <small style="color:#64748b;">Hamburg</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Yunicorn</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="operations-managerin-manager-projektingenieurin-ingenieur-dresden-168243.html" class="job-card engineering">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Operations Managerin (Manager) / Projektingenieurin(-ingenieur) (w/m/d)</h3>
+            <small style="color:#64748b;">Dresden</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">DieEnergiekoppler GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">Engineering</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="wir-suchen-einen-li-regulatory-spezialisten-ref-13633-frankfurt-am-main-469514.html" class="job-card remote it">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Wir suchen einen LI- & Regulatory-Spezialisten (m/w/d) Ref. 1363.3</h3>
+            <small style="color:#64748b;">Frankfurt am Main</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">IP Systems GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">Remote</span><span class="badge badge-tag">IT</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="junior-devops-platform-engineer-dresden-73947.html" class="job-card system-and-network-administration">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Junior DevOps / Platform Engineer (m/w/d)</h3>
+            <small style="color:#64748b;">Dresden</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">DieEnergiekoppler GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">System and Network Administration</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="devops-platform-engineer-dresden-137141.html" class="job-card system-and-network-administration">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">DevOps / Platform Engineer (m/w/d)</h3>
+            <small style="color:#64748b;">Dresden</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">DieEnergiekoppler GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">System and Network Administration</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="marketing-manager-hamburg-487260.html" class="job-card remote marketing-manager">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Marketing Manager (m/w/d)</h3>
+            <small style="color:#64748b;">Hamburg</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Yunicorn</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Marketing Manager</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="recruiting-spezialist-remote-straubenhardt-234887.html" class="job-card remote recruitment-and-selection">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Recruiting Spezialist (m/w/d) - Remote</h3>
+            <small style="color:#64748b;">Straubenhardt</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Simone Riegsinger Unternehmensberatung</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Recruitment and Selection</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="projektleiter-m365-90-remote-10-in-munchen-sowie-bundesweiten-einsatzen-bei-workshops-munich-302210.html" class="job-card project-management">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Projektleiter M365 (m/w/d) - 90% Remote , 10 % in München sowie bundesweiten Einsätzen bei Workshops</h3>
+            <small style="color:#64748b;">Munich</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">ITconfig/all GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">Project Management</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="team-lead-marketing-mensch-hamburg-432941.html" class="job-card marketing-and-communication">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Team Lead Marketing (Mensch)</h3>
+            <small style="color:#64748b;">Hamburg</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Eventinc GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+    <a href="wir-suchen-einen-operations-troubleshooting-experten-ref-13632-frankfurt-am-main-259025.html" class="job-card remote it">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+            <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">Wir suchen einen Operations- & Troubleshooting-Experten (m/w/d) Ref. 1363.2</h3>
+            <small style="color:#64748b;">Frankfurt am Main</small>
+        </div>
+        <div style="margin:0.5rem 0; font-weight:600; color:#334155;">IP Systems GmbH</div>
+        <div style="margin-bottom:0.8rem;">
+            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-tag">Remote</span><span class="badge badge-tag">IT</span>
+        </div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+    </a>
+    
+        </div>
     </main>
+    <footer>
+        <a href="impressum.html">Impressum</a> • <a href="datenschutz.html">Datenschutz</a>
+    </footer>
 </body>
 </html>
