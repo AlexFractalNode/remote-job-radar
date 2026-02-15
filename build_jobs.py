@@ -9,12 +9,9 @@ from collections import Counter
 OUTPUT_DIR = 'job_board'
 CACHE_FILE = 'ai_cache.json'
 SITE_NAME = "RemoteRadar 📡"
-
-# Domain später hier eintragen
-# Vorläufige GitHub URL (ersetze [...] mit deinen Daten)
 BASE_URL = "https://[AlexFractalNode].github.io/[remote-job-radar]"
 
-# FÜR DAS IMPRESSUM (Bitte ausfüllen)
+# IMPRESSUM
 IMPRESSUM_NAME = "Alexander Heinze"
 IMPRESSUM_ADRESSE = "Am Fuchsgraben 28, 08056 Zwickau"
 IMPRESSUM_EMAIL = "alexander.heinze.01@gmail.com"
@@ -40,7 +37,7 @@ if os.path.exists(CACHE_FILE):
     try:
         with open(CACHE_FILE, 'r', encoding='utf-8') as f:
             ai_cache = json.load(f)
-        print(f"💾 Cache geladen: {len(ai_cache)} Jobs bereits analysiert.")
+        print(f"💾 Cache geladen: {len(ai_cache)} Jobs.")
     except:
         print("⚠️ Cache leer.")
 
@@ -50,7 +47,7 @@ def analyze_job_with_ai(job):
     slug = job['slug']
     if slug in ai_cache: return ai_cache[slug]
 
-    print(f"🧠 Analysiere NEUEN Job: {job['title'][:30]}...")
+    print(f"🧠 Analysiere: {job['title'][:30]}...")
     headers = {'Authorization': f'Bearer {API_KEY}', 'Content-Type': 'application/json'}
     
     prompt = f"""
@@ -81,24 +78,21 @@ def analyze_job_with_ai(job):
                 except: return None
             elif r.status_code == 429:
                 wait = (attempt + 1) * 20
-                print(f"   ⏳ Rate Limit... warte {wait}s")
                 time.sleep(wait)
             else: return None
         except Exception as e: time.sleep(5)
     return None
 
-# --- 4. JOBS VERARBEITEN ---
+# --- 4. VERARBEITUNG & TAGS ---
 new_jobs_analyzed = 0
-all_tags = [] 
+all_tags_raw = []
 
 for i, job in enumerate(jobs):
     slug = job['slug']
-    
-    # Tags sammeln 
     job_tags = job.get('tags', [])
-    all_tags.extend(job_tags)
+    all_tags_raw.extend(job_tags) # Sammeln für später
     
-    # KI Analyse Logik
+    # KI Logik
     if slug in ai_cache:
         analysis = ai_cache[slug]
     elif new_jobs_analyzed < MAX_NEW_JOBS_LIMIT:
@@ -106,7 +100,7 @@ for i, job in enumerate(jobs):
         if analysis:
             ai_cache[slug] = analysis
             new_jobs_analyzed += 1
-            time.sleep(3) 
+            time.sleep(2) 
     else:
         analysis = None
 
@@ -125,52 +119,29 @@ for i, job in enumerate(jobs):
 with open(CACHE_FILE, 'w', encoding='utf-8') as f:
     json.dump(ai_cache, f, ensure_ascii=False)
 
-# Top 12 Tags (etwas mehr, da sie jetzt kleiner sind)
-top_tags = [tag for tag, count in Counter(all_tags).most_common(12)]
+# Top Tags ermitteln (Cleaned)
+top_tags = [tag for tag, count in Counter(all_tags_raw).most_common(15)]
 
-# --- 5. HTML GENERATOR ---
+# --- 5. SETUP HTML ---
 if not os.path.exists(OUTPUT_DIR): os.makedirs(OUTPUT_DIR)
 
-# CSS (OPTIMIERT FÜR KLEINE TAGS)
+# CSS Styles
 css_styles = """
 <style>
     :root { --primary: #2563eb; --background: #f8fafc; --text: #1e293b; --border: #e2e8f0; }
     body { background: var(--background); color: var(--text); font-family: system-ui, -apple-system, sans-serif; }
-    
-    /* Navigation */
     nav { background: white; border-bottom: 1px solid var(--border); padding: 1rem 0; margin-bottom: 2rem; }
     .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; padding: 0 1rem; }
     .logo { font-weight: 800; font-size: 1.5rem; text-decoration: none; color: var(--primary); }
     .nav-links a { color: #64748b; text-decoration: none; margin-left: 1rem; font-size: 0.9rem; }
     
-    /* --- NEUES FILTER DESIGN (CHIPS) --- */
-    .filter-container {
-        max-width: 800px; margin: 0 auto 2rem auto; text-align: center;
-    }
-    .filter-label {
-        font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; margin-bottom: 0.5rem; display: block; font-weight: bold;
-    }
-    .filter-bar { 
-        display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; 
-    }
+    /* Chips */
+    .filter-bar { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem; }
     .filter-btn { 
-        background: white; 
-        border: 1px solid #cbd5e1; 
-        padding: 4px 12px;           /* Kleineres Padding */
-        border-radius: 99px;         /* Pill Shape (ganz rund) */
-        cursor: pointer; 
-        font-size: 0.8rem;           /* Kleinere Schrift */
-        color: #475569;
-        transition: all 0.2s;
-        font-weight: 500;
+        background: white; border: 1px solid #cbd5e1; padding: 4px 12px; border-radius: 99px; 
+        text-decoration: none; font-size: 0.8rem; color: #475569; transition: all 0.2s; display:inline-block;
     }
-    .filter-btn:hover { 
-        border-color: var(--primary); color: var(--primary); transform: translateY(-1px);
-    }
-    .filter-btn.active { 
-        background: var(--primary); color: white; border-color: var(--primary); 
-        box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
-    }
+    .filter-btn:hover, .filter-btn.active { border-color: var(--primary); color: var(--primary); background: #eff6ff; }
 
     /* Job Cards */
     .job-card { 
@@ -183,16 +154,14 @@ css_styles = """
     .badge { display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; margin-right: 5px; }
     .badge-salary { background: #fff7ed; color: #c2410c; border: 1px solid #ffedd5; }
     .badge-tag { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
-    
     .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-top: 1rem; font-size: 0.9rem; color: #334155; border-left: 3px solid var(--primary); }
     
-    /* Footer */
     footer { text-align: center; margin-top: 4rem; padding: 2rem; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); }
     footer a { color: #64748b; }
 </style>
 """
 
-# HTML TEMPLATE
+# Template für Detailseiten
 job_template = """
 <!DOCTYPE html>
 <html lang="de">
@@ -208,8 +177,7 @@ job_template = """
         <div class="nav-container">
             <a href="index.html" class="logo">📡 {{ site_name }}</a>
             <div class="nav-links">
-                <a href="index.html">Jobs</a>
-                <a href="impressum.html">Impressum</a>
+                <a href="index.html">Alle Jobs</a>
             </div>
         </div>
     </nav>
@@ -226,46 +194,61 @@ job_template = """
             </header>
             <div style="margin: 2rem 0;">{{ description }}</div>
             <a href="{{ apply_url }}" target="_blank" role="button" style="width:100%; text-align:center;">Jetzt bewerben ↗</a>
-            <small style="display:block; text-align:center; margin-top:1rem; color:#94a3b8;">Weiterleitung zur Firmenseite</small>
         </article>
     </main>
-    <footer>
-        <a href="impressum.html">Impressum</a> • <a href="datenschutz.html">Datenschutz</a>
-    </footer>
+    <footer><a href="impressum.html">Impressum</a> • <a href="datenschutz.html">Datenschutz</a></footer>
 </body>
 </html>
 """
 
-# 6. HTML GENERIEREN
-index_cards = ""
+# Template für Landingpages (Index & Kategorien)
+landing_template = """
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>{{ page_title }}</title>
+    <meta name="description" content="{{ page_desc }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    {{ css_styles }}
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 {{ site_name }}</a>
+            <div class="nav-links">
+                <a href="impressum.html">Impressum</a>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <div style="text-align:center; margin-bottom: 2rem;">
+            <h1>{{ headline }}</h1>
+            <p style="color:#64748b;">{{ subheadline }}</p>
+        </div>
+        
+        <div class="filter-bar">
+            <a href="index.html" class="filter-btn {{ active_all }}">Alle Jobs</a>
+            {{ tag_buttons }}
+        </div>
 
-for job in jobs:
-    filename = f"{job['slug']}.html"
-    
-    tags_list = job.get('tags', [])
-    tags_html = "".join([f'<span class="badge badge-tag">{t}</span>' for t in tags_list])
-    
-    # Filter-Klassen
-    filter_classes = " ".join([t.lower().replace(' ', '-').replace('&', '').replace('/', '') for t in tags_list])
+        <div id="job-grid">
+            {{ job_cards }}
+        </div>
+    </main>
+    <footer><a href="impressum.html">Impressum</a> • <a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
+"""
 
-    # Detailseite
-    html = job_template.replace("{{ title }}", job['title'])
-    html = html.replace("{{ company }}", job['company_name'])
-    html = html.replace("{{ site_name }}", SITE_NAME)
-    html = html.replace("{{ salary }}", job.get('salary_estimate', ''))
-    html = html.replace("{{ summary }}", job.get('summary', ''))
-    html = html.replace("{{ description }}", job.get('description', ''))
-    html = html.replace("{{ apply_url }}", job.get('url', '#'))
-    html = html.replace("{{ css_styles }}", css_styles)
-    html = html.replace("{{ tags_html }}", tags_html)
-    
-    with open(os.path.join(OUTPUT_DIR, filename), "w", encoding="utf-8") as f:
-        f.write(html)
+# --- 6. GENERIERUNG (Der Core) ---
 
-    # Index Karte
-    index_cards += f"""
-    <a href="{filename}" class="job-card {filter_classes}">
-        <div style="display:flex; justify-content:space-between; align-items:start;">
+# Hilfsfunktion: Job-Card HTML bauen
+def build_card(job):
+    tags_html = "".join([f'<span class="badge badge-tag">{t}</span>' for t in job.get('tags', [])])
+    return f"""
+    <a href="{job['slug']}.html" class="job-card">
+        <div style="display:flex; justify-content:space-between;">
             <h3 style="margin:0; font-size:1.1rem; color:var(--primary);">{job['title']}</h3>
             <small style="color:#64748b;">{job['location']}</small>
         </div>
@@ -278,133 +261,92 @@ for job in jobs:
     </a>
     """
 
-# 7. INDEX HTML
-filter_buttons = '<button class="filter-btn active" onclick="filterSelection(\'all\')">Alle</button>'
-for tag in top_tags:
-    safe_tag = tag.lower().replace(' ', '-').replace('&', '').replace('/', '')
-    filter_buttons += f'<button class="filter-btn" onclick="filterSelection(\'{safe_tag}\')">{tag}</button>'
-
-index_html = f"""
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <title>{SITE_NAME} - Jobs</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    {css_styles}
-    <script>
-    function filterSelection(c) {{
-        var x, i;
-        x = document.getElementsByClassName("job-card");
-        var btns = document.getElementsByClassName("filter-btn");
-        
-        // Active State setzen
-        for (i = 0; i < btns.length; i++) {{
-            // Einfacher Check: Wenn der Button-Text im angeklickten Tag enthalten ist
-            if (btns[i].innerText.toLowerCase().replace(' ', '-') === c || (c === 'all' && btns[i].innerText === 'Alle')) {{
-                btns[i].classList.add("active");
-            }} else {{
-                btns[i].classList.remove("active");
-            }}
-        }}
-
-        if (c == "all") c = "";
-        for (i = 0; i < x.length; i++) {{
-            w3RemoveClass(x[i], "show");
-            if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
-        }}
-    }}
+# A) Detailseiten bauen
+for job in jobs:
+    tags_html = "".join([f'<span class="badge badge-tag">{t}</span>' for t in job.get('tags', [])])
+    html_content = job_template.replace("{{ title }}", job['title'])
+    html_content = html_content.replace("{{ company }}", job['company_name'])
+    html_content = html_content.replace("{{ site_name }}", SITE_NAME)
+    html_content = html_content.replace("{{ salary }}", job.get('salary_estimate', ''))
+    html_content = html_content.replace("{{ summary }}", job.get('summary', ''))
+    html_content = html_content.replace("{{ description }}", job.get('description', ''))
+    html_content = html_content.replace("{{ apply_url }}", job.get('url', '#'))
+    html_content = html_content.replace("{{ css_styles }}", css_styles)
+    html_content = html_content.replace("{{ tags_html }}", tags_html)
     
-    function w3AddClass(element, name) {{
-        var i, arr1, arr2;
-        arr1 = element.className.split(" ");
-        arr2 = name.split(" ");
-        for (i = 0; i < arr2.length; i++) {{
-            if (arr1.indexOf(arr2[i]) == -1) {{element.className += " " + arr2[i];}}
-        }}
-    }}
+    with open(os.path.join(OUTPUT_DIR, f"{job['slug']}.html"), "w", encoding="utf-8") as f:
+        f.write(html_content)
+
+# B) Sitemap Vorbereitung
+sitemap_urls = [f"{BASE_URL}/"]
+
+# C) Landingpages bauen (Index + Tags)
+# Wir erstellen eine Liste: "index" + alle Top Tags
+pages_to_build = [{"tag": None, "filename": "index.html", "title": "Alle Jobs"}]
+for t in top_tags:
+    clean_filename = t.lower().replace(" ", "-").replace("/", "") + "-jobs.html"
+    pages_to_build.append({"tag": t, "filename": clean_filename, "title": t})
+
+for page in pages_to_build:
+    current_tag = page['tag']
+    filename = page['filename']
     
-    function w3RemoveClass(element, name) {{
-        var i, arr1, arr2;
-        arr1 = element.className.split(" ");
-        arr2 = name.split(" ");
-        for (i = 0; i < arr2.length; i++) {{
-            while (arr1.indexOf(arr2[i]) > -1) {{
-                arr1.splice(arr1.indexOf(arr2[i]), 1);     
-            }}
-        }}
-        element.className = arr1.join(" ");
-    }}
-    window.onload = function() {{ filterSelection('all'); }};
-    </script>
-    <style>
-    .job-card {{ display: none; }}
-    .show {{ display: block; animation: fadeIn 0.4s; }}
-    @keyframes fadeIn {{ from {{ opacity: 0; transform: translateY(10px); }} to {{ opacity: 1; transform: translateY(0); }} }}
-    </style>
-</head>
-<body>
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="logo">📡 {SITE_NAME}</a>
-            <div class="nav-links">
-                <a href="impressum.html">Impressum</a>
-            </div>
-        </div>
-    </nav>
-    <main class="container">
-        <div style="text-align:center; margin-bottom: 2rem;">
-            <h1>Finde deinen nächsten Job.</h1>
-            <p style="color:#64748b;">KI-analysiert. Gehalts-geschätzt. Handverlesen.</p>
-        </div>
-        
-        <div class="filter-container">
-            <span class="filter-label">Beliebte Themen:</span>
-            <div class="filter-bar">
-                {filter_buttons}
-            </div>
-        </div>
+    # 1. Jobs filtern
+    if current_tag:
+        filtered_jobs = [j for j in jobs if current_tag in j.get('tags', [])]
+        headline = f"{current_tag} Jobs"
+        subheadline = f"Die besten {len(filtered_jobs)} offenen Stellen für {current_tag}."
+        page_title = f"{current_tag} Jobs (Remote & Hybrid) | {SITE_NAME}"
+        active_all = ""
+    else:
+        filtered_jobs = jobs # Alle
+        headline = "Finde deinen Traumjob."
+        subheadline = "KI-analysiert. Gehalts-geschätzt. Handverlesen."
+        page_title = f"{SITE_NAME} - Die besten Tech & Remote Jobs"
+        active_all = "active"
 
-        <div id="job-grid">
-            {index_cards}
-        </div>
-    </main>
-    <footer>
-        <a href="impressum.html">Impressum</a> • <a href="datenschutz.html">Datenschutz</a>
-    </footer>
-</body>
-</html>
-"""
+    # 2. Cards bauen
+    cards_html = "".join([build_card(j) for j in filtered_jobs])
+    
+    # 3. Filter Buttons bauen (Diesmal sind es echte Links!)
+    tag_btns_html = ""
+    for t in top_tags:
+        t_filename = t.lower().replace(" ", "-").replace("/", "") + "-jobs.html"
+        is_active = "active" if t == current_tag else ""
+        tag_btns_html += f'<a href="{t_filename}" class="filter-btn {is_active}">{t}</a> '
 
-# 8. RECHTSTEXTE
-impressum_html = f"""
-<!DOCTYPE html>
-<html><head><title>Impressum</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">{css_styles}</head>
-<body>
-<main class="container" style="padding-top:2rem;">
-<h1>Impressum</h1>
-<p>Angaben gemäß § 5 TMG</p>
-<p><strong>{IMPRESSUM_NAME}</strong><br>{IMPRESSUM_ADRESSE}</p>
-<p><strong>Kontakt:</strong><br>E-Mail: {IMPRESSUM_EMAIL}</p>
-<p><a href="index.html">⬅ Zurück zur Startseite</a></p>
-</main></body></html>
-"""
+    # 4. HTML zusammenbauen
+    html = landing_template.replace("{{ headline }}", headline)
+    html = html.replace("{{ subheadline }}", subheadline)
+    html = html.replace("{{ page_title }}", page_title)
+    html = html.replace("{{ page_desc }}", f"Finde aktuelle {headline} bei {SITE_NAME}.")
+    html = html.replace("{{ job_cards }}", cards_html)
+    html = html.replace("{{ tag_buttons }}", tag_btns_html)
+    html = html.replace("{{ active_all }}", active_all)
+    html = html.replace("{{ site_name }}", SITE_NAME)
+    html = html.replace("{{ css_styles }}", css_styles)
 
-datenschutz_html = f"""
-<!DOCTYPE html>
-<html><head><title>Datenschutz</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">{css_styles}</head>
-<body>
-<main class="container" style="padding-top:2rem;">
-<h1>Datenschutzerklärung</h1>
-<p>Wir speichern keine persönlichen Daten. Diese Seite hostet keine Cookies.</p>
-<p>Verantwortlich:<br>{IMPRESSUM_NAME}<br>{IMPRESSUM_ADRESSE}</p>
-<p><a href="index.html">⬅ Zurück zur Startseite</a></p>
-</main></body></html>
-"""
+    with open(os.path.join(OUTPUT_DIR, filename), "w", encoding="utf-8") as f:
+        f.write(html)
+    
+    # Zur Sitemap hinzufügen
+    sitemap_urls.append(f"{BASE_URL}/{filename}")
 
-with open(os.path.join(OUTPUT_DIR, "index.html"), "w", encoding="utf-8") as f: f.write(index_html)
-with open(os.path.join(OUTPUT_DIR, "impressum.html"), "w", encoding="utf-8") as f: f.write(impressum_html)
-with open(os.path.join(OUTPUT_DIR, "datenschutz.html"), "w", encoding="utf-8") as f: f.write(datenschutz_html)
+# D) Rechtstexte (Minimalversion)
+for legal in ["impressum", "datenschutz"]:
+    with open(os.path.join(OUTPUT_DIR, f"{legal}.html"), "w", encoding="utf-8") as f:
+        f.write(f"<html><head><title>{legal}</title>{css_styles}</head><body><main class='container'><h1>{legal}</h1><p>{IMPRESSUM_NAME}<br>{IMPRESSUM_ADRESSE}</p><a href='index.html'>Zurück</a></main></body></html>")
 
-print("✅ Update fertig: Design optimiert (Chips) & Rechtstexte aktualisiert!")
+# E) Sitemap generieren
+sitemap_xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+for url in sitemap_urls:
+    sitemap_xml += f'  <url><loc>{url}</loc><changefreq>daily</changefreq></url>\n'
+# Auch alle Detailseiten rein
+for job in jobs:
+    sitemap_xml += f'  <url><loc>{BASE_URL}/{job["slug"]}.html</loc><changefreq>daily</changefreq></url>\n'
+sitemap_xml += '</urlset>'
 
+with open(os.path.join(OUTPUT_DIR, "sitemap.xml"), "w", encoding="utf-8") as f:
+    f.write(sitemap_xml)
+
+print(f"✅ Skalierung erfolgreich! {len(pages_to_build)} Landingpages generiert.")
