@@ -2,8 +2,8 @@ name: Daily Job Update
 
 on:
   schedule:
-    - cron: '0 6 * * *' # Täglich 6 Uhr
-  workflow_dispatch: # Manueller Start
+    - cron: '0 6 * * *' # Jeden Morgen um 06:00 Uhr
+  workflow_dispatch:      # Manueller Start
 
 permissions:
   contents: write
@@ -13,28 +13,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Code auschecken
-      uses: actions/checkout@v3
+      - name: Code auschecken
+        uses: actions/checkout@v3
 
-    - name: Python einrichten
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
+      - name: Python einrichten
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
 
-    - name: Bibliotheken installieren
-      run: |
-        pip install requests
+      - name: Bibliotheken installieren
+        run: |
+          pip install requests
 
-    - name: Job-Board bauen (Mit KI)
-      env:
-        GROQ_API: ${{ secrets.GROQ_API }}
-      run: |
-        python build_jobs.py
+      - name: Job-Board bauen 🏗️
+        env:
+          GROQ_API: ${{ secrets.GROQ_API }}
+        run: |
+          python build_jobs.py
 
-    - name: Änderungen speichern (Cache & HTML)
-      if: always()
-      run: |
-        git config --global user.name "Job-Bot 🤖"
-        git config --global user.email "bot@example.com"
-        git add .
-        git diff --quiet && git diff --staged --quiet || (git commit -m "KI-Update: Neue Jobs & Gehälter 💰" && git push)
+      # SCHRITT A: Das Gehirn (Cache) sichern!
+      # Wir speichern ai_cache.json zurück in den "main" Branch
+      - name: Cache speichern (in main)
+        run: |
+          git config --global user.name "Job-Bot 🤖"
+          git config --global user.email "bot@example.com"
+          git add ai_cache.json
+          # Nur committen, wenn sich der Cache geändert hat
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🧠 Cache Update" && git push)
+
+      # SCHRITT B: Die Webseite veröffentlichen!
+      # Wir schieben NUR den Ordner "job_board" auf den Branch "gh-pages"
+      - name: Auf GitHub Pages deployen 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: job_board # Dieser Ordner wird zur Webseite
+          branch: gh-pages  # Der Zweig für die Live-Seite
