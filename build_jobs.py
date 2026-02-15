@@ -14,9 +14,9 @@ SITE_NAME = "RemoteRadar 📡"
 BASE_URL = "https://dein-jobboard-name.netlify.app" 
 
 # FÜR DAS IMPRESSUM (Bitte ausfüllen)
-IMPRESSUM_NAME = "Max Mustermann"
-IMPRESSUM_ADRESSE = "Musterstraße 1, 12345 Musterstadt"
-IMPRESSUM_EMAIL = "kontakt@muster-jobradar.de"
+IMPRESSUM_NAME = "Alexander Heinze"
+IMPRESSUM_ADRESSE = "Am Fuchsgraben 28, 08056 Zwickau"
+IMPRESSUM_EMAIL = "alexander.heinze.01@gmail.com"
 
 # EINSTELLUNGEN
 MAX_NEW_JOBS_LIMIT = 20
@@ -386,3 +386,4 @@ with open(os.path.join(OUTPUT_DIR, "impressum.html"), "w", encoding="utf-8") as 
 with open(os.path.join(OUTPUT_DIR, "datenschutz.html"), "w", encoding="utf-8") as f: f.write(datenschutz_html)
 
 print("✅ Update fertig: Tags, Filter & Rechtstexte eingebaut!")
+
