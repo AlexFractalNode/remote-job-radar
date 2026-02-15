@@ -131,62 +131,35 @@ with open(CACHE_FILE, 'w', encoding='utf-8') as f:
 
 print(f"🏁 Fertig. Heute {new_jobs_analyzed} neue Jobs analysiert.")
 
-# --- 5. HTML GENERIEREN ---
+# --- 5. HTML GENERIEREN (MIT FEHLER-SCHUTZ) ---
 if not os.path.exists(OUTPUT_DIR): os.makedirs(OUTPUT_DIR)
 
-css_styles = """
-<style>
-    :root { --primary: #2563eb; --background: #f8fafc; }
-    body { background: var(--background); font-family: sans-serif; }
-    .job-card { background: white; border: 1px solid #e2e8f0; padding: 1.5rem; margin-bottom: 1rem; border-radius: 8px; text-decoration: none; color: inherit; display: block; transition: transform 0.2s; }
-    .job-card:hover { transform: translateY(-3px); border-color: var(--primary); }
-    .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
-    .badge-salary { background: #fff7ed; color: #c2410c; border: 1px solid #ffedd5; }
-    .ai-summary { font-style: italic; color: #64748b; margin-top: 0.5rem; font-size: 0.9rem; border-left: 3px solid #cbd5e1; padding-left: 10px; }
-</style>
-"""
+# ... (CSS Styles bleiben gleich, spar ich hier kurz aus Platzgründen) ...
 
-job_template = """
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} | {{ site_name }}</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    {{ css_styles }}
-</head>
-<body>
-    <nav class="container-fluid">
-        <ul><li><strong><a href="index.html">📡 RemoteRadar</a></strong></li></ul>
-    </nav>
-    <main class="container">
-        <article>
-            <header>
-                <small>{{ company }}</small>
-                <h1>{{ title }}</h1>
-                <p>📍 {{ location }} <span class="badge badge-salary">💰 {{ salary }}</span></p>
-                <div class="ai-summary">🤖 KI-Fazit: {{ summary }}</div>
-            </header>
-            <div style="margin: 2rem 0;">{{ description }}</div>
-            <a href="{{ apply_url }}" target="_blank" role="button">Jetzt bewerben ↗</a>
-        </article>
-    </main>
-</body>
-</html>
-"""
+# Kopiere ab hier:
 
 index_cards = ""
 for job in jobs:
     filename = f"{job['slug']}.html"
     
+    # DATEN VORBEREITEN (Der Fix!)
+    # Wir stellen sicher, dass summary IMMER ein String ist
+    raw_summary = job.get('summary', '')
+    if isinstance(raw_summary, list):
+        summary_text = " ".join(raw_summary) # Liste zu Text verbinden
+    else:
+        summary_text = str(raw_summary)
+
     # HTML Detailseite
     html_content = job_template.replace("{{ title }}", job['title'])
     html_content = html_content.replace("{{ company }}", job['company_name'])
     html_content = html_content.replace("{{ location }}", job['location'])
     html_content = html_content.replace("{{ site_name }}", SITE_NAME)
     html_content = html_content.replace("{{ salary }}", job.get('salary_estimate', ''))
-    html_content = html_content.replace("{{ summary }}", job.get('summary', ''))
+    
+    # Hier nutzen wir jetzt die sichere Variable
+    html_content = html_content.replace("{{ summary }}", summary_text)
+    
     html_content = html_content.replace("{{ description }}", job.get('description', ''))
     html_content = html_content.replace("{{ apply_url }}", job.get('url', '#'))
     html_content = html_content.replace("{{ css_styles }}", css_styles)
@@ -201,9 +174,11 @@ for job in jobs:
         <h3 style="margin:0; font-size:1.2rem;">{job['title']}</h3>
         <div style="color:#64748b; margin:0.5rem 0;">{job['company_name']} • {job['location']}</div>
         <div style="margin-top:0.5rem;">{salary_badge}</div>
-        <div class="ai-summary">{job.get('summary', '')}</div>
+        <div class="ai-summary">{summary_text}</div>
     </a>
     """
+
+# ... (Rest des Codes mit index_html schreiben bleibt gleich)
 
 # Index HTML
 index_html = f"""
@@ -225,3 +200,4 @@ index_html = f"""
 
 with open(os.path.join(OUTPUT_DIR, "index.html"), "w", encoding="utf-8") as f:
     f.write(index_html)
+
