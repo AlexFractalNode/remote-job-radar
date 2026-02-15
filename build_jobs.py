@@ -10,7 +10,7 @@ CACHE_FILE = 'ai_cache.json'
 SITE_NAME = "RemoteRadar 📡"
 BASE_URL = "https://dein-jobboard-name.netlify.app" 
 
-# SICHERHEIT: Max. 20 KI-Analysen pro Lauf, um Rate-Limits zu verhindern
+# SICHERHEIT: Max. 20 KI-Analysen pro Lauf
 MAX_NEW_JOBS_LIMIT = 20 
 
 API_KEY = os.environ.get("GROQ_API")
@@ -44,8 +44,6 @@ def analyze_job_with_ai(job):
     if slug in ai_cache:
         return ai_cache[slug]
 
-    # Hier prüfen wir das Limit NICHT, das machen wir im Loop unten
-    
     print(f"🧠 Analysiere NEUEN Job: {job['title'][:30]}...")
     
     headers = {
@@ -53,6 +51,7 @@ def analyze_job_with_ai(job):
         'Content-Type': 'application/json'
     }
     
+    # Prompt
     prompt = f"""
     Analysiere als HR-Experte kurz:
     Titel: {job['title']}
@@ -73,14 +72,17 @@ def analyze_job_with_ai(job):
         "response_format": {"type": "json_object"}
     }
     
-    # Robuster Retry
+    # Retry Loop
     for attempt in range(3):
         try:
             r = requests.post("https://api.groq.com/openai/v1/chat/completions", headers=headers, json=payload)
             if r.status_code == 200:
-                return json.loads(r.json()['choices'][0]['message']['content'])
+                try:
+                    return json.loads(r.json()['choices'][0]['message']['content'])
+                except:
+                    return None # Falls JSON kaputt ist
             elif r.status_code == 429:
-                wait = (attempt + 1) * 20 # 20s, 40s, 60s warten
+                wait = (attempt + 1) * 20 
                 print(f"   ⏳ Rate Limit... warte {wait}s")
                 time.sleep(wait)
             else:
@@ -89,16 +91,11 @@ def analyze_job_with_ai(job):
             time.sleep(5)
     return None
 
-# --- 4. JOBS VERARBEITEN (MIT LIMIT) ---
+# --- 4. JOBS VERARBEITEN ---
 new_jobs_analyzed = 0
 
 for i, job in enumerate(jobs):
     slug = job['slug']
-    
-    # Entscheiden: Dürfen wir die KI fragen?
-    # Ja, wenn:
-    # 1. Der Job schon im Cache ist (kostet nix) ODER
-    # 2. Wir das Tageslimit noch nicht erreicht haben
     
     if slug in ai_cache:
         analysis = ai_cache[slug]
@@ -107,59 +104,90 @@ for i, job in enumerate(jobs):
         if analysis:
             ai_cache[slug] = analysis
             new_jobs_analyzed += 1
-            time.sleep(3) # Pause zwischen Requests
+            time.sleep(3) 
     else:
-        # Limit erreicht -> Keine KI für diesen Job heute
         analysis = None
 
-    # Daten zuweisen
     if analysis:
+        # Hier stellen wir sicher, dass summary ein String ist (DER FIX)
+        raw_summary = analysis.get('summary', '')
+        if isinstance(raw_summary, list):
+            job['summary'] = " ".join(raw_summary)
+        else:
+            job['summary'] = str(raw_summary)
+            
         job['salary_estimate'] = analysis.get('salary_estimate', 'k.A.')
-        job['summary'] = analysis.get('summary', '')
     else:
         job['salary_estimate'] = "Auf Anfrage"
         job['summary'] = "KI-Analyse folgt..."
 
-    # Alle 5 Jobs Cache speichern (Sicherheit)
     if i % 5 == 0:
         with open(CACHE_FILE, 'w', encoding='utf-8') as f:
             json.dump(ai_cache, f, ensure_ascii=False)
 
-# Final speichern
 with open(CACHE_FILE, 'w', encoding='utf-8') as f:
     json.dump(ai_cache, f, ensure_ascii=False)
 
 print(f"🏁 Fertig. Heute {new_jobs_analyzed} neue Jobs analysiert.")
 
-# --- 5. HTML GENERIEREN (MIT FEHLER-SCHUTZ) ---
+# --- 5. HTML GENERIEREN ---
 if not os.path.exists(OUTPUT_DIR): os.makedirs(OUTPUT_DIR)
 
-# ... (CSS Styles bleiben gleich, spar ich hier kurz aus Platzgründen) ...
+# CSS TEMPLATE
+css_styles = """
+<style>
+    :root { --primary: #2563eb; --background: #f8fafc; }
+    body { background: var(--background); font-family: sans-serif; }
+    .job-card { background: white; border: 1px solid #e2e8f0; padding: 1.5rem; margin-bottom: 1rem; border-radius: 8px; text-decoration: none; color: inherit; display: block; transition: transform 0.2s; }
+    .job-card:hover { transform: translateY(-3px); border-color: var(--primary); }
+    .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
+    .badge-salary { background: #fff7ed; color: #c2410c; border: 1px solid #ffedd5; }
+    .ai-summary { font-style: italic; color: #64748b; margin-top: 0.5rem; font-size: 0.9rem; border-left: 3px solid #cbd5e1; padding-left: 10px; }
+</style>
+"""
 
-# Kopiere ab hier:
+# HTML JOB TEMPLATE (Das fehlte vorhin!)
+job_template = """
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} | {{ site_name }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    {{ css_styles }}
+</head>
+<body>
+    <nav class="container-fluid">
+        <ul><li><strong><a href="index.html">📡 RemoteRadar</a></strong></li></ul>
+    </nav>
+    <main class="container">
+        <article>
+            <header>
+                <small>{{ company }}</small>
+                <h1>{{ title }}</h1>
+                <p>📍 {{ location }} <span class="badge badge-salary">💰 {{ salary }}</span></p>
+                <div class="ai-summary">🤖 KI-Fazit: {{ summary }}</div>
+            </header>
+            <div style="margin: 2rem 0;">{{ description }}</div>
+            <a href="{{ apply_url }}" target="_blank" role="button">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+</body>
+</html>
+"""
 
 index_cards = ""
 for job in jobs:
     filename = f"{job['slug']}.html"
     
-    # DATEN VORBEREITEN (Der Fix!)
-    # Wir stellen sicher, dass summary IMMER ein String ist
-    raw_summary = job.get('summary', '')
-    if isinstance(raw_summary, list):
-        summary_text = " ".join(raw_summary) # Liste zu Text verbinden
-    else:
-        summary_text = str(raw_summary)
-
     # HTML Detailseite
     html_content = job_template.replace("{{ title }}", job['title'])
     html_content = html_content.replace("{{ company }}", job['company_name'])
     html_content = html_content.replace("{{ location }}", job['location'])
     html_content = html_content.replace("{{ site_name }}", SITE_NAME)
     html_content = html_content.replace("{{ salary }}", job.get('salary_estimate', ''))
-    
-    # Hier nutzen wir jetzt die sichere Variable
-    html_content = html_content.replace("{{ summary }}", summary_text)
-    
+    html_content = html_content.replace("{{ summary }}", job.get('summary', ''))
     html_content = html_content.replace("{{ description }}", job.get('description', ''))
     html_content = html_content.replace("{{ apply_url }}", job.get('url', '#'))
     html_content = html_content.replace("{{ css_styles }}", css_styles)
@@ -174,11 +202,9 @@ for job in jobs:
         <h3 style="margin:0; font-size:1.2rem;">{job['title']}</h3>
         <div style="color:#64748b; margin:0.5rem 0;">{job['company_name']} • {job['location']}</div>
         <div style="margin-top:0.5rem;">{salary_badge}</div>
-        <div class="ai-summary">{summary_text}</div>
+        <div class="ai-summary">{job.get('summary', '')}</div>
     </a>
     """
-
-# ... (Rest des Codes mit index_html schreiben bleibt gleich)
 
 # Index HTML
 index_html = f"""
@@ -200,4 +226,3 @@ index_html = f"""
 
 with open(os.path.join(OUTPUT_DIR, "index.html"), "w", encoding="utf-8") as f:
     f.write(index_html)
-
