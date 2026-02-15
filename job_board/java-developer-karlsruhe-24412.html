@@ -8,40 +8,60 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     
 <style>
-    :root { --primary: #2563eb; --background: #f8fafc; --text: #1e293b; }
+    :root { --primary: #2563eb; --background: #f8fafc; --text: #1e293b; --border: #e2e8f0; }
     body { background: var(--background); color: var(--text); font-family: system-ui, -apple-system, sans-serif; }
     
     /* Navigation */
-    nav { background: white; border-bottom: 1px solid #e2e8f0; padding: 1rem 0; margin-bottom: 2rem; }
+    nav { background: white; border-bottom: 1px solid var(--border); padding: 1rem 0; margin-bottom: 2rem; }
     .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; padding: 0 1rem; }
     .logo { font-weight: 800; font-size: 1.5rem; text-decoration: none; color: var(--primary); }
     .nav-links a { color: #64748b; text-decoration: none; margin-left: 1rem; font-size: 0.9rem; }
     
-    /* Filter Bar */
-    .filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem; }
-    .filter-btn { 
-        background: white; border: 1px solid #cbd5e1; padding: 6px 12px; 
-        border-radius: 20px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s;
-        color: #475569;
+    /* --- NEUES FILTER DESIGN (CHIPS) --- */
+    .filter-container {
+        max-width: 800px; margin: 0 auto 2rem auto; text-align: center;
     }
-    .filter-btn:hover, .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .filter-label {
+        font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; margin-bottom: 0.5rem; display: block; font-weight: bold;
+    }
+    .filter-bar { 
+        display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; 
+    }
+    .filter-btn { 
+        background: white; 
+        border: 1px solid #cbd5e1; 
+        padding: 4px 12px;           /* Kleineres Padding */
+        border-radius: 99px;         /* Pill Shape (ganz rund) */
+        cursor: pointer; 
+        font-size: 0.8rem;           /* Kleinere Schrift */
+        color: #475569;
+        transition: all 0.2s;
+        font-weight: 500;
+    }
+    .filter-btn:hover { 
+        border-color: var(--primary); color: var(--primary); transform: translateY(-1px);
+    }
+    .filter-btn.active { 
+        background: var(--primary); color: white; border-color: var(--primary); 
+        box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+    }
 
     /* Job Cards */
     .job-card { 
-        background: white; border: 1px solid #e2e8f0; padding: 1.5rem; margin-bottom: 1rem; 
+        background: white; border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 1rem; 
         border-radius: 12px; text-decoration: none; color: inherit; display: block; 
         transition: transform 0.2s, box-shadow 0.2s;
     }
     .job-card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-color: var(--primary); }
     
-    .badge { display: inline-block; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; margin-right: 5px; }
-    .badge-salary { background: #fff7ed; color: #c2410c; }
-    .badge-tag { background: #eff6ff; color: #1e40af; }
+    .badge { display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; margin-right: 5px; }
+    .badge-salary { background: #fff7ed; color: #c2410c; border: 1px solid #ffedd5; }
+    .badge-tag { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
     
-    .ai-summary { background: #f1f5f9; padding: 0.8rem; border-radius: 8px; margin-top: 1rem; font-size: 0.9rem; color: #334155; }
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-top: 1rem; font-size: 0.9rem; color: #334155; border-left: 3px solid var(--primary); }
     
     /* Footer */
-    footer { text-align: center; margin-top: 4rem; padding: 2rem; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid #e2e8f0; }
+    footer { text-align: center; margin-top: 4rem; padding: 2rem; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); }
     footer a { color: #64748b; }
 </style>
 
@@ -62,12 +82,12 @@
                 <small>virtual7 GmbH</small>
                 <h1>Java Developer (m/w/d)</h1>
                 <div style="margin: 0.5rem 0;">
-                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-salary">💰 60k-80k</span>
                     <span class="badge badge-tag">Information technology</span><span class="badge badge-tag">vocational</span>
                 </div>
-                <div class="ai-summary">🤖 <strong>KI-Fazit:</strong> KI-Analyse folgt...</div>
+                <div class="ai-summary">🤖 <strong>KI-Fazit:</strong> Als Java-Entwickler bei virtual7 GmbH treibst du die Digitalisierung des öffentlichen Sektors voran und schaffst echten Mehrwert für Millionen Menschen in Deutschland. Du hast die Möglichkeit, deine Ideen und Fähigkeiten einzubringen und dich in einem dynamischen Team zu entwickeln.</div>
             </header>
-            <div style="margin: 2rem 0;"><p>Als IT-Dienstleister treiben wir die Digitalisierung des öffentlichen Sektors voran und schaffen echten Mehrwert für Millionen Menschen in Deutschland. Wir können vieles richtig gut, aber eben noch nicht alles. Darum suchen wir immer wieder neue Kolleg:innen, die mit ihren Ideen, ihrem Können und Engagement etwas bewegen wollen. Fühlst du dich angesprochen? Dann gestalte Deine Welt zum Besseren und werde Teil unseres Customer Clusters Finance.</p><p style=";"></p><h3><span style="color: #a9c23f">DEINE MISSION</span></h3><p style=";"><span style="color: #5a5f72">Als</span> <strong>Java Developer (m/w/d)</strong> <span style="color: #5a5f72">trägst du maßgeblich zum Erfolg unseres Entwickler-Teams bei und bist verantwortlich für folgende zentrale Aufgaben:</span> </p><ul><li><p style=";">Du implementierst Backend-Komponenten mit Spring Boot, gegebenenfalls auch im Rahmen einer Migration von Java EE</p></li><li><p style=";">Du entwickelst und betreust Webservices (REST) und sorgst für stabile Schnittstellen</p></li><li><p style=";">Du führst Unit-Tests und Integrationstests durch (u. a. mit JUnit) und stellst so eine hohe Softwarequalität sicher</p></li><li><p style=";">Du bindest CI/CD-Tools ein (z. B. Jenkins), um Build-, Test- und Deployment-Prozesse zu unterstützen</p></li><li><p style=";">Perspektivisch unterstützt du bei der Containerisierung mit Docker sowie bei der Verwaltung der Anwendungen</p><p style=";"></p></li></ul><h3><span style="">DAS IST UNS WICHTIG</span></h3><ul><li><p>Du bringst etwa 5 Jahre fundierte Erfahrung mit Java/JEE, Spring Boot und REST-Webservices mit</p></li><li><p>Du hast idealerweise Erfahrung mit Kafka (mindestens 1 Jahr) sowie mit CI/CD (z. B. Jenkins)</p></li><li><p>Du kennst dich mit relationalen Datenbanken aus (z. B. Oracle oder Postgres) und hast idealerweise Berührungspunkte mit JBoss (Applikationsserver)</p></li><li><p>Du arbeitest gerne testgetrieben und nutzt dafür u. a. JUnit und Mockito (gerne auch im Sinne von TDD)</p></li><li><p>Du verfügst über Basiskenntnisse in JavaScript/TypeScript</p></li><li><p>Sehr gute Deutschkenntnisse (C1-Niveau) sowie Englischkenntnisse auf Konversationsniveau </p></li></ul><p style=";"></p><h3><span style="">DEIN NEUER ARBEITSPLATZ</span></h3><ul><li><p>Was bei uns zählt? Klar definierte Rollen, echtes Miteinander und ein gemeinsames Ziel. Wir nennen das Responsiveness – transparent, wertschätzend und zielorientiert.</p></li><li><p>Hier bist du am Wandel direkt beteiligt, wenn du möchtest. – Nimm Teil an Projekten, die uns als Unternehmen weiterentwickeln.</p></li><li><p>Flexible Arbeitszeiten und Remote Work? – Sind selbstverständlich.</p></li><li><p>Individuelles Hardware-Budget? – Stell dir deinen Arbeitsplatz so zusammen, wie du dich am wohlsten fühlst.</p></li><li><p>Mental Health? – Dein mentales Wohlbefinden ist uns wichtig. Mit OpenUp unterstützen wir dich und bieten dir jederzeit kostenlosen Zugang zu professioneller psychologischer Unterstützung.</p></li><li><p>Individuelles Weiterbildungsbudget? – Egal ob die nächste Zertifizierung oder ein lang ersehnter Sprachkurs – du entscheidest, worin und wann du dich weiterbildest.</p></li><li><p>Mitarbeiter:innen-PC-Programm? – Lease dir dein nächstes Device zur rein privaten Nutzung einfach über virtual7.</p></li><li><p>JobRad oder Firmenwagen? – Wir helfen dir dabei, so mobil zu sein, wie du es brauchst.</p></li></ul><p style=";"></p><h3></h3><p style=";"></p><p style=";"></p><p style=";"></p><br /><br /><p>Erzähl mir, wer du bist und wann du anfangen kannst. Gerne auch über <a rel="noopener" target="_blank" ---------- Ich freue mich darauf, dich kennenzulernen.</p><p style=";"></p><img style="width: 272px" alt="Laura Korth" src="https://recruitee-main.s3.eu-central-1.amazonaws.com/uploads/yhd4k2hpwu/Laura_Korth-1080px-2.jpg" /><p><strong><span style="">Laura Korth</span></strong></p><p>Senior HR Recruiterin</p><p>+49 170 3600221<br /><a rel="noopener" target="_blank" ---------- style=";"></p><p style=";"></p><p style=";"></p><p style=";"></p><p style=";"></p><a target="_blank" href="https://virtual7.de/story/tobias-weigel/"><img style="width: 892px" src="https://recruitee-main.s3.eu-central-1.amazonaws.com/uploads/tet1pp299u/tobias.jpg" /></a><br /><br /><p>Ansprechpartner*in: Laura Korth</p><p>Vertragsart: Festanstellung</p><p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <div style="margin: 2rem 0;"><p>Als IT-Dienstleister treiben wir die Digitalisierung des öffentlichen Sektors voran und schaffen echten Mehrwert für Millionen Menschen in Deutschland. Wir können vieles richtig gut, aber eben noch nicht alles. Darum suchen wir immer wieder neue Kolleg:innen, die mit ihren Ideen, ihrem Können und Engagement etwas bewegen wollen. Fühlst du dich angesprochen? Dann gestalte Deine Welt zum Besseren und werde Teil unseres Customer Clusters Finance.</p><p style=";"></p><h3><span style="color: #a9c23f">DEINE MISSION</span></h3><p style=";"><span style="color: #5a5f72">Als</span> <strong>Java Developer (m/w/d)</strong> <span style="color: #5a5f72">trägst du maßgeblich zum Erfolg unseres Entwickler-Teams bei und bist verantwortlich für folgende zentrale Aufgaben:</span> </p><ul><li><p style=";">Du implementierst Backend-Komponenten mit Spring Boot, gegebenenfalls auch im Rahmen einer Migration von Java EE</p></li><li><p style=";">Du entwickelst und betreust Webservices (REST) und sorgst für stabile Schnittstellen</p></li><li><p style=";">Du führst Unit-Tests und Integrationstests durch (u. a. mit JUnit) und stellst so eine hohe Softwarequalität sicher</p></li><li><p style=";">Du bindest CI/CD-Tools ein (z. B. Jenkins), um Build-, Test- und Deployment-Prozesse zu unterstützen</p></li><li><p style=";">Perspektivisch unterstützt du bei der Containerisierung mit Docker sowie bei der Verwaltung der Anwendungen</p><p style=";"></p></li></ul><h3><span style="">DAS IST UNS WICHTIG</span></h3><ul><li><p>Du bringst etwa 5 Jahre fundierte Erfahrung mit Java/JEE, Spring Boot und REST-Webservices mit</p></li><li><p>Du hast idealerweise Erfahrung mit Kafka (mindestens 1 Jahr) sowie mit CI/CD (z. B. Jenkins)</p></li><li><p>Du kennst dich mit relationalen Datenbanken aus (z. B. Oracle oder Postgres) und hast idealerweise Berührungspunkte mit JBoss (Applikationsserver)</p></li><li><p>Du arbeitest gerne testgetrieben und nutzt dafür u. a. JUnit und Mockito (gerne auch im Sinne von TDD)</p></li><li><p>Du verfügst über Basiskenntnisse in JavaScript/TypeScript</p></li><li><p>Sehr gute Deutschkenntnisse (C1-Niveau) sowie Englischkenntnisse auf Konversationsniveau </p></li></ul><p style=";"></p><h3><span style="">DEIN NEUER ARBEITSPLATZ</span></h3><ul><li><p>Was bei uns zählt? Klar definierte Rollen, echtes Miteinander und ein gemeinsames Ziel. Wir nennen das Responsiveness – transparent, wertschätzend und zielorientiert.</p></li><li><p>Hier bist du am Wandel direkt beteiligt, wenn du möchtest. – Nimm Teil an Projekten, die uns als Unternehmen weiterentwickeln.</p></li><li><p>Flexible Arbeitszeiten und Remote Work? – Sind selbstverständlich.</p></li><li><p>Individuelles Hardware-Budget? – Stell dir deinen Arbeitsplatz so zusammen, wie du dich am wohlsten fühlst.</p></li><li><p>Mental Health? – Dein mentales Wohlbefinden ist uns wichtig. Mit OpenUp unterstützen wir dich und bieten dir jederzeit kostenlosen Zugang zu professioneller psychologischer Unterstützung.</p></li><li><p>Individuelles Weiterbildungsbudget? – Egal ob die nächste Zertifizierung oder ein lang ersehnter Sprachkurs – du entscheidest, worin und wann du dich weiterbildest.</p></li><li><p>Mitarbeiter:innen-PC-Programm? – Lease dir dein nächstes Device zur rein privaten Nutzung einfach über virtual7.</p></li><li><p>JobRad oder Firmenwagen? – Wir helfen dir dabei, so mobil zu sein, wie du es brauchst.</p></li></ul><p style=";"></p><h3></h3><p style=";"></p><p style=";"></p><p style=";"></p><br /><br /><p>Erzähl mir, wer du bist und wann du anfangen kannst. Gerne auch über <a rel="noopener" target="_blank" ---------- Ich freue mich darauf, dich kennenzulernen.</p><p style=";"></p><img style="width: 272px" alt="Laura Korth" src="https://recruitee-main.s3.eu-central-1.amazonaws.com/uploads/yhd4k2hpwu/Laura_Korth-1080px-2.jpg" /><p><strong><span style="">Laura Korth</span></strong></p><p>Senior HR Recruiterin</p><p>+49 170 3600221<br /><a rel="noopener" target="_blank" ---------- style=";"></p><p style=";"></p><p style=";"></p><p style=";"></p><p style=";"></p><a target="_blank" href="https://virtual7.de/story/tobias-weigel/"><img style="width: 892px" src="https://recruitee-main.s3.eu-central-1.amazonaws.com/uploads/tet1pp299u/tobias.jpg" /></a><br /><br /><p>Ansprechpartner*in: Laura Korth</p><p>Vertragsart: Festanstellung</p><p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
             <a href="https://www.arbeitnow.com/jobs/companies/virtual7-gmbh/java-developer-karlsruhe-24412" target="_blank" role="button" style="width:100%; text-align:center;">Jetzt bewerben ↗</a>
             <small style="display:block; text-align:center; margin-top:1rem; color:#94a3b8;">Weiterleitung zur Firmenseite</small>
         </article>

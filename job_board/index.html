@@ -7,40 +7,60 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     
 <style>
-    :root { --primary: #2563eb; --background: #f8fafc; --text: #1e293b; }
+    :root { --primary: #2563eb; --background: #f8fafc; --text: #1e293b; --border: #e2e8f0; }
     body { background: var(--background); color: var(--text); font-family: system-ui, -apple-system, sans-serif; }
     
     /* Navigation */
-    nav { background: white; border-bottom: 1px solid #e2e8f0; padding: 1rem 0; margin-bottom: 2rem; }
+    nav { background: white; border-bottom: 1px solid var(--border); padding: 1rem 0; margin-bottom: 2rem; }
     .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; padding: 0 1rem; }
     .logo { font-weight: 800; font-size: 1.5rem; text-decoration: none; color: var(--primary); }
     .nav-links a { color: #64748b; text-decoration: none; margin-left: 1rem; font-size: 0.9rem; }
     
-    /* Filter Bar */
-    .filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem; }
-    .filter-btn { 
-        background: white; border: 1px solid #cbd5e1; padding: 6px 12px; 
-        border-radius: 20px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s;
-        color: #475569;
+    /* --- NEUES FILTER DESIGN (CHIPS) --- */
+    .filter-container {
+        max-width: 800px; margin: 0 auto 2rem auto; text-align: center;
     }
-    .filter-btn:hover, .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .filter-label {
+        font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; margin-bottom: 0.5rem; display: block; font-weight: bold;
+    }
+    .filter-bar { 
+        display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; 
+    }
+    .filter-btn { 
+        background: white; 
+        border: 1px solid #cbd5e1; 
+        padding: 4px 12px;           /* Kleineres Padding */
+        border-radius: 99px;         /* Pill Shape (ganz rund) */
+        cursor: pointer; 
+        font-size: 0.8rem;           /* Kleinere Schrift */
+        color: #475569;
+        transition: all 0.2s;
+        font-weight: 500;
+    }
+    .filter-btn:hover { 
+        border-color: var(--primary); color: var(--primary); transform: translateY(-1px);
+    }
+    .filter-btn.active { 
+        background: var(--primary); color: white; border-color: var(--primary); 
+        box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+    }
 
     /* Job Cards */
     .job-card { 
-        background: white; border: 1px solid #e2e8f0; padding: 1.5rem; margin-bottom: 1rem; 
+        background: white; border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 1rem; 
         border-radius: 12px; text-decoration: none; color: inherit; display: block; 
         transition: transform 0.2s, box-shadow 0.2s;
     }
     .job-card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-color: var(--primary); }
     
-    .badge { display: inline-block; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; margin-right: 5px; }
-    .badge-salary { background: #fff7ed; color: #c2410c; }
-    .badge-tag { background: #eff6ff; color: #1e40af; }
+    .badge { display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; margin-right: 5px; }
+    .badge-salary { background: #fff7ed; color: #c2410c; border: 1px solid #ffedd5; }
+    .badge-tag { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
     
-    .ai-summary { background: #f1f5f9; padding: 0.8rem; border-radius: 8px; margin-top: 1rem; font-size: 0.9rem; color: #334155; }
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-top: 1rem; font-size: 0.9rem; color: #334155; border-left: 3px solid var(--primary); }
     
     /* Footer */
-    footer { text-align: center; margin-top: 4rem; padding: 2rem; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid #e2e8f0; }
+    footer { text-align: center; margin-top: 4rem; padding: 2rem; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); }
     footer a { color: #64748b; }
 </style>
 
@@ -50,9 +70,10 @@
         x = document.getElementsByClassName("job-card");
         var btns = document.getElementsByClassName("filter-btn");
         
-        // Button Active State
+        // Active State setzen
         for (i = 0; i < btns.length; i++) {
-            if (btns[i].innerText.toLowerCase().includes(c.replace('-', ' ')) || (c === 'all' && btns[i].innerText === 'Alle')) {
+            // Einfacher Check: Wenn der Button-Text im angeklickten Tag enthalten ist
+            if (btns[i].innerText.toLowerCase().replace(' ', '-') === c || (c === 'all' && btns[i].innerText === 'Alle')) {
                 btns[i].classList.add("active");
             } else {
                 btns[i].classList.remove("active");
@@ -86,13 +107,12 @@
         }
         element.className = arr1.join(" ");
     }
-    // Initial: Alle zeigen
     window.onload = function() { filterSelection('all'); };
     </script>
     <style>
-    .job-card { display: none; } /* Standardmäßig versteckt */
-    .show { display: block; animation: fadeIn 0.5s; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .job-card { display: none; }
+    .show { display: block; animation: fadeIn 0.4s; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -105,13 +125,16 @@
         </div>
     </nav>
     <main class="container">
-        <div style="text-align:center; margin-bottom: 3rem;">
+        <div style="text-align:center; margin-bottom: 2rem;">
             <h1>Finde deinen nächsten Job.</h1>
-            <p>KI-analysiert. Gehalts-geschätzt. Handverlesen.</p>
+            <p style="color:#64748b;">KI-analysiert. Gehalts-geschätzt. Handverlesen.</p>
         </div>
         
-        <div class="filter-bar">
-            <button class="filter-btn active" onclick="filterSelection('all')">Alle</button><button class="filter-btn" onclick="filterSelection('marketing-and-communication')">Marketing and Communication</button><button class="filter-btn" onclick="filterSelection('remote')">Remote</button><button class="filter-btn" onclick="filterSelection('software-development')">Software Development</button><button class="filter-btn" onclick="filterSelection('engineering')">Engineering</button><button class="filter-btn" onclick="filterSelection('it')">IT</button><button class="filter-btn" onclick="filterSelection('management')">Management</button><button class="filter-btn" onclick="filterSelection('team-leader')">Team Leader</button><button class="filter-btn" onclick="filterSelection('system-and-network-administration')">System and Network Administration</button><button class="filter-btn" onclick="filterSelection('business-development')">Business Development</button><button class="filter-btn" onclick="filterSelection('credit-analysis')">Credit Analysis</button>
+        <div class="filter-container">
+            <span class="filter-label">Beliebte Themen:</span>
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterSelection('all')">Alle</button><button class="filter-btn" onclick="filterSelection('marketing-and-communication')">Marketing and Communication</button><button class="filter-btn" onclick="filterSelection('remote')">Remote</button><button class="filter-btn" onclick="filterSelection('software-development')">Software Development</button><button class="filter-btn" onclick="filterSelection('engineering')">Engineering</button><button class="filter-btn" onclick="filterSelection('it')">IT</button><button class="filter-btn" onclick="filterSelection('management')">Management</button><button class="filter-btn" onclick="filterSelection('team-leader')">Team Leader</button><button class="filter-btn" onclick="filterSelection('system-and-network-administration')">System and Network Administration</button><button class="filter-btn" onclick="filterSelection('business-development')">Business Development</button><button class="filter-btn" onclick="filterSelection('credit-analysis')">Credit Analysis</button><button class="filter-btn" onclick="filterSelection('social-media-manager')">Social Media Manager</button><button class="filter-btn" onclick="filterSelection('marketing-manager')">Marketing Manager</button>
+            </div>
         </div>
 
         <div id="job-grid">
@@ -1163,10 +1186,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Smava GmbH</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 80k-100k</span>
             <span class="badge badge-tag">Credit Analysis</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Als Sales Manager bei smava GmbH wirst du Teil eines dynamischen Teams, das Kredite transparent und fair anbietet. Du wi...</div>
     </a>
     
     <a href="quereinsteiger-im-vertrieb-berlin-106840.html" class="job-card credit-analysis">
@@ -1176,10 +1199,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Smava GmbH</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 40k-55k</span>
             <span class="badge badge-tag">Credit Analysis</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Quereinsteiger im Vertrieb bei smava GmbH: Kommunikationsprofi mit Kundenberatung, individuellen Kreditwünschen und tran...</div>
     </a>
     
     <a href="bankkaufmann-frau-als-kreditspezialist-im-homeoffice-berlin-483238.html" class="job-card remote credit-analysis">
@@ -1189,10 +1212,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Smava GmbH</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 50k-60k</span>
             <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Credit Analysis</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du als Bankkaufmann/-frau Erfahrung in Kreditvergabe suchst und flexible Homeoffice-Arbeitsbedingungen...</div>
     </a>
     
     <a href="webentwickler-frontend-developer-potsdam-356204.html" class="job-card it">
@@ -1202,10 +1225,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">isLOGIC AG</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 40k-60k</span>
             <span class="badge badge-tag">IT</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du leidenschaftlich für Webentwicklung bist und sauberen Code schätzt. Diese Chance bietet dir die Mög...</div>
     </a>
     
     <a href="fachingenieur-fur-temporare-verkehrsplanung-bad-sackingen-295556.html" class="job-card engineering">
@@ -1215,10 +1238,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">HERY GmbH</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 60k-80k</span>
             <span class="badge badge-tag">Engineering</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewerben Sie sich, wenn Sie Erfahrung in Verkehrsplanung haben und sich für innovative Lösungen begeistern. Die HERY Gmb...</div>
     </a>
     
     <a href="java-developer-karlsruhe-24412.html" class="job-card information-technology vocational">
@@ -1228,10 +1251,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">virtual7 GmbH</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 60k-80k</span>
             <span class="badge badge-tag">Information technology</span><span class="badge badge-tag">vocational</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Als Java-Entwickler bei virtual7 GmbH treibst du die Digitalisierung des öffentlichen Sektors voran und schaffst echten ...</div>
     </a>
     
     <a href="senior-fullstack-developer-karlsruhe-319269.html" class="job-card information-technology vocational">
@@ -1241,10 +1264,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">virtual7 GmbH</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 60k-80k</span>
             <span class="badge badge-tag">Information technology</span><span class="badge badge-tag">vocational</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Die virtual7 GmbH bietet eine Herausforderung für erfahrene Fullstack-Entwickler, die an der Digitalisierung des öffentl...</div>
     </a>
     
     <a href="sap-technology-manager-wiesbaden-496023.html" class="job-card saperp-consulting development">
@@ -1254,10 +1277,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">traze GmbH</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 60k-80k</span>
             <span class="badge badge-tag">SAP/ERP Consulting</span><span class="badge badge-tag">Development</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du Erfahrung in SAP Basis und Technologie hast und dich für die Weiterentwicklung von SAP-Systemen beg...</div>
     </a>
     
     <a href="projektleiter-m365-services-munich-292039.html" class="job-card project-management">
@@ -1267,10 +1290,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">ITconfig/all GmbH</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 60k-80k</span>
             <span class="badge badge-tag">Project Management</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewerben Sie sich, wenn Sie Erfahrung in Cloud- und Enterprise-Projekten haben und sich für die Herausforderung eines bu...</div>
     </a>
     
     <a href="senior-amazon-marketplace-manager-berlin-292372.html" class="job-card online-marketing">
@@ -1280,10 +1303,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Eberlein und Kunz GbR</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 60k-80k</span>
             <span class="badge badge-tag">Online Marketing</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du Amazon-Expertenwissen einbringen und unser Geschäft strategisch entwickeln möchtest. Als Senior Ama...</div>
     </a>
     
     <a href="video-editor-hamburg-298569.html" class="job-card remote marketing-and-communication">
@@ -1293,10 +1316,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Yunicorn</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 40k-55k</span>
             <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Marketing and Communication</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du kreativ, strategisch denkend und an der Weiterentwicklung von Bildungsinhalten interessiert bist. E...</div>
     </a>
     
     <a href="operations-managerin-manager-projektingenieurin-ingenieur-dresden-168243.html" class="job-card engineering">
@@ -1306,10 +1329,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">DieEnergiekoppler GmbH</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 60k-80k</span>
             <span class="badge badge-tag">Engineering</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bei Energiekoppler kannst du deine Fähigkeiten in einem jungen und kreativen Umfeld einbringen und die Energiewende vora...</div>
     </a>
     
     <a href="wir-suchen-einen-li-regulatory-spezialisten-ref-13633-frankfurt-am-main-469514.html" class="job-card remote it">
@@ -1319,10 +1342,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">IP Systems GmbH</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 60k-80k</span>
             <span class="badge badge-tag">Remote</span><span class="badge badge-tag">IT</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Wir suchen einen LI- & Regulatory-Spezialisten, der komplexe Projekte in der Telekommunikation und Informationstechnik m...</div>
     </a>
     
     <a href="junior-devops-platform-engineer-dresden-73947.html" class="job-card system-and-network-administration">
@@ -1332,10 +1355,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">DieEnergiekoppler GmbH</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 40k-55k</span>
             <span class="badge badge-tag">System and Network Administration</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bei Energiekoppler kannst du deine Fähigkeiten als Junior DevOps/Platform Engineer weiterentwickeln und direkt Wirkung h...</div>
     </a>
     
     <a href="devops-platform-engineer-dresden-137141.html" class="job-card system-and-network-administration">
@@ -1345,10 +1368,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">DieEnergiekoppler GmbH</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 60k-80k</span>
             <span class="badge badge-tag">System and Network Administration</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du Erfahrung in der Entwicklung und Verwaltung von Cloud-Plattformen (AWS/EKS) hast und dich für eine ...</div>
     </a>
     
     <a href="marketing-manager-hamburg-487260.html" class="job-card remote marketing-manager">
@@ -1358,10 +1381,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Yunicorn</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 80k-100k</span>
             <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Marketing Manager</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb dich, wenn du eine Herausforderung in einem ambitionierten Umfeld suchst und Ownership für Marketing übernehmen m...</div>
     </a>
     
     <a href="recruiting-spezialist-remote-straubenhardt-234887.html" class="job-card remote recruitment-and-selection">
@@ -1371,10 +1394,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Simone Riegsinger Unternehmensberatung</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 50k-60k</span>
             <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Recruitment and Selection</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Als Recruiting-Spezialist bei Simone Riegsinger Unternehmensberatung unterstützt man kleine und mittlere Unternehmen bei...</div>
     </a>
     
     <a href="projektleiter-m365-90-remote-10-in-munchen-sowie-bundesweiten-einsatzen-bei-workshops-munich-302210.html" class="job-card project-management">
@@ -1384,10 +1407,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">ITconfig/all GmbH</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 60k-80k</span>
             <span class="badge badge-tag">Project Management</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Diese Stelle bietet eine interessante Mischung aus Remote-Arbeit und bundesweiten Einsätzen. Als Projektleiter M365 bei ...</div>
     </a>
     
     <a href="team-lead-marketing-mensch-hamburg-432941.html" class="job-card marketing-and-communication">
@@ -1397,10 +1420,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">Eventinc GmbH</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 80k-100k</span>
             <span class="badge badge-tag">Marketing and Communication</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Bewirb Dich, wenn Du ein starkes Marketing-Team führen und strategisch denken möchtest. Perfekte Kombination aus Marketi...</div>
     </a>
     
     <a href="wir-suchen-einen-operations-troubleshooting-experten-ref-13632-frankfurt-am-main-259025.html" class="job-card remote it">
@@ -1410,10 +1433,10 @@
         </div>
         <div style="margin:0.5rem 0; font-weight:600; color:#334155;">IP Systems GmbH</div>
         <div style="margin-bottom:0.8rem;">
-            <span class="badge badge-salary">💰 Auf Anfrage</span>
+            <span class="badge badge-salary">💰 60k-80k</span>
             <span class="badge badge-tag">Remote</span><span class="badge badge-tag">IT</span>
         </div>
-        <div style="font-size:0.9rem; color:#475569;">🤖 KI-Analyse folgt......</div>
+        <div style="font-size:0.9rem; color:#475569;">🤖 Wir suchen einen Operations- & Troubleshooting-Experten, der komplexe Projekte in der Telekommunikation und Informations...</div>
     </a>
     
         </div>
