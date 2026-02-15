@@ -11,7 +11,8 @@ CACHE_FILE = 'ai_cache.json'
 SITE_NAME = "RemoteRadar 📡"
 
 # Domain später hier eintragen
-BASE_URL = "https://dein-jobboard-name.netlify.app" 
+# Vorläufige GitHub URL (ersetze [...] mit deinen Daten)
+BASE_URL = "https://[AlexFractalNode].github.io/[remote-job-radar]"
 
 # FÜR DAS IMPRESSUM (Bitte ausfüllen)
 IMPRESSUM_NAME = "Alexander Heinze"
@@ -406,3 +407,4 @@ with open(os.path.join(OUTPUT_DIR, "impressum.html"), "w", encoding="utf-8") as 
 with open(os.path.join(OUTPUT_DIR, "datenschutz.html"), "w", encoding="utf-8") as f: f.write(datenschutz_html)
 
 print("✅ Update fertig: Design optimiert (Chips) & Rechtstexte aktualisiert!")
+
