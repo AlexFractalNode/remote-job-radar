@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Marketing and Communication Jobs | RemoteRadar 📡</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.25rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--text-main); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 800px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 6px 16px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-1px); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* Grid */
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
+    #job-grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+    @media (min-width: 768px) { #job-grid { grid-template-columns: repeat(auto-fill, minmax(45%, 1fr)); } }
+
+    /* Card */
+    .job-card { background: var(--card-bg); border: 1px solid var(--border); padding: 1.5rem; border-radius: 16px; text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%; transition: all 0.2s; position: relative; }
+    .job-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; }
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+    
+    /* Badges */
+    .badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; }
+    .ai-summary { background: #f8fafc; padding: 0.75rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); }
+
+    /* Footer */
+    footer { text-align: center; margin-top: 4rem; padding: 3rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); }
+    footer a { color: #64748b; margin: 0 10px; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; }
+    .apply-btn:hover { opacity: 0.9; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="impressum.html">Rechtliches</a></div>
+        </div>
+    </nav>
+    <div class="hero">
+        <h1>Marketing and Communication Jobs</h1>
+        <p>Die besten 15 Stellen.</p>
+    </div>
+    <main class="container">
+        <div class="filter-bar">
+            <a href="index.html" class="filter-btn ">Alle Jobs</a>
+            <a href="marketing-and-communication-jobs.html" class="filter-btn active">Marketing and Communication</a> <a href="remote-jobs.html" class="filter-btn ">Remote</a> <a href="software-development-jobs.html" class="filter-btn ">Software Development</a> <a href="engineering-jobs.html" class="filter-btn ">Engineering</a> <a href="management-jobs.html" class="filter-btn ">Management</a> <a href="team-leader-jobs.html" class="filter-btn ">Team Leader</a> <a href="it-jobs.html" class="filter-btn ">IT</a> <a href="system-and-network-administration-jobs.html" class="filter-btn ">System and Network Administration</a> <a href="business-development-jobs.html" class="filter-btn ">Business Development</a> <a href="credit-analysis-jobs.html" class="filter-btn ">Credit Analysis</a> <a href="automotive-engineering-jobs.html" class="filter-btn ">Automotive Engineering</a> <a href="social-media-manager-jobs.html" class="filter-btn ">Social Media Manager</a> <a href="marketing-manager-jobs.html" class="filter-btn ">Marketing Manager</a> <a href="online-marketing-jobs.html" class="filter-btn ">Online Marketing</a> <a href="web-development-jobs.html" class="filter-btn ">Web Development</a> 
+        </div>
+        <div id="job-grid">
+    <a href="e-commerce-manager-shopify-cro-remote-vollzeit-aachen-169293.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">E-Commerce Manager Shopify & CRO (m/w/d) - Remote (Vollzeit)</h3>
+            <div class="company-name">🏢 Tretmann • 📍 Aachen</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Bewirb dich, wenn du Erfahrung in E-Commerce Management und Conversion Rate Optimization (..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+    </a>
+    
+    <a href="online-marketing-manager-berlin-133452.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Online Marketing Manager (m/w/d)</h3>
+            <div class="company-name">🏢 FinMent GmbH • 📍 Berlin</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Bewirb dich, wenn du Erfahrung im Online Marketing hast und dich für die Demokratisierung ..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+    </a>
+    
+    <a href="junior-online-marketing-berlin-158560.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Junior Online Marketing (m/w/d)</h3>
+            <div class="company-name">🏢 FinMent GmbH • 📍 Berlin</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Bewirb dich, um Teil eines schnell wachsenden FinTech-Startups in Berlin zu werden. Mit in..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 30k-40k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+    </a>
+    
+    <a href="online-marketing-medienproduktion-finanzen-berlin-176322.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Online Marketing - Medienproduktion / Finanzen (m/w/d)</h3>
+            <div class="company-name">🏢 FinMent GmbH • 📍 Berlin</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Bewerben Sie sich, wenn Sie Erfahrung im Online Marketing und Medienproduktion haben und s..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 50k-70k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+    </a>
+    
+    <a href="design-project-manager-hamburger-headquarter-befristet-fur-ein-jahr-260662.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Design Project Manager (w/m/d)* - Hamburger Headquarter // befristet für ein Jahr</h3>
+            <div class="company-name">🏢 Engel & Völkers Holding GmbH • 📍 Hamburg</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Design Project Manager (w/m/d) gesucht, um ikonisches Shop-Konzept auf globaler Ebene zu e..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+    </a>
+    
+    <a href="head-of-growth-performance-marketing-berlin-108610.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Head of Growth & Performance Marketing (f/m/x)</h3>
+            <div class="company-name">🏢 BRAINEFFECT • 📍 Berlin</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Als Head of Growth & Performance Marketing bei BRAINEFFECT hast du die Chance, ein innovat..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+    </a>
+    
+    <a href="social-media-marketing-hofheim-267616.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Social Media Marketing</h3>
+            <div class="company-name">🏢 Challenge 4 Change GmbH • 📍 Hofheim</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Bewirb dich, wenn du kreative Arbeit liebst und Erfahrungen im Social Media Marketing samm..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 ungefähr 30k-40k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+    </a>
+    
+    <a href="content-creator-brand-marketing-manager-fur-no-sugar-factory-kalorienarme-und-proteinreiche-kuchen-desserts-berlin-266720.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Content Creator, Brand & Marketing Manager (m/w/d) für NO SUGAR FACTORY - kalorienarme und proteinreiche Kuchen & Desserts</h3>
+            <div class="company-name">🏢 NO SUGAR FACTORY • 📍 Berlin</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Chance, bei einer innovativen und gesunden Lebensmittelmarke mitzumachen. Möglichkeit, kre..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 40k-60k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+    </a>
+    
+    <a href="junior-artist-manager-influencer-manager-mulheim-199586.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Junior Artist Manager / Influencer Manager (m/w/d)</h3>
+            <div class="company-name">🏢 Lionflence • 📍 Mülheim</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Bewirb dich, um deine Karriere als Junior Artist Manager/in zu starten und dich in einem s..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 40k-60k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+    </a>
+    
+    <a href="junior-artist-manager-influencer-manager-berlin-309139.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Junior Artist Manager / Influencer Manager (m/w/d)</h3>
+            <div class="company-name">🏢 Lionflence • 📍 Berlin</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Diese Herausforderung bietet sich ideal für ambitionierte Junior-Manager an, die sich in A..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 40k-55k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+    </a>
+    
+    <a href="artist-manager-influencer-manager-mulheim-120690.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Artist Manager / Influencer Manager (m/w/d)</h3>
+            <div class="company-name">🏢 Lionflence • 📍 Mülheim</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Diese Herausforderung bietet sich ideal für erfahrene Artist- und Influencer-Manager an, d..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+    </a>
+    
+    <a href="artist-manager-influencer-manager-berlin-119143.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Artist Manager / Influencer Manager (m/w/d) BERLIN</h3>
+            <div class="company-name">🏢 Lionflence • 📍 Berlin</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Diese Herausforderung bietet sichere Entwicklungsmöglichkeiten in Artistmanagement und Inf..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 40k-60k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+    </a>
+    
+    <a href="head-of-brand-dach-berlin-332717.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Head of Brand DACH (m/f/d)</h3>
+            <div class="company-name">🏢 KoRo Handels GmbH • 📍 Berlin</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Als Head of Brand DACH hast du die Chance, ein bekanntes Marken-Image zu schaffen und KoRo..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+    </a>
+    
+    <a href="freelancer-digital-event-projektmanager-webinare-online-events-cologne-109583.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Freelancer Digital Event & Projektmanager - Webinare & Online-Events (m/w/d)</h3>
+            <div class="company-name">🏢 Webinarhelden • 📍 Cologne</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Bewirb dich, wenn du kreative Online-Events planen und durchführen möchtest und dich für m..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 40k-60k</span>
+            <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+    </a>
+    
+    <a href="video-editor-hamburg-298569.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Video Editor (m/w/d)</h3>
+            <div class="company-name">🏢 Yunicorn • 📍 Hamburg</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Bewirb dich, wenn du kreativ, strategisch denkend und an der Weiterentwicklung von Bildung..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 40k-55k</span>
+            <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Marketing and Communication</span>
+        </div>
+    </a>
+    </div>
+    </main>
+    <footer><p>&copy; 2025 RemoteRadar 📡</p><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

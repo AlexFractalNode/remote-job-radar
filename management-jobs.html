@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Management Jobs | RemoteRadar 📡</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.25rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--text-main); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 800px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 6px 16px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-1px); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* Grid */
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
+    #job-grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+    @media (min-width: 768px) { #job-grid { grid-template-columns: repeat(auto-fill, minmax(45%, 1fr)); } }
+
+    /* Card */
+    .job-card { background: var(--card-bg); border: 1px solid var(--border); padding: 1.5rem; border-radius: 16px; text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%; transition: all 0.2s; position: relative; }
+    .job-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; }
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+    
+    /* Badges */
+    .badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; }
+    .ai-summary { background: #f8fafc; padding: 0.75rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); }
+
+    /* Footer */
+    footer { text-align: center; margin-top: 4rem; padding: 3rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); }
+    footer a { color: #64748b; margin: 0 10px; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; }
+    .apply-btn:hover { opacity: 0.9; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="impressum.html">Rechtliches</a></div>
+        </div>
+    </nav>
+    <div class="hero">
+        <h1>Management Jobs</h1>
+        <p>Die besten 6 Stellen.</p>
+    </div>
+    <main class="container">
+        <div class="filter-bar">
+            <a href="index.html" class="filter-btn ">Alle Jobs</a>
+            <a href="marketing-and-communication-jobs.html" class="filter-btn ">Marketing and Communication</a> <a href="remote-jobs.html" class="filter-btn ">Remote</a> <a href="software-development-jobs.html" class="filter-btn ">Software Development</a> <a href="engineering-jobs.html" class="filter-btn ">Engineering</a> <a href="management-jobs.html" class="filter-btn active">Management</a> <a href="team-leader-jobs.html" class="filter-btn ">Team Leader</a> <a href="it-jobs.html" class="filter-btn ">IT</a> <a href="system-and-network-administration-jobs.html" class="filter-btn ">System and Network Administration</a> <a href="business-development-jobs.html" class="filter-btn ">Business Development</a> <a href="credit-analysis-jobs.html" class="filter-btn ">Credit Analysis</a> <a href="automotive-engineering-jobs.html" class="filter-btn ">Automotive Engineering</a> <a href="social-media-manager-jobs.html" class="filter-btn ">Social Media Manager</a> <a href="marketing-manager-jobs.html" class="filter-btn ">Marketing Manager</a> <a href="online-marketing-jobs.html" class="filter-btn ">Online Marketing</a> <a href="web-development-jobs.html" class="filter-btn ">Web Development</a> 
+        </div>
+        <div id="job-grid">
+    <a href="kaufmannische-fuhrungskraft-business-development-projektleitung-in-osnabruck-153271.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Kaufmännische Führungskraft (m/w/d) Business Development & Projektleitung in Osnabrück</h3>
+            <div class="company-name">🏢 Domainprofi GmbH • 📍 Osnabrück</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Bei Domainprofi GmbH als Kaufmännische Führungskraft (m/w/d) Business Development & Projek..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Management</span><span class="badge badge-tag">Team Leader</span>
+        </div>
+    </a>
+    
+    <a href="regionalleiter-vertrieb-sicherheitstechnik-berlin-88026.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Regionalleiter Vertrieb (m/w/d) Sicherheitstechnik Berlin</h3>
+            <div class="company-name">🏢 Stadtritter GmbH • 📍 Berlin</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Bewirb dich als Regionalleiter Vertrieb bei Stadtritter GmbH und übernimm die Führung in d..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 60k-80k</span>
+            <span class="badge badge-tag">Management</span><span class="badge badge-tag">Team Leader</span>
+        </div>
+    </a>
+    
+    <a href="senior-manager-group-accounting-consolidation-grafelfing-175181.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Senior Manager Group Accounting & Consolidation (w/m/d)</h3>
+            <div class="company-name">🏢 Right Search • 📍 Gräfelfing</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Bewerben Sie sich, wenn Sie Erfahrung in Group Accounting & Consolidation haben und nach e..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Management</span><span class="badge badge-tag">Team Leader</span>
+        </div>
+    </a>
+    
+    <a href="director-accounting-tax-grafelfing-477510.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Director Accounting & Tax (w/m/d)</h3>
+            <div class="company-name">🏢 Right Search • 📍 Gräfelfing</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Als Director Accounting & Tax bei Right Search hast du die Möglichkeit, deine Fähigkeiten ..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Management</span><span class="badge badge-tag">Team Leader</span>
+        </div>
+    </a>
+    
+    <a href="head-of-energy-operations-berlin-404451.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Head of Energy Operations</h3>
+            <div class="company-name">🏢 VREY • 📍 Berlin</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Als Head of Energy Operations bei VREY entwickelst du ein innovatives Energiemanagementsys..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 80k-100k</span>
+            <span class="badge badge-tag">Management</span><span class="badge badge-tag">Team Leader</span>
+        </div>
+    </a>
+    
+    <a href="operations-lead-operative-leitung-in-passau-74042.html" class="job-card">
+        <div style="margin-bottom:1rem;">
+            <h3 class="job-title">Operations Lead, operative Leitung (w/m/d) in Passau</h3>
+            <div class="company-name">🏢 NETPROFIT • 📍 Passau</div>
+        </div>
+        <div class="ai-summary" style="margin-top:0; font-size:0.8rem;">"Bewerben Sie sich, wenn Sie ein Prozess-Experte sind, der Termine hält und ein starkes Tea..."</div>
+        <div class="meta-tags">
+            <span class="badge badge-salary">💰 50k-70k</span>
+            <span class="badge badge-tag">Management</span><span class="badge badge-tag">Team Leader</span>
+        </div>
+    </a>
+    </div>
+    </main>
+    <footer><p>&copy; 2025 RemoteRadar 📡</p><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

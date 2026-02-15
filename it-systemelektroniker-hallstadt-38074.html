@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT-Systemelektroniker (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.25rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--text-main); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 800px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 6px 16px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-1px); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* Grid */
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
+    #job-grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+    @media (min-width: 768px) { #job-grid { grid-template-columns: repeat(auto-fill, minmax(45%, 1fr)); } }
+
+    /* Card */
+    .job-card { background: var(--card-bg); border: 1px solid var(--border); padding: 1.5rem; border-radius: 16px; text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%; transition: all 0.2s; position: relative; }
+    .job-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; }
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+    
+    /* Badges */
+    .badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; }
+    .ai-summary { background: #f8fafc; padding: 0.75rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); }
+
+    /* Footer */
+    footer { text-align: center; margin-top: 4rem; padding: 3rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); }
+    footer a { color: #64748b; margin: 0 10px; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; }
+    .apply-btn:hover { opacity: 0.9; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600;">Stannek GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0.5rem 0;">IT-Systemelektroniker (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 40k-55k</span>
+                    <span class="badge badge-tag">System and Network Administration</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Du hast die Möglichkeit, komplexe IT-Projekte beim Mittelstand umzusetzen und deine Fähigkeiten zu entwickeln. Bei der Stannek GmbH wirst du Teil eines engagierten Teams und hast die Chance, deine Karriere als IT-Systemelektroniker zu fördern.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.7;"><p><strong>IT-Systemelektroniker (m/w/d)</strong></p>
+<p>Vollzeit | Vor Ort |</p>
+<p>Standort: Hallstadt bei Bamberg</p>
+<h2><strong>Technik ist dein Ding? Dann lies weiter.</strong></h2>
+<p>Du willst nicht nur Kabel ziehen, sondern komplette IT- und Print-Infrastrukturen beim Mittelstand umsetzen?</p>
+<p>Du willst Netzwerke, Server, Firewalls – und moderne Kopierer- &#x26; Dokumentensysteme aus einer Hand betreuen?</p>
+<p>Dann komm zu uns.</p>
+<p>Wir sind die <strong>Stannek GmbH</strong> – IT-Systemhaus und DATEV-Partner mit Fokus auf moderne IT-Infrastruktur, Cloudlösungen und ganzheitliche Digitalisierung. Unsere Kunden erwarten keine Einzelbausteine, sondern funktionierende Gesamtsysteme. Genau dafür brauchen wir dich.</p>
+<h2></h2>
+<p><strong>Deine Aufgaben</strong></p>
+<ul>
+<li>Installation und Inbetriebnahme von IT- und Netzwerkinfrastrukturen</li>
+<li>Einrichtung von Server-, Client- und Cloudumgebungen</li>
+<li>Konfiguration von Firewalls, Switches und WLAN-Systemen</li>
+<li>Installation, Wartung und Betreuung von Kopierer- und Multifunktionssystemen</li>
+<li>Einbindung von Druck- und Scansystemen in bestehende IT-Umgebungen</li>
+<li>Fehleranalyse und Störungsbehebung vor Ort beim Kunden</li>
+<li>Durchführung von Wartungen und Serviceeinsätzen</li>
+<li>Mitarbeit an Infrastruktur- und Digitalisierungsprojekten</li>
+</ul>
+<h2><strong>Das bringst du mit</strong></h2>
+<ul>
+<li>Abgeschlossene Ausbildung als IT-Systemelektroniker oder vergleichbare Qualifikation</li>
+<li>Erfahrung im Bereich Netzwerktechnik und IT-Infrastruktur</li>
+<li>Idealerweise Erfahrung mit Kopierer- / MFP-Systemen</li>
+<li>Grundkenntnisse in Microsoft-Umgebungen (Windows, M365)</li>
+<li>Technisches Verständnis für elektrotechnische Zusammenhänge</li>
+<li>Selbstständige und strukturierte Arbeitsweise</li>
+<li>Führerschein Klasse B</li>
+<li>Kundenorientiertes Auftreten</li>
+</ul>
+<h2><strong>Das bieten wir dir</strong></h2>
+<p>Moderne Arbeitsumgebung mit aktueller Hardware und Tools</p>
+<p>Fahrradleasing (BusinessBike)</p>
+<p>Vermögenswirksame Leistungen (VWL)</p>
+<p>Betriebliche Altersvorsorge</p>
+<p>Corporate Benefits mit zahlreichen Mitarbeiterrabatten</p>
+<p>Flexible Arbeitszeiten und Homeoffice-Möglichkeiten</p>
+<p>Weiterbildung &#x26; Entwicklungsmöglichkeiten</p>
+<p>Ein motiviertes Team mit flachen Hierarchien und kollegialem Miteinander</p>
+<h2></h2>
+<p><strong>Warum Stannek?</strong></p>
+<p>Weil wir IT ganzheitlich denken.</p>
+<p>Weil wir Infrastruktur, Security, Cloud und Dokumentenprozesse verbinden.</p>
+<p>Und weil wir als Next-Generation-Systemhaus im Mittelstand echte Verantwortung übernehmen.</p>
+<p>Lust, Technik nicht nur zu betreuen, sondern aktiv mitzugestalten?</p>
+<p>Dann bewirb dich jetzt – wir freuen uns auf dich.</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/stannek-gmbh/it-systemelektroniker-hallstadt-38074" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
