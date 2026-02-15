@@ -10,7 +10,7 @@ OUTPUT_DIR = 'job_board'
 CACHE_FILE = 'ai_cache.json'
 SITE_NAME = "RemoteRadar 📡"
 
-# WICHTIG: Sobald du die Domain hast, hier ändern (z.B. "https://www.meine-domain.de")
+# Domain später hier eintragen
 BASE_URL = "https://dein-jobboard-name.netlify.app" 
 
 # FÜR DAS IMPRESSUM (Bitte ausfüllen)
@@ -88,16 +88,16 @@ def analyze_job_with_ai(job):
 
 # --- 4. JOBS VERARBEITEN ---
 new_jobs_analyzed = 0
-all_tags = [] # Hier sammeln wir alle Tags für den Filter
+all_tags = [] 
 
 for i, job in enumerate(jobs):
     slug = job['slug']
     
-    # Tags sammeln (Arbeitnow liefert 'tags' als Liste)
+    # Tags sammeln 
     job_tags = job.get('tags', [])
     all_tags.extend(job_tags)
     
-    # KI Analyse
+    # KI Analyse Logik
     if slug in ai_cache:
         analysis = ai_cache[slug]
     elif new_jobs_analyzed < MAX_NEW_JOBS_LIMIT:
@@ -124,49 +124,69 @@ for i, job in enumerate(jobs):
 with open(CACHE_FILE, 'w', encoding='utf-8') as f:
     json.dump(ai_cache, f, ensure_ascii=False)
 
-# Top 10 Tags ermitteln für die Filter-Leiste
-top_tags = [tag for tag, count in Counter(all_tags).most_common(10)]
+# Top 12 Tags (etwas mehr, da sie jetzt kleiner sind)
+top_tags = [tag for tag, count in Counter(all_tags).most_common(12)]
 
 # --- 5. HTML GENERATOR ---
 if not os.path.exists(OUTPUT_DIR): os.makedirs(OUTPUT_DIR)
 
-# CSS (Erweitert für Tags und Filter)
+# CSS (OPTIMIERT FÜR KLEINE TAGS)
 css_styles = """
 <style>
-    :root { --primary: #2563eb; --background: #f8fafc; --text: #1e293b; }
+    :root { --primary: #2563eb; --background: #f8fafc; --text: #1e293b; --border: #e2e8f0; }
     body { background: var(--background); color: var(--text); font-family: system-ui, -apple-system, sans-serif; }
     
     /* Navigation */
-    nav { background: white; border-bottom: 1px solid #e2e8f0; padding: 1rem 0; margin-bottom: 2rem; }
+    nav { background: white; border-bottom: 1px solid var(--border); padding: 1rem 0; margin-bottom: 2rem; }
     .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; padding: 0 1rem; }
     .logo { font-weight: 800; font-size: 1.5rem; text-decoration: none; color: var(--primary); }
     .nav-links a { color: #64748b; text-decoration: none; margin-left: 1rem; font-size: 0.9rem; }
     
-    /* Filter Bar */
-    .filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem; }
-    .filter-btn { 
-        background: white; border: 1px solid #cbd5e1; padding: 6px 12px; 
-        border-radius: 20px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s;
-        color: #475569;
+    /* --- NEUES FILTER DESIGN (CHIPS) --- */
+    .filter-container {
+        max-width: 800px; margin: 0 auto 2rem auto; text-align: center;
     }
-    .filter-btn:hover, .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .filter-label {
+        font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; margin-bottom: 0.5rem; display: block; font-weight: bold;
+    }
+    .filter-bar { 
+        display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; 
+    }
+    .filter-btn { 
+        background: white; 
+        border: 1px solid #cbd5e1; 
+        padding: 4px 12px;           /* Kleineres Padding */
+        border-radius: 99px;         /* Pill Shape (ganz rund) */
+        cursor: pointer; 
+        font-size: 0.8rem;           /* Kleinere Schrift */
+        color: #475569;
+        transition: all 0.2s;
+        font-weight: 500;
+    }
+    .filter-btn:hover { 
+        border-color: var(--primary); color: var(--primary); transform: translateY(-1px);
+    }
+    .filter-btn.active { 
+        background: var(--primary); color: white; border-color: var(--primary); 
+        box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+    }
 
     /* Job Cards */
     .job-card { 
-        background: white; border: 1px solid #e2e8f0; padding: 1.5rem; margin-bottom: 1rem; 
+        background: white; border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 1rem; 
         border-radius: 12px; text-decoration: none; color: inherit; display: block; 
         transition: transform 0.2s, box-shadow 0.2s;
     }
     .job-card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-color: var(--primary); }
     
-    .badge { display: inline-block; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; margin-right: 5px; }
-    .badge-salary { background: #fff7ed; color: #c2410c; }
-    .badge-tag { background: #eff6ff; color: #1e40af; }
+    .badge { display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; margin-right: 5px; }
+    .badge-salary { background: #fff7ed; color: #c2410c; border: 1px solid #ffedd5; }
+    .badge-tag { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
     
-    .ai-summary { background: #f1f5f9; padding: 0.8rem; border-radius: 8px; margin-top: 1rem; font-size: 0.9rem; color: #334155; }
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-top: 1rem; font-size: 0.9rem; color: #334155; border-left: 3px solid var(--primary); }
     
     /* Footer */
-    footer { text-align: center; margin-top: 4rem; padding: 2rem; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid #e2e8f0; }
+    footer { text-align: center; margin-top: 4rem; padding: 2rem; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); }
     footer a { color: #64748b; }
 </style>
 """
@@ -221,12 +241,10 @@ index_cards = ""
 for job in jobs:
     filename = f"{job['slug']}.html"
     
-    # Tags HTML
     tags_list = job.get('tags', [])
     tags_html = "".join([f'<span class="badge badge-tag">{t}</span>' for t in tags_list])
     
-    # Filter-Klassen (für JS)
-    # Wir machen aus "Tech & Engineering" -> "tech-engineering"
+    # Filter-Klassen
     filter_classes = " ".join([t.lower().replace(' ', '-').replace('&', '').replace('/', '') for t in tags_list])
 
     # Detailseite
@@ -259,7 +277,7 @@ for job in jobs:
     </a>
     """
 
-# 7. INDEX HTML MIT FILTER LOGIK
+# 7. INDEX HTML
 filter_buttons = '<button class="filter-btn active" onclick="filterSelection(\'all\')">Alle</button>'
 for tag in top_tags:
     safe_tag = tag.lower().replace(' ', '-').replace('&', '').replace('/', '')
@@ -279,9 +297,10 @@ index_html = f"""
         x = document.getElementsByClassName("job-card");
         var btns = document.getElementsByClassName("filter-btn");
         
-        // Button Active State
+        // Active State setzen
         for (i = 0; i < btns.length; i++) {{
-            if (btns[i].innerText.toLowerCase().includes(c.replace('-', ' ')) || (c === 'all' && btns[i].innerText === 'Alle')) {{
+            // Einfacher Check: Wenn der Button-Text im angeklickten Tag enthalten ist
+            if (btns[i].innerText.toLowerCase().replace(' ', '-') === c || (c === 'all' && btns[i].innerText === 'Alle')) {{
                 btns[i].classList.add("active");
             }} else {{
                 btns[i].classList.remove("active");
@@ -315,13 +334,12 @@ index_html = f"""
         }}
         element.className = arr1.join(" ");
     }}
-    // Initial: Alle zeigen
     window.onload = function() {{ filterSelection('all'); }};
     </script>
     <style>
-    .job-card {{ display: none; }} /* Standardmäßig versteckt */
-    .show {{ display: block; animation: fadeIn 0.5s; }}
-    @keyframes fadeIn {{ from {{ opacity: 0; }} to {{ opacity: 1; }} }}
+    .job-card {{ display: none; }}
+    .show {{ display: block; animation: fadeIn 0.4s; }}
+    @keyframes fadeIn {{ from {{ opacity: 0; transform: translateY(10px); }} to {{ opacity: 1; transform: translateY(0); }} }}
     </style>
 </head>
 <body>
@@ -334,13 +352,16 @@ index_html = f"""
         </div>
     </nav>
     <main class="container">
-        <div style="text-align:center; margin-bottom: 3rem;">
+        <div style="text-align:center; margin-bottom: 2rem;">
             <h1>Finde deinen nächsten Job.</h1>
-            <p>KI-analysiert. Gehalts-geschätzt. Handverlesen.</p>
+            <p style="color:#64748b;">KI-analysiert. Gehalts-geschätzt. Handverlesen.</p>
         </div>
         
-        <div class="filter-bar">
-            {filter_buttons}
+        <div class="filter-container">
+            <span class="filter-label">Beliebte Themen:</span>
+            <div class="filter-bar">
+                {filter_buttons}
+            </div>
         </div>
 
         <div id="job-grid">
@@ -354,7 +375,7 @@ index_html = f"""
 </html>
 """
 
-# 8. RECHTSTEXTE GENERIEREN
+# 8. RECHTSTEXTE
 impressum_html = f"""
 <!DOCTYPE html>
 <html><head><title>Impressum</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">{css_styles}</head>
@@ -380,10 +401,8 @@ datenschutz_html = f"""
 </main></body></html>
 """
 
-# Speichern
 with open(os.path.join(OUTPUT_DIR, "index.html"), "w", encoding="utf-8") as f: f.write(index_html)
 with open(os.path.join(OUTPUT_DIR, "impressum.html"), "w", encoding="utf-8") as f: f.write(impressum_html)
 with open(os.path.join(OUTPUT_DIR, "datenschutz.html"), "w", encoding="utf-8") as f: f.write(datenschutz_html)
 
-print("✅ Update fertig: Tags, Filter & Rechtstexte eingebaut!")
-
+print("✅ Update fertig: Design optimiert (Chips) & Rechtstexte aktualisiert!")
