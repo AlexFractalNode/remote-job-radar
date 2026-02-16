@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projekt-Manager (m/w/d) - Digital & Projekt Engineering | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Leisure One GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Projekt-Manager (m/w/d) - Digital & Projekt Engineering</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 60k-80k</span>
+                    <span class="badge badge-tag">Online Marketing</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Diese Stelle bietet die Möglichkeit, in einer internationalen und inhabergeführten Firma mitzuarbeiten. Die Vielseitigkeit der Projekte und die Chance auf Weiterentwicklung machen diese Position besonders attraktiv.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Von den Alpen bis an die Küste – als inhabergeführter <strong>Partner</strong> hat sich die <strong>Leisure One</strong> national und international auf die ganzheitliche Beratung und Vermarktung von Kunden aus der gehobenen Hotellerie und Tourismusbranche spezialisiert. Unser Leistungsspektrum ist so vielseitig wie unsere Projekte: Es reicht von der strategischen Beratung über hochwertige Content-Produktionen bis hin zu einem datengetriebenen Online-Marketing, das die gesamte digitale Klaviatur bespielt. Wir sorgen für Sichtbarkeit durch <strong>SEO</strong> und gezielte <strong>Paid-Kampagnen auf Google, Bing, Meta, TikTok und LinkedIn</strong> und nutzen innovative, <strong>KI-gestützte Geo-Optimization</strong>, um Gäste präzise dort zu erreichen, wo sie sich befinden.</p>
+<p>Ein zentraler Fokus unserer täglichen Arbeit liegt in der Gestaltung erstklassiger digitaler Erlebnisse durch nutzerzentriertes <strong>UX-Design</strong>. Dabei meistern wir die komplexe Aufgabe des <strong>E-Commerce in der Hospitality</strong> – ob für Hotels, Restaurants oder ganze Destinationen. Wir verstehen, dass digitaler Vertrieb im Tourismus weit über den Verkauf hinausgeht: Es geht darum, komplexe Buchungsprozesse und exklusive Dienstleistungen intuitiv und emotional erfahrbar zu machen, um die Brücke zwischen Inspiration und Conversion zu schlagen. Damit unsere Strategien keine Theorie bleiben, setzen wir auf volle <strong>Messbarkeit durch DSGVO-konforme Tracking-Tools</strong> und integrieren modernste <strong>CRM-Lösungen</strong> zur langfristigen Gästebindung.</p>
+<p><strong>Wer wir sind und was dich bei uns erwartet:</strong></p>
+<p>Wir sind mehr als eine klassische Berater – wir sind strategische Wegbegleiter für Brands, die im Premium-Segment den Unterschied machen wollen. Bei der Leisure One triffst du auf ein inhabergeführtes Team, das Leidenschaft für die Hospitality mit technischer Präzision verbindet. Dich erwartet ein Umfeld, in dem kreatives Storytelling auf datengetriebene Optimierung trifft und in dem du die digitale Transformation namhafter Hotels und Destinationen aktiv mitgestaltest. Wir bieten dir den Freiraum, modernste Tools von KI-gestützter Analyse bis hin zu High-End-Tracking einzusetzen und deine Expertise in einem spezialisierten Wachstumsmarkt stetig zu erweitern.</p>
+<p>Bei uns arbeitest du an der Schnittstelle von Ästhetik und Performance. Du wirst Teil eines Teams, das flache Hierarchien nicht nur verspricht, sondern durch kurze Entscheidungswege und echtes partnerschaftliches Miteinander lebt. Ob im Bereich UX, im komplexen E-Commerce oder in der Steuerung globaler Ad-Kampagnen: Wir bieten dir die Chance, Verantwortung zu übernehmen und messbare Erfolge für exklusive Kunden von den Bergen bis zum Meer zu feiern.</p>
+<h2>Aufgaben</h2>
+<p>Deine Mission</p>
+<p>Als <strong>Projekt-Manager (m/w/d) – Fokus Digital &#x26; Projekt Engineering</strong> bist du der strategische Kopf und die kommunikative Schnittstelle unseres Web-Teams. Du vereinst technisches Verständnis mit Umsetzungsstärke, um die digitale Präsenz unserer Kunden aus der <strong>Hotellerie und Gastronomie</strong> auf das nächste Level zu heben.</p>
+<p>Deine Kernaufgaben:</p>
+<ul>
+<li><strong>Web-Engineering &#x26; Management:</strong> Du baust und pflegst eigenständig moderne Websites auf Basis von <strong>WordPress (Elementor)</strong>.</li>
+<li><strong>Schnittstelle &#x26; Team-Lead:</strong> Du steuerst unsere <strong>englischsprachigen Programmierer</strong> im Team. Du erstellst präzise technische Briefings und überwachst die Umsetzung – dabei kommunizierst du sicher auf Englisch, um komplexe Themen punktgenau zu klären.</li>
+<li><strong>Full-Cycle Projektleitung:</strong> Du verantwortest die Planung, Steuerung und das Budget von Projekten im Bereich Performance Marketing und Web. Du stellst sicher, dass Termine eingehalten werden und die Ergebnisse unsere Kunden begeistern.</li>
+<li><strong>Branchen-Strategie:</strong> Du entwickelst maßgeschneiderte Konzepte und Marketingkampagnen, die exakt auf die Bedürfnisse der Hospitality-Branche zugeschnitten sind.</li>
+<li><strong>Reporting &#x26; Optimierung:</strong> Du monitorst den Projektfortschritt, analysierst Ergebnisse und berichtest direkt an die Geschäftsführung.</li>
+</ul>
+<h2>Qualifikation</h2>
+<p>Dein Profil – Das bringst du mit:</p>
+<ul>
+<li><strong>Fundament:</strong> Du hast ein Studium (z. B. Hotelmanagement, BWL, Marketing) oder eine vergleichbare Ausbildung erfolgreich abgeschlossen und bringst ein tiefes Verständnis für wirtschaftliche Zusammenhänge mit.</li>
+<li><strong>WordPress-Pro:</strong> Du bist kein Anfänger, sondern ein versierter Anwender in <strong>WordPress &#x26; Elementor</strong>. Dein technisches Grundverständnis ermöglicht es dir, Web-Projekte nicht nur zu verwalten, sondern aktiv mitzugestalten.</li>
+<li><strong>Technical Translator:</strong> Du liebst Technik und besitzt die seltene Gabe, komplexe Anforderungen in messerscharfe, <strong>englische Briefings</strong> für unsere Programmierer zu übersetzen. Du bist die Brücke, die sicherstellt, dass Code und Konzept perfekt matchen.</li>
+<li><strong>Einschlägige Erfahrung:</strong> Idealerweise hast du bereits Projekte im technischen Umfeld gesteuert (Agenturen/Freelancer) und kennst die Dynamik von <strong>Performance- und Online-Marketing</strong>.</li>
+<li><strong>Branchen-Insider:</strong> Du kennst die Welt der <strong>Hotellerie oder Gastronomie</strong> von innen und weißt, wie diese Branche tickt und welche digitalen Lösungen sie wirklich braucht.</li>
+<li><strong>Projekt-Lead:</strong> Du bist ein Organisationstalent mit einem kühlen Kopf. Planung, Steuerung und Termintreue sind für dich keine Floskeln, sondern gelebter Standard – auch wenn es mal hektisch wird.</li>
+<li><strong>Trend-Radar:</strong> Du bist digitaler Native, verfolgst Marketing-Trends proaktiv und brennst darauf, neue Tools gewinnbringend einzusetzen.</li>
+<li><strong>Sprachgewandt:</strong> Kommunikation ist deine Stärke. Du agierst absolut sicher und verhandlungssicher in <strong>Deutsch und Englisch</strong> (Wort &#x26; Schrift).</li>
+</ul>
+<h2>Benefits</h2>
+<p>Dein Impact &#x26; Unsere Benefits</p>
+<p>Wir bieten dir mehr als nur einen Job – wir bieten dir den Freiraum, digitale Exzellenz in der Hospitality-Branche mitzugestalten.</p>
+<ul>
+<li><strong>Verantwortung ab Tag 1:</strong> Dich erwartet eine abwechslungsreiche Schlüsselrolle in einem dynamischen Team, in dem deine Ideen nicht nur gehört, sondern aktiv umgesetzt werden.</li>
+<li><strong>Flexibilität, die zu deinem Leben passt:</strong> Arbeite in einem modernen Arbeitsumfeld direkt im Herzen von <strong>Hamburg-Eppendorf</strong> oder nutze unsere flexiblen <strong>Homeoffice-Optionen</strong>.</li>
+<li><strong>Wachstum garantiert:</strong> Wir unterstützen deine Karriere durch kontinuierliche Weiterbildung und attraktive Entwicklungsmöglichkeiten innerhalb des Unternehmens.</li>
+<li><strong>Innovation:</strong> Gestalte zukunftsweisende Projekte mit und setze neue Standards im digitalen Projekt Engineering.</li>
+</ul>
+<p>Deine Extras – Flexibel &#x26; Individuell</p>
+<p>Zusätzlich zu einem attraktiven Gehalt profitierst du von einem <strong>flexiblen Benefit-Budget</strong>, das du ganz nach deinen persönlichen Bedürfnissen einsetzen kannst:</p>
+<ul>
+<li><strong>Mobilität:</strong> Wir halten dich mobil und bezuschussen dein <strong>Deutschlandticket</strong> oder Jobticket für einen entspannten (und steuerfreien) Arbeitsweg.</li>
+<li><strong>Fitness &#x26; Wellness:</strong> Dein Ausgleich ist uns wichtig. Mit dem <strong>EGYM Wellpass</strong> hast du Zugriff auf ein riesiges Netzwerk an Sport- und Wellness-Partnern – steuerfrei im Rahmen der Sachbezugsgrenze.</li>
+<li><strong>JobRad:</strong> Lease dein Wunschrad bequem über uns und starte fit in den Tag – wir unterstützen dich mit einem attraktiven <strong>monatlichen Arbeitgeberzuschuss</strong> zur Leasingrate.</li>
+</ul>
+<p>Bist Du bereit?</p>
+<p>Hast du die Leidenschaft, digitale Lösungen für die Gastgeber von morgen zu entwickeln? Wenn du strukturiert arbeitest, fließend Englisch sprichst und WordPress im Schlaf beherrschst, wollen wir dich kennenlernen.</p>
+<p>Sende uns deinen Lebenslauf und ein kurzes Anschreiben, in dem du uns von deiner Erfahrung in der Steuerung technischer Teams und deinem Gespür für die Hotel- und Gastro-Welt erzählst.</p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/leisure-one-gmbh/projekt-manager-digital-projekt-engineering-hamburg-383576" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
