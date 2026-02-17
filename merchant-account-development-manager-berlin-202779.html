@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merchant Account Development Manager | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Wolt - English sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Merchant Account Development Manager</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><div class="content-intro"><h2><span data-sheets-root="1">About Wolt</span></h2>
+<p><span data-sheets-root="1">At Wolt, we create technology that brings joy, simplicity and earnings to the neighborhoods of the world. In 2014 we started with delivery of restaurant food. Now we're building the delivery of (almost) everything and you'll find us in over 500 cities in 30 countries around the world. In 2022 we joined forces with DoorDash and together we keep on dreaming big and expanding across the globe.<br><br>Working at Wolt isn't always easy, but it's definitely exciting. Here you'll learn more, build more, and ship more than in most other companies. You'll be challenged a lot, but also have a lot of fun on the way. So, if you're a self-starter with drive and entrepreneurial spirit, this could be the ride of your life.</span></p></div><p>We are looking for a motivated and experienced Merchant Account Development Manager to drive growth and revenue across our restaurant and merchant network. This is a highly execution-driven role, where you are accountable not only for defining growth strategies, but for driving them end-to-end to measurable outcomes in a fast-moving environment.</p>
+<p>As a Merchant Account Development Manager, you will act as a strategic partner and growth driver for our merchants, developing tailored ads and promotions strategies that align with their business objectives. This role requires close collaboration with cross-functional teams, performance analysis, and a focus on driving product adoption, customer engagement, and long-term retention.</p>
+<h2>What you'll be doing</h2>
+<p><strong>Strategic Planning &amp; Execution:</strong></p>
+<ul>
+<li>Develop and execute a comprehensive ads and promos strategy for our restaurant business,&nbsp; including owning prioritization, delivery timelines, stakeholder alignment and measurable commercial outcomes end-to-end.</li>
+</ul>
+<p><strong>Relationship Management:</strong></p>
+<ul>
+<li>Build and manage relationships with key industry players, including global enterprise brands, franchises, and local key accounts to meet their evolving needs.</li>
+</ul>
+<p><strong>Cross-functional Collaboration:</strong></p>
+<ul>
+<li>Motivate a high-performing local Account Management team to exceed ad revenue targets and customer acquisition and retention goals.</li>
+<li>Collaborate with cross-functional teams, including product, marketing, and operations, to ensure business objectives are met.</li>
+</ul>
+<p><strong>Performance Analysis &amp; Reporting:</strong></p>
+<ul>
+<li>Analyze sales performance metrics and proactively translate insights into clear recommendations, decisions &amp; actions, and provide regular updates to leadership</li>
+</ul>
+<p><strong>Account Management &amp; Development:</strong></p>
+<ul>
+<li>Lead strategic account planning, sales presentations, contract negotiations, and QBRs, while owning end-to-end outcomes across your portfolio - including prioritization, follow-through, revenue performance, and proactive management of risks and timelines</li>
+</ul>
+<h2>Our humble expectations*&nbsp;</h2>
+<ul>
+<li>Fluency in German and English</li>
+<li>3+ years of account management or sales experience in a high-growth, data-driven environment</li>
+<li>Strong commercial acumen, with the ability to connect data, insights, and merchant needs to revenue-driving actions</li>
+<li>Experience in retail media, advertising, or performance marketing is a strong plus</li>
+<li>Strong communication and presentation skills, with the ability to influence and drive alignment across stakeholders</li>
+<li>Analytical mindset with the ability to extract meaningful insights and translate them into concrete decisions, actions, and commercial impact</li>
+<li>Demonstrated project management skills, including planning, execution, and tracking of initiatives</li>
+<li>Ability to independently prioritize work, manage competing demands, and drive initiatives to closure in a fast-paced environment, including proactively managing timelines and escalating risks when needed</li>
+<li>Proficient in CRM tools (e.g., Salesforce) and basic sales reporting</li>
+<li>Bonus points: prior enterprise client work</li>
+</ul>
+<h2>What we offer</h2>
+<ul>
+<li>A rare opportunity to shape a high-growth business with significant untapped potential - over 80% of the German market remains ahead of us.</li>
+<li>Real ownership and autonomy to drive impact on one of Wolt Germany's most important revenue levers.</li>
+<li>Work in a collaborative, high-performing team with strong international support and exposure to senior decision-makers.</li>
+<li>Competitive compensation package, with a hybrid and flexible working model.</li>
+<li>A culture that values analytical thinking, ownership, and impact over hierarchy.</li>
+</ul>
+<h2>Next steps*</h2>
+<ul>
+<li>Introduction meeting (You to Wolt and Wolt to you)</li>
+<li>Meeting with your potential Manager</li>
+<li>Show us why you're the best candidate for the role (Assignment stage)</li>
+</ul>
+<p><iframe src="https://www.youtube.com/embed/GoL541_xj9w" width="560" height="314"></iframe></p><div class="content-conclusion"><h2><span data-sheets-root="1">Our Commitment to Diversity and Inclusion</span></h2>
+<p><span data-sheets-root="1">We're committed to growing and empowering a more inclusive community within our company, industry, and cities. That's why we hire and cultivate diverse teams of people from all backgrounds, experiences, and perspectives. We believe that true innovation happens when everyone has room at the table and the tools, resources, and opportunity to excel.</span></p></div><p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/wolt-english/merchant-account-development-manager-berlin-202779" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Engineer (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">MegaDev GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Frontend Engineer (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Software Development</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><em>english version below</em></p>
+<p>Wir bei <strong>MegaDev GmbH</strong> entwickeln innovative Lösungen für Gamer:innen und sind mit unserer Software <strong>PLITCH</strong> europäischer Marktführer für Trainer und temporäre Mods für Einzelspieler-PC-Spiele. Unser Ziel ist es, das Spielerlebnis individuell anpassbar zu machen – egal, ob für mehr Komfort oder eine größere Herausforderung.</p>
+<p>Wir suchen einen <strong>Frontend Engineer (m/w/d)</strong>, für den User-Feedback der wichtigste Antrieb ist. Als Kernmitglied unseres Tech-Teams fungierst du als primäre technische Schnittstelle zum Community-Team. Deine Mission: Tägliches Spieler-Feedback in ein Weltklasse-Interface zu verwandeln.</p>
+<p>________________________________________________________________________</p>
+<p>At <strong>MegaDev GmbH</strong>, we develop innovative solutions for gamers and are the European market leader in trainer and temporary mods for single-player PC games with our software <strong>PLITCH</strong>. Our goal is to enable players worldwide to create their own gaming experience.</p>
+<p>We are looking for a <strong>Frontend Engineer (m/f/d)</strong> who thrives on user feedback. While you will be a core member of the Tech Team, you will serve as our primary technical bridge to the Community Team. Your mission: turn daily player feedback into a world-class interface.</p>
+<h2>Aufgaben</h2>
+<p><strong><em>DEINE AUFGABEN</em></strong></p>
+<ul>
+<li><strong>Verantwortung für die Component Library:</strong> Du übernimmst die Leitung beim Aufbau, der Pflege und Skalierung unserer internen Component Library. Du stellst sicher, dass unsere UI-Elemente modular, wiederverwendbar und für eine hohe Informationsdichte optimiert sind.</li>
+<li><strong>Community-getriebene Iteration:</strong> Du stehst in ständigem Austausch mit unserem Community-Team. Du analysierst tägliches User-Feedback sowie „Pain Point“-Berichte und übersetzt qualitative Spielerfahrungen in technische UI-Verbesserungen.</li>
+<li><strong>Rapid Prototyping &#x26; UX-Optimierung:</strong> Du identifizierst Navigations-Engpässe und nutzt Tools wie <strong>Figma</strong> und <strong>KI-gestützte Workflows</strong>, um schnell Prototypen zu erstellen und die Klicktiefe für Kernfunktionen zu minimieren.</li>
+<li><strong>Design-to-Code Excellence:</strong> Du agierst als technischer Mentor für Frontend-Komponenten. Dabei stellst du sicher, dass visuelles Design und funktionaler Nutzen von PLITCH perfekt ausbalanciert und technisch robust in unserem Desktop-Client umgesetzt werden.</li>
+</ul>
+<p>________________________________________________________________________</p>
+<p><strong><em>YOUR RESPONSIBILITIES</em></strong></p>
+<ul>
+<li><strong>Component Library Ownership:</strong> You take the lead on building, maintaining, and scaling our internal component library. You ensure that our UI elements are modular, reusable, and optimized for high information density.</li>
+<li><strong>Community-Driven Iteration:</strong> You will maintain a constant sync with our Community Team. You’ll digest daily user feedback and "pain point" reports, translating qualitative player experiences into technical UI improvements.</li>
+<li><strong>Rapid Prototyping &#x26; UX Optimization:</strong> You identify and fix navigation "bottlenecks" highlighted by the community. You use tools like <strong>Figma and AI-supported workflows</strong> to quickly create prototypes and minimize click-depth for core features.</li>
+<li><strong>Design-to-Code Excellence:</strong> You act as a technical mentor for frontend components, ensuring that the visual design and the functional utility of PLITCH are perfectly balanced and technically robust across our desktop client.</li>
+</ul>
+<h2>Qualifikation</h2>
+<p><strong><em>DEIN PROFIL</em></strong></p>
+<ul>
+<li>Mehrjährige Erfahrung mit modernen Frontend-Frameworks (z. B. <strong>React, Vue</strong>). Tiefgreifendes Verständnis von UX-Gesetzen (Fitts's Law etc.) und State-Management in komplexen Anwendungen.</li>
+<li><strong>Design- &#x26; KI-Tooling:</strong> Du bist sicher im Umgang mit <strong>Figma</strong> und weißt, wie man moderne <strong>KI-Tools</strong> (z. B. GitHub Copilot, Cursor oder Figma AI) effizient nutzt, um deine Entwicklungsgeschwindigkeit und Code-Qualität zu steigern</li>
+<li><strong>Das „User Advocate“-Mindset:</strong> Du schreibst Code nicht nur, um Spezifikationen zu erfüllen, sondern um Probleme der Spieler zu lösen. Community-Feedback ist für dich der wichtigste Treiber für technische Exzellenz.</li>
+<li><strong>Abteilungsübergreifende Kommunikation:</strong> Du kannst die Aussage „User finden diesen Button verwirrend“ in eine technische Strategie für ein UI-Overhaul übersetzen. Du schätzt den kollaborativen Prozess zwischen Tech, Produkt und Community.</li>
+<li>Ein ausgeprägtes Gespür für „Product Ownership“. Du hinterfragst Workflows aktiv, um das bestmögliche Spielerlebnis zu garantieren.</li>
+<li><strong>Sprachkenntnisse:</strong> Fließend in Deutsch und Englisch, weitere Sprachen sind ein Plus.</li>
+</ul>
+<p><strong><em>HIT THE HIGHSCORE</em></strong></p>
+<ul>
+<li>Erfahrung in der Entwicklung von Single-Page-Applications (<strong>Blazor / .NET</strong>) oder im Aufbau/der Pflege anspruchsvoller Design-Systeme.</li>
+<li>Du hast in deinem Leben selbst schon das eine oder andere Videospiel aus Leidenschaft gezockt.</li>
+</ul>
+<p>________________________________________________________________________</p>
+<p><strong><em>YOUR PROFILE</em></strong></p>
+<ul>
+<li>Several years of experience in modern Frontend frameworks (e.g., React, Vue). Deep understanding of UX laws (Fitts's Law, etc.) and state management in complex apps.</li>
+<li><strong>Design &#x26; AI Tooling:</strong> You are proficient in using <strong>Figma</strong> and know how to efficiently leverage modern <strong>AI tools</strong> (e.g., GitHub Copilot, Cursor, or Figma AI) to increase your development speed and code quality.</li>
+<li><strong>The "User Advocate" Mindset:</strong> You don’t just write code to meet a spec; you write code to solve a player’s problem. You value community feedback as a primary driver for technical excellence.</li>
+<li><strong>Cross-Departmental Communication:</strong> You can translate "The users find this button confusing" into a technical strategy for a UI overhaul. You enjoy the collaborative process between Tech, Product, and Community.</li>
+<li>A strong sense of "Product Ownership." You don't just write code; you challenge workflows to ensure the best possible player experience.</li>
+<li><strong>Language skills</strong>: Fluent in German and English, additional languages are a plus.</li>
+</ul>
+<p><strong><em>HIT THE HIGHSCORE</em></strong></p>
+<ul>
+<li>Experience in single page application development (.NET / Blazor) or building/maintaining sophisticated Design Systems.</li>
+<li>You’ve played a few video games in your life – out of passion.</li>
+</ul>
+<p>________________________________________________________________________</p>
+<p><strong><em>DAS BIETEN WIR DIR</em></strong></p>
+<ul>
+<li><strong>Flexible Arbeitszeiten</strong></li>
+<li><strong>Mobiles Arbeiten</strong> (inkl. Workation-Möglichkeiten)</li>
+<li><strong>Zusätzliche Urlaubstage</strong></li>
+<li><strong>Benefits-Cafeteria-System</strong></li>
+<li><strong>Flache Hierarchien &#x26; kreative Freiheit</strong> – deine Ideen zählen!</li>
+<li>Ein Team, das sich gegenseitig <strong>unterstützt</strong> und <strong>Herausforderungen gemeinsam löst</strong></li>
+<li><strong>Karriereentwicklung</strong> – Weiterbildungsmöglichkeiten und Entwicklungsperspektiven</li>
+<li><strong>Regelmäßige Team-Events</strong> und ein konstruktives, kollegiales Arbeitsumfeld</li>
+<li><strong>Modernes Büroambiente</strong></li>
+</ul>
+<p>Wir können es kaum erwarten, Dich kennenzulernen!</p>
+<p>________________________________________________________________________</p>
+<p><strong><em>WHAT WE OFFER</em></strong></p>
+<ul>
+<li><strong>Flexible working hours</strong></li>
+<li><strong>Remote work options</strong> (including workation opportunities)</li>
+<li><strong>Additional vacation days</strong></li>
+<li><strong>Benefits cafeteria system</strong></li>
+<li><strong>Flat hierarchies &#x26; creative freedom</strong> – your ideas matter!</li>
+<li>A team that <strong>supports</strong> each other and solves challenges <strong>collaboratively</strong></li>
+<li><strong>Career development</strong> – training opportunities and growth perspectives</li>
+<li><strong>Regular team events</strong> and a constructive, collaborative atmosphere</li>
+<li><strong>Modern office environment</strong></li>
+</ul>
+<p><em>We can't wait to meet you!</em></p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/megadev-gmbh/frontend-engineer-munich-479330" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

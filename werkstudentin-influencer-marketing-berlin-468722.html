@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Werkstudent:in Influencer Marketing (w/m/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">getolo GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Werkstudent:in Influencer Marketing (w/m/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Marketing and Communication</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>⚡️ Du liebst Social Media? Wir suchen dich! <strong>(Werkstudent:in Influencer Marketing, m/w/d)</strong></p>
+<p>Lass uns das klarstellen: Wir reden nicht von langweiligen Versicherungen. Wir sind getolo, Deutschlands InsurTech #1 und wir sind dabei, die Branche auf den Kopf zu stellen. Und dafür brauchen wir jemanden, der echte Ahnung von digitalen Trends und Reichweite hat!</p>
+<p>💥 Dein Spot: Influencer Marketing &#x26; Social Media</p>
+<p>Du studierst etwas mit Power (Marketing, Medien, Kommunikation, BWL oder Ähnliches) und willst endlich sehen, wie Theorie zu Viralität wird? Perfekt!</p>
+<p>Unser Influencer Marketing &#x26; Social Media Team ist das Herzstück unserer digitalen Strategie. Wir suchen dich – ein kreatives, trendbewusstes Talent, das Instagram, TikTok &#x26; Co. nicht nur nutzt, sondern beherrscht. Wenn Influencer Marketing deine Leidenschaft ist, dann bist du bei uns goldrichtig!</p>
+<p>🤘 Dein Deal</p>
+<p>Start: Ab sofort, um unser internationales Team zu verstärken.</p>
+<p>Rolle: Werkstudent:in (m/w/d) für Influencer Marketing &#x26; Social Media Management.</p>
+<p>Flexibilität: ca. 20 Std./Woche – perfekt abgestimmt auf deinen Uni-Alltag.</p>
+<p>Dein Benefit: Sammle sofort hands-on Erfahrung und erweitere deinen Horizont in einem Umfeld, das wirklich etwas bewegt.</p>
+<p><strong>Als Werkstudent:in wirst du folgende Aufgaben übernehmen:</strong></p>
+<ul>
+<li>Strategische und operative Unterstützung im Influencer Marketing.</li>
+<li>Kreativer Kopf: Du erstellst und optimierst kreative Briefings für Influencer und unsere Agenturen, um sicherzustellen, dass die Botschaft perfekt sitzt und unsere Produkte richtig erklärt werden.</li>
+<li>Qualitätssicherung: Du screenst und gibst Influencer</li>
+<li>Content (+ UGC-Produktionen) frei – dabei stellst du sicher, dass die Inhalte sowohl kreativ als auch markenkonform sind.</li>
+<li>Schnittstelle und Partner:in: Du agierst als direkte/r Ansprech- und Sparringpartner:in für unsere Kreativ- und Influencer-Agenturen.</li>
+<li>Trend-Scouting: Du behältst die gängigen Kanäle wie Instagram, TikTok und Facebook im Blick und bringst aktuelle Trends und deine Kreativität in unsere Online-Präsenz ein.</li>
+</ul>
+<p><strong>Requirements</strong></p>
+<ul>
+<li>Du kennst dich hervorragend mit Influencern, Influencer Marketing und den Mechanismen der sozialen Netzwerke aus.</li>
+<li>Du beherrschst die gängigen Kanäle wie Instagram, TikTok und Facebook und weißt, wie man dort authentischen und ansprechenden Content erstellt und verbreitet.</li>
+<li>Aktuelle Immatrikulation an einer Universität oder Hochschule (idealerweise in den Bereichen Marketing, Kommunikationswissenschaften, Medien, BWL oder vergleichbaren Studiengängen).</li>
+<li>Ausgeprägte Kommunikationsstärke: Du liebst es, mit Menschen aus unterschiedlichen Branchen zu interagieren, und verfügst über Deutschkenntnisse (Muttersprachler-Niveau) sowie sehr gute Englischkenntnisse.</li>
+<li>Organisationstalent: Deine Arbeitsweise ist strukturiert und eigenverantwortlich – das ermöglicht dir, Fristen zuverlässig einzuhalten und die Aufgaben auch neben einem fordernden Unialltag souverän zu meistern.</li>
+<li>Lernbereitschaft: Du zeigst Interesse an digitalen Themen und hast die Motivation, dich schnell in neue Bereiche und Trends einzuarbeiten.</li>
+</ul>
+<p><strong>Benefits</strong></p>
+<p><strong>Warum getolo?</strong></p>
+<p><strong>💰 Gehalt</strong></p>
+<ul>
+<li>Attraktives Fixgehalt</li>
+</ul>
+<p>🧑‍💻 <strong>Mobilität &#x26; Flexibilität</strong></p>
+<ul>
+<li>Arbeite hybrid - aus deinem Home Office und in unserem Büro in Berlin-Mitte</li>
+<li>Flexible Arbeitstage</li>
+</ul>
+<p>🧘 <strong>Gesundheit</strong></p>
+<ul>
+<li>Nutzung von kostenlosen Coaching-Sitzungen mit nilo.health, unserem Tool für mentale Gesundheit</li>
+<li>Teste unsere Produkte selbst! Wähle zwischen dentolo, petolo oder vitolo</li>
+</ul>
+<p>🙌 <strong>Und vieles mehr…</strong></p>
+<ul>
+<li>Legendäre Sommer- und Winter­partys</li>
+<li>Regelmäßige Teamevents</li>
+<li>Mitarbeitervergünstigungen über Corporate Benefits</li>
+<li>Haustierfreundliches Büro</li>
+</ul>
+<p>Klingt nach einer perfekten Stelle für dich?</p>
+<p>Wir freuen uns auf deine Bewerbung und darauf, dich kennenzulernen!</p>
+<p>Über getolo</p>
+<p>Die 2015 gegründete getolo GmbH ist ein innovatives und mehrfach ausgezeichnetes InsurTech, das ganzheitliche Zusatztarife in den Bereichen Zahnzusatz, Tierkranken und -haftpflicht sowie Krankenzusatztarife anbietet. Unter den Marken dentolo, petolo und vitolo betreuen wir über 200.000 Kund:innen in Deutschland und bieten einen digitalen und unkomplizierten Schutz an, der sich nahtlos in den Alltag unserer Kund:innen integriert.<br>
+Wir glauben: Vorsorge ist immer besser als Nachsorge und deshalb stellen wir Prävention, kundenzentrierten Service und finanzielle Sicherheit in den Mittelpunkt, um Kund:innen und ihre Liebsten vor unerwarteten Kosten zu schützen. Dank der engen Zusammenarbeit unseres Teams aus Marktspezialist:innen und Versicherungsexpert:innen behalten wir aktuelle Entwicklungen stets im Blick, um praktikable Lösungen für aktuelle Probleme anzubieten.<br>
+Die getolo Unternehmenskultur basiert auf Zusammenarbeit, Innovationsgeist und Schnelligkeit – immer mit dem klaren Fokus auf die Bedürfnisse unserer Kund:innen. Mit einem Team von rund 200 Mitarbeitenden wird getolo von Daniel Gadea (CEO) und Laura Wulff (CGO) geleitet. getolo ist Partner von DA Direkt und Teil der Zurich Gruppe Deutschland.</p>
+<p><em>getolo ist ein Arbeitgeber, der Chancengleichheit und Vielfalt fördert. Wir bemühen uns, ein freundliches, sicheres und einladendes Umfeld für alle getolis zu schaffen, unabhängig von ethnischer Herkunft, Geschlecht, Geschlechtsidentität und -ausdruck, sexueller Orientierung, Einschränkungen und Begabungen jeglicher Art, körperlicher Erscheinung, sozialem Hintergrund, Familienstand, Alter oder Religion (oder deren Fehlen).</em></p>
+<p><em>Bei deiner Bewerbung konzentrieren wir uns ausschließlich auf deine Erfahrung und Motivation. Du entscheidest selbst, welche zusätzlichen Informationen du preisgeben möchtest (Foto, Familienstand, Religion, Geschlecht, Nationalität usw.). Wir schätzen und behandeln alle Bewerbungen gleich.</em></p>
+<p><strong>Kontakt:</strong></p>
+<p>getolo Recruiting Team</p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/getolo-gmbh/werkstudentin-influencer-marketing-berlin-468722" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
