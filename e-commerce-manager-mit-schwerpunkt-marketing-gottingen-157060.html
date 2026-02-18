@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Manager (m/w/d) mit Schwerpunkt Marketing | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Ecomsky GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">E-Commerce Manager (m/w/d) mit Schwerpunkt Marketing</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Online Marketing</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Du suchst eine Aufgabe in einem positiven Umfeld, in dem dein Einsatz zählt und Vertrauen großgeschrieben wird?</p>
+<p>Unsere Marke <strong>Elusa Fragrance</strong> hat es seit dem Start 2023 geschafft, hunderttausende Kundinnen und Kunden in der DACH-Region zu begeistern – mit hochwertigen Duftalternativen, die Luxus neu definieren. In kurzer Zeit haben wir uns zu einer der spannendsten Marken im Online-Parfümsegment entwickelt und wachsen kontinuierlich weiter.</p>
+<p>Damit unser starkes Wachstum im Onlinegeschäft weiter vorangetrieben wird, suchen wir einen <strong>E-Commerce Manager (m/w/d) mit Schwerpunkt Marketing</strong> – eine analytisch denkende und zugleich kreative Persönlichkeit, die strukturiert, vorausschauend und performanceorientiert arbeitet und auch in dynamischen Situationen den Überblick behält.</p>
+<p>Als <strong>E-Commerce Manager (m/w/d) mit Schwerpunkt Marketing</strong> verantwortest du die Weiterentwicklung unseres Online-Shops aus Marketingperspektive, optimierst Conversion, Umsatz und Customer Journey und steuerst kanalübergreifende Marketingmaßnahmen.</p>
+<p>In deiner Rolle als <strong>E-Commerce Manager (m/w/d) mit Schwerpunkt Marketing</strong> analysierst du relevante KPIs, leitest datenbasierte Entscheidungen ab und sorgst dafür, dass Marketingstrategie und E-Commerce-Ziele perfekt ineinandergreifen.</p>
+<p>Du arbeitest eigenständig, sorgfältig und lösungsorientiert und fühlst dich in einem jungen, digitalen Team wohl, das ehrgeizige Ziele verfolgt und mit Leidenschaft an einer starken Marke arbeitet.</p>
+<h2>Aufgaben</h2>
+<ul>
+<li>Planung, Umsetzung und Optimierung von Marketingmaßnahmen entlang der gesamten Customer Journey</li>
+<li>Steuerung und Optimierung. von Traffic-Quellen (Paid Ads, E-Mail-Marketing, SEO, Social Media)</li>
+<li>Enge Zusammenarbeit mit Performance Marketing, Content, Design und externen Dienstleistern</li>
+<li>Monitoring relevanter KPIs (Umsatz, ROAS, CAC, Conversion Rate) und regelmäßiges Reporting</li>
+<li>Du entwickelst Produkt-Launches und Sales-Kampagnen (z. B. Drops, Seasonal Sales, Limited Editions) mit und bringst kreative Ideen ein</li>
+<li>Du beobachtest Markttrends, Wettbewerber &#x26; Plattformverhalten und nutzt dieses Wissen zur Weiterentwicklung unserer Strategie</li>
+<li>Du bringst dich als Schnittstelle zwischen Marketing, Produktentwicklung und Customer Support aktiv ein – mit klarem Fokus auf Growth</li>
+<li>Du übernimmst die operative Verantwortung für Werbekampagnen (Meta, TikTok, Google, ggf. Influencer &#x26; UGC)</li>
+</ul>
+<h2>Qualifikation</h2>
+<ul>
+<li><strong>Mehrjährige Erfahrung</strong> im E-Commerce oder Online-Marketing</li>
+<li><strong>Starkes Verständnis</strong> für Performance Marketing und Funnel-Logik</li>
+<li><strong>Erfahrung</strong> mit Shop-Systemen wie <strong>Shopify</strong> oder vergleichbar</li>
+<li>Sicherer Umgang mit Analyse-Tools (z.B. Google Analytics, Tracking Tools, Dashboards)</li>
+<li>Analytische, strukturierte und eigenverantwortliche Arbeitsweise</li>
+<li>Hohes Maß an Eigeninitiative, Lösungsorientierung und unternehmerischem Denken</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li><strong>Sichere, unbefristete Festanstellung</strong> in einem wachsenden Unternehmen mit langfristiger Perspektive</li>
+<li><strong>Verantwortung mit klarer Rolle</strong>: Du bekommst einen festen Aufgabenbereich, den du eigenständig betreust und mitgestaltest</li>
+<li><strong>Faire Vergütung</strong> und Anerkennung für gute Leistung – bei uns wird gesehen, was du leistest</li>
+<li><strong>Persönliche Entwicklung</strong> nach deinen Stärken: Ob du dich fachlich spezialisieren oder mittelfristig mehr Verantwortung übernehmen möchtest – wir unterstützen dich dabei</li>
+<li><strong>Wertschätzung und offene Kommunikation</strong>: Du arbeitest eng mit der Geschäftsleitung zusammen und wirst in Entscheidungen einbezogen</li>
+<li><strong>Positives Teamgefühl</strong>: Du wirst Teil eines jungen, ehrgeizigen Teams, das gemeinsam an einer starken Marke arbeitet</li>
+<li><strong>Strukturierte Einarbeitung &#x26; Weiterbildung</strong>: Du erhältst regelmäßige Schulungen und kannst dich fachlich gezielt weiterentwickeln</li>
+<li><strong>Modernes Arbeitsumfeld</strong>: Helles, modernes Büro – mit allem, was du brauchst, um produktiv und gerne zu arbeiten</li>
+<li><strong>Zusätzliche Benefits</strong>: Kostenlose Getränke, Mitarbeiter-Rabatte und vieles mehr</li>
+</ul>
+<p><strong>Elusa Fragrance</strong> steht für hochwertige Duftalternativen, die Luxus für jeden zugänglich machen – modern, selbstbewusst und mit Fokus auf Qualität.<br>
+Seit 2023 haben wir uns zu einer der beliebtesten Marken im Online-Parfümsegment entwickelt und wachsen rasant weiter – mit einem starken Team, klarer Vision und Leidenschaft für Düfte.</p>
+<p>Unser Ziel: <strong>die führende Duftmarke in der DACH-Region</strong> zu werden – und langfristig international zu expandieren.<br>
+Dafür suchen wir Menschen, die mitdenken, Verantwortung übernehmen und gemeinsam mit uns Großes aufbauen wollen.</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/ecomsky-gmbh/e-commerce-manager-mit-schwerpunkt-marketing-gottingen-157060" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

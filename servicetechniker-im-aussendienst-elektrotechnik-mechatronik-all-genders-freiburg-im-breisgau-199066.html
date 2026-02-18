@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicetechniker im Außendienst - Elektrotechnik; Mechatronik (all genders) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Flach & Barfigo PL GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Servicetechniker im Außendienst - Elektrotechnik; Mechatronik (all genders)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Engineering</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Unser Auftraggeber <strong>ist der weltweit führende Anbieter</strong> von <strong>Zugangslösungen</strong> und <strong>stellt Lösungen für einen effizienten Waren-, Fahrzeug- und Personenverkehr bereit.</strong> Das Sortiment umfasst eine breite Palette an <strong>automatischen Tür-, Tor- und Verladesystemen</strong> für <strong>Wohn- und Gewerbegebäude</strong> sowie <strong>alle damit verbundenen Serviceleistungen.</strong></p>
+<h2>Aufgaben</h2>
+<p>Für den <strong>Geschäftsbereich Industrietore &#x26; Verladetechnik</strong> suchen wir zur <strong>Verstärkung des Teams einen engagierten</strong> und <strong>dynamischen</strong></p>
+<p><strong>Servicetechniker (all genders) mit Einsatzgebiet Großraum „Freiburg im Breisgau – B.W.“</strong></p>
+<p>Sie sind für die <strong>Durchführung von Störungsbehebungen, Wartungen und Modernisierungen</strong> von <strong>Industrietoren und Verladesystemen zuständig.</strong> Sie sollten über <strong>fundierte</strong> <strong>elektrotechnische oder mechanische Kenntnisse</strong> verfügen sowie <strong>Erfahrung im Service-Außendienst</strong> mitbringen. Ihr <strong>Wohnort</strong> befindet sich im <strong>Umkreis</strong> des <strong>angeführten Einsatzgebietes</strong> oder Sie sind <strong>umzugsbereit</strong>.</p>
+<h2>Qualifikation</h2>
+<ul>
+<li><strong>Störungsbehebung, Wartung, Reparatur und Modernisierung</strong> unterschiedlichster <strong>Tor- und Verladesysteme</strong> inkl. der dazugehörigen <strong>Antriebe</strong> sowie <strong>Steuerungs- und Hydrauliksysteme</strong></li>
+<li><strong>Professionelle</strong> <strong>Beratung der Kunden</strong> vor Ort im zugewiesenen Servicegebiet</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li>
+<p>Nachweislich erfolgreich <strong>abgeschlossene elektrotechnische</strong> (oder vergleichbare) <strong>Berufsausbildung,</strong> wobei <strong>elektrotechnische Kenntnisse unbedingt erforderlich sind!</strong></p>
+</li>
+<li>
+<p>Erfahrung im <strong>Service-Außendienst</strong> an <strong>technischen Produkten</strong> und <strong>Anlagen</strong></p>
+</li>
+<li>
+<p><strong>Wohnort im Raum „Freiburg“ bzw. im Einzugsgebiet</strong></p>
+</li>
+<li>
+<p>Gültiger <strong>Führerschein der Kategorie „B“</strong> (Servicefahrzeug wird zur Verfügung gestellt)</p>
+</li>
+<li>
+<p>Sehr gute Deutschkenntnisse in Wort und Schrift</p>
+</li>
+<li>
+<p>Routinierter Umgang mit Tablet und Anwendungssoftware</p>
+</li>
+<li>
+<p>Selbstständige, eigenverantwortliche und kundenorientierte Arbeitsweise</p>
+</li>
+<li>
+<p>Nach <strong>Einschulung durch einen erfahrenen Mitarbeiter</strong> erwartet Sie ein <strong>abwechslungsreiches</strong> und <strong>eigenverantwortliches</strong> Aufgabengebiet eingebunden in ein kollegiales und teamorientiertes Arbeitsumfeld <strong>(Direktanstellung – Vermittlung)</strong>.</p>
+</li>
+<li>
+<p><strong>Unbefristeter Arbeitsvertrag ab Tag 1</strong>!</p>
+</li>
+<li>
+<p><strong>Moderner Firmenwagen</strong> mit hochwertiger, technischer Ausstattung, umfangreiches Sortiment an <strong>Arbeitskleidung</strong>, persönliche Schutzausrüstung <strong>(PSA)</strong>;</p>
+</li>
+<li>
+<p>Förderung und Unterstützung der Mitarbeiter durch ein hohes Schulungsangebot und <strong>Weiterentwicklungsmöglichkeiten bei der Karriereplanung</strong>.</p>
+</li>
+<li>
+<p>Für diese Position wird ein <strong>marktkonformes</strong> und <strong>leistungsgerechtes</strong> <strong>Gehalt</strong> geboten  und wird <strong>auf Basis Ihrer Erfahrung und Qualifikation individuell vereinbart</strong>.</p>
+</li>
+</ul>
+<p>Sie verfügen über eine <strong>hohe Kundenorientierung, arbeiten lösungsorientiert, strukturiert</strong> und erfüllen die geforderten Qualifikationen!? Dann freuen wir uns auf Ihre aussagekräftige Bewerbung <strong>mit aktuellem Foto</strong> und <strong>Ihrer Gehaltsvorstellung.</strong></p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/flach-barfigo-pl-gmbh/servicetechniker-im-aussendienst-elektrotechnik-mechatronik-all-genders-freiburg-im-breisgau-199066" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

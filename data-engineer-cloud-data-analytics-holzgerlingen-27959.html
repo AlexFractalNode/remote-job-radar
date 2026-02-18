@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Engineer (m/w/d) - Cloud Data & Analytics | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Integrated Worlds GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Data Engineer (m/w/d) - Cloud Data & Analytics</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 80k-100k</span>
+                    <span class="badge badge-tag">Data Processing</span><span class="badge badge-tag">Data Engineer</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Data Engineer für Cloud Data & Analytics gesucht, mit 3+ Jahren Erfahrung und Wohnsitz in Deutschland. Ideal für alle Erfahrungsstufen, mit Möglichkeit zur Weiterentwicklung in einem cloudbasierten Umfeld.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>ab 3+ Jahren Berufserfahrung | alle Erfahrungsstufen willkommen</strong></p>
+<p>Diese Stelle ist nur für Deutschland ausgeschrieben, weshalb Bewerbende gesucht werden, die ihren <strong>Wohnsitz in Deutschland</strong> haben. Standort: Holzgerlingen oder Oschatz.</p>
+<p>Als Data Engineer gestaltest du den Aufbau und die Weiterentwicklung unserer <strong>cloudbasierten Daten- und Analytics-Plattform</strong>. Du denkst Daten ganzheitlich – von der Integration über die Modellierung bis zur analytischen Nutzung – und setzt sie in den <strong>Kontext realer Geschäftsprozesse</strong>.</p>
+<p>Wir verarbeiten jährlich <strong>Millionen geschäftskritischer Belege und Daten</strong> (u. a. Aufträge, Lieferungen, Rechnungen, Zahlungen) zwischen tausenden Unternehmen. Mit unserer <strong>FXM-Plattform</strong> ermöglichst du datenbasierte Entscheidungen entlang von Supply-Chain-, Logistik- und Finance-Prozessen.</p>
+<h2><strong>Deine Rolle</strong></h2>
+<ul>
+<li>Entwicklung und Weiterentwicklung unserer <strong>Azure-basierten Datenplattform</strong> – vom Data Lake bis zum analytischen Frontend.</li>
+<li>Design, Implementierung und Betrieb von <strong>Datenpipelines</strong>, z. B. mit Azure Data Factory, Synapse Pipelines oder vergleichbaren Orchestrierungswerkzeugen.</li>
+<li>Verarbeitung großer Datenmengen auf <strong>Databricks / Apache Spark (PySpark)</strong> oder ähnlichen Big-Data-Frameworks.</li>
+<li>Nutzung von <strong>Cloud Data Lakes / Object Storage</strong> (z. B. Azure Data Lake, S3, GCS) inklusive Sicherheits- und Zugriffsmodellen.</li>
+<li>Modellierung analytischer Datenstrukturen (z. B. Dimensional Models oder Data Vault).</li>
+<li>Bereitstellung von Reports und analytischen Modellen über <strong>BI- und Analytics-Tools</strong> wie Power BI, Tableau oder vergleichbare Lösungen.</li>
+<li>Sicherstellung von <strong>Datenqualität, Konsistenz, Performance und Governance</strong>.</li>
+<li>Integration interner und externer Systeme, inkl. <strong>B2B- und EDI-Datenflüsse</strong>.</li>
+<li>Enge Zusammenarbeit in <strong>cross-funktionalen Teams</strong> bis hin zur Geschäftsführung.</li>
+<li>Mit wachsender Erfahrung übernimmst du Verantwortung für Architekturentscheidungen, technische Leitlinien und nachhaltige Gesamtlösungen.</li>
+</ul>
+<h2><strong>Dein Profil</strong></h2>
+<ul>
+<li>Mehrjährige Berufserfahrung (ab <strong>3 Jahren</strong>) als Data Engineer oder in einer vergleichbaren Rolle.</li>
+<li>Erfahrung in <strong>Cloud-Umgebungen</strong>, idealerweise Microsoft Azure.</li>
+<li>Praxis mit Daten- und Analytics-Technologien, u. a.</li>
+<li>Sehr gute <strong>SQL-Kenntnisse</strong>, inklusive komplexer Joins, Window Functions und Performance-Optimierung.</li>
+<li>Erfahrung im Aufbau <strong>analytischer Datenmodelle</strong> für Reporting und Analytics.</li>
+<li>Erfahrung mit <strong>Semantic Models</strong> und Performance-Optimierung in BI-Umgebungen.</li>
+<li>Vertrautheit mit geschäftlichen Domänen wie <strong>Supply Chain &#x26; Logistik</strong> (Bestände, Lieferungen, 3PL, Lager, Routing) und/oder <strong>Order-to-Cash / Procure-to-Pay</strong>.</li>
+<li>Erfahrung mit <strong>B2B-/EDI-Integrationen.</strong></li>
+<li>Sehr gute Englischkenntnisse (B2+), gute Deutschkenntnisse (B2+).</li>
+</ul>
+<h2><strong>Unser Angebot</strong></h2>
+<ul>
+<li>Unbefristete Anstellung mit regelmäßigen Gehaltserhöhungen.</li>
+<li>Betriebliche Altersvorsorge sowie Kranken- und Unfallversicherung.</li>
+<li>Fahrradleasing, Firmenkarte, Essenszuschuss, Deutschlandticket u. v. m.</li>
+<li>Flexible Arbeitszeiten und Home-Office-Regelung.</li>
+<li>Moderne Ausstattung, höhenverstellbare Tische und grüne Terrasse.</li>
+<li>Gute Verkehrsanbindung, Tiefgarage, Mittagstische in unmittelbarer Nähe.</li>
+<li>Sommerfest mit Familie und Freunden, Weihnachtsfeier, Teamevents uvm.</li>
+<li>Kalt- und Warmgetränke, Obstkorb, gemeinsames Frühstück.</li>
+</ul>
+<p>Seit 1996 sind wir <strong>Pioniere der digitalen Transformation</strong> und strategischer Partner des deutschen Mittelstands. Mit unseren Plattformen bieten wir Lösungen für Produktkonfiguration, Online-Handel, Logistik, Belegaustausch und Business Intelligence. So digitalisieren wir hunderte Unternehmen mit tausenden von Standorten in Europa.</p>
+<p>Erfahren Sie mehr unter: <a href="https://www.integrated-worlds.com/de/karriere/">https://www.integrated-worlds.com/de/karriere/</a></p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/integrated-worlds-gmbh/data-engineer-cloud-data-analytics-holzgerlingen-27959" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

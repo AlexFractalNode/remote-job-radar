@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Manager / Vertriebsmitarbeiter, Retail (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Wolt - English sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Sales Manager / Vertriebsmitarbeiter, Retail (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 €60k-80k</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Bewerben Sie sich, wenn Sie eine Herausforderung in einem dynamischen Umfeld suchen und sich für den Vertrieb von Lebensmitteln und anderen Produkten begeistern. Wolt bietet eine einzigartige Gelegenheit, in einer globalen Firma mit schnellem Wachstum zu arbeiten.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><div class="content-intro"><h2><span data-sheets-root="1">About Wolt</span></h2>
+<p><span data-sheets-root="1">At Wolt, we create technology that brings joy, simplicity and earnings to the neighborhoods of the world. In 2014 we started with delivery of restaurant food. Now we're building the delivery of (almost) everything and you'll find us in over 500 cities in 30 countries around the world. In 2022 we joined forces with DoorDash and together we keep on dreaming big and expanding across the globe.<br><br>Working at Wolt isn't always easy, but it's definitely exciting. Here you'll learn more, build more, and ship more than in most other companies. You'll be challenged a lot, but also have a lot of fun on the way. So, if you're a self-starter with drive and entrepreneurial spirit, this could be the ride of your life.</span></p></div><p>Wolt ist im August 2020 als Land Nr. 23 offiziell in Deutschland an den Start gegangen! Was in Berlin mit der Gastronomie begann, hat sich rasant zu einer umfassenden Plattform für den lokalen Handel entwickelt.</p>
+<p>Mittlerweile vernetzen wir zehntausende Kunden nicht nur mit großartigem Essen, sondern bringen den gesamten Einzelhandel direkt an die Haustür – von Lebensmitteln und Drogerieartikeln bis hin zu Non-Food-Sortimenten. Da wir den täglichen Bedarf unserer Kunden immer ganzheitlicher abbilden, freuen wir uns sehr, nun den nächsten Schritt zu gehen: Wir erweitern unsere Aktivitäten im Retail-Segment massiv und suchen Partner, die mit uns gemeinsam den Standard für modernen Quick-Commerce definieren wollen!</p>
+<h2><strong>Deine Hauptaufgaben bei Wolt</strong></h2>
+<ul>
+<li><strong>Identifikation &amp; Akquise:</strong> Du bist verantwortlich für das Sourcing der besten Retail-Partner der Stadt. Dein Ziel ist es, Supermärkte und erstklassige Non-Food-Venues in Berlin und Hamburg zu gewinnen und diese zu optimalen Konditionen auf die Wolt-Plattform zu bringen.</li>
+<li><strong>Pipeline-Management:</strong> Du steuerst deine Sales-Pipeline eigenständig und baust belastbare Netzwerke zu Inhaber:innen sowie Geschäftsleiter:innen im Einzelhandel auf.</li>
+<li><strong>Überzeugende Präsentation: </strong>Du positioniert Wolt als führende E-Commerce-Lösung. Dabei hörst du potenziellen Partnern aktiv zu, stellst die richtigen Fragen und überzeugst Entscheidungsträger durch passgenaue Mehrwerte.</li>
+<li><strong>Präsenz vor Ort: </strong>Dein Fokus liegt auf dem Außendienst. Deine Woche besteht aus ca. 1–2 Tagen strategischer Planung und Cold Calling (Home Office) sowie 3–4 Tagen im Außendienst in Süddeutschland (inkl. gelegentlicher Hotelübernachtungen).</li>
+<li><strong>Schnittstellenarbeit:</strong> Du arbeitest eng mit dem Onboarding-Team zusammen, um eine perfekte Abbildung deiner Partner – vom Supermarkt bis zum Blumenladen – auf unserer Plattform sicherzustellen.</li>
+</ul>
+<h2><strong>Das bringst du mit:</strong></h2>
+<ul>
+<li><strong>Vertriebsprofi im Außendienst:</strong> Du hast bereits 3-5 Jahre Erfahrung im Sales und liebst den <strong>Kalt Kundenkontakt.</strong> Es motiviert dich, Partner proaktiv vor Ort zu besuchen und zu überzeugen.</li>
+<li><strong>Hohe Anpassungsfähigkeit:</strong> Du kommunizierst souverän auf Augenhöhe – vom Blumenladen bis zum <strong>C-Level-Entscheider</strong>. Dabei bleibst du immer authentisch und zielorientiert.</li>
+<li><strong>Performance-Drive:</strong> Du willst der Beste sein und die <strong>Top-Retail-Partner der Stadt</strong> für Wolt gewinnen, um unseren Marktanteil signifikant auszubauen.</li>
+<li><strong>Selbstorganisation:</strong> Du planst deine <strong>Walk-in-Routen</strong> effizient, trackst deine Aktivitäten eigenständig und managest deine Pipeline absolut zuverlässig.</li>
+<li><strong>Positives Mindset:</strong> Du bist hartnäckig, denkst lösungsorientiert und behältst auch bei Gegenwind deine positive Ausstrahlung.</li>
+<li><strong>Qualifikation &amp; Sprache:</strong> Studium oder Ausbildung, <strong>fließendes Deutsch</strong> und gute Englischkenntnisse.</li>
+</ul>
+<h2><strong>Was wir dir anbieten:</strong></h2>
+<ul>
+<li><strong>Gestalte die Zukunft des Handels:</strong> Wir verändern, wie Menschen einkaufen. Dein Job ist es, den lokalen Handel so effizient zu machen, dass unsere Kunden Zeit für Wichtigeres gewinnen, anstatt sie in Warteschlangen im Supermarkt zu verbringen.</li>
+<li><strong>Wachstum &amp; Impact:</strong> Nutze die steile Lernkurve eines globalen Tech-Unternehmens und entwickle unsere bereits etablierten Märkte in Berlin und Hamburg auf das nächste Level.</li>
+<li><strong>Eigenverantwortung:</strong> Arbeite selbständig in einem dynamischen Team mit flachen Hierarchien und direktem Einfluss auf den Markterfolg.</li>
+<li><strong>Mobilität &amp; Equipment:</strong> Du erhältst Top-Hardware (iPhone &amp; MacBook) und die Option auf einen <strong>Firmenwagen</strong> für deine Einsätze im Außendienst.</li>
+<li><strong>Wolt-Benefits:</strong> Rabatte auf Wolt-Bestellungen, ÖPNV-Zuschuss sowie Wellness-Angebote (z. B. Urban Sports Club).</li>
+<li><strong>Work-Life-Balance:</strong> 30 Tage Urlaub, flexible Arbeitszeiten und ein modernes Office im Herzen von <strong>Berlin</strong>.</li>
+</ul>
+<h2><strong>Bereit, mit uns Geschichte zu schreiben?</strong></h2>
+<p>Wir verändern nicht nur den Handel – wir geben den Menschen Zeit für das zurück, was sie wirklich lieben. Wenn du in einem High-Growth-Umfeld Verantwortung übernehmen willst und ein Team suchst, das Ambition mit Spaß verbindet, dann bist du bei uns genau richtig.</p>
+<p><strong>Bewirb dich jetzt und lass uns gemeinsam den Markt revolutionieren!</strong></p>
+<p><strong><em>Wichtiger Hinweis:</em></strong><em> Um deine Daten bestmöglich zu schützen (GDPR), akzeptieren wir keine Bewerbungen per E-Mail. Bitte nutze ausschließlich unsere Karriereseite für deine Bewerbung. Wir freuen uns auf dich!</em></p>
+<p><em><iframe src="https://www.youtube.com/embed/GoL541_xj9w" width="560" height="314"></iframe></em></p>
+<p><br><br></p><div class="content-conclusion"><h2><span data-sheets-root="1">Our Commitment to Diversity and Inclusion</span></h2>
+<p><span data-sheets-root="1">We're committed to growing and empowering a more inclusive community within our company, industry, and cities. That's why we hire and cultivate diverse teams of people from all backgrounds, experiences, and perspectives. We believe that true innovation happens when everyone has room at the table and the tools, resources, and opportunity to excel.</span></p></div><p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/wolt-english/sales-manager-vertriebsmitarbeiter-retail-berlin-219859" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

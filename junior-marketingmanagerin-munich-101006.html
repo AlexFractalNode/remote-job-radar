@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junior-Marketingmanager:in | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Bergson GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Junior-Marketingmanager:in</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Marketing Manager</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Junior Marketing Manager (m/w/d) in München</p>
+<p><strong>Lust, auf ein spektakuläres Ambiente im neuen Place to be für Kunst, Kultur, Konzerte, Kulinarik und Events? Auf Wertschätzung, Herzlichkeit und gute Vibes?</strong> <strong>Dann komm‘ in unser junges, dynamisches Team und gestalte die Geschichte unseres Bergson Kunstkraftwerk mit!</strong></p>
+<p>Seit April 2024 heißen wir auf 20.000 qm unsere Gäste im Bergson Kunstkraftwerk in München Aubing willkommen und erwecken bei ihnen Begeisterung. Von dem außerordentlich vielfältigen Kulturangebot, das Konzerte aller Musikrichtungen (von Klassik bis Techno), Partys, Familienvorstellungen, Talkformate, Vorträge u.v.m. umfasst. Von der bildenden Kunst, die wir auf außergewöhnlich viel Fläche ausstellen. Von der Qualität und modernen Speisenvielfalt, mit der unsere Gastronomie-Outlets (Restaurant, Bar, Tagesbar, Biergarten, Außenterrasse und bald auch Live-Club) jeden Geschmack treffen. Und von dem Flair, das das Bergson als exklusiv buchbarer Veranstaltungsort für private und Corporate Events mit seinem hyperflexiblen Raumkonzept, seiner hochmodernen Technikausstattung und architektonischen Schönheit ausstrahlt.</p>
+<p>Damit wir möglichst individuell auf unsere Gäste, Kund:innen und Besucher:innen eingehen können, suchen wir zur Erweiterung unseres Teams für den Bereich Marketing schnellstmöglich in Vollzeit oder Teilzeit eine:n</p>
+<p><strong>Junior Marketing - Manager:in</strong> <strong>(m/w/d)</strong></p>
+<p>für unser spektakuläres Kunst-, Kultur-, Gastronomie- und Event-Highlight in München</p>
+<p>e.</p>
+<h2>Aufgaben</h2>
+<p>Deine Aufgaben</p>
+<p>Unterstützung und selbstständige Mitgestaltung bei der Planung und Umsetzung von ganzheitlichen Marketingkampagnen</p>
+<ul>
+<li>Mitarbeit bei der Content-Erstellung (z.B. Social Media, Mailings, Website)</li>
+<li>Unterstützung im CRM- und Newsletter-Marketing (Zielgruppen, Verteiler, Versand, einfache Auswertungen)</li>
+<li>Pflege von Marketing- und Veranstaltungsdaten im CMS und weiteren internen Systemen</li>
+<li>Selbstständige Mitgestaltung bei der Weiterentwicklung der Website</li>
+<li>Recherchen und Analyse zu Trends, Zielgruppen und Wettbewerb</li>
+<li>Pflege und Steuerung der digitalen Signaletik am POS im Tagesbetrieb und bei B2B Events</li>
+</ul>
+<h2>Qualifikation</h2>
+<p>Du bringst bitte mit</p>
+<p>Einen Bachelor- oder Masterabschluss aus einem Studiengang mit relevantem Schwerpunkt, z. B. BWL, Wirtschaftswissenschaften, Marketing, Kommunikationswissenschaften, Wirtschaftspsychologie, Konsumentenpsychologie oder eine gleichwertige Qualifikation</p>
+<ul>
+<li>Erste Praktische Erfahrungen mit Adobe Creative Cloud Anwendungen wie Photoshop, After Effects oder Indesign</li>
+<li>Idealerweise Erfahrungen in der Zusammenarbeit mit externen Agenturen und Dienstleistern</li>
+<li>Selbständige Arbeitsweise und ausgeprägte Produktivität</li>
+<li>Genauigkeit, Zuverlässigkeit sowie verantwortungsbewusstes Handeln verbunden mit Kommunikationsgeschick und Teamkompetenz</li>
+<li>Verhandlungssichere Deutsch- und Englischkenntnisse sowie vertrauter Umgang mit den gängigen Microsoft 365 Anwendungen</li>
+</ul>
+<h2>Benefits</h2>
+<p>Wir bieten Dir</p>
+<p>Eine attraktive Vergütung mit Entwicklungsmöglichkeiten</p>
+<ul>
+<li>Einen sehr abwechslungsreichen, spannenden Verantwortungsbereich mit dauerhaft viel Raum für maßgebliche Mitgestaltung</li>
+<li>Die einmalige Chance in Deinem Berufsleben, bei der Neueröffnung eines solch großartigen Kunst-, Kultur-, Kulinarik- und Event-Hotspots aktiv dabei zu sein</li>
+<li>Ein kostenloses Mittag- oder Abendessen, das Deutschland-Ticket für die Nutzung des ÖPNV sowie weitere Arbeitgeber-Benefits</li>
+<li>Weiterbildungsmöglichkeiten, die zu Dir persönlich und Deinen Aufgaben passen</li>
+<li>Eine moderne, schöne Arbeitsumgebung mit hohem Wohlfühlfaktor</li>
+<li>Eine hervorragende technische Ausstattung</li>
+<li>Eine außerordentlich positive Arbeitsatmosphäre, die geprägt ist von herzlicher, lebendiger Aufbruchstimmung sowie gegenseitiger Wertschätzung</li>
+<li>Regelmäßige Teamevents</li>
+<li>Einen sicheren, auf langfristige Zusammenarbeit ausgelegten Arbeitsplatz in einem jungen Unternehmen, das durch ein krisenfestes Unternehmenskonzept, flache Hierarchien, Umsetzungsfreude und eine wirtschaftlich starke, innovationsfreudige Muttergesellschaft ALLGUTH GmbH punktet</li>
+</ul>
+<p>K</p>
+<p><strong>Möchtest Du uns kennenlernen? Wir Dich auch!</strong></p>
+<p>Bitte sende Deine Bewerbung an Isabelle Wagner, Am Bergson Kunstkraftwerk 2, 81245 München. Bitte gib dabei Deinen möglichen Starttermin und Deinen Gehaltswunsch an.</p>
+<p><strong>Hast Du vorab Fragen?</strong></p>
+<p>Dann stelle diese gerne telefonisch unter 089-444433611 oder via Instagram DM <a -----
+<p>Weitere Informationen zum Bergson Kunstkraftwerk in München Aubing erhältst Du auf unserer Homepage.</p>
+<p><strong>Wir freuen uns auf Dich!</strong></p>
+<p>Es gelten unsere Datenschutzhinweise.</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/bergson-gmbh/junior-marketingmanagerin-munich-101006" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PR & Reputation Specialist - 100% Remote (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Digistore24 sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">PR & Reputation Specialist - 100% Remote (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Marketing and Communication</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><h2>Jobbeschreibung</h2>
+<h2>Digistore24 ist eine internationale Plattform für digitale Produkte und Services. Als verantwortungsvoller Plattformanbieter stehen wir im öffentlichen Fokus von Medien, Partnern, Institutionen und Nutzern. Für den strategischen Aufbau und die aktive Steuerung unserer externen Wahrnehmung suchen wir einen Experten im Bereich PR &#x26; Reputationsmanagement.</h2>
+<h2>Über Digistore24</h2>
+<p><strong>Wer ist Digistore24?</strong></p>
+<p>Wir sind eines der Top-It-Unternehmen Deutschlands.</p>
+<p><strong>Das treibt uns an: We shape the digital future!</strong> Unsere Mission ist es, mit unserer Software Menschen zu ermächtigen, ihr Wissen online mit anderen zu teilen, um sich den Traum von einem eigenen Business zu erfüllen. Dadurch erhalten Millionen von Menschen Zugang zu Informationen, die es ihnen ermöglichen, ihre Ziele zu erreichen.<br>
+Um mit unserem Wachstum gleichzuziehen, haben wir den Anspruch, unsere Teams nachhaltig auszubauen. Dabei legen wir Wert darauf, mit Experten und starken Persönlichkeiten zu arbeiten, die unsere Werte teilen - unabhängig von ihrem Wohnort.</p>
+<h2>Dein neuer Traumjob</h2>
+<ul>
+<li>Strategische PR &#x26; Positionierung: Entwicklung und Steuerung zentraler PR-Narrative zur Positionierung von Digistore24 als verantwortungsvoller Plattformanbieter sowie kommunikative Begleitung relevanter PR- und CSR-Initiativen.</li>
+<li>Klassische PR &#x26; externe Kommunikation: Verantwortung für Medienanfragen, Presse-Statements und die Pflege zentraler Presse-Assets wie Presse-Seite, Media-Kits und Medienverteiler.</li>
+<li>Reputations- &#x26; Issues-Kommunikation: Konzeption und Umsetzung proaktiver PR-Maßnahmen zur Reputationsbildung sowie professionelle, kontextualisierte Reaktion auf externe Veröffentlichungen und Anfragen relevanter Stakeholder.</li>
+<li>Monitoring &#x26; Risikoanalyse: Ganzheitliches Monitoring reputations-, risiko- und marktrelevanter Entwicklungen, deren strategische Bewertung sowie Ableitung geeigneter Kommunikationsmaßnahmen.</li>
+<li>Interne Abstimmung: Enge Zusammenarbeit mit internen Schnittstellen wie Management, Legal und Product zur konsistenten und belastbaren Außenkommunikation.</li>
+<li>KI-gestützte PR-Arbeit: Sinnvoller und verantwortungsbewusster Einsatz von KI zur Unterstützung von Recherche, Monitoring-Auswertung, Textvorbereitung und Argumentationsstrukturierung.</li>
+</ul>
+<p><strong>Unsere Werte</strong></p>
+<p>Bitte schau dir die Werte WIRKLICH genau an. Bist du bereit diese zu leben?</p>
+<h2>Stellenanforderungen</h2>
+<p>Deine Superkräfte</p>
+<ul>
+<li><strong>Exzellente schriftliche Ausdrucks- und Argumentationsfähigkeit:</strong> Du formulierst komplexe, sensible oder kritische Themen klar, strukturiert und überzeugend, z. B. in Statements, Einordnungen oder Q&#x26;As.</li>
+<li><strong>Analytisches Urteilsvermögen &#x26; technisches Grundverständnis:</strong> Du erfasst externe Inhalte und Dynamiken schnell, bewertest sie fundiert und ordnest sie kommunikativ sinnvoll ein; digitale und KI-gestützte Tools nutzt du reflektiert zur Analyse, Strukturierung und Effizienzsteigerung.</li>
+<li><strong>Themen- und Ideenfindungskompetenz:</strong> Du erkennst relevante Anlässe und entwickelst daraus tragfähige PR-Ansätze, Hooks und kommunikative Maßnahmen.</li>
+<li><strong>Souveränität unter Druck:</strong> Auch bei erhöhter Aufmerksamkeit, Zeitdruck oder sensiblen Themen handelst du ruhig, präzise und verantwortungsbewusst.</li>
+<li><strong>Eigenständigkeit &#x26; Verantwortungsübernahme:</strong> Du priorisierst Aufgaben, triffst fundierte Entscheidungen und setzt PR-Maßnahmen eigenständig end-to-end um.</li>
+</ul>
+<h2>Dieser Job ist NICHT für dich geeignet, wenn</h2>
+<ul>
+<li>… du überwiegend aus Marketing, Brand oder Social Media kommst und deine Erfahrung primär in Kampagnen-, Channel- oder Performance-Themen liegt.</li>
+<li>… du keine Erfahrung in externer Unternehmens- oder PR-Kommunikation hast und noch keine Verantwortung für Statements, Einordnungen oder reputationsrelevante Themen getragen hast.</li>
+<li>… du dich nicht tief in komplexe, neue oder konfliktbehaftete Themen einarbeiten möchtest.</li>
+<li>… es dir schwerfällt, eigenständig Entscheidungen zu treffen und Verantwortung zu übernehmen – insbesondere bei unvollständiger Informationslage oder Zeitdruck.</li>
+<li>… du keine End-to-End-Verantwortung übernehmen möchtest und eine stark arbeitsteilige Umgebung bevorzugst.</li>
+<li>… du nicht strukturiert arbeiten, Inhalte sauber dokumentieren und Themen nachvollziehbar aufbereiten möchtest.</li>
+<li>… du kein Interesse an digitalen Tools, KI-gestützter Arbeit oder kontinuierlicher fachlicher Weiterentwicklung hast.</li>
+<li>du nicht fließend Deutsch (mind. C1) und Englisch (mind. B2) in Wort und Schrift beherrschst (beide Sprachen sind Voraussetzung für diese Rolle).</li>
+<li>… du dich nicht mit unseren Werten identifizierst.</li>
+</ul>
+<p><strong>Deine Benefits bei Digistore24</strong></p>
+<p>Bei Digistore24 sind wir überzeugt: Großartige Menschen leisten ihre beste Arbeit, wenn sie echte Autonomie, klare Ziele und ein unterstützendes Umfeld haben. Das erwartet dich bei uns:</p>
+<ul>
+<li><strong>100 % Remote:</strong> Arbeite dauerhaft von zu Hause aus. Alles, was du brauchst, ist eine stabile Internetverbindung.</li>
+<li>Du bist <strong>permanent außerhalb Deutschlands</strong> ansässig? Auch das ist in Festanstellung in vielen europäischen Ländern möglich.</li>
+<li>Arbeite <strong>bis zu 170 Tage im Jahr aus dem EU-Ausland</strong>! (Weitere Länder nach Absprache möglich).</li>
+<li>Nutze <strong>bis zu 3 Tage pro Woche</strong> die <strong>Coworking-Spaces</strong> unseres Partners.</li>
+<li><strong>30 Urlaubstage</strong></li>
+<li><strong>Klare Strukturen</strong>: Arbeiteim Gleitzeitmodell und in Absprache mit deinem Team.</li>
+<li>Keine starren Entwicklungspläne: Deine <strong>Weiterentwicklung</strong> richtet sich <strong>individuell</strong> nach deinen Stärken. On the job setzt du dich mit modernen und relevanten Themen auseinander.</li>
+<li><strong>Flache Hierarchien und kurze Entscheidungswege:</strong> Die Stabilität eines extrem erfolgreichen deutschen Hightech-Unternehmens, das sich seinen Start-Up-Spirit über die Jahre bewahrt hat.</li>
+<li><strong>Unsere Founder sind Teil unseres Teams:</strong> wir agieren ohne externe Investoren aus eigener Kraft und reinvestieren alles, was wir erwirtschaften.</li>
+<li><strong>Selbstbestimmte, ergebnisorientierte Teams:</strong> Arbeite in einer Unternehmenskultur, die auf Eigenverantwortung, Autonomie und direktes Feedback setzt, statt auf Micromanagement.</li>
+<li>Du erhältst von uns <strong>modernes Equipment</strong> für deine Arbeit.</li>
+<li><strong>Internationale, kollaborative Kultur:</strong> Arbeite mit einem internationalen Team aus engagierten, klugen Köpfen zusammen.</li>
+<li><strong>Team Lunches</strong> mit Lieferando-Guthaben.</li>
+<li><strong>Echte menschliche Verbindung:</strong> Erlebe spektakuläre Team-Events in ganz Europa und baue Beziehungen auf, die über Bildschirme hinausgehen.</li>
+<li><strong>Ownership vom ersten Tag an:</strong> Bei uns bist du kein Rädchen im System, sondern ein wichtiger Teil eines A-Player-Teams und wirst von der Teamleitung persönlich gefördert (und gechallenged!), unter anderem in monatlichen One-on-One-Gesprächen. .</li>
+<li>Arbeite in deinem Team per du, ohne Dresscode und auf Augenhöhe.</li>
+</ul>
+<h2>Dein typischer Tag bei Digistore24</h2>
+<ul>
+<li><strong>Struktur ist alles:</strong> Du startest den Tag mit einem Blick ins Monitoring und deine offenen Themen. Was ist heute wirklich relevant? Wo braucht es Einordnung, Entscheidung oder Tempo? Du priorisierst und planst deinen Tag entsprechend.</li>
+<li>Danach arbeitest du an einem laufenden PR-Thema. Du entwickelst Narrative weiter, schärfst Argumente, formulierst Statements, erstellst Q&#x26;As und bereitest Entscheidungsgrundlagen für die nächste externe Kommunikation vor. Immer mit Blick darauf, dass unsere Botschaften intern wie extern klar, verständlich und stimmig sind.</li>
+<li>Zwischendurch landet eine <strong>externe Anfrage</strong> in deinem Postfach. Du recherchierst die nötigen Hintergründe in den Systemen, ordnest die Anfrage ein und formulierst eine fundierte Antwort. Bei Bedarf stimmst du dich kurz mit dem Pressevertreter oder internen Stakeholdern ab.</li>
+<li>Zeit für einen <strong>virtuellen Kaffee</strong>: In einem kurzen Call tauschst du dich mit einer Kollegin oder einem Kollegen aus. Raum für Austausch, Einordnung und neue Perspektiven, auch das gehört zum Arbeitsalltag dazu.</li>
+<li>In deiner <strong>Mittagspause</strong> gestaltest du deine Zeit flexibel. Ob ein Spaziergang, Kochen zu Hause oder ein Lunch mit Freunden, dank Remote-Arbeit entscheidest du selbst, wie du neue Energie sammelst.</li>
+<li>Am Nachmittag steht ein <strong>Call</strong> mit Legal für ein PR-Projekt an. Ihr klärt offene Punkte, trefft Entscheidungen und sorgt dafür, dass das Thema schnell vorankommt.</li>
+<li><strong>Zum Abschlusscheckst</strong> du noch einmal deine <strong>To-dos, dokumentierst wichtige Erkenntnisse</strong> und gehst mit dem <strong>guten Gefühl in den Feierabend</strong>, Dinge vorangetrieben zu haben.</li>
+</ul>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/digistore24/pr-reputation-specialist-100-remote-hanover-39806" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
