@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Engineer | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Flora Food Group sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Project Engineer</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><div class="content-intro"><p><strong>About Flora Food Group</strong></p>
+<p><span data-contrast="auto">We offer consumers a compelling choice in four growing categories: butters and spreads, creams, liquids and cheeses. We hold leadership positions in many of the 100 countries we operate in, with iconic brands including Flora, Becel+ProActiv, Blue Band, Country Crock, I Can't Believe It's Not Butter, Rama, and Violife, together with our local brands and Professional business.&nbsp;</span><span data-ccp-props="{&quot;201341983&quot;:0,&quot;335559739&quot;:160,&quot;335559740&quot;:259}">&nbsp;</span></p>
+<p><span data-contrast="auto">Global branded food champion Flora Food Group, offers the next generation of delicious, natural, nutritious food. Our products are more affordable and more sustainable than their dairy equivalents.&nbsp;</span><span data-ccp-props="{&quot;201341983&quot;:0,&quot;335559739&quot;:160,&quot;335559740&quot;:259}">&nbsp;</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p></div><p>Location: Kleve, Germany</p>
+<p>On-site<br><br></p>
+<p><strong>About the position&nbsp;</strong></p>
+<p>We are looking for a <strong>Project Engineer</strong> at our Kleve factory who will be responsible for supporting CAPEX projects both in Kleve and at Third Party Manufacturers. You will be part of the Global Engineering Team. The primary purpose of this role is to support project managers in delivering Capex projects on the Kleve manufacturing site and at Third Party Manufacturers in accordance with Flora standards and best industry practices. The expected annual Capex spend is approximately €5–10 million.</p>
+<p>By partnering closely with Supply Chain and Manufacturing teams, you will ensure all Capex projects are delivered on time, in full, and within budget, in line with the Flora Project Delivery Framework and industry best practices. In this role, you will travel approximately 30% of the time to other factories.</p>
+<p>You will:</p>
+<ul>
+<li>Be responsible for the technical design and execution of engineering projects in Kleve, including feasibility assessments and order-of-magnitude costing to support project justification and planning.</li>
+<li>Support project managers in delivering growth, business continuity, value creation, and decarbonization projects, including developing scopes, URS documentation, and Capital Appropriation Requests.</li>
+<li>Lead the planning and execution of smaller projects under the guidance of a senior project manager, ensuring adherence to Flora standards, policies, and project delivery frameworks.</li>
+<li>Identify and drive value-creating manufacturing initiatives requiring capital expenditure, validate savings with finance, and track realization of benefits.</li>
+<li>Collaborate with the Kleve Plant Leader, Maintenance, Supply Chain, and Manufacturing teams to deliver engineering improvements, support OEE improvement plans, and debottleneck the factory.</li>
+<li>Coordinate and monitor mechanical, electrical, and civil on-site contractor activities, ensuring safe and compliant execution throughout the project lifecycle.</li>
+<li>Work closely with R&amp;D and Global Engineering SMEs on front-end and detailed design, ensuring alignment with Flora engineering standards and best practices.</li>
+<li>Maintain accurate and up-to-date technical documentation for the factory and ensure compliance with all Flora policies and procedures.</li>
+<li>Support creams development projects across other factories and third-party manufacturers, acting as a technical expert for equipment installation, commissioning, and start-up.</li>
+<li>Travel as required (30% of the time) to ensure project delivery aligns with business needs and stakeholder expectations.<br><strong>&nbsp;</strong></li>
+</ul>
+<p><strong>So what does it take to be successful in this role?  </strong></p>
+<p>You have a tertiary qualification in Engineering, with a bachelor's degree in Chemical/Process, Mechanical, Electrical, or Industrial Engineering, and strong project management skills (with formal certification considered a plus). You bring at least 3 years of experience in a technical FMCG engineering environment and 3+ years within the Food &amp; Beverage, Dairy, or FMCG industry. You possess solid knowledge of food and beverage processes and packaging technologies, including food safety and GMP standards, and experience in aseptic filling technology is highly advantageous. You are capable of understanding and developing technical documentation such as P&amp;IDs, PFDs, electrical drawings, and functional descriptions. You demonstrate a high level of personal integrity and strong interpersonal, negotiation, influencing, and stakeholder management skills, and you are able to work both independently and collaboratively while building strong relationships across the organization. You are fluent in English, both written and spoken, with German proficiency being a strong advantage, and you enjoy working in a virtual, multicultural environment.<br><br></p>
+<p><strong>What's Next? </strong></p>
+<p>If this position sounds interesting, please hit the apply button now! The deadline to apply is March 3<sup>rd</sup>.</p><div class="content-conclusion"><p><span data-contrast="auto">We understand your resume might not be up to date and recommend that you apply with what you have or your LinkedIn Profile. Flora Food Group is dedicated to building an inclusive and diverse workplace, we understand that you might not meet all the requirements stated in the description, but we encourage you to apply anyway. You might be the right candidate for this role or other roles. </span><span data-ccp-props="{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335559740&quot;:240}">&nbsp;</span></p>
+<p><em><span data-contrast="auto">Flora Food Group is an employer committed to diversity and inclusion in the workplace and equal opportunities for all. We recruit based only on values, qualifications, performance, skills, behaviours, experience, and knowledge. We ensure job advertisements are free from unintentional bias. </span></em><span data-ccp-props="{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335559740&quot;:240}">&nbsp;</span></p>
+<p><em><span data-contrast="auto">No personal characteristics should be a barrier to joining Flora Food Group. We prohibit discrimination and harassment based on race, color, sex, religion, sexual orientation, national origin, disability, genetic information, pregnancy, or other personal characteristics.</span></em><span data-ccp-props="{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335559740&quot;:240}">&nbsp;</span></p>
+<p>&nbsp;</p></div><p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/flora-food-group/project-engineer-kleve-47435" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

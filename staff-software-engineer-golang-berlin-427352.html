@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Software Engineer (w/m/d) GoLang | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">IONOS SE sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Staff Software Engineer (w/m/d) GoLang</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Software Development</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Bei IONOS arbeitest Du bei dem führenden europäischen Anbieter von Cloud-Infrastruktur, Cloud-Services und Hosting-Dienstleistungen partnerschaftlich mit unterschiedlichen Teams zusammen. Wir bieten Dir eine Perspektive in einer der zukunftssichersten Branchen. Uns zeichnen offene Arbeitsstrukturen, Duz-Kultur und flache Hierarchien mit unvergleichlichem Team-Spirit aus. Wir sind fest davon überzeugt, dass Job und Spaß vereinbar sind und bieten Dir hierfür das entsprechende Umfeld. Bei ständigem Wachstum sind wir stets auf der Suche nach neuen Kolleginnen und Kollegen. Werde Teil von IONOS und lass uns gemeinsam wachsen.</p>
+<p>Wir sind auf der Suche nach einem erfahrenen Staff Software Engineer mit Erfahrung in Go (Golang), um unser IONOS Cloud Team. In dieser Position geht es um die Entwicklung und Optimierung unserer Cloud-Lösungen, um sicherzustellen, dass diese robust und skalierbar sind und sich nahtlos in unser umfassendes Serviceangebot einfügen.</p>
+<h2>Aufgabenbereich</h2>
+<ul>
+<li>Konzeption und Entwicklung hochwertiger, wartungsfreundlicher und robuster Go-Anwendungen, die speziell für Cloud-Funktionen wie Speicher-, Rechen- und Netzwerkdienste entwickelt wurden.</li>
+<li>Du leitest alle Phasen des Softwareentwicklungszyklus vom Konzept bis zur Bereitstellung mit besonderem Schwerpunkt auf Cloud-basierten Lösungen.</li>
+<li>Zusammenarbeit mit funktionsübergreifenden Teams, einschließlich Produktmanagern und Cloud-Architekten, um Funktionen zu entwerfen und zu implementieren, die die Skalierbarkeit und Leistung der IONOS Cloud verbessern.</li>
+<li>Du stellst sicher, dass die Services produktionsreif sind und in einer hochverfügbaren Produktionsumgebung laufen. Du wendest strenge Test- und Debugging-Verfahren an, um eine hochzuverlässige und fehlertolerante Software zu gewährleisten.</li>
+<li>Technische Beratung und Vorreiterrolle bei der Förderung eines Umfelds kontinuierlicher Verbesserung und Innovation bei der Entwicklung von Cloud-orientierten Projekten; Mentor für jüngere Ingenieure und Förderung von Best Practices in der Softwareentwicklung und spezifischen Techniken für Cloud-basierte Lösungen.</li>
+<li>Bewertung und Integration neuer Technologien und Software-Engineering-Werkzeuge in bestehende Plattformen, um die Zuverlässigkeit der Dienste und die Geschwindigkeit der Bereitstellung zu verbessern.</li>
+</ul>
+<h2>Qualifikationen</h2>
+<ul>
+<li>Bachelor- oder Master-Abschluss in Informatik, Informationstechnologie oder einem verwandten Fachgebiet.</li>
+<li>Mindestens 5 Jahre Berufserfahrung in der Programmierung mit einem starken Hintergrund in Java-basierter Backend-Entwicklung und mindestens 3 Jahre Erfahrung mit Go (Golang).</li>
+<li>Fundierte Erfahrung in der Entwicklung und Wartung von Cloud-Diensten mit Kenntnissen von Cloud-Plattformen (z.B. AWS, Azure).</li>
+<li>Fundierte Kenntnisse von Kubernetes und Docker sowie der Microservices-Architektur.</li>
+<li>Erfahrung im gesamten Lebenszyklus der Softwareentwicklung, insbesondere im agilen Umfeld.</li>
+</ul>
+<p>Nice-to-have:</p>
+<ul>
+<li>Ausgeprägte analytische Fähigkeiten mit nachweisbaren Erfolgen bei der Problemlösung und technischen Innovation.</li>
+<li>Vertrautheit mit Cloud-Sicherheitsprotokollen, Datenverschlüsselung und sicherer Softwareentwicklung.</li>
+<li>Ausgezeichnete Kommunikations- und Teamfähigkeit sowie die Fähigkeit, Diskussionen und Projekte in einem multikulturellen Umfeld zu leiten.</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li>Hybrides Arbeitsmodell.</li>
+<li>Flexible Arbeitszeiten durch Vertrauensarbeitszeit.</li>
+<li>An einigen Standorten eine bezuschusste Kantine und verschiedene kostenfreie Getränke.</li>
+<li>Moderne Büroflächen mit sehr guter Verkehrsanbindung.</li>
+<li>Diverse Mitarbeiterrabatte für Aktivitäten und Produkte.</li>
+<li>Mitarbeiterevents wie Sommer- und Winterfeiern, sowie Workshops.</li>
+<li>Zahlreiche Weiterbildungs- und Entwicklungsmöglichkeiten.</li>
+<li>Verschiedene Gesundheitsangebote, wie Sport- und Gesundheitskurse.</li>
+</ul>
+<h2>Über IONOS</h2>
+<p>IONOS ist der führende europäische Digitalisierungs-Partner für kleine und mittlere Unternehmen (KMU). IONOS hat mehr als sechs Millionen Kundinnen und Kunden und ist mit einer weltweit verfügbaren Plattform in 18 Märkten in Europa und Nordamerika aktiv. Mit seinen Web Presence &#x26; Productivity-Angeboten agiert das Unternehmen als “One-Stop-Shop" für alle Digitalisierungs-Bedürfnisse - von Domains und Webhosting über klassische Website-Builder und Do-It-Yourself-Lösungen, von E-Commerce bis zu Online-Marketing-Tools. Darüber hinaus bietet IONOS Cloud-Lösungen für Firmen, die im Zuge der Weiterentwicklung ihres Geschäfts in die Cloud wechseln möchten.</p>
+<p>Wir wertschätzen Vielfalt und begrüßen alle Bewerbungen – unabhängig von z. B. Geschlecht, Nationalität, ethnischer und sozialer Herkunft, Religion, Behinderung, Alter sowie sexueller Orientierung und Identität, körperlichen Merkmalen, Familienstand oder einem anderen sachfremden Kriterium nach geltendem Recht.</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/ionos-se/staff-software-engineer-golang-berlin-427352" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projektleitung “Engagement 3.0” (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Join Impact sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Projektleitung “Engagement 3.0” (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Applications Administration</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong><em>Starttermin:</em></strong> Mai 2026 (oder nach Absprache später)</p>
+<p><strong><em>Befristung:</em></strong> bis 31.08.2027</p>
+<p><strong><em>Art &#x26; Umfang:</em></strong> <em>Festanstellung</em>, Teilzeit / Vollzeit (mind. 50%)</p>
+<p><strong><em>Location:</em></strong> Berlin (Mitte) oder Remote</p>
+<p><strong><em>Fähigkeitsprofil:</em></strong> Project Management, Marketing, Product Management</p>
+<p>Wir sind <strong>GoVolunteer -</strong> eine Plattform und Community für Ehrenamt. Über soziales Engagement ermöglichen wir Begegnung und Austausch. Seit 2015 bringen wir deutschlandweit soziale Projekte mit Menschen zusammen, die helfen möchten. Wir fördern soziale Innovation, stärken gesellschaftliches Engagement und schaffen Austausch zwischen Menschen verschiedener Hintergründe.<br>
+Im Projekt <strong>Engagement 3.0</strong> wollen wir den Zugang zum Engagement vereinfachen. Für viele Menschen fühlt sich die Suche nach einem Ehrenamt bislang wie eine mühsame Jobsuche an – mit langen Formularen und unübersichtlichen Listen. In der Projektleitung treibst du die Entwicklung von Lösungen voran, die diese Hürden überwinden und Engagement für mehr Menschen erreichbar machen.</p>
+<ol>
+<li><strong>Voice-Input &#x26; Messenger:</strong> Freiwillige finden in unter 60 Sekunden das passende Projekt – einfach per Sprachnachricht via Messenger.</li>
+<li><strong>Reverse Marketplace:</strong> Nicht nur Freiwillige können sich bei Organisationen melden, sondern auch Organisationen können sich bei passenden Freiwilligen melden.</li>
+<li><strong>KI-Use-Cases:</strong> Wir haben alles vorbereitet, um über einen eigenen MCP-Server (Model Context Protocol) die Engagement-Daten z.B. für Sprachassistenten und LLMs zugänglich zu machen.</li>
+</ol>
+<p><strong>Du willst Impact at Scale schaffen und Deine Erfahrung im Projektmanagement dort einsetzen, wo sie gesellschaftlich etwas bewegt? Du übernimmst Verantwortung, interessierst Dich für technologische Entwicklungen und arbeitest strukturiert sowie lösungsorientiert?</strong> Dann bist Du bei uns richtig! Wir suchen eine engagierte Projektleitung, die strategisches Denken mit agilem Projektmanagement verbindet, um unsere Plattform nutzerzentriert, innovativ und zukunftsfähig weiterzuentwickeln. In dieser Rolle gestaltest Du gemeinsam mit einem dynamischen Team die Grundlage für die nächste Generation des sozialen Engagements bei GoVolunteer.</p>
+<h2>Aufgaben</h2>
+<p><strong>Welche Aufgaben warten auf Dich Projektleitung ?</strong></p>
+<ul>
+<li><strong>Projektsteuerung &#x26; Teamführung:</strong> Du verantwortest die Planung und Durchführung der Neuentwicklungen und führst das interdisziplinäre Projektteam.</li>
+<li><strong>Produktentwicklung &#x26; Nutzer:innenfokus:</strong> Du analysierst Nutzer:innenbedarfe und übersetzt sie in technische Anforderungen, immer mit dem Fokus auf „Volunteer-first“.</li>
+<li><strong>Technische Koordination:</strong> Du steuerst externe Dienstleister:innen und Freelancer:innen bei der Implementierung der geplanten Änderungen der Plattform GoVolunteer.</li>
+<li><strong>Stakeholder- &#x26; Fördermittelmanagement:</strong> Du bereitest Berichte und Unterlagen für unsere Fördermittelgeber:innen vor und sicherst die Einhaltung von Meilensteinen und Budgets.</li>
+<li><strong>Transfer &#x26; Skalierung:</strong> Du dokumentierst die Ergebnisse so, dass unser Team abgeholt ist und unsere Innovationen für den gesamten Sektor nutzbar werden.</li>
+</ul>
+<h2>Qualifikation</h2>
+<p><strong>Was solltest Du mitbringen?</strong></p>
+<ul>
+<li><strong>Erfahrung:</strong> Mindestens 2 Jahre im Projektmanagement oder Product Management, idealerweise an der Schnittstelle von Webentwicklung oder SaaS.</li>
+<li><strong>Nutzerzentriertes Produktverständnis:</strong> Du hast Erfahrung in nutzerzentrierter Produktentwicklung und kannst Bedarfe in klare, umsetzbare Anforderungen für digitale Produkte übersetzen.</li>
+<li><strong>Zusammenarbeit mit technischen Partner:innen:</strong> Du bist es gewohnt, mit Entwickler:innen, Agenturen oder Freelancer:innen zusammenzuarbeiten, Anforderungen zu priorisieren und technische Entscheidungen strukturiert vorzubereiten.</li>
+<li><strong>Struktur &#x26; Kommunikation:</strong> Du kannst komplexe Prozesse für interne Teams und externe Partner:innen verständlich aufbereiten.</li>
+<li><strong>Impact-Mindset:</strong> Du willst Technologie nutzen, um Barrieren für Menschen mit Sprach- oder Leseschwäche abzubauen und Teilhabe zu fördern.</li>
+<li><strong>Hands-on-Mentalität:</strong> Du liebst schlanke Prozesse (Entwicklung → Pilot → Feedback) und behältst auch bei nötigen Anpassungen des Plans den Überblick.</li>
+</ul>
+<h2>Benefits</h2>
+<p><strong>Was bieten wir Dir?</strong></p>
+<ul>
+<li><strong><em>Werde Teil eines jungen, wachsenden Sozialunternehmens:</em></strong> Du bist Teil des Teams von “Join Impact”, unserer breit aufgestellten Social-Startup-Familie.</li>
+<li><strong><em>Übernehme Verantwortung &#x26; bewege etwas:</em></strong> Führe unsere Projekte zum Erfolg und schaffe sozialen Impact. Wie Du das tust, ist Dir überlassen. Bei uns zählt das Ergebnis.</li>
+<li><strong><em>Erweitere Dein Netzwerk:</em></strong> Werde Teil der NGO- &#x26; Startup-Community in Berlin und lerne spannende Persönlichkeiten aus der Non-Profit- und der For-Profit-Welt kennen.</li>
+<li><strong><em>Arbeite im tollsten Büro der Stadt oder im Home Office:</em></strong> Wir sitzen im sozialen Coworking-Space MACHWERK in der Alten Münze, einem Ort für Kultur und Kreativität.</li>
+<li><strong><em>Hab Spaß bei der Arbeit:</em></strong> Unsere gemeinsame Motivation, eine unterstützende Teamkultur und regelmäßige Team-Events lassen uns eng zusammenwachsen.</li>
+</ul>
+<p><strong>Bewirb Dich jetzt!</strong></p>
+<p><strong>Bewirb Dich jetzt auf unsere Stelle als Projektleitung! Bitte schick uns die folgenden Unterlagen:</strong></p>
+<ul>
+<li><strong><em>Einen kurzen Impuls (Stichpunkte, max. 1 Seite/Slide):</em></strong> <em>Wie würdest Du die Einführung eines MCP-Servers koordinieren, um Reichweite für soziale Projekte zu erzielen?</em></li>
+<li><em>LinkedIn-Profil</em> oder PDF-Lebenslauf</li>
+<li><em>Referenzen</em> oder Zeugnisse (optional)</li>
+<li>Kurzes <em>Motivationsschreiben</em> (optional)</li>
+</ul>
+<p><strong>Bitte erwähne in Deiner Bewerbung, wo Du uns gefunden hast.</strong><br>
+<strong>Bei Fragen steht Dir Olga - unsere Geschäftsleitung - unter 0159 051 877 59 zur Verfügung. Wir freuen uns auf Dich!</strong></p>
+<p><strong>Diversity is key!</strong> Wir schätzen die Einzigartigkeit und Unterschiedlichkeit unserer Mitarbeitenden und fördern ein inklusives Arbeitsumfeld, in dem alle Menschen – unabhängig von Alter, Geschlecht, sexueller Identität, Herkunft, Religion, körperlicher oder geistiger Beeinträchtigung – gleiche Chancen erhalten.</p>
+<p><strong><em>Weitere Stellenausschreibungen findest Du auf unserer</em></strong> <strong><em>Karriereseite!</em></strong></p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/join-impact/projektleitung-engagement-30-berlin-39068" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

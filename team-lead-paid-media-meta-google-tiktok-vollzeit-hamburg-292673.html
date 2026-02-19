@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Lead Paid Media  - (Meta, Google, TikTok) (m/w/d) - Vollzeit | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Leisure One GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Team Lead Paid Media  - (Meta, Google, TikTok) (m/w/d) - Vollzeit</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Online Marketing</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Leisure One GmbH ist eine dynamische Agentur mit Fokus auf <strong>Marketing, Strategie und digitales Wachstum</strong> für die <strong>Gastronomie-, Hotellerie- und Tourismusbranche</strong>. Wir entwickeln kreative Kampagnen, datengetriebene Performance-Strategien und digitale Lösungen, die echte Erlebnisse schaffen.</p>
+<p>Jetzt suchen wir <strong>dich</strong>, um unser Team mit deiner Expertise im <strong>Performance Marketing</strong> zu verstärken!</p>
+<p><strong>Deine Mission</strong></p>
+<p>Als <strong>Senior Performance Marketing Manager</strong> bist du verantwortlich für das schnell wachsenden Team, für die Konzeption, Umsetzung und Optimierung datengetriebener <strong>Paid Media Strategien</strong>. Du analysierst, testest und optimierst kontinuierlich unsere Kampagnen mit deinem Team – mit einem klaren Ziel: <strong>Relevante Reichweite und messbare Ergebnisse</strong> für unsere Kunden.</p>
+<p>Bist Du bereit, Deine Karriere im digitalen Marketing auf das nächste Level zu heben und ein wesentlicher Teil unseres Erfolgs zu werden? Dann sende Deinen Lebenslauf und ein kurzes Anschreiben, in dem Du uns von Deiner Leidenschaft für digitales Marketing und Deinem Beitrag zu unserem Team erzählst.</p>
+<h2>Aufgaben</h2>
+<ul>
+<li>Aufbau, Führung und Weiterentwicklung des Performance Marketing Teams inklusive Ressourcen- und Budgetplanung</li>
+<li>Entwicklung und Steuerung performance-getriebener Marketing-Kampagnen (Google Ads, Meta Ads, TikTok, LinkedIn &#x26; Co.)</li>
+<li>Kontinuierliche Analyse, Optimierung und Skalierung der Kampagnen anhand von KPIsConversion-Tracking</li>
+<li>Funnel-Optimierung und BudgetsteuerungA/B-Testing</li>
+<li>Audience-Segmentierung und datengetriebene Entscheidungen</li>
+<li>Enge Zusammenarbeit mit Content- und Creative-Teams für Performance-getriebene Assets</li>
+<li>Markt- und Wettbewerbsanalysen, um neue Trends und Strategien zu identifizieren</li>
+<li>Gesamtverantwortung für Tracking-Setups (u. a. Google Tag Manager, eTracker, server-side Tracking) und Sicherstellung einer sauberen Datenbasis</li>
+<li>KPI- und Conversion-Tracking sowie Verantwortung für die Erstellung, Pflege und Weiterentwicklung der Dashboards (Looker Studio, eTracker Dashboards, ggf. interne BI-Systeme)</li>
+</ul>
+<h2>Qualifikation</h2>
+<ul>
+<li><strong>Mehrjährige Erfahrung im Performance Marketing</strong>, vorzugsweise in dynamischen Branchen wie Gastronomie, Hotellerie oder Tourismus – oder die Leidenschaft, sich schnell in diese Branchen einzuarbeiten.</li>
+<li><strong>Fundierte Kenntnisse in Google Ads, Meta Ads (Facebook &#x26; Instagram), LinkedIn Ads &#x26; TikTok Ads – idealerweise belegt durch einschlägige Zertifikate wie z.B. Google Ads</strong> Google Skillshop Zertifizierungen (Search, Display, Video, Shopping, Measurement), <strong>Meta Ads:</strong> Meta Blueprint Zertifizierungen (z. B. Digital Marketing Associate, Media Buying Professional, Media Planning Professional), <strong>LinkedIn Ads:</strong> LinkedIn Marketing Labs Zertifizierungen (z. B. Fundamentals, Marketing Strategy, Content &#x26; Creative Design) <strong>TikTok Ads:</strong> TikTok Academy Zertifizierungen (z. B. Campaign Manager, Performance Advertising, Branded Content)</li>
+<li>Sicherer Umgang mit Google Analytics, GTM &#x26; Conversion Tracking, etracker</li>
+<li>Strategisches Denken und analytische Fähigkeiten zur Performance-Optimierung</li>
+<li>Kreatives Gespür für zielgruppengerechte Anzeigen &#x26; Messaging</li>
+<li>Erfahrung mit SEA, Social Paid &#x26; Retargeting-Strategien</li>
+<li>Hands-on-Mentalität, datengetriebener Ansatz und Lust auf eine dynamische Branche</li>
+<li>Deutsch als Muttersprache oder C1</li>
+</ul>
+<h2>Benefits</h2>
+<p>Dein Impact &#x26; Unsere Benefits</p>
+<p>Wir bieten dir mehr als nur einen Job – wir bieten dir den Freiraum, digitale Exzellenz in der Hospitality-Branche mitzugestalten.</p>
+<ul>
+<li><strong>Verantwortung ab Tag 1:</strong> Dich erwartet eine abwechslungsreiche Schlüsselrolle in einem dynamischen Team, in dem deine Ideen nicht nur gehört, sondern aktiv umgesetzt werden.</li>
+<li><strong>Flexibilität, die zu deinem Leben passt:</strong> Arbeite in einem modernen Arbeitsumfeld direkt im Herzen von <strong>Hamburg-Eppendorf</strong> oder nutze unsere flexiblen <strong>Homeoffice-Optionen</strong>.</li>
+<li><strong>Wachstum garantiert:</strong> Wir unterstützen deine Karriere durch kontinuierliche Weiterbildung und attraktive Entwicklungsmöglichkeiten innerhalb des Unternehmens.</li>
+<li><strong>Innovation:</strong> Gestalte zukunftsweisende Projekte mit und setze neue Standards im digitalen Projekt Engineering.</li>
+</ul>
+<p>Deine Extras – Flexibel &#x26; Individuell</p>
+<p>Zusätzlich zu einem attraktiven Gehalt profitierst du von einem <strong>flexiblen Benefit-Budget</strong>, das du ganz nach deinen persönlichen Bedürfnissen einsetzen kannst:</p>
+<ul>
+<li><strong>Mobilität:</strong> Wir halten dich mobil und bezuschussen dein <strong>Deutschlandticket</strong> oder Jobticket für einen entspannten (und steuerfreien) Arbeitsweg.</li>
+<li><strong>Fitness &#x26; Wellness:</strong> Dein Ausgleich ist uns wichtig. Mit dem <strong>EGYM Wellpass</strong> hast du Zugriff auf ein riesiges Netzwerk an Sport- und Wellness-Partnern – steuerfrei im Rahmen der Sachbezugsgrenze.</li>
+<li><strong>JobRad:</strong> Lease dein Wunschrad bequem über uns und starte fit in den Tag – wir unterstützen dich mit einem attraktiven <strong>monatlichen Arbeitgeberzuschuss</strong> zur Leasingrate.</li>
+</ul>
+<p>Werde ein Teil von Leisure One GmbH als Performance Marketing Manager (m/w/d) und gestalte die Zukunft des Online-Marketings für Gastronomie und Hotellerie in einem dynamischen Team mit.</p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/leisure-one-gmbh/team-lead-paid-media-meta-google-tiktok-vollzeit-hamburg-292673" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

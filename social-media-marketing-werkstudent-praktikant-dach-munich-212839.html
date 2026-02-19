@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media (Marketing) Werkstudent/Praktikant (m/w/d) DACH | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">MF Food and Beverage Limited sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Social Media (Marketing) Werkstudent/Praktikant (m/w/d) DACH</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Social Media Manager</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>DEINE CHANCE</strong></p>
+<p>Du lebst Social Media und willst nicht nur Kampagnen verwalten, sondern eine echte Love Brand digital aufbauen? 💡 Dann bist du bei uns genau richtig! In dieser Rolle machst du Social Media zum Herzstück unseres Wachstums in der DACH-Region. Du übernimmst Verantwortung von A bis Z – von der kreativen Content-Strategie bis zur Umsetzung und dem Video Cutting. Hier hast du die Chance, Trends zu setzen, unsere Community zu begeistern und den Markt mit deinen Ideen aktiv mitzugestalten. 🚀</p>
+<p><strong>ÜBER UNS</strong></p>
+<p>Wir sind ein innovatives Getränke-Startup mit einer klaren Mission: Wir wollen den Getränkemarkt revolutionieren – mit unserer ballaststoffreichen Limonade, die nicht nur erfrischend schmeckt, sondern auch einen echten Mehrwert für einen gesunden Lifestyle bietet. 🍋💪</p>
+<p>Unser Team besteht aus kreativen Köpfen, Macher:innen und Visionär:innen, die gemeinsam etwas Großes aufbauen wollen. Wir glauben an flache Hierarchien, schnelle Entscheidungen und vor allem daran, dass großartige Ideen aus Leidenschaft und Zusammenarbeit entstehen. 🤝✨</p>
+<p>Wenn du Teil eines dynamischen Startups sein möchtest, das eine Marke von Grund auf in neuen Märkten etabliert und dir dabei echte Gestaltungsspielräume bietet, dann freuen wir uns auf deine Bewerbung! 🔥</p>
+<h2>Aufgaben</h2>
+<p><strong>DEINE AUFGABEN – BAU MIT UNS DIE ONLINE-PRÄSENZ UNSERER MARKE AUF</strong></p>
+<p><strong>Social Media Marketing &#x26; Influencer Marketing</strong><br>
+🎯 Planung und Umsetzung von Social Media-Konzepten &#x26; -Strategien</p>
+<p>📱 Unterstützung bei der täglichen Pflege unserer Sozialen Kanäle (Postings &#x26; Community Management)</p>
+<p>🤝 Mithilfe beim Aufbau und der Pflege von Kooperationen mit Marken und Influencern durch die Einbindung auf unseren Social Media-Accounts</p>
+<p><strong>Social Media Reporting &#x26; Analyse</strong><br>
+📊 Analyse von Kampagnenergebnissen und KPIs<br>
+📈 Erstellung von Reportings zur Performance von Social Media-Aktivitäten<br>
+🔍 Durchführung von Markt-und Trendanalysen und Wettbewerbsbeobachtungen zur Optimierung unserer Social Media-Strategie</p>
+<h2>Qualifikation</h2>
+<p><strong>ÜBER DICH</strong></p>
+<p>Um in dieser Rolle erfolgreich zu sein, brauchst du eine Leidenschaft für Social Media, Marketing und die Bereitschaft, in einem dynamischen Umfeld zu lernen und zu wachsen.</p>
+<p>📸 <strong>Social Native</strong>: TikTok, Instagram &#x26; Co. sind dein zweites Zuhause. Du hast keine Scheu, dich für unseren Content auch selbst mal vor die Kamera zu stellen und unsere Marke authentisch zu verkörpern.</p>
+<p>🔥 <strong>Kreativer Kopf</strong>: Du hast ständig neue Ideen für Reels oder Posts und ein gutes Gespür dafür, was gerade trendet. Du hast Lust, diese Trends direkt für uns umzusetzen.</p>
+<p>📈 <strong>Interesse an Performance:</strong> Du findest es spannend zu sehen, wie deine Posts performen, und möchtest lernen, wie man Kampagnen anhand von Zahlen und KPIs optimiert.</p>
+<p>🤝 <strong>Hands-on &#x26; Allrounder</strong>: Dein Fokus liegt auf Social Media, aber du hast auch Bock, uns im allgemeinen Marketing-Tagesgeschäft zu unterstützen- sei es bei Events, Influencer-Recherchen oder Community Management.</p>
+<p><strong>DEIN PROFIL – DAS BRINGST DU MIT</strong></p>
+<p>✅ Erste Erfahrung im Social Media Bereich, idealerweise im Bereich FMCG oder Food &#x26; Beverage mit Bezug zum Lebensmitteleinzelhandel (Praktika oder erste Werkstudentenjobs) oder durch den Aufbau eigener Social Media-Präsenz</p>
+<p>✅ Du bist aktuell immatrikuliert in einem Studiengang wie Marketing, Medienmanagement, Kommunikation oder einer vergleichbaren Fachrichtung.</p>
+<p>✅ Content Creation Skills: Du weißt, wie man ein ansprechendes Video schneidet (z.B. mit CapCut oder InShot, Adobe etc.) und hast ein Auge für Ästhetik.</p>
+<p>✅ Muttersprachlich Deutsch: Du bist textsicher und triffst den richtigen Ton für unsere Captions und Community-Antworten.</p>
+<p>✅ Kreativität, ein gutes Gespür für Trends und eine proaktive, hands-on Mentalität</p>
+<p>✅ Eigeninitiative, Lernbereitschaft und Lust, Verantwortung zu übernehmen</p>
+<h2>Benefits</h2>
+<p><strong>WAS WIR BIETEN</strong></p>
+<p>🚀 <strong>Lern- und Entwicklungsmöglichkeiten</strong> – Du erhältst die Chance, dich in einem dynamischen Umfeld weiterzuentwickeln und viel über Social Media (Marketing) in der FMCG-Branche zu lernen.</p>
+<p>🌍 <strong>Startup-Dynamik &#x26; internationales Team</strong> – Flache Hierarchien, schnelle Entscheidungen und kreativer Austausch erwarten dich in einem motivierten Team.</p>
+<p>🎯 <strong>Direkter Einfluss</strong> – Deine Arbeit trägt aktiv dazu bei, die Marke aufzubauen und das Wachstum des Unternehmens zu unterstützen.</p>
+<p>🎉 <strong>Karriereboost</strong> – Du bekommst die Gelegenheit, eigenständig zu arbeiten, Verantwortung zu übernehmen und wertvolle Erfahrungen zu sammeln, die dich im Marketing voranbringen.</p>
+<p>💓<strong>Unbegrenzter Vorrat an XO SODA</strong> – Du liebst die Drinks genau so wie wir? Ab morgen könnte dein Kühlschrank bereits aussehen wie unser Lager.</p>
+<p>Bereit, XO SODA auf Instagram, Tik Tok und Co. aufzubauen und zur Love Brand zu machen?</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/mf-food-and-beverage-limited/social-media-marketing-werkstudent-praktikant-dach-munich-212839" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Backend Engineer (gn) Zahlungsverkehr & Buchungssysteme | 90% REMOTE | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Bridgency HR Management GbR sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Senior Backend Engineer (gn) Zahlungsverkehr & Buchungssysteme | 90% REMOTE</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Unbekannt</span>
+                    <span class="badge badge-tag">Software Development</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Senior Backend Engineer mit Fokus auf Zahlungsverkehr & Buchungssysteme gesucht. Digitale Transformation im öffentlichen Sektor gestalten und Teil eines zukunftsorientierten IT-Beratungsunternehmens werden.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>From Legacy to Leading Edge</strong> – gestalten Sie mit uns die digitale Transformation im öffentlichen Sektor und werden Sie Teil eines zukunftsorientierten IT-Beratungsunternehmens.</p>
+<p>Als ausgezeichneter Arbeitgeber und <strong>Top Company 2026</strong> bieten wir Ihnen mehr als nur einen Job. Bei uns gestalten Sie aktiv die digitale Zukunft mit – in Projekten, die wirklich bewegen – und das ohne starre Hierarchien, aber mit viel Vertrauen und Gestaltungsspielraum. Ob Projektmanagement, innovative Softwareentwicklung oder der smarte Einsatz von Künstlicher Intelligenz: Bei Semper Prospera glauben wir an exzellente Zusammenarbeit, echte Wertschätzung und die Kraft guter Ideen.</p>
+<p>Für ein zentrales Entwicklungsprojekt im Bereich Zahlungs- und Forderungsverwaltung suchen wir per Juli 2026 eine:n <strong>Senior Backend Engineer (gn) Zahlungsverkehr &#x26; Buchungssysteme.</strong></p>
+<p>In dieser verantwortungsvollen Rolle wirken Sie an der Entwicklung eines geschäftskritischen Zahlungsverkehrssystems (SEPA-Umfeld) mit. Sie übernehmen eine zentrale Funktion bei der Umsetzung komplexer fachlicher Modelle in performante, transaktionssichere Software-Komponenten.</p>
+<h2>Aufgaben</h2>
+<ul>
+<li>Implementierung komplexer Software-Komponenten auf Basis fachlicher UML-Modelle</li>
+<li>Enge Abstimmung mit Fachexpert:innen zur Sicherstellung fachlicher Korrektheit und Traceability</li>
+<li>Entwicklung von Dialog-Komponenten im Zahlungsverkehrsumfeld (SEPA)</li>
+<li>Umsetzung performancekritischer und transaktionssicherer Backend-Logik</li>
+<li>Weiterentwicklung und Integration von SOAP-Webservices und Dateischnittstellen</li>
+<li>Integration der Anwendung in eine bestehende Dialog- und Systemarchitektur</li>
+<li>Durchführung umfangreicher Qualitätssicherungsmaßnahmen (Unit-, Integrations-, Performance- und Lasttests)</li>
+<li>Analyse und Behebung von Fehlern während Pilotierungsphasen</li>
+<li>Coaching und Unterstützung von Entwickler:innen bei Architektur- und Implementierungsfragen</li>
+<li>Mitwirkung an Architekturentscheidungen und Mehrschicht-Design</li>
+</ul>
+<h2>Qualifikation</h2>
+<ul>
+<li>Abgeschlossenes Hochschulstudium der Informatik oder eines vergleichbaren Studiengangs oder vergleichbare Qualifikation mit relevanter Berufserfahrung</li>
+<li>Mehrjährige Erfahrung in der Java-Enterprise-Entwicklung (Java EE / Jakarta EE)</li>
+<li>Sehr gute Kenntnisse in Mehrschicht-Architekturen, Persistenzschichten (z. B. EJB Persistence Provider) und Relationalen Datenbanksystemen (insbesondere Oracle)</li>
+<li>Gute Kenntnisse in der Entwicklung mit Eclipse, Maven, Git und TestNG (oder vergleichbare Testframeworks)</li>
+<li>Erfahrung in der Entwicklung und Integration von SOAP-Webservices</li>
+<li>Sehr gute Kenntnisse in UML-Modellierung</li>
+<li>Erfahrung mit komplexer, performancekritischer und transaktionssicherer Software</li>
+<li>Kenntnisse im Ressourcenmanagement für Dialog- und Batchbetrieb</li>
+<li>Erfahrung in der Durchführung von Unit-, Integrations-, Performance- und Lasttests</li>
+<li>Erfahrung in Projekten im öffentlichen Umfeld oder bei einem IT-Dienstleister vorteilhaft</li>
+<li>Sehr gute Deutschkenntnisse in Wort und Schrift (mindestens B2)</li>
+<li>Strukturierte, analytische und eigenverantwortliche Arbeitsweise</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li>Spannende und herausfordernde Aufgaben in einem bedeutenden Digitalisierungsprojekt</li>
+<li>Ein motiviertes und professionelles Team in einem dynamischen Arbeitsumfeld</li>
+<li>Die Möglichkeit, aktiv an der Gestaltung von innovativen Lösungen mitzuwirken</li>
+<li>Attraktive Vergütung und Benefits, sowie Entwicklungsmöglichkeiten entsprechend Ihrer Leistung und Erfahrung</li>
+<li>Top Company 2026 – weil unsere Mitarbeiter*innen uns wichtig sind</li>
+<li>Home-Office/Remote-Work und eigenverantwortliches Arbeiten ermöglicht Ihnen maximale Flexibilität im Alltag</li>
+<li>Eine unbefristete Festanstellung (Vollzeit) mit Planungssicherheit</li>
+<li>Professionelles Equipment/Moderne technische Ausstattung, um Ihren Arbeitsalltag zu vereinfachen</li>
+<li>Regelmäßige Teamveranstaltungen fördern den Zusammenhalt und sorgen für Abwechslung</li>
+</ul>
+<p>Wenn Sie bereit sind, eine Schlüsselrolle in einem bedeutenden Digitalisierungsprojekt zu übernehmen und Ihre Expertise einzubringen, freuen wir uns auf Ihre Bewerbung!</p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/bridgency-hr-management-gbr/senior-backend-engineer-gn-zahlungsverkehr-buchungssysteme-90-remote-nuremberg-169703" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
