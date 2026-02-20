@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Systemadministrator (m/w/d) - IT-Infrastruktur & Prozessoptimierung | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Riffbird Gmbh sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Systemadministrator (m/w/d) - IT-Infrastruktur & Prozessoptimierung</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">IT</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Du willst IT nicht nur betreuen, sondern <strong>aktiv aufbauen, strukturieren und strategisch weiterentwickeln</strong>?</p>
+<p>Bei der LTS Licht &#x26; Leuchten in Tettnang erwartet dich eine <strong>IT-Infrastruktur mit Gestaltungsspielraum</strong> – klare Prozesse, stabile Systeme und ein Team, das Qualität, Nachhaltigkeit und Zusammenarbeit auf Augenhöhe lebt.</p>
+<p>Hier unterstützt du mit deiner Systemadministration nicht nur interne Abläufe, sondern auch die Entwicklung hochwertiger <strong>Beleuchtungslösungen „Made in Germany“</strong> – mit einer stabilen, modernen IT-Landschaft im Hintergrund.</p>
+<p>Klingt nach dem Setup, das du dir wünschst? Dann lies weiter.</p>
+<h2>Aufgaben</h2>
+<ul>
+<li>Nachhaltige Analyse und Lösung von IT-Störungen (Root-Cause statt Symptombehandlung)</li>
+<li>Administration der gesamten <strong>Windows-Umgebung</strong> (Server, Clients, mobile Endgeräte)</li>
+<li>Betreuung von <strong>Microsoft 365</strong>, Windows 11 und Terminalserver-Umgebungen</li>
+<li>Verwaltung und Weiterentwicklung virtualisierter Systeme</li>
+<li>Konfiguration und Wartung von Netzwerkkomponenten (VLANs, Firewalls, Switche)</li>
+<li>First- und Second-Level-Support für Mitarbeitende</li>
+<li>Planung und Umsetzung von <strong>Hardware-Rollouts &#x26; Software-Einführungen</strong></li>
+<li>Dokumentation und Standardisierung von IT-Prozessen nach ITIL</li>
+<li>Koordination externer IT-Dienstleister</li>
+<li>Strategische Weiterentwicklung der IT-Infrastruktur</li>
+<li>Teilprojektleitung bei IT-Optimierungsprojekten</li>
+</ul>
+<h2>Qualifikation</h2>
+<ul>
+<li>Abgeschlossene IT-Ausbildung (z. B. Fachinformatiker/in Systemintegration) oder vergleichbare Qualifikation</li>
+<li>Mehrjährige Erfahrung in der <strong>Systemadministration</strong></li>
+<li>Sehr gute Kenntnisse in <strong>Windows 11 &#x26; Microsoft 365</strong></li>
+<li>Erfahrung mit Terminalservern und virtualisierten Umgebungen</li>
+<li>Praxiswissen in Netzwerktechnik (VLAN, Firewall, Switching)</li>
+<li>Erfahrung mit ITIL-Prozessen und strukturiertem Arbeiten</li>
+<li>Sehr gute Deutschkenntnisse, gute Englischkenntnisse</li>
+<li>Analytische Denkweise und systematische Problemlösungskompetenz</li>
+<li>Selbstständige Arbeitsweise und saubere Dokumentation</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li>IT-Infrastruktur mit echtem Gestaltungsspielraum</li>
+<li>Klare Zuständigkeiten und strukturierte Prozesse</li>
+<li>31 Urlaubstage</li>
+<li>Bis zu 2 Tage Homeoffice pro Woche</li>
+<li>Flexible Arbeitszeiten</li>
+<li>13 Monatsgehälter</li>
+<li>Steuerfreie Zusatzleistungen</li>
+<li>Betriebliches Gesundheitsmanagement</li>
+<li>Teamevents (z. B. Winterfest mit Familie)</li>
+<li>Langfristige Perspektive in einem stabilen Mittelstandsunternehmen</li>
+<li>Gelebte Fehlerkultur &#x26; Kommunikation auf Augenhöhe</li>
+<li>Nachhaltige Unternehmensphilosophie mit regionaler Fertigung</li>
+</ul>
+<p>Jetzt bewerben</p>
+<p>Bewirb dich unkompliziert über das Kontaktformular – auch ohne Lebenslauf.</p>
+<p>Wir melden uns innerhalb weniger Tage telefonisch bei dir zurück.</p>
+<p>Lass uns gemeinsam eine IT-Infrastruktur schaffen, die nicht nur läuft – sondern begeistert.</p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/riffbird-gmbh/systemadministrator-it-infrastruktur-prozessoptimierung-tettnang-416528" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

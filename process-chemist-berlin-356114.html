@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Chemist | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">DuDeChem GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Process Chemist</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Development</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>**Who we are:<br>
+**</p>
+<p>DUDE CHEM is a Green Chemistry startup with its origins in the German Cluster of<br>
+Excellence in Catalysis at the University of Technology Berlin. We are a small but<br>
+mighty team which is dedicated to fulfil our mission: Based on the 12 Principles of<br>
+Green Chemistry we aim to build a green chemical-pharmaceutical industry. The<br>
+industry currently consumes >13% of all fossil resources, most of them during the<br>
+manufacturing. Our aim is to change this.</p>
+<p>In order to achieve this goal, we have built a strong IP portfolio and validated the tech<br>
+onto the market in order to reduce or reuse expensive resources in the production of<br>
+chemicals and pharmaceuticals.</p>
+<p>We believe that digitalization can be an integral tool for the implementation of<br>
+greener, more sustainable production processes.</p>
+<p>This is why we combine both scientific disciplines – digitalization and sustainability –<br>
+in all of our projects. Over the last years, our team has proven that our approaches<br>
+work and created hard competitive advantages in the core of the value chain of their<br>
+customers.</p>
+<h2>Tasks</h2>
+<p>**Why we need you:<br>
+**</p>
+<p>We have recently secured a financing round in order to bring our first, greener<br>
+manufactured products into the plants. Further, many customers are approaching us<br>
+in order to get our support and help them to produce in a more sustainable and<br>
+controlled way. Thus, we need your help to bring our greener processes into<br>
+manufacturing as part of our Chemistry &#x26; Engineering Team.</p>
+<p>In this role you will support our development team with your know-how in process<br>
+chemistry, in the assessment of greener synthesis routes, the development of our<br>
+green chemical processes, and scale-ups to the manufacturing plant. You will<br>
+support us in establishing and shaping our process chemistry capabilities and<br>
+strategy as the company grows into the future.</p>
+<p>If you want to develop innovative green chemical manufacturing processes, bring<br>
+them from the lab scale into the plant scale and have a real positive impact on the<br>
+world, you are the perfect match for us!</p>
+<p>**Results we expect:<br>
+**</p>
+<p>As a Process Chemist we expect you to help develop our processes across the<br>
+process development life cycle, from route design to process validation and<br>
+manufacturing. You will be working in a multidisciplinary team developing our green<br>
+processes, using your organic and process chemistry knowledge and creative<br>
+problem-solving skills.</p>
+<ul>
+<li>Scalable and greener routes designed in collaboration with our synthesis<br>
+chemists.</li>
+<li>Planned, executed and analysed small scale laboratory experiments in<br>
+collaboration with our lab technicians to develop our green processes.<br>
+Identification and removal of impurities from our reaction process steps in<br>
+collaboration with our analytical chemists.</li>
+<li>Processes that are scalable, developed in collaboration with our process<br>
+engineers.</li>
+<li>Tested synthesized material in collaboration with our synthesis chemists and<br>
+lab technicians.</li>
+<li>Successful tech-transfer to our manufacturing partners.</li>
+<li>Control strategies for the processes and materials in our developed<br>
+processes, in collaboration with our analytical chemists.</li>
+</ul>
+<h2>Requirements</h2>
+<p>**Skills and attitudes that might be helpful:<br>
+**</p>
+<ul>
+<li>Degree (<a href="http://M.Sc">M.Sc</a>., Dipl.-Ing or PhD, or equivalents) in chemistry, natural<br>
+sciences, or a related discipline.</li>
+<li>3 years of experience working in the pharmaceutical or fine chemical industry<br>
+in Chemical Process Development &#x26; Manufacturing.</li>
+<li>Experience developing and scaling synthesis processes, including common<br>
+unit operations such as reactions, work-ups and crystallizations.</li>
+<li>Demonstrated expertise in reaction optimisation, including the application of<br>
+Design of Experiments (DoE) and kinetic modelling/optimisation techniques.</li>
+<li>Experience supporting late-phase development of Active Pharmaceutical<br>
+Ingredients (APIs), including identification and control of Critical Process<br>
+Parameters (CPPs), Critical Material Attributes (CMAs), and establishment of<br>
+design space.Hands-on experience developing robust processes suitable for<br>
+large-scale manufacturing, with a track record of effective collaboration with<br>
+Contract Development and Manufacturing Organizations (CDMOs).</li>
+<li>Experience with regulatory authoring and submissions and authoring of<br>
+technical reports.</li>
+<li>Knowledge of ICH guidelines and practical experience of working in a GMP<br>
+manufacturing environment</li>
+<li>Experience working in multidisciplinary teams, and with external partners</li>
+<li>Experience in leading initiatives and projects</li>
+<li>Ability to juggle multiple priorities and effectively deliver in a fast-paced,<br>
+dynamic environment</li>
+<li>Good organizational and time-management skills</li>
+<li>Exceptional communication skills and the ability to translate between different<br>
+technical languages and understandings.</li>
+<li>Highly self-driven, professional personality with an aspiration to excel in the<br>
+role.</li>
+<li>Excellent written and oral communication, as well as presentation skills.</li>
+<li>Being fluent in English is a must, in German a plus.</li>
+</ul>
+<h2>Benefits</h2>
+<p><strong>What we offer:</strong></p>
+<p>We regard your skills as well as your conscience as our highest assets. We provide<br>
+every team member with a veto right on projects, e.g. if you don’t want to work for a<br>
+specific customer due to moral reasons. There were several occasions that also our<br>
+CEO used this right.</p>
+<p>We offer you an unlimited work contract and flexible working hours (results<br>
+orientation), with the options to work from home at least one day per week. You will<br>
+be part of an extremely motivated interdisciplinary team, giving you all the<br>
+possibilities to further develop yourself and to help us to build an industry anew.</p>
+<p>DUDE CHEM strives to be a diverse and inclusive workplace where we can ALL be<br>
+ourselves. We encourage job applications from people of all genders, backgrounds,<br>
+and communities.</p>
+<p>We are consequently state-of-the-art driven and we promise that we will always listen<br>
+to your ideas. Our dynamic and flat hierarchies enable us to flexibly adapt our<br>
+organizational structure to the level of expertise required in a project. Sometimes you<br>
+will learn and sometimes you will have the lead in a project.</p>
+<p>Open communication and direct feedback are values that we live every day. The<br>
+conviction to do something that creates a positive impact in the world drives us<br>
+forward. We are a young, enthusiastic team that likes each other very much and we’d<br>
+be very pleased if you’d be interested in working with us!</p>
+<p>Unfortunately, we neither are able to pay you BASF salaries, nor are we able to pay<br>
+them to ourselves. However, we will do our best to pay you a competitive salary,<br>
+considering your individual needs and the specific circumstances you are in.<br>
+Additionally, you will receive stock options from our employee stock option pool so<br>
+that you can participate in the success of the company. 28 days holiday per year, as<br>
+well as an entirely paid for annual ticket for the public transport (“Deutschlandticket”)<br>
+come on top of that.</p>
+<p>We provide you with organic fruits, snacks, coffee &#x26; tea and non-alcoholic drinks in<br>
+our offices and labs in Berlin. It is important for that you develop professionally, thus<br>
+we support and offer coachings and job relevant trainings to you. Lastly, we have<br>
+frequent company socials to just have some fun.</p>
+<p>Anything else you need? Just let us know! :-)<br>
+Let’s transform the industry for the better, together!</p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/dudechem-gmbh/process-chemist-berlin-356114" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

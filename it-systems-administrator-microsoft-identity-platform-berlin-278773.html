@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Systems Administrator – Microsoft & Identity Platform | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Forteil GmbH - bonify sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">IT Systems Administrator – Microsoft & Identity Platform</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Software Development</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><h2>About us</h2>
+<p>Join bonify, Germany’s leading platform for credit scoring and financial management. We are on the mission to revolutionize the FinTech industry and make the credit score and financial data available and transparent for our users.</p>
+<p>The IT Systems Administrator – Microsoft &#x26; Identity Platform is responsible for the secure, compliant and reliable operation of the Microsoft-centric identity and endpoint environment within a regulated fintech (BaFin / DORA context).</p>
+<p>The role focuses on Microsoft Entra ID, Intune, Microsoft Defender and related cloud services. It ensures controlled access to systems and data, supports audit-readiness, and collaborates closely with internal teams (Security, Platform, People Ops) as well as external professional services partners.</p>
+<h2>Your tasks</h2>
+<h2>Identity &#x26; Access Management (Microsoft Entra ID)</h2>
+<ul>
+<li>Operate Microsoft Entra ID as central Identity Provider (IdP).</li>
+<li>Manage users, groups, roles and conditional access policies.</li>
+<li>Enforce MFA and baseline security configurations.</li>
+<li>Support and execute periodic access reviews and recertifications.</li>
+<li>Maintain structured role/group concepts and least-privilege access models.</li>
+<li>Support Joiner/Mover/Leaver processes in coordination with People Ops.</li>
+</ul>
+<h2>SaaS &#x26; SSO Operations</h2>
+<ul>
+<li>Maintain and troubleshoot SSO integrations (SAML, OIDC, SCIM where applicable).</li>
+<li>Onboard new SaaS applications into the central identity framework.</li>
+<li>Support application owners in defining access governance models.</li>
+<li>Ensure consistent role/group mapping across systems.</li>
+</ul>
+<h2>AWS &#x26; Production Access (in cooperation with Platform Team)</h2>
+<ul>
+<li>Support Entra–AWS integration (IAM Identity Center / SSO, role-based access).</li>
+<li>Assist in implementing least-privilege and just-in-time (JIT) access patterns.</li>
+<li>Troubleshoot access issues in production environments.</li>
+<li>Contribute to secure and compliant cloud access models.</li>
+</ul>
+<h2>Endpoint &#x26; Mobile Management</h2>
+<ul>
+<li>Operate Intune policies and configuration profiles for:
+<ul>
+<li>macOS</li>
+<li>Windows</li>
+<li>Mobile and BYOD devices</li>
+</ul>
+</li>
+<li>Monitor device compliance and security posture.</li>
+<li>Oversee Microsoft Defender status and remediation workflows.</li>
+<li>Support users with enrollment, configuration and compliance remediation.</li>
+</ul>
+<h2>Monitoring &#x26; Audit Support</h2>
+<ul>
+<li>Support Security in operating log and alert flows (Entra logs, Defender, Sentinel, incident tooling).</li>
+<li>Contribute technical analysis during security incidents.</li>
+<li>Provide structured evidence and documentation for audits and regulatory reviews.</li>
+<li>Maintain runbooks, configuration documentation and change traceability</li>
+<li>Coordinate handovers and ensure operational sustainability of implemented solutions.</li>
+</ul>
+<h2>Requirements</h2>
+<ul>
+<li>5-7 years of experience as IT Administrator / Systems Engineer with strong focus on Microsoft Cloud.</li>
+<li>Proven hands-on experience with:
+<ul>
+<li>Microsoft Entra ID (SSO, Conditional Access, MFA, Groups/Roles; PIM is a plus)</li>
+<li>Microsoft Intune</li>
+<li>Microsoft Defender for Endpoint</li>
+</ul>
+</li>
+<li>Experience integrating SaaS applications via SAML/OIDC and SCIM.</li>
+<li>Basic understanding of AWS IAM and IAM Identity Center.</li>
+<li>Experience working in regulated, audit-driven or security-sensitive environments (financial services / fintech preferred).</li>
+<li>Strong documentation skills and understanding of governance requirements.</li>
+<li>Very good English required; German strongly preferred.</li>
+</ul>
+<h2>Personal Attributes</h2>
+<ul>
+<li>Strong sense of responsibility for security-critical services.</li>
+<li>Structured, documentation- and evidence-oriented working style.</li>
+<li>Pragmatic and automation-minded approach.</li>
+<li>Ability to balance usability and security in a regulated environment.</li>
+<li>Collaborative mindset across Security, Engineering, Operations and external partners.</li>
+</ul>
+<h2>What we offer</h2>
+<p>As part of the bonify team, you'll have:</p>
+<ul>
+<li>The opportunity to take ownership from day one</li>
+<li>The chance to thrive in a dynamic and flexible startup environment.</li>
+<li>Access to extensive coaching and training programs through our personal development budget</li>
+<li>30 vacation days</li>
+<li>Mental health support platform</li>
+<li>Subsidies for BVG and UrbanSportsClub</li>
+<li>1:1 language classes in both German and English.</li>
+</ul>
+<p>The Company is committed to the principle that no employee or job applicant shall receive unfavourable treatment on grounds of age, disability, gender reassignment, race, religion or belief, sex, sexual orientation, marriage or civil partnership, pregnancy, and maternity.</p>
+<p>Please note, to be compliant with AML requirements, due to the specifics of fintech industries additional background checks are required (applicable only at the offer stage).</p>
+<p>If you're ready to make a meaningful impact in the world of FinTech and embark on an exciting career journey, apply now to join bonify!</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/forteil-gmbh-bonify/it-systems-administrator-microsoft-identity-platform-berlin-278773" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
