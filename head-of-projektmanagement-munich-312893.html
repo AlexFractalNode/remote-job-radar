@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Head of Projektmanagement | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Wiese Dental Beratungs GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Head of Projektmanagement</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 80k-100k</span>
+                    <span class="badge badge-tag">Management</span><span class="badge badge-tag">Team Leader</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Bewerben Sie sich, wenn Sie Erfahrung im Projektmanagement haben und sich für die Herausforderung eines stark wachsenden Unternehmens begeistern. Als Head of Projektmanagement werden Sie ein wichtiger Teil des Erfolgs der Wiese Dental Beratungs GmbH.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Die Wiese Dental Beratungs GmbH</strong> unterstützt Zahnarztpraxen und Zahnkliniken beim Wachstum – mit klarem Schwerpunkt auf Personalgewinnung und Mitarbeiterbindung.</p>
+<p>Wir sind ein stark wachsendes Unternehmen (über 200 % Wachstum jährlich) mit Sitz in München-Bogenhausen in den Bavaria Towers auf 800 qm Fläche.</p>
+<p>Zur weiteren Expansion suchen wir High-Performer, die sich persönlich, beruflich und finanziell auf das nächste Level entwickeln wollen.</p>
+<p><strong>Du wirst bei uns nicht glücklich, wenn du:</strong></p>
+<ul>
+<li>klare Anweisungen brauchst, um ins Handeln zu kommen</li>
+<li>Konflikte vermeidest</li>
+<li>Verantwortung scheust</li>
+</ul>
+<p><strong>Du bist bei uns richtig, wenn du:</strong></p>
+<ul>
+<li>konstant neue Standards setzen willst</li>
+<li>ein hohes Maß an Selbstverantwortung mitbringst</li>
+<li>selbstständig arbeiten kannst und willst</li>
+<li>leistungsorientiert denkst</li>
+<li>überdurchschnittlich verdienen möchtest</li>
+</ul>
+<h2>Aufgaben</h2>
+<p><strong>Budget- und Ressourcenverantwortung</strong></p>
+<ul>
+<li>Planung, Steuerung und Controlling der Budgets für Personalmarketingprojekte</li>
+<li>Effiziente Allokation von Ressourcen zur Sicherstellung maximaler Performance</li>
+</ul>
+<p><strong>Prozess- &#x26; Business Development</strong></p>
+<ul>
+<li>Strategische Weiterentwicklung bestehender Accounts</li>
+<li>Optimierung bestehender Produkte und Prozesse (technisch und inhaltlich)</li>
+<li>Entwicklung neuer Produkte und Leistungsangebote</li>
+</ul>
+<p><strong>Steuerung interner &#x26; externer Stakeholder</strong></p>
+<ul>
+<li>Zentrale Schnittstelle zwischen Kreativteam, Beratung und Kunden</li>
+<li>Sicherstellung reibungsloser Kommunikation und klarer Verantwortlichkeiten</li>
+</ul>
+<p><strong>Qualitätssicherung &#x26; Führungsverantwortung</strong></p>
+<ul>
+<li>Sicherstellung höchster Qualitätsstandards in allen Projekten</li>
+<li>Positionierung von Wiese Dental als Premium-Partner im Markt</li>
+<li>Leitung des Projektmanagement-Teams</li>
+<li>Steigerung der Produktivität durch das Setzen neuer Standards</li>
+<li>Individuelle Weiterentwicklung der Mitarbeitenden zu mehr Erfolg und Zufriedenheit in ihrer Rolle</li>
+</ul>
+<p><strong>Projekt- &#x26; Prozessentwicklung</strong></p>
+<ul>
+<li>Entwicklung neuer Prozesse und Projekte – eigenständig sowie im Team</li>
+<li>Aufbau skalierbarer Strukturen für weiteres Unternehmenswachstum</li>
+</ul>
+<p><strong>Kennzahlen-Management</strong></p>
+<ul>
+<li>Verantwortung für ein professionelles KPI-Tracking</li>
+<li>Steuerung auf Basis klar definierter Leistungskennzahlen</li>
+</ul>
+<p><strong>Technische Innovation</strong></p>
+<ul>
+<li>Testing und Implementierung neuer KI-Tools</li>
+<li>Optimierung unserer META- und Google-Ads-Kampagnen sowie Strategien</li>
+<li>Kontinuierliche Performance-Verbesserung im Paid-Marketing</li>
+</ul>
+<p><strong>In deiner Rolle bist du erfolgreich, wenn:</strong></p>
+<ul>
+<li>wir neue Produkte erfolgreich entwickeln und im Markt etablieren</li>
+<li>bestehende Produkte unsere Kunden messbar erfolgreicher machen</li>
+<li>der Account Manager durch deine Struktur und Führung deutlich entlastet wird</li>
+<li>das Projektmanagement-Team produktiver auf dem Niveau neuer Standards arbeitet</li>
+<li>Prozesse klar definiert sind und Missverständnisse auf ein Minimum reduziert werden</li>
+</ul>
+<h2>Qualifikation</h2>
+<ul>
+<li>Du willst Verantwortung übernehmen und aktiv gestalten – statt nur auszuführen.</li>
+<li>Du verfügst über ausgeprägte Kommunikationsfähigkeiten und trittst souverän auf.</li>
+<li>Du erkennst Chancen und Potenziale frühzeitig und handelst mit emotionaler Intelligenz sowie einem feinen Gespür für Menschen und Situationen.</li>
+<li>Du bringst die Bereitschaft mit, kontinuierlich zu lernen, neue Themenfelder zu erschließen und Dich stetig weiterzuentwickeln.</li>
+<li>Prozessuales und analytisches Denken sind für Dich selbstverständlich.</li>
+<li>Du interessierst Dich für Digitalisierung, Technologie-Trends und moderne Arbeitswelten.</li>
+<li>Du besitzt die Fähigkeit, Probleme klar zu identifizieren und zielgerichtet zu lösen.</li>
+<li>Du hast erste Erfahrungen im Bereich digitale Medien, Marketingmaßnahmen oder Personalstrategien – und den klaren Anspruch, Dich in diesem Bereich stark weiterzuentwickeln.</li>
+<li>Du arbeitest selbstständig, strukturiert und hochorganisiert.</li>
+<li>Du hast Lust auf viel Verantwortung und willst in den nächsten 1–3 Jahren finanziell erfolgreich werden.</li>
+<li>Proaktivität und intrinsisches Interesse an Wachstum zeichnen Dich aus.</li>
+<li>Zeitdruck empfindest Du als Ansporn, nicht als Belastung.</li>
+<li>Du bist aufgeschlossen, reflektiert und lernbereit.</li>
+</ul>
+<h2>Benefits</h2>
+<p><strong>Team &#x26; Kultur</strong></p>
+<ul>
+<li>Ein starkes, unterstützendes Team, das gemeinsam ambitionierte Ziele verfolgt</li>
+<li>Junges, leistungsorientiertes Team mit hohen Standards</li>
+<li>Offene Kommunikation und kurze Entscheidungswege</li>
+<li>Ein Umfeld, in dem Lernen, Feedback und Weiterentwicklung aktiv gelebt werden</li>
+<li>Strukturierte Einarbeitung und ehrliches Mentoring</li>
+</ul>
+<p><strong>Karriere &#x26; Entwicklung</strong></p>
+<ul>
+<li>Klar definierter Karriereplan mit echten Entwicklungsperspektiven</li>
+<li>Hoher Gestaltungsspielraum in einer dynamischen Wachstumsphase</li>
+<li>Viel Verantwortung und die Möglichkeit, aktiv mitzugestalten</li>
+</ul>
+<p><strong>Vergütung &#x26; Incentives</strong></p>
+<ul>
+<li>Attraktives Gehalt zzgl. leistungsorientierter Provision</li>
+<li>Incentive-Trips nach Monaco, Dubai, Warschau, Zürich etc.</li>
+</ul>
+<p><strong>Arbeitsumfeld &#x26; Ausstattung</strong></p>
+<ul>
+<li>Hochmodernes Büro in den Bavaria Towers in München-Bogenhausen (800 qm Fläche)</li>
+<li>Apple MacBooks – auch zur privaten Nutzung</li>
+<li>Höhenverstellbare Schreibtische</li>
+<li>Tiefgaragenstellplatz</li>
+<li>Möglichkeit zur Nutzung des Wellpass-Programms</li>
+</ul>
+<p>Bring deine Karriere auf das nächste Level und bewirb dich bei WIESE DENTAL!</p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/wiese-dental-beratungs-gmbh/head-of-projektmanagement-munich-312893" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
