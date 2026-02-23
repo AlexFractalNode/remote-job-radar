@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Backend Entwickler:in PHP & Laravel - für populäre Social Intranet Plattform (Nürnberg & remote) * | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Ilias Vassiliou  & Team  headhunter.digital im Auftrag sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Senior Backend Entwickler:in PHP & Laravel - für populäre Social Intranet Plattform (Nürnberg & remote) *</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 80k-100k</span>
+                    <span class="badge badge-tag">Web Development</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Bewirb dich, um Teil des innovativen Teams bei Humanstars zu werden, das eine beliebte Social-Intranet-Plattform entwickelt und betreibt. Mit dieser Rolle als Senior Backend Entwickler:in PHP & Laravel kannst du deine Fähigkeiten einsetzen, um ein komplexes System zu verbessern und zu skalieren.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Werde Teil des Teams bei Humanstars</strong></p>
+<p>Unser Mandant Humanstars mit Sitz in Nürnberg ist ein innovatives Unternehmen, das seit 10+ Jahren eine Mitarbeiteranwendung (»Social-Intranet«) der nächsten Generation entwickelt und betreibt, die ausgezeichnet bewertet ist.</p>
+<p>Mittlerweile wird das System von fast 1.000 Unternehmen und vielen Tausend Usern genutzt: Fluggesellschaften, Firmen aus dem Gesundheitssektor, staatliche Institutionen etc.</p>
+<p>Die Plattform integriert sich nahtlos in verschiedene Unternehmenssysteme, um das Engagement und die Produktivität der Mitarbeitenden zu steigern.</p>
+<p><strong>Die Mission ...</strong></p>
+<p>Humanstars ist die führende Plattform für digitale Mitarbeiterkommunikation und Social Intranet in Deutschland mit der Vision: „Digital employee communication – at its best“.</p>
+<p>Humanstars verbindet Unternehmen und ihre Mitarbeitenden sicher, effizient und individuell – auf allen Devices, in Echtzeit und mit höchsten Sicherheitsstandards.</p>
+<p>--</p>
+<p>Zur Verstärkung des Teams suchen wir eine:n Senior Backend-Entwickler:in mit Laravel-Fokus für eine zentrale Rolle bei der technischen Architektur sowie Weiter-Entwicklung und Optimierung der Backend-Services der Social Intranet Plattform.</p>
+<h2>Aufgaben</h2>
+<p><strong>Deine Rolle ...</strong></p>
+<p>Als Senior Backend-Entwickler:in bist Du verantwortlich für die Entwicklung und Wartung der zentralen Backend-Systeme.</p>
+<p>Du arbeitest eng mit Frontend-Entwicklern, Entwicklungs-Ingenieuren und Business-Stakeholdern zusammen, um skalierbare, sichere und leistungsstarke Lösungen bereitzustellen.</p>
+<p><strong>Deine konkreten Aufgaben ...</strong></p>
+<ul>
+<li><strong>Senior-Level Ownership</strong> über Architektur &#x26; Implementation</li>
+<li><strong>Backend-Entwicklung</strong>: Entwurf, Entwicklung und Optimierung skalierbarer Backend-Services mit <strong>PHP (Laravel)</strong>.</li>
+<li><strong>Datenbankmanagement</strong>: Entwicklung, Optimierung und Wartung von <strong>MySQL/MariaDB-Datenbanken</strong> unter Sicherstellung von Datenintegrität und Performance.</li>
+<li><strong>API-Entwicklung &#x26; Integration</strong>: Erstellung von <strong>RESTful APIs</strong> und Integration von Drittanbieter-Schnittstellen.</li>
+<li><strong>Echtzeit-Kommunikation</strong>: Implementierung und Wartung von <strong>WebSockets</strong> für Echtzeitnachrichten und Benachrichtigungen.</li>
+<li><strong>Systemarchitektur &#x26; Performance</strong>: Entwurf skalierbarer Architekturen, Optimierung von Datenbankabfragen und Implementierung von Caching-Lösungen.</li>
+<li><strong>Codequalität &#x26; Best Practices</strong>: Schreiben von sauberem, wartbarem Code gemäß Best Practices und etablierten Designmustern.</li>
+</ul>
+<h2>Qualifikation</h2>
+<p><strong>Dein Profil ...</strong></p>
+<ul>
+<li><strong>5+ Jahre Erfahrung</strong> als Backend-Entwickler:in mit fundierten Kenntnissen in <strong>PHP (Laravel-Framework)</strong>.</li>
+<li><strong>Erfahrung mit Software-Architekturen</strong> für High-Traffic Multiuser-Anwendungen</li>
+<li><strong>Sehr gute Kenntnisse in MySQL/MariaDB</strong>, einschließlich Datenbankdesign, Optimierung und Performance-Tuning von Abfragen.</li>
+<li><strong>Erfahrung in der Implementierung von WebSockets</strong> für Echtzeitanwendungen.</li>
+<li><strong>Fundiertes Wissen in der API-Entwicklung</strong>, Authentifizierungsprotokollen und Best Practices zur Websicherheit.</li>
+<li><strong>Ausgeprägte Problemlösungsfähigkeiten</strong> und die Fähigkeit, in einem dynamischen Umfeld effektiv zu arbeiten</li>
+<li><strong>Sprachkenntnisse in Deutsch &#x26; Englisch</strong> (der Entwicklungsleiter ist rein englischsprachig)</li>
+<li>Du wohnst in einem Radius, der es dir ermöglicht, <strong>1x/Woche nach Nürnberg</strong> zu kommen, ansonsten kannst du remote arbeiten</li>
+</ul>
+<h2>Benefits</h2>
+<p><strong>Darauf kannst du dich freuen ...</strong></p>
+<ul>
+<li>Ein innovatives Produkt mit echtem Mehrwert für fast 1.000 Unternehmen weltweit</li>
+<li>Flexible Arbeitszeiten und die Möglichkeit, remote zu arbeiten</li>
+<li>Attraktives Gehalt und Zusatzleistungen</li>
+<li>Ein motiviertes, interdisziplinäres Team mit flachen Hierarchien</li>
+<li>Regelmäßige Weiterbildungen und Teilnahme an Konferenzen</li>
+<li>Modernes Equipment und ergonomischer Arbeitsplatz</li>
+<li>Ein ganz besonderes Arbeitsumfeld: Das Büro befindet sich mitten im führenden Tagungshotel Deutschlands, dem <strong>Schindlerhof</strong> in Nürnberg – ein inspirierender Ort mit Gartenanlagen, Design-Interieur und Wohlfühlatmosphäre.</li>
+<li>Humanstars @ Schindlerhof: 2x ausgezeichnet als bester Arbeitgeber Deutschlands bei Great Place to Work, branchenübergreifend bis 500 Mitarbeiter.</li>
+<li>Verpflegung auf Top-Niveau: Frühstück, Snacks und Abendessen sind am Schindlerhof inklusive – und das auf dem hohen kulinarischen Standard eines mehrfach ausgezeichneten Hotels.</li>
+</ul>
+<p>Die Stelle ist ab sofort zu besetzen. Start idealerweise März/April 2026 oder je nach deiner Verfügbarkeit.</p>
+<p>--</p>
+<p><strong>Nimm jetzt Kontakt zu uns auf</strong> - wir freuen uns schon sehr über deine Bewerbung mit Lebenslauf, Portfolio und Gehaltsvorstellung.</p>
+<p>- Ilias &#x26; Team</p>
+<p>--</p>
+<p>* Diese Stelle steht allen Menschen offen, unabhängig von Geschlecht, Alter und anderen Merkmalen: m/w/d +</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/ilias-vassiliou-team-headhunterdigital-im-auftrag/senior-backend-entwicklerin-php-laravel-fur-populare-social-intranet-plattform-nurnberg-remote-nuremberg-68724" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

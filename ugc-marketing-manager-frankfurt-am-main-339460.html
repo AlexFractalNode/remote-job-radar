@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UGC Marketing Manager (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">6PM GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">UGC Marketing Manager (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 40k-55k</span>
+                    <span class="badge badge-tag">Marketing and Communication</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Bewirb dich, wenn du Erfahrung in UGC Marketing hast und dich für die Streetwear-Branche begeistern kannst. Hier kannst du deine Kreativität und Kommunikationsfähigkeiten einsetzen, um eine lebendige Community zu fördern.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Als eine der bekanntesten Streetwear Brands in Europa schaffen wir es bei 6PM nicht nur durch unsere Designs und unseren einzigartigen Vibe aus der grauen Masse der Szene hervorzustechen, sondern vor allem durch unsere Community. Egal ob Pop-Up Tour, eigenes Records-Label oder Collabs - wir machen nicht einfach Fashion - wir machen Culture.</p>
+<p>Und jetzt suchen wir dich!</p>
+<p>Als UGC Marketing Manager übernimmst du eine zentrale Rolle in unserem Marketing-Team und fungierst als Schnittstelle zwischen unserer Marke, Creatorn und internen Teams. Du stellst eine konsistente Markenkommunikation sicher und trägst maßgeblich dazu bei, authentischen und performancestarken UGC-Content zu realisieren.</p>
+<p>Du behältst auch in dynamischen Projekten den Überblick, arbeitest strukturiert und lösungsorientiert? Du denkst kreativ, gleichzeitig datenbasiert und möchtest Prozesse aktiv mitgestalten und optimieren? Dann bist du die perfekte Ergänzung für unser Team.</p>
+<h2>Aufgaben</h2>
+<ul>
+<li>Umfassende operative <strong>Umsetzung von (internationalen) UGC-Kampagnen</strong> auf Instagram, TikTok &#x26; Co.</li>
+<li><strong>Selbstständige Identifikation, Kontaktaufnahme und Briefing von Creatorn</strong> für die Erstellung von Content-Assets</li>
+<li><strong>Pflege und Aufbau von Creator Relations</strong></li>
+<li><strong>Identifikation und Testing von neuen Content-Formaten</strong> sowie deren Umsetzung</li>
+<li><strong>KPI-basiertes Tracking und Reporting</strong> von umgesetzten Kampagnen zur laufenden performance Optimierung, Qualitätssicherung und Ableitung von Handlungsempfehlungen</li>
+<li><strong>Entwicklung und Optimierung von internen Prozessen</strong>, um einen kontinuierlichen Zulauf von Content-Assets zu gewährleisten</li>
+<li><strong>Enge Zusammenarbeit mit unserem Brand- und Performance-Team</strong>, um unsere Content-Strategie konsistent und datenbasiert weiterzuentwickeln</li>
+</ul>
+<h2>Qualifikation</h2>
+<ul>
+<li><strong>Abgeschlossenes Studium</strong> im Bereich Marketing, Kommunikation, Medienwissenschaften <strong>oder relevante Berufserfahrung</strong> im Content-Marketing, Social Media Management oder Community-Management</li>
+<li><strong>Exzellente Kommunikationsfähigkeiten</strong> in Deutsch und Englisch, sowohl mündlich als auch schriftlich, um Briefings und Verträge zielgerichtet abzustimmen</li>
+<li><strong>Sicherer Umgang mit Social Media Plattformen</strong>, deren Ad-Managern und gängigen Analyse-Tools für Meta, TikTok &#x26; Co.</li>
+<li><strong>Verständnis für Kampagnen-KPIs</strong> wie ROAS, CAC etc. und die Ableitung von klaren Handlungsempfehlungen</li>
+<li><strong>Content-Kompetenz:</strong> Ausgeprägtes Verständnis für digitale Trends und kreative Bildsprache</li>
+<li><strong>Lösungsorientierte und strukturierte Arbeitsweise</strong>, auch in stressigen Situationen</li>
+<li><strong>Eigeninitiative und Engagement</strong>, um unsere Content-Strategie aktiv mitzugestalten</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li>Modernes Office mit Dachterasse im Herzen Frankfurts, Drinks auf uns &#x26; Freitags Homeoffice</li>
+<li>Zuschuss zu einer Fitnessstudiomitgliedschaft sowie diverse Mobilitätszuschüsse</li>
+<li>Regelmäßige Weiterbildungsmöglichkeiten zur fachlichen und persönlichen Entwicklung</li>
+<li>Regelmäßige Incentive Team-Events</li>
+<li>Vertrauensarbeitszeiten in einem jungen, motivierten Team</li>
+<li>Attraktives Gehaltspaket mit variabler Vergütungskomponente</li>
+</ul>
+<p>Werde Teil einer der führenden deutschen Streetwear-Marken und unterstütze uns dabei die Fashion-Culture mitzugestalten - mit deinem Engagement und deinem Gespür für guten Content. Wir freuen uns auf dich!</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/6pm-gmbh/ugc-marketing-manager-frankfurt-am-main-339460" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
