@@ -11,10 +11,10 @@ SITE_NAME = "RemoteRadar 📡"
 BASE_URL = "https://[AlexFractalNode].github.io/[remote-job-radar]"
 
 # IMPRESSUM DATEN (Wird automatisch in die Rechtstexte eingefügt)
-IMPRESSUM_NAME = "Alexander Heinze"
-IMPRESSUM_ADRESSE = "Am Fuchsgraben 28, 08056 Zwickau"
-IMPRESSUM_EMAIL = "alexander.heinze.01@gmail.com"
-IMPRESSUM_TELEFON = "+49 15231751760" # Optional
+IMPRESSUM_NAME = ""
+IMPRESSUM_ADRESSE = ""
+IMPRESSUM_EMAIL = ""
+IMPRESSUM_TELEFON = "" # Optional
 
 # EINSTELLUNGEN
 MAX_NEW_JOBS_LIMIT = 20
@@ -393,3 +393,4 @@ sitemap_xml += '</urlset>'
 with open(os.path.join(OUTPUT_DIR, "sitemap.xml"), "w", encoding="utf-8") as f: f.write(sitemap_xml)
 
 print(f"✅ Update fertig! Grid repariert & Rechtstexte erweitert.")
+
