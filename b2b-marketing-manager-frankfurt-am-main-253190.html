@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B2B Marketing Manager (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">ABRIO GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">B2B Marketing Manager (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Strategic Marketing</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Stell dir vor, es ist dein erster Tag als <strong>B2B Marketing Manager (m/w/d)</strong> bei ABRIO. Du wirst herzlich von einem motivierten und professionellen Team empfangen. Nach einem ersten gemeinsamen Team-Lunch tauchst du direkt in die Welt von Shopify und der Enterprise-E-Commerce-Beratung ein – mit dem klaren Ziel, ABRIO im DACH-Markt als differenzierte Premium-Marke weiter auszubauen.</p>
+<p>Du merkst sofort: Hier kannst du strategisch gestalten und zugleich operativ umsetzen. Deine Mission ist es, ABRIO als führende und qualitativ hochwertigste Shopify- und E-Commerce-Beratung im DACH-Enterprise-Segment zu positionieren und unsere Marke bei Kunden, Partnern und Talenten nachhaltig zu stärken. Dafür baust du unser Marketing strategisch und operativ weiter aus, hebst es durch Professionalisierung auf das nächste Level und machst es zu einem relevanten Treiber für nachhaltiges Wachstum.</p>
+<p>ABRIO ist eine der führenden Digital Commerce Beratungen mit Sitz in Frankfurt am Main. Unser Ziel: Die E-Commerce-Welt unserer Kunden nachhaltig zu verbessern und skalierbare Erfolge zu schaffen. Dabei kombinieren wir modernste Technologien mit innovativen Ansätzen und maßgeschneiderten Lösungen.</p>
+<p>Klingt spannend? Dann lies weiter – wir suchen genau dich für unser Team!</p>
+<h2>Aufgaben</h2>
+<ul>
+<li><strong>Strategische B2B-Positionierung:</strong> Du entwickelst eine klare B2B-Positionierung inkl. Messaging (USP, ICP, Value Proposition) und stellst sicher, dass sie konsistent über alle relevanten Kanäle ausgespielt wird.</li>
+<li><strong>Brand Management:</strong> Du verantwortest eine hochwertige und einheitliche Markenpräsenz über Website, LinkedIn, PR, Content und Events hinweg, orchestrierst intern relevante Bereiche (z. B. Employer Branding) und stellst die Qualität in der Umsetzung sicher.</li>
+<li><strong>Awareness &#x26; Thought Leadership:</strong> Über Content-Formate, relevante Partnerschaften sowie Event- und Messeauftritte sorgst du dafür, dass ABRIO im Premiumsegment als Thought Leader im Shopify- und Enterprise-E-Commerce-Umfeld etabliert wird.</li>
+<li><strong>KPI-driven Growth:</strong> Du definierst geeignete KPIs und misst die Wirkung entlang von Brand Awareness, Engagement und Anfragequalität, um unser Marketing als Wachstumstreiber weiterzuentwickeln.</li>
+</ul>
+<h2>Qualifikation</h2>
+<p><strong>IT'S A MATCH, SOFERN DU...</strong></p>
+<ul>
+<li>mindestens 3 Jahre Erfahrung im B2B-Marketing hast und Marken skaliert, weiterentwickelt oder im Brand Management aktiv gesteuert hast – von der Positionierung bis zur konsistenten Umsetzung über alle relevanten Kanäle.</li>
+<li>über ein abgeschlossenes Studium im Bereich (Digital) Marketing, Medienmanagement, Betriebswirtschaftslehre oder einer vergleichbaren Fachrichtung verfügst.</li>
+<li>contentgetriebenes Marketing und LinkedIn-B2B-Branding beherrschst und dich im Sparring mit der Geschäftsführung wohlfühlst.</li>
+<li>Budgets (mit-)verantwortet hast und Wirkung über KPIs und Tracking messbar machen kannst.</li>
+<li>Tools wie LinkedIn, CMS (Webflow/WordPress), SEO-Tools und Google Analytics sicher nutzt.</li>
+<li>mit echter Aufbau-Mentalität dafür brennst, kontinuierlich Neues auszuprobieren, Veränderungen aktiv anzustoßen und ABRIO gezielt als Premium-Partner im DACH-Markt und im Enterprise-Segment zu positionieren.</li>
+<li>Lust auf hohe Ownership hast, strategisch vorausdenkst und gleichzeitig hands-on sowie zuverlässig mit hohem Qualitätsanspruch operativ umsetzt.</li>
+<li>sehr gute Deutsch- und gute Englischkenntnisse mitbringst.</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li><strong>Teamspirit, den man erlebt:</strong> Du bringst deine Erfahrung und Perspektive aktiv ein und prägst die Zusammenarbeit in einem offenen, wertschätzenden Team. Regelmäßige Teamevents stärken dabei den gemeinsamen Austausch.</li>
+<li><strong>Urlaub &#x26; Balance:</strong> 30 Tage Urlaub und ein kleines Extra für deine Auszeit: ein zusätzlicher Urlaubstag, wenn Heiligabend &#x26; Silvester auf Werktage fallen.</li>
+<li><strong>Arbeitszeiten, die zu dir passen:</strong> Wir bieten flexible Arbeitszeiten und 2 - 3 Tage Präsenz im Büro pro Woche. So gestaltest du deinen Arbeitsalltag eigenständig und kannst deine Projekte effizient voranbringen.</li>
+<li><strong>Weiterbildung, die deine Karriere stärkt:</strong> Wir investieren gezielt in deine Entwicklung – mit einem persönlichen Weiterbildungsbudget für Weiterbildungen, Zertifizierungen und Coaching.</li>
+<li><strong>Leistung wird belohnt:</strong> Neben einer Vergütung, die deiner Erfahrung und Verantwortung entspricht, erhältst du attraktive Bonuszahlungen mit klarer Leistungsorientierung und eine Benefitcard mit monatlich 50,00€ netto – flexibel einsetzbar und jeden Monat ein Plus.</li>
+<li><strong>Spannende Projekte mit echtem Impact:</strong> Bei ABRIO gestaltest du anspruchsvolle E-Commerce-Projekte für führende Marken und triffst Entscheidungen, die echte Ergebnisse erzeugen.</li>
+<li><strong>Gestalte mit und übernimm Verantwortung:</strong> Du treibst Themen aktiv voran, bringst deine Erfahrung ein und setzt deine mehrjährige Expertise gezielt ein, um echte Ergebnisse zu erzielen und unser Team voranzutreiben.</li>
+<li><strong>Unsere Werte – gelebter Alltag:</strong> Teamgeist, Professionalität und Leidenschaft prägen unser tägliches Handeln. Bei uns bekommst du den Raum, Verantwortung zu übernehmen und Entscheidungen zu treffen, die spürbare Qualität und Wirkung entfalten.</li>
+<li><strong>Modernes Büro im Herzen Frankfurts:</strong> Eine hochwertige Arbeitsumgebung mit moderner Ausstattung für fokussiertes Arbeiten, kreativen Austausch und produktive Zusammenarbeit.</li>
+</ul>
+<p>Mit uns erhältst du nicht nur einen Job, sondern eine Erfahrung, die dich weiterbringt – beruflich und persönlich! 🚀</p>
+<p>Unser Team steht für flache Hierarchien und Eigeninitiative. Wenn du motiviert bist, Verantwortung übernehmen möchtest und Lust hast, gemeinsam mit uns die Zukunft des E-Commerce zu gestalten, dann bist du bei uns genau richtig!</p>
+<p>Unser Bewerbungsprozess ist schnell und zuverlässig – wir melden uns innerhalb kürzester Zeit bei dir zurück.</p>
+<p>Also, bewirb dich noch heute und werde Teil unseres dynamischen Teams. Wir freuen uns auf deine Bewerbung und darauf, dich kennenzulernen.</p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/abrio-gmbh/b2b-marketing-manager-frankfurt-am-main-253190" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

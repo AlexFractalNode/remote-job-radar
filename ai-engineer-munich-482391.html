@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Engineer (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">citema systems GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">AI Engineer (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Engineering</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Driving Digital Technologies.</strong><br>
+Den digitalen Wandel begleiten und aktiv mitgestalten – unsere Mission bei citema. Mit unseren innovativen Ansätzen beraten und unterstützen wir unsere Kunden in den Technologiefeldern Cyber Security, KI und Blockchain. Ebenso gehört die Umsetzung system- und sicherheitsrelevanter Softwareprojekte zu unserem Portfolio. So verbinden wir die neuen Technologien mit der klassischen Softwarewelt. Bei uns wird ein professionelles, kollegiales Miteinander mit Du-Kultur gelebt, denn unser exzellenter Teamgeist und die offene Kommunikation sind der Spirit unseres Unternehmens. Als sehr erfolgreiches und kontinuierlich wachsendes Unternehmen mit solider Basis, bieten wir Dir vielfältige Möglichkeiten in einem hochinteressanten, dynamischen Umfeld. Werde Teil unseres Erfolgs, bring Deine Expertise mit ein und gestalte gemeinsam mit uns die Zukunft verantwortungsvoll.</p>
+<h2>Aufgaben</h2>
+<p><strong>Deine Mission</strong><br>
+Wir suchen Dich als <strong>AI Engineer (m/w/d)</strong> am Standort <strong>München</strong> (überwiegend <strong>remote</strong> mit gelegentlichen Anwesenheiten vor Ort). Du entwickelst KI-Funktionalität für einen produktionsnahen Chat-Service: Anfrageanalyse, Agentic Retrieval, Antwortgenerierung mit Zitaten/Referenzen, Feedback-Loop, Telemetrie sowie kontinuierliche Qualitätsmessung.</p>
+<p>Deine Aufgaben dabei sind:</p>
+<ul>
+<li>Implementierung und Weiterentwicklung der Agent-Orchestrierung inkl. Tool-Calling zu Retrieval, Knowledge-APIs und Ticketing-Integrationen.</li>
+<li>Prompt Engineering: System-/Rollenprompts, Antwortformat, Tonalität, Zitierregeln, Abbruch- und Eskalationslogik.</li>
+<li>Aufbau von Guardrails: Prompt Injection/Jailbreak Mitigation, Unsicherheitsbehandlung, Quellenpflicht, Policies (inkl. Negativ-Aussagen-Schutz).</li>
+<li>Mitwirkung an Index- und Retrieval-Pipelines: Chunking, Metadaten, Versionierung, Re-Indexing; Integration hybrider Datenquellen.</li>
+<li>Aufbau von Evaluation und Benchmarking: Testfragen, Referenzantworten, Scoring, automatisierte Regressionstests.</li>
+<li>Telemetrie und Feedback: Qualitätsmetriken, Halluzinations-Flagging, Monitoring der KI-Komponenten.</li>
+</ul>
+<h2>Qualifikation</h2>
+<p><strong>Dein Profil</strong><br>
+Folgende Kenntnisse und Fähigkeiten solltest Du auf jeden Fall mitbringen:</p>
+<ul>
+<li>Erfahrung im praktischen LLM Engineering (RAG, Agentic RAG), inklusive Evaluationsmethoden (Groundedness, Halluzination, Robustness).</li>
+<li>Solide Software-Engineering-Skills (APIs, Tests, Logging/Monitoring), idealerweise Cloud-Native.</li>
+<li>Kenntnisse in Azure AI Services und idealerweise Azure AI Search.</li>
+<li>Verständnis für Datenschutz (PII), Data Governance, Logging-Minimierung und Retention.</li>
+<li>Teamfähig, dokumentationsstark, zuverlässig in komplexen Stakeholder-Setups.</li>
+<li>Für die effektive Kommunikation im Projektumfeld sowie mit unseren deutschsprachigen Kunden ist ein sehr gutes mündliches und schriftliches Deutsch erforderlich.</li>
+</ul>
+<h2>Benefits</h2>
+<p><strong>Das bieten wir Dir</strong><br>
+Wir sind der Überzeugung, dass folgende Rahmenbedingungen die besten Voraussetzungen für Effizienz und kreative Lösungsfindungen bieten:</p>
+<ul>
+<li>Aktives Mitwirken an innovativen Zukunftstechnologien</li>
+<li>Flexibles New-Work-Modell mit hybriden Arbeitsmöglichkeiten</li>
+<li>Unbefristeter Arbeitsvertrag</li>
+<li>Givve-Card als steuerfreier Unternehmensbenefit</li>
+<li>Maximale Entscheidungs- und Gestaltungsspielräume</li>
+<li>Individuelle Karriereplanung und Entwicklungsperspektiven</li>
+<li>Wissenstransfer und Synergieeffekte durch ein starkes Team</li>
+<li>Technologische Vielfalt mit spannenden Einblicken in sicherheitsrelevante Systeme</li>
+</ul>
+<p>Und: Herausforderungen, die wirklich Spaß machen!</p>
+<p>Ready to shape the future?</p>
+<p>Drive digital technologies with us!</p>
+<p><strong>Wir freuen uns auf Deine Bewerbung.</strong></p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/citema-systems-gmbh/ai-engineer-munich-482391" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
