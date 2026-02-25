@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KVP-Spezialist (Continous Improvement Officer) (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Flora Food Group sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">KVP-Spezialist (Continous Improvement Officer) (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 50k-65k</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Bewirb dich, um in einer vielfältigen und dynamischen Umgebung zu arbeiten und deine Fähigkeiten als KVP-Spezialist einzusetzen. Entwickle aktiv unsere Sicherheitskultur und trage zur kontinuierlichen Verbesserung des Unternehmens bei.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><div class="content-intro"><p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p></div><p>Werde Du <strong>KVP-Spezialist (Continous Improvement Officer) (m/w/d)</strong> in unserem Werk in Kleve &amp; gestalte aktiv unsere Sicherheitskultur.</p>
+<p>&nbsp;</p>
+<p><strong>Über die Position: </strong></p>
+<p>Der KVP-Spezialist (Continous Improvement Officer) (m/w/d)&nbsp; ist genauso vielfältig wie unsere Rezepturen &amp; Produkte. In erster Linie ist er verantwortlich für die Analyse und Optimierung von Prozessen z. B. Materialeinsatz und -verbrauch, Energiemanagement. Hinzu kommt das Thema Abfallreduzierung in welchem man Strategien zur Reduzierung erarbeiten muss. Des Weiteren Leitet und führt er Projekte durch zur kontinuierlichen Verbesserung unter Verwendung von Lean- und Six Sigma- Methoden. Abwechselung erhält man durch Schulung und Training der Mitarbeiter zur kontinuierlichen Verbesserung von Prozessen. Abgerundet wird die Stelle durch Projektmanagement, da der CI Officer verantwortlich für die Durchführung von Projekten ist.</p>
+<p>&nbsp;</p>
+<p><strong>Was braucht es also, um in dieser Rolle erfolgreich zu sein?</strong></p>
+<ul>
+<li>Erfolgreich abgeschlossenes Studium im Bereich Lebensmitteltechnik / Ingenieurswissenschaften (oder adäquate Fachrichtung) oder zusätzliche Fachausbildung mit entsprechenden Fach- und Spezialkenntnissen</li>
+<li>Erfahrungen im Projektmanagement (z.B. TPM/ WCM/ Lean Six Sigma Kurse) und im Begleiten von Veränderungsprozessen</li>
+<li>3-5 Jahre Erfahrung im genannten Bereich, vorzugsweise in der Lebensmittelindustrie</li>
+<li>Erfahrungen in der fachlichen und disziplinarischen Mitarbeiterführung</li>
+<li>Erfahrung im Umgang mit SAP/ERP-Systemen sowie den gängigen MS-Office Anwendungen</li>
+<li>Flexible Reaktionsfähigkeit auf wechselnde Themen</li>
+<li>Fließende bzw. sichere Kenntnisse in Deutsch und Englisch in Wort und Schrift</li>
+<li>Engagierte und belastbare Persönlichkeit mit einem selbstständigen, zuverlässigen, teamorientierten sowie verantwortungsbewussten Arbeitsstil</li>
+<li>Analytisches Denkvermögen, Managementkompetenz und Durchsetzungsstärke</li>
+<li>Ausgeprägte Serviceorientierung, Handlungs- und Entscheidungskompetenz sowie hohes Bewusstsein für Sicherheit-, Qualität und Kosten</li>
+<li>Breite Sichtweise gegenüber Fabrikorganisation, Ressourcenplanung, persönlichen Angelegenheiten</li>
+<li>Verständnis für andere operativen Unternehmensbereiche (z.B. Produktion, Planung, Technik)</li>
+<li>Selbstbewusstes, aber emphatisches Auftreten verbunden mit einer hohen Kommunikationsfähigkeit</li>
+<li>Ausgeprägte Führungsfähigkeiten und –Erfahrungen</li>
+<li>Ausgeprägte kommunikative Fähigkeiten und Eigeninitiative</li>
+<li>Unternehmerisches Denken und Handeln</li>
+</ul>
+<p><strong>&nbsp;</strong></p>
+<p><strong>Wir bieten</strong></p>
+<ul>
+<li>sichere &amp; attraktive Vergütung gemäß Tarifvertrag</li>
+<li>30 Tage Urlaub</li>
+<li>Flexible Arbeitszeitgestaltung mit Nutzung eines Arbeitszeitkontos</li>
+<li>Sonderzahlungen, wie z.B. 13. Monatsgehalt und Urlaubsgeld</li>
+<li>arbeitgeberfinanzierte betriebliche Altersvorsorge</li>
+<li>Ergonomische Arbeitsplätze (z. B. höhenverstellbare Schreibtische)</li>
+<li>wöchentliche kostenlose Massage</li>
+<li>Jobrad</li>
+<li>frisches Obst, Getränkespender, Kaffee- und Snackautomaten</li>
+<li>ein eigenes Flora Cares Programm z. B. 12 Wochen bezahlter Elternurlaub</li>
+<li>persönliche Gestaltungs- und Entwicklungsmöglichkeiten</li>
+<li>ein eigenes Parkhaus, in dem man kostenlos parken kann</li>
+</ul>
+<p>&nbsp;</p>
+<p><strong>Über Flora Food</strong></p>
+<p>Unser Ziel bei Flora Food ist klar: Wir machen die Menschen gesünder und glücklicher mit nahrhaften und köstlichen, natürlichen, pflanzlichen Produkten, die gut für Sie und unseren Planeten sind und mit Verpackungen frei von Plastik. Wir haben kultige Marken wie Rama, Becel, Country Crock, Blue Band und Flora, die Menschen auf der ganzen Welt kennen und lieben. Wir sind seit 1871 ein vertrauenswürdiger Marktführer in der Branche und doch haben wir das Gefühl, dass wir gerade erst am Anfang stehen.&nbsp;Leistung, Leidenschaft und Sorgfalt definieren, wer wir als Unternehmen sind, wie wir jeden Tag arbeiten und welche Verantwortung wir gegenüber unseren Mitarbeitern, unseren Verbrauchern, unseren Geschäftspartnern und unserer Welt empfinden.&nbsp;Wir haben große Ambitionen, dieses Geschäft auszubauen und wollen die richtigen Leute anziehen - diejenigen, die lieben, was sie tun, die von Verantwortung leben und nach beruflichen Perspektiven suchen, die ihre Zukunft bestimmen</p>
+<p>&nbsp;</p>
+<p><strong>Was sind die weiteren Schritte?:</strong></p>
+<p>Wenn Dich diese Rolle interessiert und Du dich damit identifizieren kannst, dann gebe deine Bewerbung gerne bei mir <strong>Felix Schmidt</strong> ab oder bewerbe Dich unten über das Bewerbungsformular, auch gerne via Email an <a ----------
+<p>Ich freue mich auf Deine Bewerbung! &nbsp;</p><div class="content-conclusion"><p><span data-contrast="auto">We understand your resume might not be up to date and recommend that you apply with what you have or your LinkedIn Profile. Flora Food Group is dedicated to building an inclusive and diverse workplace, we understand that you might not meet all the requirements stated in the description, but we encourage you to apply anyway. You might be the right candidate for this role or other roles. </span><span data-ccp-props="{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335559740&quot;:240}">&nbsp;</span></p>
+<p><em><span data-contrast="auto">Flora Food Group is an employer committed to diversity and inclusion in the workplace and equal opportunities for all. We recruit based only on values, qualifications, performance, skills, behaviours, experience, and knowledge. We ensure job advertisements are free from unintentional bias. </span></em><span data-ccp-props="{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335559740&quot;:240}">&nbsp;</span></p>
+<p><em><span data-contrast="auto">No personal characteristics should be a barrier to joining Flora Food Group. We prohibit discrimination and harassment based on race, color, sex, religion, sexual orientation, national origin, disability, genetic information, pregnancy, or other personal characteristics.</span></em><span data-ccp-props="{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335559740&quot;:240}">&nbsp;</span></p>
+<p>&nbsp;</p></div><p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/flora-food-group/kvp-spezialist-continous-improvement-officer-kleve-387814" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

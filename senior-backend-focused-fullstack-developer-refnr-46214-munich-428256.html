@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Backend-Focused Fullstack Developer (m/f/d) (Ref.Nr.: 46214) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Wavestone Germany AG sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Senior Backend-Focused Fullstack Developer (m/f/d) (Ref.Nr.: 46214)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">IT</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>We are seeking an experienced Senior Backend-Focused Fullstack Developer to support and develop a high-profile customer experience application within the automotive sector. This role involves working on a cloud-native, event-driven architecture to enhance customer-facing communication and aggregate vehicle tracking data from multiple sources.</p>
+<p><strong>Key Facts</strong><br>
+Start: 01.03.2026<br>
+Duration: not known<br>
+Capacity: 100 %<br>
+Employment type:<br>
+Job site:<br>
+Job country: Deutschland</p>
+<p>Your tasks</p>
+<p>• Support and develop a specialized customer experience application focused on tracking and event-driven communication</p>
+<p>• Design and implement complex integration architectures for aggregating data from multiple asynchronous and synchronous sources</p>
+<p>• Develop backend services using Kotlin and Spring Boot within an AWS cloud environment including Lambda and ECS</p>
+<p>• Build and maintain web applications for internal reviewers and dealers using React and TypeScript</p>
+<p>• Implement event-driven systems utilizing Kafka for robust communication between services</p>
+<p>• Apply clean architecture principles and architectural patterns to ensure scalable and maintainable codebases</p>
+<p>• Execute consumer-driven contract testing and ensure high engineering quality through TDD and the testing pyramid</p>
+<p>• Lead technical discussions, facilitate alignment across multiple teams, and document architectural decisions</p>
+<p>• Drive knowledge sharing and mentor team members through pairing, rotation, and code reviews</p>
+<p>• Proactively shape team processes and engineering practices to raise the overall technical bar</p>
+<p>• Migrate integrations to new upstream systems while maintaining uninterrupted functionality</p>
+<p>Must have competences</p>
+<p>• Senior-level expertise with the ability to lead architectural discussions and drive technical decisions</p>
+<p>• Extensive professional experience in Backend development with Kotlin and Spring Boot</p>
+<p>• Strong proficiency in building event-driven systems and asynchronous integrations using Kafka</p>
+<p>• Practical experience with AWS cloud services, specifically Lambda, SQS, and ECS/Fargate</p>
+<p>• Strong skills in Frontend development with React and TypeScript</p>
+<p>• Experience with Node.js for supporting and developing web applications</p>
+<p>• Solid knowledge of Infrastructure as Code (IaC) using Terraform or AWS CDK</p>
+<p>• In-depth understanding of clean architecture, modularity, and API design</p>
+<p>• Experience with CI/CD tools (e.g., GitHub Actions) and containerization with Docker</p>
+<p>• Strong engineering quality mindset, including experience with TDD and the Testing Pyramid</p>
+<p>• Ability to lead technical discussions, facilitate alignment, and mentor team members in an agile environment</p>
+<p>• Professional fluency in English</p>
+<p>• Ability to visit the client site in Ludwigsburg once per quarter</p>
+<p>Nice to have competences</p>
+<p>• Experience with NoSQL databases such as DynamoDB or MongoDB</p>
+<p>• Experience with consumer-driven contract testing (e.g., Pact)</p>
+<p>• Familiarity with observability and operations, including distributed tracing, metrics/alerting, and incident response</p>
+<p>• Experience with collaborative programming techniques such as pair programming and mob programming</p>
+<p>• Previous experience migrating integrations to new upstream systems</p>
+<p>• German language skills</p>
+<p>Additional information</p>
+<p>The position is 100% remote with a mandatory onsite presence in Ludwigsburg once per quarter. Collaboration with nearshore partners is part of the project model.</p>
+<p><strong>Let’s power the future together</strong><br>
+From Business Case to Implementation: As a leading consulting firm for strategic transformations, we are a trusted partner for our clients—and for our employees. Responsible, high-performing, and always with a focus on people. #WeAreWavestone<br>
+With our 360° portfolio of consulting services, we combine top-tier industry expertise with a wide range of cross-sector skills, work interdisciplinary, and think outside the box. This allows us to offer our partner companies and freelancers comprehensive perspectives within our own projects, while also supporting them as a long-standing framework agreement partner in filling project vacancies—promptly and directly.</p>
+<p>We look forward to hearing from you!</p>
+<p><strong>Your direct contact at Wavestone</strong><br>
+Mirza Tahirovic<br>
+Phone: +498945599291<br>
+E-Mail: <a ----------
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/wavestone-germany-ag/senior-backend-focused-fullstack-developer-refnr-46214-munich-428256" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Marketing Lead - Creative & Scaling (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Dreamlight Labs GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Performance Marketing Lead - Creative & Scaling (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 80k-100k</span>
+                    <span class="badge badge-tag">Social Media Manager</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Dreamlight Labs GmbH sucht nach einem Performance Marketing Lead - Creative & Scaling, um das Wachstum des Unternehmens durch innovative Marketingstrategien zu unterstützen. Die Position bietet die Möglichkeit, kreative Lösungen zu entwickeln und das Unternehmen zu skalieren.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Bei Dreamlight Labs entwickeln wir Event-Erlebnisse, die Menschen verbinden – von Anime über Gaming bis hin zu K-Pop und True Crime. Wir sind ein wachsendes Unternehmen, das innovative Live- und Konzertevents gestaltet, bei denen Fans in ihre Lieblingswelten eintauchen und unvergessliche Momente erleben.</p>
+<p>Unser Wachstum entsteht nicht zufällig – wir entwickeln neue Event-Konzepte und skalieren sie systematisch über Performance Marketing.</p>
+<p>Als <strong>Performance Creative Lead (m/w/d)</strong> in Vollzeit wirst du Teil eines ambitionierten Teams, das datengetrieben arbeitet, schnell testet und konsequent auf Skalierung ausgerichtet ist. Du verantwortest den gesamten Prozess – von der Entwicklung neuer Themen über die Creative-Konzeption bis hin zur profitablen Kampagnenstruktur auf Meta, TikTok und Google.</p>
+<p>Wenn du Performance nicht nur verwalten, sondern Wachstum aktiv gestalten willst, Creatives strategisch denkst und moderne KI-Tools selbstverständlich in deinen Workflow integrierst, freuen wir uns darauf, dich kennenzulernen.</p>
+<h2>Aufgaben</h2>
+<p>🎯 Strategische Verantwortung</p>
+<ul>
+<li>Entwicklung und Validierung neuer Event-Konzepte gemeinsam mit dem Team</li>
+<li>Identifikation von Marktchancen, Trends und skalierbaren Themen</li>
+<li>Entwicklung klarer Positionierungen, Hooks und Angles</li>
+<li>Konzeption ganzheitlicher Funnel-Strategien (Top / Middle / Bottom of Funnel)</li>
+</ul>
+<p>🚀 Performance &#x26; Scaling</p>
+<ul>
+<li>Eigenständiger Aufbau, Strukturierung und Skalierung von Kampagnen auf</li>
+<li>Meta (Schwerpunkt)</li>
+<li>TikTok</li>
+<li>Google</li>
+<li>Entwicklung strukturierter Creative- und Zielgruppen-Testing-Setups</li>
+<li>Budgetsteuerung und Skalierung profitabler Kampagnen</li>
+<li>Kontinuierliche Optimierung anhand klarer KPIs (ROAS, CPA, CTR, CVR etc.)</li>
+</ul>
+<p>🎬 Creative Ownership</p>
+<ul>
+<li>Konzeption und Produktion von Static- und Video-Ads</li>
+<li>Entwicklung von Skripten, Creative-Frameworks und Storylines</li>
+<li>Analyse von Creative-Performance und Ableitung datenbasierter Learnings</li>
+<li>Aufbau einer skalierbaren Creative-Test-Engine</li>
+</ul>
+<p>🤖 KI-Integration</p>
+<ul>
+<li>Einsatz moderner KI-Tools zur Beschleunigung von</li>
+<li>Research</li>
+<li>Skripterstellung</li>
+<li>Creative-Produktion</li>
+<li>Video-Optimierung</li>
+<li>Automatisierung</li>
+<li>Kontinuierliches Testing neuer Tools und Technologien</li>
+</ul>
+<h2>Qualifikation</h2>
+<p>Du hast Performance-Marketing nicht nur ausgeführt, sondern verantwortet. Du weißt, wie man Kampagnen strukturiert testet, profitable Setups erkennt und Budgets kontrolliert skaliert.</p>
+<p><strong>Das bedeutet konkret:</strong></p>
+<ul>
+<li>3–5+ Jahre Performance-Marketing-Erfahrung mit nachweisbaren Ergebnissen</li>
+<li>Sehr starke Meta-Expertise (Testing-Strukturen, Skalierung, Budgetsteuerung)</li>
+<li>Nachweisbarer Ad Spend mit konkreten Budgetangaben</li>
+<li>Erfahrung im Aufbau und der Skalierung profitabler Kampagnen</li>
+<li>Tiefes Verständnis von Funnel-Logiken (TOF / MOF / BOF)</li>
+<li>Strukturierter Creative-Testing-Ansatz</li>
+<li>Mindestens 4–6 eigene Creatives als Referenz (Video &#x26; Static)</li>
+<li>Sehr gutes KPI-Verständnis (ROAS, CPA, CTR, CVR etc.)</li>
+<li>Eigenständige, strukturierte und ergebnisorientierte Arbeitsweise</li>
+<li>Deutschsprachig</li>
+<li>Vollzeit verfügbar</li>
+</ul>
+<p>Du arbeitest datenbasiert, denkst in Hypothesen und triffst klare Entscheidungen auf Basis von Performance und nicht aus dem Bauchgefühl.</p>
+<p><strong>Nice-To-Have:</strong><br>
+Erfahrung im Event- oder Entertainment-Bereich, UGC-Verständnis, starke Copywriting-Skills, Landingpage-Know-how, Influencer-Erfahrung oder Skalierung von 6-stelligen Monatsbudgets.</p>
+<h2>Benefits</h2>
+<p>Bei uns übernimmst du keine operative Nebenrolle, sondern eine echte Schlüsselposition mit direktem Einfluss auf unser Wachstum. Deine Ideen werden nicht durch Hierarchien gebremst – sie werden getestet, umgesetzt und skaliert.</p>
+<p>Du arbeitest eng mit dem Gründerteam zusammen, triffst schnelle Entscheidungen und bekommst den unternehmerischen Gestaltungsspielraum, den Senior-Performer brauchen. Statt Micromanagement erwarten dich klare Ziele, Vertrauen und Verantwortung.</p>
+<p>Wir bieten dir ein überdurchschnittliches, attraktives Gehalt, das deiner Erfahrung und deinem nachweisbaren Track Record entspricht. Gleichzeitig erhältst du echte Budgetverantwortung und die Möglichkeit, Kampagnen auf einem Niveau zu skalieren, das Impact hat.</p>
+<p>Dich erwartet ein ambitioniertes Umfeld mit Fokus auf Geschwindigkeit, Testing und Innovation. Moderne KI-Tools sind für uns kein Buzzword, sondern Teil der täglichen Arbeit. Wenn du Dinge vorantreiben willst statt sie zu verwalten, bist du hier richtig.</p>
+<p><strong>Hier baust du nicht nur Kampagnen. Du baust Wachstum.</strong></p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/dreamlight-labs-gmbh/performance-marketing-lead-creative-scaling-frankfurt-am-main-391267" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
