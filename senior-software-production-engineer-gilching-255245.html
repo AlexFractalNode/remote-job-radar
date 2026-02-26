@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Software Production Engineer (m/f/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Quantum- Systems GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Senior Software Production Engineer (m/f/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Internet and software</span><span class="badge badge-tag">professional</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p style=";"><span style="color: #edeff4">As a Senior Software Production Engineer, you lead the strategy and implementation of production-grade deployment systems for drones - covering microcontroller firmware and embedded Linux platforms. You will own the end-to-end rollout toolchain, define quality gates, drive cross-functional root-cause efforts, and deliver scalable, reliable, auditable processes that support production ramp and continuous improvement.​</span></p><p style=";"></p><p style=";"><span style="color: #edeff4">You will work closely with stakeholders from our software development teams (Embedded and embedded Linux) as well as our test and integration team and our manufacturing team to streamline and optimize the software rollouts during production. By ensuring high quality and efficient software deployment pipelines, you will support Quantum Systems in its mission to become the benchmark for aerial data collection solutions with unmanned aerial systems (sUAV).</span></p><p style=";"><br /><br /></p><h4><strong>What is your Day to Day Mission:</strong></h4><ul><li><p><span style="color: #ebedf5">Architect and own end-to-end production deployment pipelines for:​</span></p></li></ul><ol><li><p><span style="color: #ebedf5">Microcontroller firmware: flashing, verification, configuration/calibration injection, rollback strategy.​</span></p></li><li><p><span style="color: #ebedf5">NVIDIA Orin embedded Linux: image creation/deployment, provisioning, secure updates, boot reliability, and recovery.​</span></p></li></ol><ul><li><p><span style="color: #ebedf5">Define and implement robust production tooling: flashing stations, automation scripts, artifact/version management, logs/metrics, and operator-friendly UIs/workflows.​</span></p></li><li><p><span style="color: #ebedf5">Establish quality gates and release readiness criteria for production software (test coverage expectations, acceptance thresholds, rollback plans).​</span></p></li><li><p><span style="color: #ebedf5">Lead complex debugging across hardware, firmware, bootloaders, OS, and factory test systems—drive corrective actions and long-term prevention.​</span></p></li><li><p><span style="color: #ebedf5">Scale processes for throughput: reduce flashing time, minimize manual steps, and improve stability and repeatability across lines / sites (International).​</span></p></li><li><p><span style="color: #ebedf5">Own traceability and compliance requirements: per-unit SW versioning, configuration baselines, device identity, and audit-ready records.​</span></p></li><li><p><span style="color: #ebedf5">Mentor engineers and production support; set standards for documentation, incident response, and postmortems.​</span></p></li><li><p><span style="color: #ebedf5">Partner with Manufacturing Engineering, Quality, and R&amp;D to influence product design for manufacturability and serviceability (DFM/DFS from a software angle).</span></p></li></ul><br /><br /><h4><strong><br /></strong></h4><h4><strong>What you bring to the team:</strong><br /></h4><ul><li><p><span style="color: #ecedf1">6+ years relevant experience (production engineering, embedded deployment, systems / firmware, manufacturing test, DevOps for devices).​</span></p></li><li><p><span style="color: #ecedf1">Deep expertise in flashing / provisioning microcontrollers (interfaces, bootloaders, common failure modes, verification strategies).​</span></p></li><li><p><span style="color: #ecedf1">Strong expertise in embedded Linux deployment and debugging (boot chain, systemd / services, kernel / driver basics, storage, networking, logs).​</span></p></li><li><p><span style="color: #ecedf1">Proven track record designing scalable, reliable production workflows and driving yield/throughput improvements.​</span></p></li><li><p><span style="color: #ecedf1">Strong automation skills (Python / Bash), plus disciplined engineering practices (Git, CI concepts, release branching, artifact integrity).​</span></p></li><li><p><span style="color: #ecedf1">Excellent cross-functional leadership and communication—able to translate factory problems into engineering roadmaps.</span></p></li></ul><p><br /></p><h4><strong>Why Quantum-Systems:</strong></h4><ul><li><p>We believe in the power of combined efforts: straightforward tech expertise paired with a customer-centric focus.</p></li><li><p>We are industry pioneers who are ambitious, bold, and visionary. </p></li><li><p>We push limits, think outside-the-box and strive for technological excellence to shape the future of aerial data.</p></li><li><p>We promise to be your runway for individual and professional growth.</p></li></ul><p><strong><br /></strong></p><h4><strong>Our benefits:</strong></h4><ul><li><p><strong>Company pension scheme: </strong>We support you so that you can already make provisions for later.</p></li><li><p><strong>Flexible working hours: </strong>With trust-based working hours, you are not only responsible for your working hours, but also for your work-life balance.</p></li><li><p><strong>Mobile working: </strong>If it gets too turbulent for you in our office, you can get the necessary balance through mobile working.</p></li><li><p><strong>Bike-Leasing: </strong>We support you in staying environmentally mobile and healthy.</p></li><li><p><strong>Corporate Benefits: </strong>Your opportunity for attractive offers and discounts from well-known suppliers and brands, e.g. Adidas, Apple, Expedia.</p></li><li><p><strong>Employee events: </strong>We not only want to grow together, but also celebrate our successes together.</p></li><li><p><strong>Lunch-Card: </strong>Be powerful with delicious energy, daily lunch budget is sponsored.</p></li><li><p><strong>Company Shuttle:</strong> Enjoy our convenient shuttle service that picks you up from Pasing in Munich and brings you to our location, with return trips at the end of the workday.</p></li></ul><p><br /></p><h4><strong>About us:</strong></h4><p style=";">Quantum Systems specialises in the development, design, and production of small Unmanned Aerial Systems (sUAS). The company’s range of electric vertical take-off and landing (eVTOL) sUAS are built to maximize range and versatility and to provide operators with a seamless user experience. By integrating cutting-edge software capabilities, like edge computing and real-time AI-powered data processing, Quantum Systems is building next-generation UAS for clients in defence, security, public sectors.</p><p style=";"></p><p style=";"></p><p><br /></p><h4><strong>Our commitment:</strong></h4><p>We are an open-minded company that not only values diversity, but actively promotes it. Regardless of gender, age, ethnic origin, religion, sexual orientation or disability, we firmly believe that the diversity of our employees is an essential part of our success.</p><p>At our company, every voice is heard and every perspective is valued. We believe that our differences enrich us and help us to find creative solutions and generate innovative ideas. We pride ourselves on creating an inclusive work environment where all employees can reach their full potential.</p><p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/quantum-systems-gmbh/senior-software-production-engineer-gilching-255245" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

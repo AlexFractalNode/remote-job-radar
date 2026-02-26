@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(Senior) Sales Manager:in Media Sales (m/f/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Gymondo GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">(Senior) Sales Manager:in Media Sales (m/f/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Business Development</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><h2>Dein Impact</h2>
+<p>Wir bei Gymondo bewegen und inspirieren. Wir sind überzeugt, dass ein gesünderes Leben mit kleinen Schritten und starken Partnerschaften beginnt.<br>
+Als Teil der 7NXT Health Group motivieren wir gemeinsam mit 7Mind und 7NXT Brand Solutions, Millionen Menschen zu mehr Achtsamkeit, Bewegung und Wohlbefinden:<br>
+We empower people to lead a fit and healthy life.</p>
+<p>In der Rolle als Sales Manager:in Media Sales (m/f/d) verkaufst du die Medienreichweite von Gymondo und 7Mind, unabhängig davon, ob es sich um Platzierungen in der App, auf Social Media, im Newsletter, auf der Homepage oder um exklusive Partnerschaften handelt (z.B. Fabletics als exklusiver Outfitter für Gymondo). Darüber hinaus steuerst du komplexe Vermarktungsprozesse, gewinnst strategische Partner und entwickelst neue Geschäftsmodelle. Du bist nicht nur operativ im Markt präsent, sondern baust den Kanal strategisch weiter aus.</p>
+<h2>Deine Mission</h2>
+<p>Du übernimmst die unternehmerische Verantwortung für unseren Media Sales:</p>
+<ul>
+<li>Strategische Vermarktung: Du verantwortest den Sales-Funnel für unsere Medienangebote und entwickelst maßgeschneiderte Lösungen für verschiedene Partner und Werbekunden.</li>
+<li>Business Development: Du entwickelst und implementierst Go-to-Market-Strategien für neue digitale Medienformate.</li>
+<li>Deal-Making: Du führst souverän durch komplexe Verhandlungen und Platzierungsprozesse auf Entscheider-Ebene.</li>
+<li>Markt-Repräsentanz: Du bist das Gesicht von 7Mind und Gymondo im Markt, baust Netzwerke aus und vertrittst uns auf Networking- und Branchen-Events.</li>
+<li>Stakeholder-Management: Du arbeitest eng mit unseren Expert:innen für Content, Marketing und Produkt zusammen, um Markt- &#x26; Kundenanforderungen in attraktive Werbeangebote umzusetzen.</li>
+</ul>
+<h2>Deine Story</h2>
+<p>Du bist eine erfahrene Sales-Persönlichkeit, die sich im Medienmarkt sicher bewegt und komplexe Strukturen als Chance begreift.</p>
+<ul>
+<li>Erfahrung: Du bringst mindestens 5 Jahre fundierte Erfahrung im Media Sales oder Business Development mit, idealerweise im Bereich digitale Medien</li>
+<li>Track Record: Du hast bereits erfolgreich großvolumige Partnerschaften abgeschlossen und besitzt idealerweise Erfahrungen im Bereich digitale Werbung und Medienverkäufe.</li>
+<li>Netzwerk: Du bist im deutschen Medienmarkt und Unternehmertum vernetzt und hast bereits Sichtbarkeit im Markt aufgebaut.</li>
+<li>Kommunikation: Du bist ein Verhandlungsprofi, moderierst souverän zwischen verschiedenen Interessen und kommunizierst sicher auf Deutsch (Muttersprachniveau) und Englisch.</li>
+<li>Mindset: Du denkst unternehmerisch, handelst datengetrieben und brennst für die Vision, digitale Medienpartnerschaften innovativ und zugänglich zu gestalten.</li>
+</ul>
+<h2>Deine Goodies bei uns</h2>
+<p>Erfolg braucht gute Energie. Deshalb sorgen wir für die richtigen Rahmenbedingungen - körperlich, mental und im Team:</p>
+<ul>
+<li>30 Urlaubstage pro Jahr</li>
+<li>2 zusätzliche freie Tage: 24.12. (Heiligabend) und der 31.12. (Silvester) werden offiziell als bezahlte Feiertage anerkannt.</li>
+<li>Hybrides Arbeitsmodell (3 Tage im Office, 2 Tage im HomeOffice)</li>
+<li>4 Wochen Work from Abroad pro Jahr</li>
+<li>Eine kostenlose Urban Sports Club M Mitgliedschaft &#x26; Zugang zu Nilo Health für mentale Gesundheit als auch persönliche Weiterentwicklung</li>
+<li>Kostenfreier Zugang zu unseren digitalen Wellbeing-Produkten (7Mind &#x26; Gymondo)</li>
+<li>Monatliches Mobilitätsbudget von 30 € über Navit</li>
+<li>Familienfreundliche Leistungen: Betreuungskosten &#x26; Kinderkranktage</li>
+<li>Die Klassiker im Office: Obst- &#x26; Gemüsekorb, Müsli &#x26; Joghurt (auch vegan), Getränke &#x26; Snacks</li>
+<li>Vielfältige Möglichkeiten für persönliches Wachstum und Weiterentwicklung - inkl. 1.000 € jährlichem Weiterbildungsbudget</li>
+<li>Vierbeinige Kollegen sind in unserem tierfreundlichen Office herzlich willkommen!</li>
+</ul>
+<h2>Come as you are</h2>
+<p>__Wir feiern Unterschiede und das meinen wir ernst.__Bei 7NXT, Gymondo und 7Mind setzen wir auf Vielfalt, Offenheit und Teamgeist. Ganz gleich, mit welchem Geschlecht du dich identifizierst, ob du eine Behinderung hast, was dein Neurotyp ist, woher du kommst, woran du glaubst oder wie du liebst - du bist bei uns willkommen.<br>
+Du erfüllst nicht alle Kriterien? Kein Problem. Wenn du Lust hast, mit uns die Zukunft von Gesundheit &#x26; Wohlbefinden zu gestalten, freuen wir uns auf deine Bewerbung.</p>
+<p>Du brauchst einen barrierearmen Bewerbungsprozess oder hast Fragen zum Ablauf? Schreib uns und wir finden einen Weg.</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/gymondo-gmbh/senior-sales-managerin-media-sales-berlin-257397" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

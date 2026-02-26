@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Manager (m/f/x) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Wolt - English sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Account Manager (m/f/x)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Geschätzt 60k-80k</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Wolt bietet eine einzigartige Möglichkeit, in einem dynamischen und globalen Umfeld zu arbeiten. Als Account Manager kannst du deine Fähigkeiten in Vertrieb und Kundenbeziehungen unter Beweis stellen und einen wichtigen Beitrag zum Erfolg der Firma leisten.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><div class="content-intro"><h2><span data-sheets-root="1">About Wolt</span></h2>
+<p><span data-sheets-root="1">At Wolt, we create technology that brings joy, simplicity and earnings to the neighborhoods of the world. In 2014 we started with delivery of restaurant food. Now we're building the delivery of (almost) everything and you'll find us in over 500 cities in 30 countries around the world. In 2022 we joined forces with DoorDash and together we keep on dreaming big and expanding across the globe.<br><br>Working at Wolt isn't always easy, but it's definitely exciting. Here you'll learn more, build more, and ship more than in most other companies. You'll be challenged a lot, but also have a lot of fun on the way. So, if you're a self-starter with drive and entrepreneurial spirit, this could be the ride of your life.</span></p></div><p>Are you an experienced and strategic account manager with a true 'service first' and analytical mindset? Does a challenging role in one of Europe's fastest-growing companies interest you? If so, then we'd love to chat!</p>
+<h2>What you'll be doing</h2>
+<p>Our Account Management team lies at the heart and soul of Wolt, ensuring all our existing restaurant partners and Wolts success in Germany. As Wolt grows both in scale and scope of offering, the strength of our account management engine must grow with it.</p>
+<p>As a Senior Account Manager at Wolt, you will be responsible for managing our largest SMB merchants, increasing the adoption of Wolt's products and driving their growth on the platform. In this role, you will drive commercial negotiations, close complex deals in a competitive landscape, analyze and synthesize large datasets and manage your portfolio with a consultative approach.</p>
+<h3><strong>Day-to-day in this role you'll:</strong></h3>
+<ul>
+<li><strong>Wolt´s Products:</strong> Leverage your business acumen and analytical abilities to raise the adoption of Wolt's products and services among the restaurant partners within your portfolio.</li>
+<li><strong>Strategic Partnerships:</strong> Drive complex commercial negotiations to strengthen the partnership with key restaurant partners, while meeting financial targets for these accounts.</li>
+<li><strong>Portfolio Performance: </strong>Constantly monitor your portfolio's performance, interpret complex data sets and provide data-driven consultancy to your partners.</li>
+<li><strong>Business Reviews:</strong> Conduct periodic meetings, present business reviews and lead discussions with a consultative approach.</li>
+<li><strong>Collaboration: </strong>Work closely together with the Marketing team to plan and execute campaigns together with restaurant partners.</li>
+<li><strong>Mentorship:</strong> Be a senior presence and source of knowledge on the team, and help others level up through training and mentorship.</li>
+<li><strong>Market Analysis:</strong> Actively monitor the competitive landscape and feedback loop to influence Wolt's product improvements.</li>
+</ul>
+<h2>Our humble expectations&nbsp;</h2>
+<ul>
+<li data-start="222" data-end="275">
+<p data-start="224" data-end="275">Fluency in <strong data-start="235" data-end="245">German</strong> and good <strong data-start="255" data-end="266">English</strong> skills</p>
+</li>
+<li data-start="276" data-end="398">
+<p data-start="278" data-end="398"><strong data-start="278" data-end="291">3–5 years</strong> of experience in <strong data-start="309" data-end="368">Account Management, Sales, Category / Vendor Management</strong>, or <strong data-start="373" data-end="386">Marketing</strong> positions</p>
+</li>
+<li data-start="399" data-end="484">
+<p data-start="401" data-end="484"><strong data-start="401" data-end="420">BA or MA degree</strong> in a relevant field (e.g. <strong data-start="447" data-end="481">Business Management, Marketing</strong>)</p>
+</li>
+<li data-start="485" data-end="582">
+<p data-start="487" data-end="582">Understanding of <strong data-start="504" data-end="524">sales principles</strong> and ability to deliver <strong data-start="548" data-end="580">excellent partner experience</strong></p>
+</li>
+<li data-start="583" data-end="676">
+<p data-start="585" data-end="676">Strong <strong data-start="592" data-end="635">verbal and written communication skills</strong> with an ability to build relationships</p>
+</li>
+<li data-start="677" data-end="748">
+<p data-start="679" data-end="748">Good <strong data-start="684" data-end="710">time-management skills</strong> with a <strong data-start="718" data-end="746">problem-solving attitude</strong></p>
+</li>
+<li data-start="749" data-end="796">
+<p data-start="751" data-end="796">High sense of <strong data-start="765" data-end="794">ownership and proactivity</strong></p>
+</li>
+<li data-start="797" data-end="927">
+<p data-start="799" data-end="927">Knowledge or previous exposure to <strong data-start="833" data-end="858">analytical dashboards</strong> (e.g. <strong data-start="865" data-end="875">Looker</strong>, <strong data-start="877" data-end="889">Power BI</strong>) or <strong data-start="894" data-end="925">data-driven decision-making</strong></p>
+</li>
+<li data-start="928" data-end="986">
+<p data-start="930" data-end="986">Advanced <strong data-start="939" data-end="974">Microsoft Excel / Google Sheets</strong> knowledge</p>
+</li>
+<li data-start="987" data-end="1082">
+<p data-start="989" data-end="1082">Willingness to <strong data-start="1004" data-end="1024">travel regularly</strong> to meet key partners within the assigned city or region</p>
+</li>
+</ul>
+<h2>What we offer</h2>
+<ul>
+<li><strong>Dynamic Environment:</strong> An opportunity to work in a fast-growing tech company with a startup mindset.</li>
+<li><strong>Impactful Work:</strong> The chance to make a significant impact on the growth and success of our restaurant partners.</li>
+<li><strong>Collaborative Culture:</strong> A supportive and inclusive team culture that values innovation and continuous improvement.</li>
+<li><strong>Professional Growth:</strong> Opportunities for personal and professional development within a global organization.</li>
+</ul>
+<h2>Next steps</h2>
+<ol>
+<li>Introduction meeting (You to Wolt and Wolt to you)</li>
+<li>Meeting with your potential Manager</li>
+<li>Show us why you're the best candidate for the role! (Assignment stage)</li>
+<li>Final interview where we make sure we are a perfect fit for each other</li>
+</ol>
+<p>------------------------------------------------------------------------------------------------------------------------------------</p>
+<p>Bist du ein erfahrener und strategischer Account Manager mit einer ausgeprägten "Service zuerst"- und analytischen Denkweise? Reizt dich eine herausfordernde Rolle in einem der am schnellsten wachsenden Unternehmen Europas? Wenn ja, dann freuen wir uns auf ein Gespräch mit Dir!</p>
+<h2>Deine Aufgaben</h2>
+<p>Unser Account Management Team ist das Herz und die Seele von Wolt und stellt den Erfolg all unserer bestehenden Restaurant Partner und von Wolt in Deutschland sicher. Da Wolt sowohl im Umfang als auch im Angebot wächst, muss die Stärke unserer Account Management Abteilung entsprechend wachsen.</p>
+<p>Als Account Manager bei Wolt bist du verantwortlich für die Betreuung unserer größten SMB-Händler, die Steigerung der Akzeptanz von Wolts Produkten und die Förderung ihres Wachstums auf der Plattform. In dieser Rolle führst du&nbsp; kommerzielle Verhandlungen, schließt komplexe Verträge in einem wettbewerbsintensiven Umfeld ab, analysiert und synthetisiert große Datensätze und betreust dein Portfolio mit einem beratenden Ansatz.</p>
+<h3>Deine täglichen Aufgaben:</h3>
+<ul>
+<li><strong>Wolt´s Produkte: </strong>Du nutzt dein unternehmerisches Gespür und deine analytischen Fähigkeiten, um die Akzeptanz der Produkte und Dienstleistungen von Wolt bei den Restaurant Partnern in deinem Portfolio zu steigern.</li>
+<li><strong>Strategische Partnerschaften:</strong> Du führst komplexe kommerzielle Verhandlungen, um die Partnerschaft mit wichtigen Restaurant Partnern zu stärken und gleichzeitig die finanziellen Ziele für diese Konten zu erreichen.</li>
+<li><strong>Portfolio Performance: </strong>Du überwachst kontinuierlich die Performance deiner Portfolios, interpretierst komplexe Datensätze und bietest deinen Partnern datengestützte Beratung.</li>
+<li><strong>Business Reviews: </strong>Du führst regelmäßige Meetings durch, präsentierst Business Reviews und leitest Diskussionen mit einem beratenden Ansatz.</li>
+<li><strong>Collaboration: </strong>Du<strong> </strong>arbeitest eng mit dem Marketing Team zusammen, um Kampagnen gemeinsam mit Restaurant Partnern zu planen und umzusetzen.</li>
+<li><strong>Mentorship:</strong> Du bist eine erfahrene Persönlichkeit und Wissensquelle im Team und hilfst anderen, sich durch Schulungen und Mentoring weiterzuentwickeln.</li>
+<li><strong>Marktanalyse:</strong> Du beobachtest aktiv das Wettbewerbsumfeld und die Feedbackschleife, um die Produktverbesserungen von Wolt zu beeinflussen.</li>
+</ul>
+<h2>Unsere bescheidenen Erwartungen</h2>
+<ul data-start="231" data-end="1372">
+<li data-start="231" data-end="298">
+<p data-start="233" data-end="298"><strong data-start="233" data-end="264">Fließende Deutschkenntnisse</strong> und gute <strong data-start="274" data-end="296">Englischkenntnisse</strong></p>
+</li>
+<li data-start="299" data-end="411">
+<p data-start="301" data-end="411"><strong data-start="301" data-end="324">3–5 Jahre Erfahrung</strong> im <strong data-start="328" data-end="390">Account Management, Vertrieb, Category / Vendor Management</strong> oder <strong data-start="396" data-end="409">Marketing</strong></p>
+</li>
+<li data-start="412" data-end="519">
+<p data-start="414" data-end="519"><strong data-start="414" data-end="462">Abgeschlossenes Bachelor- oder Masterstudium</strong> in einem relevanten Bereich (z. B. <strong data-start="498" data-end="516">BWL, Marketing</strong>)</p>
+</li>
+<li data-start="520" data-end="631">
+<p data-start="522" data-end="631">Verständnis von <strong data-start="538" data-end="561">Vertriebsprinzipien</strong> und die Fähigkeit, ein <strong data-start="585" data-end="619">hervorragendes Partnererlebnis</strong> zu bieten</p>
+</li>
+<li data-start="632" data-end="762">
+<p data-start="634" data-end="762">Starke <strong data-start="641" data-end="697">mündliche und schriftliche Kommunikationsfähigkeiten</strong> sowie die Fähigkeit, <strong data-start="719" data-end="760">Beziehungen aufzubauen und zu pflegen</strong></p>
+</li>
+<li data-start="763" data-end="846">
+<p data-start="765" data-end="846">Gute <strong data-start="770" data-end="800">Zeitmanagement-Fähigkeiten</strong> mit einer <strong data-start="811" data-end="844">lösungsorientierten Denkweise</strong></p>
+</li>
+<li data-start="847" data-end="913">
+<p data-start="849" data-end="913">Hohes Maß an <strong data-start="862" data-end="911">Eigeninitiative und Verantwortungsbewusstsein</strong></p>
+</li>
+<li data-start="914" data-end="1055">
+<p data-start="916" data-end="1055">Kenntnisse oder Erfahrung mit <strong data-start="946" data-end="973">analytischen Dashboards</strong> (z. B. <strong data-start="981" data-end="991">Looker</strong>, <strong data-start="993" data-end="1005">Power BI</strong>) oder <strong data-start="1012" data-end="1053">datengetriebener Entscheidungsfindung</strong></p>
+</li>
+<li data-start="1056" data-end="1137">
+<p data-start="1058" data-end="1137"><strong data-start="1058" data-end="1089">Fortgeschrittene Kenntnisse</strong> in <strong data-start="1093" data-end="1112">Microsoft Excel</strong> oder <strong data-start="1118" data-end="1135">Google Sheets</strong></p>
+</li>
+<li data-start="1138" data-end="1248">
+<p data-start="1140" data-end="1248">Bereitschaft, <strong data-start="1154" data-end="1178">regelmäßig zu reisen</strong>, um wichtige Partner in der jeweiligen Stadt oder Region zu treffen</p>
+</li>
+</ul>
+<h2>Was wir bieten</h2>
+<ul>
+<li><strong>Dynamisches Umfeld: </strong>Eine Gelegenheit, in einem schnell wachsenden Technologieunternehmen mit Startup-Mentalität zu arbeiten.</li>
+<li><strong>Wirkungsvolle Arbeit: </strong>Die Chance, einen bedeutenden Einfluss auf das Wachstum und den Erfolg unserer Einzelhandelspartner zu nehmen.</li>
+<li><strong>Kollaborative Kultur:</strong> Eine unterstützende und inklusive Teamkultur, die Innovation und kontinuierliche Verbesserung schätzt.</li>
+<li><strong>Professionelles Wachstum: </strong>Möglichkeiten zur persönlichen und beruflichen Weiterentwicklung innerhalb einer globalen Organisation.</li>
+</ul>
+<h2>Nächste Schritte</h2>
+<p>Nachdem einer unserer Talent Acquisition Partner deine Bewerbung geprüft hat und feststellt, dass Du die erforderlichen Kriterien erfüllen, wirst du zu den folgenden Schritten eingeladen:</p>
+<ul>
+<li>Kennenlerngespräch (Du lernst Wolt kennen und Wolt lernt Dich kennen)</li>
+<li>Gespräch mit Deinem potenziellen Manager</li>
+<li>Zeig uns, warum Du der beste Kandidat für die Stelle bist! (Case Study)</li>
+<li>Abschließendes Gespräch, in dem wir sicherstellen, dass wir perfekt zueinander passen.</li>
+</ul>
+<p><iframe src="https://www.youtube.com/embed/GoL541_xj9w" width="560" height="314"></iframe></p><div class="content-conclusion"><h2><span data-sheets-root="1">Our Commitment to Diversity and Inclusion</span></h2>
+<p><span data-sheets-root="1">We're committed to growing and empowering a more inclusive community within our company, industry, and cities. That's why we hire and cultivate diverse teams of people from all backgrounds, experiences, and perspectives. We believe that true innovation happens when everyone has room at the table and the tools, resources, and opportunity to excel.</span></p></div><p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/wolt-english/account-manager-leipzig-74031" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

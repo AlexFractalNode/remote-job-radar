@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Backend VPP Software Engineer - TypeScript (m/f/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">1KOMMA5˚ sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Senior Backend VPP Software Engineer - TypeScript (m/f/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Software Development</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><h2>1KOMMA5°</h2>
+<p>At <strong>1KOMMA5°</strong>, we pursue a clear vision: <strong>Living on wind and sunlight forever for free</strong>. To make this a reality, we are building the energy system of the future with Heartbeat AI. Want to be part of it?</p>
+<p>We bring together regional craftsmanship and scalable software: We don't think of solar, batteries, heat pumps, and e-mobility as isolated components, but control them as an intelligent, integrated overall system in our virtual power plant. Directly connected to the electricity market – in real time, fully automated. This way, energy is used when it is available from renewables and particularly cost-effective. By 2030, our goal is to transition 1.5 million households to renewable energies. Over 3,000 people are working towards this every day, at more than 80 locations worldwide, from Finland to Australia.</p>
+<p><strong>Want to take responsibility and build solutions that truly matter? Apply now and help us shape the energy world of tomorrow</strong>.</p>
+<p>Learn about our Product &#x26; Tech team!</p>
+<h2>Deine Position</h2>
+<p>As a member of the B2C domain, you will build a virtual power plant leveraging our energy manager "Heartbeat", and continuously ship innovative energy market solutions to our customers.</p>
+<p>You will be responsible for developing scalable, robust backend services that enable seamless integration of our energy management solutions with various energy markets.</p>
+<p>Key responsibilities include:</p>
+<ul>
+<li>Work collaboratively with product managers, data engineers, and data scientists to understand problems, support discoveries, and create solutions our customers love</li>
+<li>Build and optimize backend services for VPP operations and energy market integrations</li>
+<li>Design and implement APIs and abstraction layers for seamless communication between different components of our energy market integration solutions</li>
+<li>Optimize backend services for scalability and support for a large number of connected users</li>
+<li>Create, implement, evaluate, and deploy software solutions to solve complex problems in a simplified way</li>
+<li>Foster a culture of experiment-driven innovation within the team</li>
+<li>Promote teamwork and successful project execution</li>
+<li>Continuously improve developer satisfaction by avoiding/reducing tech debt, automating processes, and good documentation</li>
+<li>Work across your boundaries and interact in close collaboration with our stakeholders and other teams</li>
+</ul>
+<p>Technologies you will work with include:</p>
+<ul>
+<li>TypeScript, NestJS</li>
+<li>Google Cloud Platform (Cloud Run, Cloud Functions, PubSub, CloudSQL, Firestore, BigQuery)</li>
+<li>Domain-driven design architecture</li>
+<li>Datadog</li>
+<li>Terraform</li>
+<li>GitHub Actions</li>
+</ul>
+<h2>Dein Profil</h2>
+<p>The successful candidate will have:</p>
+<ul>
+<li>Proven experience in developing scalable backend solutions with TypeScript from several past projects</li>
+<li>Competence in building virtual power plant infrastructure, including the integration into energy markets (day-ahead, intraday, balancing services, etc).</li>
+<li>Hands-on experience working with interfaces in the context of energy services (e.g., smart meters, energy optimization, load balancing).</li>
+<li>Broad knowledge of various architectural patterns and experience implementing them with CI/CD using GitHub Actions and cloud infrastructure (ideally GCP)</li>
+<li>Passion for maintainable, documented, reusable, and testable code</li>
+<li>A finger on the pulse of software engineering trends and industry best practices</li>
+<li>An agile and product-oriented mindset and you consider yourself a team player</li>
+<li>Very strong written and spoken English skills, German is a plus</li>
+</ul>
+<p>Bonus points for:</p>
+<ul>
+<li>Experience with IaC (ideally Terraform)</li>
+<li>Experience Python in the context of Data Engineering or Machine Learning</li>
+<li>Experience with IoT applications for grid balancing and demand response</li>
+</ul>
+<p>We are an ambitious and dynamic company with a talented team. We require our engineers to be imaginative, enthusiastic, and willing to tackle new challenges as we strive to provide everyone with renewable energy technologies.</p>
+<h2>Benefits</h2>
+<ul>
+<li>You are part of an international, dynamic, and highly motivated team of people who have proven to make things happen</li>
+<li>With your work, you accelerate the "energy transition" and hence have a direct impact on our climate</li>
+<li>Work with and learn from other super-smart colleagues</li>
+<li>You will enjoy direct contact with core decision-makers</li>
+<li>You will enjoy the best chances of entering full-time in one of Europe’s most thriving scaleups</li>
+<li>You work remotely (Germany-wide), with offices in Hamburg, Berlin or Munich</li>
+<li>Create a healthy balance alongside your work and enjoy all the benefits of the EGYM Wellpass</li>
+<li>Benefits and discounts are yours with Futurebens</li>
+<li>Whether city bike or e-bike - be flexible with our job bike leasing and do something good for the environment at the same time</li>
+</ul>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/1komma50/senior-backend-vpp-software-engineer-typescript-berlin-340536" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

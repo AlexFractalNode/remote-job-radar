@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(Senior) Engineering Manager (gn) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">sofatutor GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">(Senior) Engineering Manager (gn)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Remote</span><span class="badge badge-tag">IT</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><h2>Jobbeschreibung</h2>
+<p>Du übernimmst die fachliche und disziplinarische Führung eines cross-funktionalen Engineering-Teams und verantwortest die erfolgreiche Delivery entlang unserer Produktziele. Dabei verbindest du exzellentes Engineering-Handwerk mit moderner Produktentwicklung – und treibst aktiv die Zukunft des digitalen Lernens voran. Du schaffst den Rahmen, in dem Menschen, Prozesse und Technologie nachhaltig performen.</p>
+<h2>📍 100% remote (EMEA) | ⏳ 40 h/Woche</h2>
+<h2>Das macht uns aus:</h2>
+<p>sofatutor ist eine digitale Lernplattform, die über eine Million Schüler*innen, deren Eltern und Lehrkräfte beim Lernen und Lehren unterstützt – mit anschaulichen Videos, interaktiven Übungen, Lernspielen und hilfreichen Arbeitsmaterialien. Unser Ziel ist es, das Lernen einfach, effektiv und für alle zugänglich zu gestalten. Dabei treibt uns der Anspruch an, uns nicht mit dem Status quo zufriedenzugeben - wir wollen uns stetig weiterentwickeln, für unsere Nutzer*innen und für uns selbst. Wir lernen voneinander, geben und nehmen aktiv Feedback und wachsen gemeinsam als Team. Unsere Überzeugung, dass digitale Bildung Großes bewegen kann, ist dabei ein zentraler Antrieb. In einem dynamischen Umfeld fühlen wir uns zuhause: Wir denken flexibel, handeln lösungsorientiert und setzen KI dort ein, wo sie echten Mehrwert schafft.</p>
+<h2>Dein Verantwortungsbereich:</h2>
+<h2>Leadership &#x26; Team-Performance</h2>
+<ul>
+<li>Du verantwortest Aufbau, Führung und Weiterentwicklung der Entwickler*innen im Team, mit klarem Fokus auf Outcomes, Qualität und nachhaltige Delivery.</li>
+<li>Du coachst Engineers (fachlich &#x26; persönlich), setzt Wachstumspläne auf und etablierst wirkungsvolle Feedback- und Performance-Routinen.</li>
+<li>Du stärkst eine kollaborative, motivierende Teamkultur mit Ownership, psychologischer Sicherheit und hoher Qualitätsorientierung.</li>
+</ul>
+<h2>Produkt &#x26; Delivery</h2>
+<ul>
+<li>Du arbeitest eng mit Product, Design, Content und Technical Leader*innen an Roadmap, Priorisierung und Umsetzung – und übersetzt Ziele in realistische Pläne.</li>
+<li>Du gestaltest Arbeitsabläufe, agile Rituale und Qualitätsstandards kontinuierlich weiter (z. B. DoR/DoD, Release-Prozesse, Incident-Learnings).</li>
+<li>Du stellst sicher, dass technische Entscheidungen, Abhängigkeiten und Risiken transparent sind – und steuerst aktiv auf Lösungen zu.</li>
+</ul>
+<h2>Hiring &#x26; Scaling</h2>
+<ul>
+<li>Du hast Erfahrung im Hiring, Entwerfen von Onboarding-Prozessen und der fachlichen Weiterentwicklung von Software-Entwickler*innen.</li>
+<li>Du baust Strukturen, die Skalierung ermöglichen (z. B. Rollen-/Leveling-Klarheit, klare Verantwortlichkeiten, Wissensmanagement).</li>
+</ul>
+<h2>AI &#x26; Innovation</h2>
+<ul>
+<li>Du identifizierst sinnvolle Einsatzfelder für KI im Engineering (z. B. Assistenzfunktionen, Automatisierung, Developer Productivity) und befähigst dein Team, diese verantwortungsvoll umzusetzen.</li>
+</ul>
+<h2>Stellenanforderungen</h2>
+<p>Mehrjährige Erfahrung als Engineering Manager (gn) oder (Staff-)Teamlead in agilen Software-Teams – inklusive People Leadership.</p>
+<ul>
+<li><strong>Nachweisbare Erfahrung in Hiring, Onboarding und der Weiterentwicklung</strong> von Engineers (Coaching, Feedback, Growth Frameworks).</li>
+<li>Praxis in <strong>größeren Web-Development-Projekten</strong>, idealerweise mit Ruby on Rails.</li>
+<li><strong>Solide Programmierkenntnisse</strong> (bevorzugt in Ruby und/oder JavaScript) - genug, um Architektur- und Code-Qualitätsdiskussionen kompetent zu führen.</li>
+<li>Sehr gutes Verständnis von Software-Development-Prozessen, Testing, Deployment und moderner Delivery-Kultur.</li>
+<li>Sehr gute Englischkenntnisse (min. C2)</li>
+<li>Du brennst für <strong>AI-Entwicklung</strong> und willst dein Team mit pragmatischen, wertstiftenden Use Cases nach vorne bringen.</li>
+</ul>
+<h2>Das bieten wir dir:</h2>
+<ul>
+<li><strong>🕒 Flexibles Arbeiten:</strong> Mit flexiblen Arbeitszeiten und unserem remote-first Arbeitsmodell (inkl. Möglichkeit zur Arbeit aus dem EU-Ausland für 180 Tage im Jahr) gestaltest du deinen Alltag so, wie er zu dir passt.</li>
+<li><strong>💻 Unterstützung für mobiles Arbeiten:</strong> Für dein optimales Remote-Setup erhältst du alle zwei Jahre bis zu 100 € Zuschuss für dein Home-Office-Equipment. Grundlegendes technisches Equipment wie Laptop, Headset, Monitor etc. bekommst du selbstverständlich von uns gestellt.</li>
+<li><strong>🌍 Mobil &#x26; unabhängig:</strong> Dank Zuschüssen für ÖPNV-Tickets oder Swapfiets bist du flexibel unterwegs – egal ob in Berlin oder anderen Städten.</li>
+<li><strong>🎉 Gemeinschaft &#x26; Events:</strong> Teamspirit ist uns wichtig! Freu dich auf regelmäßige Events, digital und live vor Ort in Berlin.</li>
+<li><strong>💚 Ehrenamt &#x26; freie Tage:</strong> Zwei zusätzliche freie Tage im Jahr für dein gesellschaftliches Engagement – plus freie Tage an Heiligabend und Silvester.</li>
+<li><strong>💪🏻 Fitness &#x26; mentale Gesundheit:</strong> Mit einer Urban Sports Club- oder Fitnessstudio-Mitgliedschaft bleibst du aktiv. Für deine mentale Gesundheit steht dir die Plattform <em>Bloom</em> kostenfrei zur Verfügung.</li>
+<li><strong>💸 Attraktive Rabatte:</strong> Profitiere von Vergünstigungen über <em>FutureBens</em> und <em>Corporate Benefits</em> sowie Rabatten für Familie &#x26; Freunde auf unsere Lernangebote.</li>
+<li><strong>💳 Flexible Zusatzleistungen:</strong> Mit der <em>givve</em>-Benefits-Kreditkarte nutzt du steuerfreie Extras ganz flexibel in deiner Region.</li>
+</ul>
+<p>Wir bei sofatutor arbeiten jeden Tag daran, unser integratives Arbeitsumfeld so weiterzuentwickeln, dass deine Entwicklung unabhängig von Geschlecht, Familienstand, sexueller Orientierung, Religionszugehörigkeit, Alter, Behinderungsgrad, Bildungsstand oder Ethnie gefördert wird. Unterstütze uns gern dabei und schließe dich an!</p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/sofatutor-gmbh/senior-engineering-manager-gn-berlin-401437" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
