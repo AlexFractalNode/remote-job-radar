@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Contract Renewal Manager (all genders) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Urban Sports Club sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Senior Contract Renewal Manager (all genders)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><h3>Meet Urban Sports Club</h3>
+<p>We are among the leading platforms for sports and wellness in Europe, dedicated to inspiring people to live active, healthy lives. With just one membership we offer access to thousands of fitness and wellness experiences across the continent.</p>
+<p>But what truly sets us apart? We believe our people are at the heart of everything we do. If you're curious about how we work, what we value and how you might grow with us, explore our<a href="https://culture.urbansportsclub.com/de/jobs"> Culture Hub &amp; Career Opportunities</a>.</p>
+<p><strong>*Big news: Wellhub and Urban Sports Club unite!*</strong><br>Urban Sports Club is now a proud part of Wellhub, creating a global wellbeing ecosystem. Together, we connect 39,000 corporate clients and 97,000 wellness partners across 18 countries, offering millions of people even more ways to stay active and take care of their health.</p>
+<h3>The opportunity&nbsp;</h3>
+<p class="p1">As part of our Senior Contract Renewal team, you will own the full renewal cycle for a portfolio of established B2B Enterprise clients, with a particular emphasis on larger and more complex organizations. Your goal: secure long-term partnerships, unlock growth potential, and ensure sustainable revenue development.</p>
+<h3>What you will do</h3>
+<ul>
+<li>You manage and lead the end-to-end renewal process for key corporate customers, ensuring high retention and revenue optimization</li>
+<li>You evaluate your portfolio using data-driven insights to identify expansion potential, pricing adjustments, cross-sell opportunities, and risk factors</li>
+<li>You develop independently and execute negotiation strategies tailored to each account</li>
+<li>You conduct commercial negotiations with senior stakeholders, aligning internally with Sales, Customer Success, Legal, and Finance teams</li>
+<li>You optimize contract structures with a strong understanding of margin impact, cost drivers, and strategic relevance</li>
+<li>You refine continuously renewal processes, tools, and best practices to strengthen our Account Renewal Management function</li>
+<li>You translate client feedback and market insights into strategic recommendations for product development and future offerings</li>
+</ul>
+<h3>What you will need to succeed</h3>
+<ul>
+<li class="p1">You have 3+ years of experience in B2B contract negotiations, key account management, or sales (experience with pricing models or commercial frameworks is a plus)</li>
+<li class="p1">You bring strong commercial acumen with a clear focus on revenue growth and profitability</li>
+<li class="p1">You are confident in working with data and analytical capability to uncover both risks and opportunities</li>
+<li class="p1">You have excellent communication skills in German and English, with the ability to influence decision-makers at executive level</li>
+<li class="p1">You are confident and composed in negotiations, even in high-stakes or challenging discussions</li>
+<li class="p1">You have a strong affinity for digital products and the ability to convincingly represent our solution to corporate clients</li>
+<li class="p1">You bring advanced skills in Google Sheets and comfort working with performance metrics and financial models</li>
+</ul>
+<h3>What's in it for you&nbsp;</h3>
+<ul>
+<li data-stringify-indent="0" data-stringify-border="0"><strong data-stringify-type="bold">Free Urban Sports Club L Pro Membership + Friends and Family Discount:</strong>&nbsp;Stay active with free membership, plus discounts for friends and family.</li>
+<li data-stringify-indent="0" data-stringify-border="0"><strong data-stringify-type="bold">Flexible Work Model:</strong>&nbsp;Enjoy a hybrid work setup, balancing on-site and remote work options to fit your lifestyle.</li>
+<li data-stringify-indent="0" data-stringify-border="0"><strong data-stringify-type="bold">Extended Remote Work Options:</strong>&nbsp;Work up to 120 days remotely within the EU, the UK, and Switzerland, including 30 days outside the EU. You'll also have the option to desk-swap at our other European offices.</li>
+<li data-stringify-indent="0" data-stringify-border="0"><strong data-stringify-type="bold">WorkOUT Life Balance:</strong> Take advantage of 30 days of paid vacation annually, plus two additional days for volunteering, flexible working hours, and complimentary access to our mental health provider Open Up.</li>
+<li data-stringify-indent="0" data-stringify-border="0"><strong data-stringify-type="bold">Personal Development:</strong>&nbsp;Receive an annual budget of €1,000 for professional growth, with regular internal training sessions and weekly German and English language classes.</li>
+<li data-stringify-indent="0" data-stringify-border="0"><strong data-stringify-type="bold">Engaging Team Culture:</strong>&nbsp;Participate in regular team and company events along with wellness initiatives that help you stay productive, healthy, and engaged in a hybrid work environment.</li>
+</ul>
+<p><em><strong>Urban Sports Club is committed to providing a friendly, safe, and welcoming environment for everyone who applies for a position or already works with us, regardless of their sports preferences, gender, gender identity and expression, sexual orientation, disability, physical appearance, body size, race, age, or religion (or lack thereof).</strong></em></p><p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/urban-sports-club/senior-contract-renewal-manager-all-genders-berlin-413340" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

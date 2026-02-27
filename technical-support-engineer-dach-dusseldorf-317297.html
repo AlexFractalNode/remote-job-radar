@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Support Engineer (DACH) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Info Technology Supply Ltd sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Technical Support Engineer (DACH)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Helpdesk</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><h2>The Job Role</h2>
+<p>Are you looking for a challenging Technical Support role working in a fast-paced working environment?</p>
+<p>If so, this is an excellent opportunity to develop and grow your technical skills while joining our friendly Technical Services team within a progressive international software house.</p>
+<p>We are looking for a <strong>Technical Support Engineer</strong> to provide technical support and execute installations throughout the <strong>DACH region</strong> in <strong>German</strong>, with the flexibility to support our other iTS regions in <strong>English</strong> when required.</p>
+<h2>Why Join Us?</h2>
+<ol>
+<li>We are the number one PaperCut <strong>Authorised Solution Center</strong> in Europe with global operations including the DACH region supported by a strong and well-established channel network that delivers solutions through a trusted reseller model.</li>
+<li>Receive <strong>extensive training and continuous support</strong> to help you grow and excel is your role.</li>
+<li>Work alongside experienced <strong>global presales and technical</strong> support engineers who collaborate closely to achieve outstanding results.</li>
+<li><strong>Career progression opportunities</strong>, with the ability to develop your skills and advance into <strong>senior</strong> technical, presales, or <strong>leadership</strong> roles as your experience grows.</li>
+</ol>
+<p>5. Be part of a <strong>dynamic and international</strong> working environment with an <strong>inclusive culture</strong> and a strong <strong>family feel</strong>.</p>
+<h2>Key Responsibilities</h2>
+<ol>
+<li>Deliver comprehensive <strong>technical support</strong> via helpdesk, telephone, email and secure remote access tools.</li>
+<li>Perform <strong>software installation</strong> configuration and ongoing support across a diverse global customer environment.</li>
+<li>Support <strong>global iTS regions</strong> when required, maintaining consistent standards and collaborating closely with the wider European support team.</li>
+<li>Assist with <strong>technical and functional presales queries.</strong></li>
+<li>Occasionally travel to customer sites in the <strong>DACH region</strong> to perform onsite installations and deliver technical training.</li>
+<li>Document support cases, installation activities, and technical findings accurately within internal systems, contributing to the knowledge base and continuous product improvement.</li>
+<li>Replicate and diagnose customer issues in internal <strong>virtual test environments</strong>, escalating complex issues to vendors when necessary.</li>
+<li>Deliver internal and external <strong>training, demonstrations, webinars, workshops, and technical enablement</strong> sessions as needed.</li>
+</ol>
+<h2>Required Skills and Experience</h2>
+<ol>
+<li>Previous experience working with customers in a technical support environment.</li>
+<li>Excellent communication skills with <strong>fluent spoken and written German</strong>, and a good level of English.</li>
+<li>Previous experience managing or supporting <strong>print management systems</strong> such as <strong>PaperCut</strong> and <strong>print environments</strong> is required.</li>
+<li>Extensive <strong>hands-on experience</strong> with <strong>Microsoft Windows Server</strong>, <strong>Windows client</strong> operating systems, <strong>Active Directory</strong>, <strong>Microsoft Entra ID</strong> and foundational <strong>Microsoft SQL Server</strong>. Administration.</li>
+<li>Exposure to <strong>Apple macOS</strong> and <strong>Linux</strong> operating systems is desirable to assist with cross platform integration and troubleshooting.</li>
+<li>Strong technical skills in <strong>troubleshooting</strong> and <strong>problem-solving</strong>.<strong>‑solving</strong></li>
+<li>Ability to <strong>self-learn</strong> and resolve <strong>complex technical issues</strong> independently.<strong>‑learn</strong></li>
+<li>Good <strong>organisational skills</strong> with <strong>strong attention to detail</strong> and the ability to retain information.</li>
+<li>Ability to work well under pressure in a <strong>fast-paced</strong> support environment.<strong>‑paced</strong></li>
+<li>Capable of working <strong>independently</strong> as well as collaboratively within a global team.</li>
+<li>Excellent <strong>timekeeping</strong> and <strong>reliability</strong>.</li>
+</ol>
+<p><strong><em>Most important is attitude and work ethic.</em> This role requires an enthusiastic, details orientated individual with a 'can-do' attitude who can provide high quality technical support for our Managed Print and Scan Solutions (PaperCut, Umango, and Princity) and many other products in our portfolio.</strong></p>
+<h2>In return we offer:</h2>
+<ol>
+<li><strong>Skill Development:</strong> Build hands-on expertise in software installation, troubleshooting, systems integration, virtual environments, and a wide range of iTS products.‑on expertise in software installation, troubleshooting, systems integration, virtual environments, and a wide range of iTS products</li>
+<li><strong>Cross Functional Exposure:</strong> Collaborate closely with colleagues in <strong>Technical Services</strong> which includes <strong>Support</strong> and <strong>Presales</strong> alongside <strong>Sales</strong>, and <strong>Development</strong> to gain comprehensive cross functional understanding of workflows within our international organisation.<strong>‑Functional Exposure:</strong></li>
+<li><strong>Competitive Salary:</strong> Offered based on skills and experience.</li>
+<li><strong>Company Laptop:</strong> Provided for business use.</li>
+<li><strong>Mileage Allowance:</strong> Petrol/diesel mileage allowance paid per kilometre for business travel.</li>
+<li><strong>Annual Leave Entitlement:</strong> Leave entitlement will be aligned to the location/region, with gradual progression up to a maximum of 30 days, based on completed years of service.</li>
+<li><strong>Comprehensive Support &#x26; Training:</strong> Access continuous training, product certifications, and mentoring to help you excel in your role.</li>
+</ol>
+<h2>About ITS</h2>
+<p>Info Technology Supply Ltd (iTS) is a well-established software company with a diverse portfolio spanning cloud-based solutions, on-premise software, and professional services. After 30+ years of success, we're expanding our digital marketing capabilities to drive volume growth in our transactional products while supporting our consultative sales for enterprise solutions.</p>
+<h2>iTS is not:</h2>
+<ul>
+<li>Arrogant: Arrogance makes people believe they always know best. It stops the constant learning that success requires. We see arrogance as the beginning of the end of any organisation.</li>
+</ul>
+<p><strong><em>Join us and become part of a collaborative team that values initiative, technical curiosity, and a commitment to delivering exceptional customer service. If you are passionate about solving technical challenges, supporting customers, and working in a dynamic environment where your contributions make a real impact, we would love to hear from you.</em></strong></p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/info-technology-supply-ltd/technical-support-engineer-dach-dusseldorf-317297" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

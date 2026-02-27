@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Werkstudent (m/w/d) – Outbound Marketing | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">FactFinder sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Werkstudent (m/w/d) – Outbound Marketing</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Marketing and Communication</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><h2>Introduction</h2>
+<p>Outbound Marketing ist der Ort, an dem Pipeline entsteht. Während Content und Events potenzielle Kund:innen anziehen, sorgt Outbound dafür, dass wir aktiv die richtigen Entscheider:innen in den passenden Unternehmen mit der richtigen Botschaft erreichen. Als Outbound Marketing Werkstudent bei FactFinder sitzt du nicht am Telefon und liest Skripte vor – du entwickelst dich zu einem Demand-Generation-Strategen. Du recherchierst hochwertige E-Commerce-Unternehmen, erstellst personalisierte Outreach-Kampagnen und arbeitest eng mit unseren Sales- und Marketing-Teams zusammen, um qualifizierte Leads zu generieren, die zu echtem Umsatz werden.</p>
+<h2>Das ist deine Chance:</h2>
+<ul>
+<li>B2B-SaaS-Demand-Generation zu meistern – eine der wertvollsten und gefragtesten Marketing-Kompetenzen unserer Zeit</li>
+<li>Direkt mit Benedikt („Mr. Outbound“) sowie unseren BDR- und AE-Teams an Kampagnen zu arbeiten, die echte Pipeline erzeugen</li>
+<li>Account-Based Marketing (ABM), Lead Scoring und die Zusammenarbeit moderner B2B-Sales- und Marketing-Teams kennenzulernen</li>
+<li>Ein starkes Portfolio mit Kampagnenkennzahlen, Conversion Rates und messbarem Business Impact aufzubauen</li>
+</ul>
+<h2>Deine Aufgaben</h2>
+<ul>
+<li><strong>Account Research &#x26; Segmentierung (35 %)</strong>
+<ul>
+<li>Recherche und Identifikation von B2B-E-Commerce-Unternehmen mit hohem Potenzial in ganz Europa (Fokus auf Mid-Market und Enterprise)</li>
+<li>Aufbau detaillierter Account-Profile: Unternehmensgröße, Tech-Stack, Pain Points, relevante Entscheider:innen</li>
+<li>Segmentierung von Accounts nach Branche, Umsatz, Region und Buying Signals (z. B. Stellenausschreibungen, Finanzierungsrunden, Technologie-Wechsel)</li>
+<li>Nutzung von Tools wie LinkedIn Sales Navigator, Crunchbase, BuiltWith und unserem CRM zur Informationsgewinnung</li>
+<li>Erstellung strukturierter Target-Account-Listen für Outbound-Kampagnen</li>
+</ul>
+</li>
+<li><strong>Lead-Validierung &#x26; -Anreicherung (25 %)</strong>
+<ul>
+<li>Validierung und Anreicherung von Lead-Daten (E-Mail-Adressen, Telefonnummern, Jobtitel, Unternehmensinformationen)</li>
+<li>Recherche einzelner Prospects: Interessen, aktuelle Unternehmensnews, Social-Media-Aktivitäten</li>
+<li>Bewertung und Scoring von Leads nach Fit und Kaufabsicht (ICP-Match, Engagement-Signale, Timing)</li>
+<li>Sicherstellung eines sauberen, aktuellen und verwertbaren CRM-Datenbestands</li>
+<li>Enge Zusammenarbeit mit unseren BDRs, um besonders wertvolle Outreach-Ziele zu priorisieren</li>
+</ul>
+</li>
+<li><strong>Entwicklung von Outreach-Kampagnen (25 %</strong>)
+<ul>
+<li>Verfassen personalisierter E-Mail-Vorlagen und LinkedIn-Nachrichten, die Antworten generieren</li>
+<li>Zusammenarbeit mit Benedikt und dem Marketing-Team, um Messaging, Betreffzeilen und CTAs zu testen und zu optimieren</li>
+<li>Entwicklung von Multi-Touch-Outreach-Sequenzen (E-Mail, LinkedIn, Telefon, Video)</li>
+<li>Personalisierung von Outreach in der Skalierung mithilfe von AI-Tools und Automatisierung<br>
+<em>(du lernst u. a. den Einsatz von Notion AI und ChatGPT für Recherche und Copywriting)</em></li>
+<li>Durchführung von A/B-Tests und kontinuierliche Optimierung basierend auf Response-Raten</li>
+</ul>
+</li>
+<li><strong>Kampagnen-Performance &#x26; Optimierung (15 %)</strong>
+<ul>
+<li>Monitoring zentraler Kampagnen-KPIs: Open Rates, Reply Rates, Terminbuchungen, generierte Pipeline</li>
+<li>Analyse dessen, was funktioniert – und was nicht – sowie Ableitung von Optimierungen bei Targeting, Messaging oder Timing</li>
+<li>Reporting der Kampagnen-Performance an Marketing- und Sales-Leads</li>
+<li>Einbringen von Insights zur Weiterentwicklung unserer Outbound-Strategie und ICP-Definition</li>
+<li>Dokumentation von Best Practices und erfolgreichen Playbooks in Notion</li>
+</ul>
+</li>
+</ul>
+<h2>Dein Profil</h2>
+<ul>
+<li><strong>Must-haves</strong>
+<ul>
+<li>Aktuell eingeschrieben in einem Bachelor- oder Masterstudium (z. B. Marketing, BWL, Kommunikation oder einem vergleichbaren Studiengang)</li>
+<li>Sehr gute Deutschkenntnisse (C1+) sowie gute Englischkenntnisse (B2+) – du recherchierst Unternehmen und verfasst Outreach sowohl auf Deutsch als auch auf Englisch</li>
+<li>Ausgeprägte Recherche- und Analysefähigkeiten – du bist ein_e echte_r „Digital Detective“ und liebst es, Insights zu finden</li>
+<li>Sehr gute Schreibfähigkeiten – du formulierst prägnante, überzeugende Nachrichten, die Aufmerksamkeit erzeugen</li>
+<li>Hohe Detailgenauigkeit und Organisationsstärke – du arbeitest strukturiert mit Daten, Listen und Kampagnen und vermeidest Fehler</li>
+<li>Souveräner Umgang mit Unklarheit – Outbound ist iterativ, nicht alles funktioniert beim ersten Versuch</li>
+</ul>
+</li>
+<li><strong>Nice-to-haves</strong>
+<ul>
+<li>Erste Erfahrung im Sales-, Marketing- oder kundenorientierten Umfeld (z. B. Praktikum, Werkstudierendenjob, Student Consulting)</li>
+<li>Vertrautheit mit LinkedIn Sales Navigator, CRM-Systemen (z. B. HubSpot, Salesforce) oder Sales-Engagement-Tools</li>
+<li>Grundverständnis von B2B-SaaS-Geschäftsmodellen sowie E-Commerce- bzw. Retail-Technologien</li>
+<li>Interesse an Psychologie, Überzeugungstechniken und Entscheidungsprozessen im Kaufverhalten</li>
+<li>Erfahrung im Einsatz von AI-Tools (z. B. ChatGPT, Claude, Notion AI) für Recherche und Content-Erstellung</li>
+</ul>
+</li>
+</ul>
+<h2>THE JOY OF WORKING WITH US</h2>
+<ul>
+<li><strong>Echte Verantwortung statt Beschäftigungstherapie:</strong> Du verantwortest komplette Kampagnen und Account-Listen. Deine Arbeit erzeugt direkt Pipeline und Umsatz für das Unternehmen.</li>
+<li><strong>Mentorship, das wirklich etwas bringt:</strong> Du arbeitest eng mit Benedikt („Mr. Outbound“) zusammen, der sich voll darauf fokussiert, eine erstklassige Outbound-Motion aufzubauen. Wöchentliches Feedback, klare KPIs und praxisnahes Coaching gehören dazu.</li>
+<li><strong>Moderne Arbeitskultur:</strong> Hybrides Arbeiten, AI-native Workflows (du nutzt Notion AI, ChatGPT und weitere Tools täglich), asynchrone Zusammenarbeit und transparente Performance-Kennzahlen.</li>
+<li><strong>Klare Karriereperspektive:</strong> Outbound-Marketing-Skills öffnen dir Türen zu Rollen im BDR-, Sales-, Demand-Gen- und Growth-Marketing-Umfeld bei führenden SaaS-Unternehmen. Diese Position ist ein echtes Sprungbrett für deine Karriere.</li>
+<li><strong>Vergütung &#x26; Benefits:</strong> Attraktive Werkstudierenden-Vergütung (€15–17/Stunde, je nach Erfahrung), flexible Arbeitszeiten rund um dein Studium, moderne technische Ausstattung, Team-Events sowie ein persönliches Lernbudget.</li>
+</ul>
+<h2>Standort</h2>
+<p>Pforzheim, Berlin (hybrid)</p>
+<h2>Benefits</h2>
+<h2>Was du lernst &#x26; mitnimmst</h2>
+<ul>
+<li><strong>Hard Skills</strong>
+<ul>
+<li>B2B-Demand-Generation- und Account-Based-Marketing-(ABM)-Strategien</li>
+<li>Prospecting-, Lead-Recherche- und Datenanreicherungstechniken</li>
+<li>Copywriting für Sales &#x26; Marketing (E-Mails, LinkedIn-Nachrichten, Landingpages)</li>
+<li>Umgang mit CRM-Systemen, Sales-Engagement-Plattformen und Marketing-Automation-Tools</li>
+<li>Kampagnen-Analytics und Conversion-Optimierung</li>
+<li>KI-gestützte Recherche und Outreach (Prompt Engineering für Sales- und Marketing-Anwendungsfälle)</li>
+</ul>
+</li>
+<li><strong>Soft Skills &#x26; persönliche Weiterentwicklung</strong>
+<ul>
+<li>Denken aus Käuferperspektive und tiefes Verständnis für Customer Pain Points</li>
+<li>Überzeugende Kommunikation und Storytelling für Business-Zielgruppen</li>
+<li>Zusammenarbeit zwischen Sales- und Marketing-Teams („Smarketing“-Modell)</li>
+<li>Datengetriebene Entscheidungsfindung und Experimentier-Mindset</li>
+<li>Wöchentliches Mentoring durch Benedikt (Outbound Lead) und Einbindung in Marketing-Strategie-Sessions</li>
+</ul>
+</li>
+<li><strong>Netzwerk &#x26; Einblicke</strong>
+<ul>
+<li>Direkte Zusammenarbeit mit BDRs, AEs und dem Marketing Leadership – erlebe, wie High-Performance-Sales-Teams arbeiten</li>
+<li>Verständnis des gesamten Funnels: von Cold Outreach → Qualified Lead → Demo → Closed Deal</li>
+<li>Aufbau von Beziehungen innerhalb unseres internationalen Teams und Lernen von erfahrenen GTM-Expert:innen</li>
+<li>Empfehlungsschreiben und LinkedIn-Empfehlung bei erfolgreichem Abschluss</li>
+</ul>
+</li>
+</ul>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/factfinder/werkstudent-outbound-marketing-pforzheim-358329" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
