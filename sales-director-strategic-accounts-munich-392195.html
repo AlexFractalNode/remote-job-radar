@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Director - Strategic Accounts (f/m/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Apaleo sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Sales Director - Strategic Accounts (f/m/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 80k-100k</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Als Sales Director - Strategic Accounts bei Apaleo gestalten Sie die Zukunft der Hospitality Tech und tragen maßgeblich zum Erfolg der Firma bei. Sie werden Teil eines dynamischen Teams und haben die Möglichkeit, Ihre Fähigkeiten in einem innovativen Umfeld zu entwickeln.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><h2>Join Apaleo and Shape the Future of Hospitality Tech!</h2>
+<p>Apaleo is an <strong>API-first, AI-powered property management platform</strong> built for modern hospitality groups that want flexibility, speed, and control over their tech stack. We're scaling rapidly across Europe and beyond, supporting innovative operators across multiple segments and geographies.</p>
+<p>Our open platform approach lets enterprise customers compose their stack with best-in-class solutions - and increasingly combine those with <strong>agentic AI capabilities</strong> to move from "insights" to <strong>execution</strong>: orchestrating cross-system tasks, reducing manual work, and enabling new operating models with the right governance and control.</p>
+<p>We're looking for a Sales Director - Strategic Accounts to <strong>win new enterprise business across Europe</strong> and help build initial traction with <strong>Global accounts</strong>. This is a senior individual contributor role with high accountability/ autonomy and close collaboration with the founders and senior leadership team, helping drive strategic pursuits and building a repeatable enterprise motion as we grow.</p>
+<h2><strong>What You'll Be Up To:</strong></h2>
+<ul>
+<li>Own full-cycle enterprise new logo sales across Europe, from target account strategy through close.</li>
+<li>Develop and execute strategic account plans across complex, multi-stakeholder enterprise organisations.</li>
+<li>Lead complex, consultative enterprise sales cycles, ensuring strong qualification, deal strategy, and forecast accuracy.</li>
+<li>Create compelling executive narratives and <strong>business cases</strong>: ROI, operating model impact, phased transformation roadmap, and clear success criteria.</li>
+<li>Collaborate closely with the <strong>Solution Architecture</strong> team to scope outcomes, shape solution approaches, align on integration realities, and de-risk enterprise adoption</li>
+<li>Partner closely with founders/senior leadership on strategic deals: executive outreach, deal strategy, and high-stakes negotiations.</li>
+<li>Stay close to strategic accounts <strong>through the roll-out phase</strong> as an executive sponsor: ensure a crisp handover, maintain executive alignment, unblock risks, and identify expansion pathways with Customer Success / Onboarding.</li>
+<li>Act as a <strong>voice to the market</strong>: build a trusted network across hospitality leaders, ownership groups, consultants, and ecosystem partners; represent Apaleo in executive forums and industry moments to generate long-term opportunity flow and credibility.</li>
+<li>Feed structured market insights back into GTM and product direction: positioning, packaging, proof points, partner involvement, and enterprise playbooks.</li>
+</ul>
+<h2><strong>What Success Looks Like</strong></h2>
+<ul>
+<li>A focused enterprise target list with strong account plans, executive access, and multi-threaded stakeholder engagement across priority markets.</li>
+<li>A healthy, high-quality enterprise pipeline built through repeatable plays (strategic outreach, network, partners, market presence) - with reliable forecasting and strong deal inspection discipline.</li>
+<li>Flagship enterprise wins and visible traction with global accounts, supported by crisp value cases and executive alignment.</li>
+<li>Smooth early roll-outs for strategic wins with clear continuity from late-stage deal to rollout governance - and a visible path to expansion.</li>
+<li>Apaleo is increasingly seen as a credible strategic platform in enterprise hospitality circles through your relationships and market presence.</li>
+</ul>
+<h2><strong>Requirements</strong></h2>
+<ul>
+<li>7+ years of experience in <strong>enterprise SaaS sales / strategic new business</strong>, ideally in hospitality, travel tech, or an adjacent B2B vertical selling into complex, multi-stakeholder organisations.</li>
+<li>Proven track record of closing complex, high-value deals (multi-year, multi-property, multi-stakeholder) across Europe.</li>
+<li>Proven capability in <strong>consultative, value-based selling</strong>: deep discovery, executive storytelling, business case/ROI creation, procurement negotiation, and stakeholder management.</li>
+<li>Technical acumen in platform and integration-heavy environments - comfortable partnering with Solution Architects and leading credible conversations with IT and product teams</li>
+<li>High ownership and structured execution in build-mode environments; able to create clarity and momentum without heavy process.</li>
+<li>Strong internal collaboration skills - comfortable working closely with founders, senior leadership, Solution Architecture, CS, and Marketing.</li>
+<li>Europe-based, with willingness to travel for key enterprise moments (exec workshops, rollout milestones, industry events).</li>
+</ul>
+<h2><strong>Nice to Have</strong></h2>
+<ul>
+<li>Munich or Berlin based; German speaking.</li>
+<li>Existing network across European hotel groups, ownership/management companies, consultants, or hospitality tech ecosystem.</li>
+<li>Excited about agentic (autonomous) AI for enterprise hospitality - and motivated to make it real with strategic customers in a pragmatic, risk-aware way.</li>
+<li>Experience selling platform products (vs. closed all-in-one suites) or orchestrating partner-rich solutions.</li>
+</ul>
+<h3><strong>Culture &amp; Growth</strong></h3>
+<ul>
+<li><strong>A Diverse &amp; International Team:</strong> Work alongside professionals from many backgrounds and nationalities shaping the future of hospitality tech.</li>
+<li><strong>Growth &amp; Development:</strong> Feedback-driven culture, learning budget, and room to grow as the enterprise motion scales.</li>
+<li><strong>Autonomy &amp; Ownership:</strong> High trust, high accountability - impact over process.</li>
+<li><strong>Shape the Future of Hospitality Tech:</strong> Your work helps define how enterprise growth is built at Apaleo.</li>
+<li><strong>Competitive &amp; Fair Compensation:</strong> Benchmark-guided compensation and clear performance expectations.</li>
+</ul>
+<h3><strong>Perks &amp; Lifestyle</strong></h3>
+<ul>
+<li><strong>Flexible &amp; Remote Work Options:</strong> Remote-first across Europe with regular in-person moments where it matters.</li>
+<li><strong>Free Public Transport:</strong> Fully covered <em>Deutschland Ticket</em> (Germany-based).</li>
+<li><strong>Team Connection:</strong> Regular team dinners, company meetups, and offsites.</li>
+<li><strong>Paid Time Off:</strong> <strong>30 days of vacation</strong>.</li>
+<li><strong>Personal Development Budget:</strong> <strong>1.000 € per year (can exceed with approval)</strong>.</li>
+<li><strong>Health &amp; Wellbeing:</strong> Access to gyms and wellness options via <strong>EGYM Wellpass</strong>.</li>
+</ul>
+<p></p><p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/apaleo/sales-director-strategic-accounts-munich-392195" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

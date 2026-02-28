@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Manager Paid & Performance (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">homie sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Marketing Manager Paid & Performance (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Online Marketing</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Über homie – Dein zukünftiger Arbeitgeber mit Zukunft</strong></p>
+<p>homie ist ein stark wachsendes deutsches KI-Startup mit langfristig gesicherter Finanzierung. Unser Homie ist ein KI-basierter Assistent, der in Echtzeit berät und so für zufriedene Kunden und mehr Umsatz sorgt. Wir sind ganz vorne mit dabei, wenn es darum geht KI-Systeme der Zukunft zu gestalten. Unsere Mission: Mit smarter, evolutionärer KI und echtem Praxisnutzen die Beratung und den Verkauf auf ein neues Level heben.</p>
+<h2>Aufgaben</h2>
+<p><strong>Deine Rolle – werde unser Wachstums-Architekt</strong></p>
+<p>Als Marketing Manager Paid &#x26; Performance (m/w/d) übernimmst du eine zentrale Rolle in unserem Wachstumskurs. Du wirst unser Architekt und strategischer Treiber für planbares, skalierbares Neukundengeschäft sein. Dein Fokus liegt darauf, aus Marketingbudget eine messbare Pipeline zu entwickeln – datenbasiert, effizient und kontinuierlich optimiert.</p>
+<p>Du analysierst Zielgruppen, Märkte und Wettbewerber und entwickelst darauf aufbauend eine ganzheitliche Paid-Strategie entlang des gesamten Funnels – von Awareness über Consideration bis hin zur Conversion. Dabei verstehst du es, Performance-Marketing nicht isoliert zu denken, sondern als integralen Bestandteil unserer Revenue-Strategie in enger Verzahnung mit Sales und Customer Success.</p>
+<p>Du identifizierst Wachstumspotenziale, testest neue Kanäle und Creatives, baust skalierbare Kampagnenstrukturen auf und entwickelst bestehende Setups kontinuierlich weiter. KPIs wie CPL, CAC, Conversion Rate und Pipeline-Impact sind für dich nicht nur Reporting-Zahlen, sondern Steuerungsinstrumente.</p>
+<p>Gleichzeitig bringst du strategische Weitsicht mit: Du hinterfragst bestehende Prozesse, optimierst Tracking- und Attributionsmodelle und nutzt moderne KI-Tools sowie Automatisierungen, um Effizienz und Performance stetig zu steigern.</p>
+<p>Im Mittelpunkt steht: qualitative Leads, transparente Performance-Strukturen und nachhaltiges Wachstum für ein ambitioniertes KI-Startup.</p>
+<p>Du berichtest direkt an die Geschäftsführung Marketing &#x26; Sales.</p>
+<ul>
+<li>Ganzheitliche Performance-Strategie: Entwicklung und kontinuierliche Weiterentwicklung einer datenbasierten Paid-Strategie entlang des gesamten B2B-Funnels (Awareness bis Conversion)</li>
+<li>Full-Funnel Campaign Ownership: Eigenverantwortliche Planung, Umsetzung und Skalierung kanalübergreifender Kampagnen (z. B. Google, LinkedIn, Meta) mit klarem Fokus auf Pipeline-Impact</li>
+<li>Wachstum &#x26; Skalierung: Identifikation neuer Wachstumshebel, Zielgruppen und Kanäle sowie systematisches Testing und Validieren neuer Ansätze</li>
+<li>Marketing-Sales-Alignment: Enge Zusammenarbeit mit Sales zur Definition von Ideal Customer Profiles (ICP), Lead-Scoring-Modellen und Feedback-Loops zur Qualitätssteigerung</li>
+<li>Lead- &#x26; Pipeline-Optimierung: Generierung qualifizierter B2B-Leads in enger Abstimmung mit Sales – mit Fokus auf Leadqualität, Conversion und nachhaltigem Revenue-Impact</li>
+<li>KPI-Steuerung &#x26; Budgetverantwortung: Strategische Allokation und Skalierung von Werbebudgets auf Basis von CPL, CAC, ROAS und Customer Lifetime Value</li>
+<li>Tracking &#x26; Attribution: Aufbau, Optimierung und Qualitätssicherung eines sauberen Tracking-Setups (z. B. GA, Tag Manager, CRM-Integration) inklusive Weiterentwicklung von Attributionsmodellen</li>
+<li>Conversion-Rate-Optimierung: Analyse und Optimierung von Landingpages, Funnels, Creatives und Messaging auf Basis datengetriebener Insights und A/B-Tests</li>
+<li>Reporting &#x26; Insights: Erstellung transparenter Performance-Reports mit klaren Handlungsempfehlungen für die Geschäftsführung</li>
+<li>AI &#x26; Automatisierung: Einsatz moderner KI-Tools und Marketing-Automationen zur Effizienzsteigerung, Skalierung und datenbasierten Entscheidungsfindung</li>
+<li>Prozess- &#x26; Strukturaufbau: Mitgestaltung skalierbarer Performance-Strukturen und interner Best Practices in einem wachsenden KI-Startup</li>
+</ul>
+<h2>Qualifikation</h2>
+<p>• Du hast Performance-Marketing bereits skalierend verantwortet – idealerweise im B2B-, SaaS- oder Tech-Umfeld – und kannst messbare Erfolge vorweisen (z. B. signifikante Senkung des CAC, Skalierung von Budgets bei stabilem ROAS, Aufbau planbarer Pipeline)</p>
+<ul>
+<li>Du denkst in Revenue, nicht in Reichweite. Pipeline-Impact, SQL-Qualität und Customer Lifetime Value sind für dich die relevanten Steuerungsgrößen</li>
+<li>Du hast echte Budgetverantwortung getragen und Kampagnen von validierten Tests auf sechsstellige Jahresbudgets skaliert</li>
+<li>Du baust skalierbare Performance-Strukturen, nicht nur einzelne Kampagnen – saubere Setups, klare KPI-Logik, nachhaltige Skalierungsmechanismen</li>
+<li>Tracking ist für dich kein Nice-to-have, sondern Fundament. Du verstehst Attribution, CRM-Integration und datengetriebene Entscheidungsmodelle</li>
+<li>Du triffst Entscheidungen auf Basis von Daten – schnell und pragmatisch. 80/20 ist für dich ein Werkzeug, kein Risiko</li>
+<li>Testing ist Teil deiner DNA. Du validierst Hypothesen strukturiert, testest aggressiv und optimierst kontinuierlich</li>
+<li>Du verbindest Kreativität mit Performance-Denken. Starke Creatives und klare Messaging-Logik gehören für dich zusammen</li>
+<li>Du nutzt KI und Automatisierung proaktiv, um Effizienz, Skalierbarkeit und Wettbewerbsvorteile zu schaffen</li>
+<li>Du arbeitest unternehmerisch. Du wartest nicht auf perfekte Rahmenbedingungen, sondern schaffst sie. Du übernimmst Verantwortung, wartest nicht auf Briefings und willst mit hoher Ergebnisorientierung aktiv gestalten</li>
+<li>Du kommunizierst klar, fordernd und lösungsorientiert – auch gegenüber Geschäftsführung, Produkt und Sales</li>
+<li>Du willst Impact. Nicht nur ein Kampagnenmanagement aufbauen, sondern einen messbaren Beitrag zum Unternehmenswachstum leisten</li>
+<li>Du bist ein Teamplayer. Ambitioniertes Mindset und Kollegialität schließen sich für dich nicht aus, sondern gehören zusammen</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li>Remote oder Hybrid: Arbeite flexibel von überall oder in unserem Co-Working-Space in Hamburg</li>
+<li>Startup-Spirit: Schnelle Entscheidungen, flache Hierarchien, agile Arbeitsweise und viel Gestaltungsspielraum</li>
+<li>Learning Culture: Intensive Einarbeitung, offene Feedback-Kultur mit persönlichem Mentoring &#x26; echtes On-the-Job-Learning</li>
+<li>Teamwork first: Du arbeitest eng mit erfahrenen Sales Managern zusammen und lernst direkt von ihnen. Kollegiale &#x26; persönliche Atmosphäre, regelmäßige Teamevents und Knowledge-Sharing-Sessions</li>
+<li>Lösungsorientierte Kultur: Wir fördern Kreativität, Eigenverantwortung und den Willen, Dinge voranzutreiben</li>
+<li>KI-Boost: Du nutzt modernste Tools – von KI-Outreach bis hin zu Automatisierungen, die deine Arbeit smarter und zukunftssicher machen</li>
+<li>Keep going smarter: Budget für Weiterbildung, Konferenzen und E-Learnings, um immer auf dem neuesten Stand der KI-Entwicklung zu bleiben Your benefits: Mit einem monatlichen Zuschuss unterstützen wir dich bei Mobilität, Fitness, Lebensmitteln oder sonstigem</li>
+</ul>
+<p><strong>Warum diese Rolle perfekt für Dich ist</strong></p>
+<ul>
+<li>Du bekommst echten Wachstumseinfluss. Deine Entscheidungen wirken direkt auf Pipeline, Umsatz und Skalierung. Klare Ziele, viel Freiheit in der Umsetzung und Verantwortung für Budget und Ergebnis.</li>
+<li>Du baust Performance-Strukturen von Grund auf mit auf. Kein starres Konzernkonstrukt, sondern die Chance, ein skalierbares Growth-Setup aktiv mitzugestalten.</li>
+<li>Du arbeitest im Zukunftsmarkt KI. Performance-Marketing für ein innovatives KI-Produkt bedeutet hohe Relevanz, klare Differenzierung und echtes Marktpotenzial.</li>
+<li>Du bist strategischer Sparringspartner fürs Management. Deine Insights beeinflussen Go-to-Market-Strategien und Wachstumsentscheidungen auf GF-Ebene.</li>
+</ul>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/homie/marketing-manager-paid-performance-hamburg-183233" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

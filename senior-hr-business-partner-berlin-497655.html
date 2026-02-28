@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(Senior) HR Business Partner (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Flix sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">(Senior) HR Business Partner (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><span data-contrast="none">Bei&nbsp;FlixTrain&nbsp;bieten wir sichere Arbeitsplätze mit überdurchschnittlicher Bezahlung und&nbsp;tollen&nbsp;Zusatzleistungen. Du hast die Möglichkeit, dich in einem dynamischen Umfeld weiterzuentwickeln, in dem dein Einfluss wirklich zählt.</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="none">FlixTrain&nbsp;wächst – und mit uns wachsen auch die Anforderungen an Führung, Strukturen und klare Entscheidungen.&nbsp;Als</span><strong><span data-contrast="none">&nbsp;(Senior) HR Business Partner (m/w/d)&nbsp;</span></strong><span data-contrast="none">spielst du eine zentrale Rolle in dieser Entwicklung: Du berätst unsere Führungskräfte auf Augenhöhe, gestaltest nachhaltige Organisationsstrukturen und stellst sicher, dass personelle Entscheidungen sowohl strategisch klug als auch rechtlich fundiert sind.</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559685&quot;:0,&quot;335559737&quot;:0,&quot;335559738&quot;:0,&quot;335559739&quot;:160,&quot;335559740&quot;:278}">&nbsp;</span></p>
+<p><span style="font-size: 24pt;"><strong data-renderer-mark="true">Über die Rolle</strong></span></p>
+<ul>
+<li data-leveltext="" data-font="Symbol" data-listid="7" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;multilevel&quot;}" data-aria-posinset="5" data-aria-level="1"><span data-contrast="auto">Du berätst&nbsp;proaktiv unsere Führungskräfte in allen personalrelevanten Fragestellungen und unterstützt diese bei weiteren Organisationsentwicklung und strukturellem Wachstum</span> </li>
+<li data-leveltext="" data-font="Symbol" data-listid="7" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;multilevel&quot;}" data-aria-posinset="5" data-aria-level="1">Du unterstützt bei bei Performance- und Entwicklungsfragen auf Team- und Individualebene und begleitest aktiv Change Prozesse und treibst personalrelevante Transformationsthemen </li>
+<li data-leveltext="" data-font="Symbol" data-listid="7" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;multilevel&quot;}" data-aria-posinset="5" data-aria-level="1">Du arbeitest eng mit dem Management an der strategischen und operativen Personalplanung und leitest aus Headcount‑Entwicklungen, Forecasts und Kapazitätsanalysen die richtigen Prioritäten ab; &nbsp;auf Basis klarer KPIs gibst du datengetriebene Empfehlungen und übersetzt sie in konkrete Maßnahmen für nachhaltige Personalstrukturen </li>
+<li data-leveltext="" data-font="Symbol" data-listid="7" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;multilevel&quot;}" data-aria-posinset="5" data-aria-level="1">Du berätst Führungskräfte zu arbeitsrechtlichen Fragestellungen und unterstützt personelle Maßnahmen in enger Zusammenarbeit mit unseren Rechtsexpert*innen, um sichere und fundierte Entscheidungen zu gewährleisten. </li>
+<li data-leveltext="" data-font="Symbol" data-listid="7" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;multilevel&quot;}" data-aria-posinset="5" data-aria-level="1">Du stellst hochwertige HR‑Prozesse entlang des Employee Lifecycles sicher, standardisierst und optimierst Abläufe in unserem Wachstumsumfeld und stärkst eine klare Führungs‑ und Performancekultur im gesamten Unternehmen<span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559685&quot;:720,&quot;335559737&quot;:0,&quot;335559738&quot;:0,&quot;335559739&quot;:160,&quot;335559740&quot;:278,&quot;335559991&quot;:360}">&nbsp;</span></li>
+</ul>
+<p><span style="font-size: 24pt;"><strong>Über Dich</strong></span></p>
+<ul>
+<li data-leveltext="" data-font="Symbol" data-listid="12" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559683&quot;:0,&quot;335559684&quot;:-2,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="1" data-aria-level="1"><span data-contrast="none">Du bringst ein abgeschlossenes Studium im Bereich Human Resources oder in einem vergleichbaren Fachgebiet mit</span> </li>
+<li data-leveltext="" data-font="Symbol" data-listid="12" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559683&quot;:0,&quot;335559684&quot;:-2,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="1" data-aria-level="1">Du verfügst über mindestens 5–7 Jahre Erfahrung als HR Business Partner*in in einem wachsenden, idealerweise regulierten Umfeld sowie sehr fundierte Kenntnisse im deutschen Arbeitsrecht und einschlägige Erfahrung in der Zusammenarbeit mit Betriebsräten </li>
+<li data-leveltext="" data-font="Symbol" data-listid="12" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559683&quot;:0,&quot;335559684&quot;:-2,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="1" data-aria-level="1">Du arbeitest strukturiert und datenbasiert, bringst Erfahrung in der Personalplanung mit und überzeugst durch hohe Entscheidungsfähigkeit, Durchsetzungsstärke und zugleich diplomatisches Geschick </li>
+<li data-leveltext="" data-font="Symbol" data-listid="12" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559683&quot;:0,&quot;335559684&quot;:-2,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="1" data-aria-level="1">Souveränes Auftreten gegenüber Führungskräften auf allen Ebenen und die Fähigkeit, wirtschaftliche Zusammenhänge schnell zu erfassen und People‑Themen strategisch wirksam zu platzieren </li>
+<li data-leveltext="" data-font="Symbol" data-listid="12" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559683&quot;:0,&quot;335559684&quot;:-2,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="1" data-aria-level="1">Sehr gute Deutsch- und Englischkenntnisse</li>
+</ul>
+<p><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559685&quot;:720,&quot;335559737&quot;:0,&quot;335559738&quot;:0,&quot;335559739&quot;:160,&quot;335559740&quot;:278,&quot;335559991&quot;:360}">Bei uns zählt der Blick auf das Ganze – auch wenn du nicht alle Anforderungen zu 100 % erfüllst, aber dennoch glaubst, etwas bewegen zu können, freuen wir uns auf deine Bewerbung!&nbsp;</span></p>
+<p><span style="font-size: 24pt;"><strong>Was Wir Bieten</strong></span></p>
+<ul>
+<li data-leveltext="-" data-font="Aptos" data-listid="13" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559683&quot;:0,&quot;335559684&quot;:-2,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Aptos&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;-&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="1" data-aria-level="1"><strong><span data-contrast="none">Reisevorteile:</span></strong><span data-contrast="none">&nbsp;12 kostenlose Flix-Gutscheine + 12 Rabattgutscheine für Freunde &amp; Familie.&nbsp;</span> </li>
+<li data-leveltext="-" data-font="Aptos" data-listid="13" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559683&quot;:0,&quot;335559684&quot;:-2,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Aptos&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;-&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="1" data-aria-level="1"><strong><span data-contrast="none">Arbeiten von Überall:</span></strong><span data-contrast="none">&nbsp;Je nach Rolle kannst du bis zu 60 Tage pro Jahr von einem anderen Standort aus arbeiten.&nbsp;</span> </li>
+<li data-leveltext="-" data-font="Aptos" data-listid="13" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559683&quot;:0,&quot;335559684&quot;:-2,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Aptos&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;-&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="1" data-aria-level="1"><strong><span data-contrast="none">Hybrides Arbeitsmodell:</span></strong><span data-contrast="none">&nbsp;Wir sind ein Unternehmen mit Bürokultur, bieten jedoch Flexibilität, um Arbeit und Leben in Einklang zu bringen.&nbsp;</span> </li>
+<li data-leveltext="-" data-font="Aptos" data-listid="13" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559683&quot;:0,&quot;335559684&quot;:-2,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Aptos&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;-&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="1" data-aria-level="1"><strong><span data-contrast="none">Gesundheits- und Wohlfühlangebote</span></strong><span data-contrast="none">:&nbsp;Zugang zu vertraulichen Einzelberatungen, Kursen und Stressbewältigungsmaßnahmen – für dich und bis zu vier Familienangehörige.&nbsp;</span> </li>
+<li data-leveltext="-" data-font="Aptos" data-listid="13" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559683&quot;:0,&quot;335559684&quot;:-2,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Aptos&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;-&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="1" data-aria-level="1"><strong><span data-contrast="none">Lernen &amp; Entwicklung:</span></strong><span data-contrast="none">&nbsp;Nutze Sprachkurse, Schulungen und Experten-Sessions, um deine Fähigkeiten auszubauen.&nbsp;</span> </li>
+<li data-leveltext="-" data-font="Aptos" data-listid="13" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559683&quot;:0,&quot;335559684&quot;:-2,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Aptos&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;-&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="1" data-aria-level="1"><strong><span data-contrast="none">Mentoring-Programm</span></strong><span data-contrast="none">: Vernetze dich mit erfahrenen Kollegen, um Einblicke zu gewinnen und deine Karriere zu beschleunigen.</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559685&quot;:720,&quot;335559737&quot;:0,&quot;335559738&quot;:0,&quot;335559739&quot;:160,&quot;335559740&quot;:278,&quot;335559991&quot;:360}">&nbsp;</span></li>
+</ul>
+<p style="line-height: 1.4;">&nbsp;</p>
+<hr>
+<p style="line-height: 1.4;"><span style="font-size: 18pt;"><strong><span class="TextRun SCXW120114278 BCX0" lang="DE-DE" data-contrast="none"><span class="NormalTextRun SCXW120114278 BCX0">Warum Teil von Flix werden?</span></span><span class="TextRun SCXW120114278 BCX0" lang="DE-DE" data-contrast="none"><span class="NormalTextRun SCXW120114278 BCX0">&nbsp;</span></span><span class="EOP SCXW120114278 BCX0" data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335557856&quot;:16777215,&quot;335559738&quot;:180,&quot;335559739&quot;:0}">&nbsp;</span></strong></span></p>
+<p><span data-contrast="none">Bei Flix konzentrieren wir uns darauf, Reisen einfach, sicher und erschwinglich zu gestalten – sowohl für unsere Passagiere als auch für unsere Mitarbeiter. Hier geht es schnell voran, und es gibt viel Raum, etwas zu bewegen. Wir wachsen und entwickeln uns täglich weiter und suchen Menschen, die bereit sind, sich einzubringen und die Art und Weise, wie wir arbeiten, mitzugestalten.&nbsp;</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559685&quot;:0,&quot;335559737&quot;:0,&quot;335559738&quot;:0,&quot;335559739&quot;:160,&quot;335559740&quot;:278}">&nbsp;</span></p>
+<p><span data-contrast="none">Wenn du einen Job suchst, in dem du wachsen und etwas bewirken kannst, dann bist du bei&nbsp;FlixTrain&nbsp;genau richtig. Hier kannst du Teil eines Teams werden, in dem dein Beitrag zählt und du deine Reise selbst gestalten kannst!</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;201341983&quot;:0,&quot;335551550&quot;:1,&quot;335551620&quot;:1,&quot;335559685&quot;:0,&quot;335559737&quot;:0,&quot;335559738&quot;:0,&quot;335559739&quot;:160,&quot;335559740&quot;:278}">&nbsp;</span></p>
+<p style="line-height: 1.4;" data-renderer-start-pos="12125">&nbsp;</p>
+<p><iframe src="https://www.youtube.com/embed/YlHz7TiiRAw" width="560" height="314"></iframe></p>
+<p>&nbsp;</p><p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/flix/senior-hr-business-partner-berlin-497655" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

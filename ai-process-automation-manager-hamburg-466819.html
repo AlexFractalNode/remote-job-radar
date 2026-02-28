@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & Process Automation Manager (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">adlicious sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">AI & Process Automation Manager (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Online Marketing</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Über adlicious</strong></p>
+<p>adlicious ist einer der führenden Advertising Solutions Provider im schönen Hamburg und unsere Mission ist es, die besten Werbekampagnen für unsere Kunden zu kreieren, indem wir Media, Creative &#x26; Tech miteinander vereinen. Mit unserer einzigartigen Ad Delivery Technologie unterstützen wir führende Marken dabei, ihre Botschaft in Echtzeit über die gesamte digitale Customer Journey personalisiert an ihre Zielgruppen auszuliefern. Dafür brauchen wir talentierte Individuen aus unterschiedlichen Bereichen, die gemeinsam Synergien schaffen. Momentan sind wir ca. 90 Mitarbeitende, Tendenz steigend - was uns noch fehlt, bist DU!</p>
+<p><strong>Über die Rolle:</strong></p>
+<p>Der AI &#x26; Process Automation Manager ist verantwortlich für die Identifikation, Evaluierung und Implementierung von KI-gestützten Lösungen zur Optimierung interner Prozesse bei adlicious. Die Rolle verbindet technisches KI-Know-how mit einem tiefen Verständnis der operativen Abläufe im Unternehmen und agiert als zentrale Schnittstelle zwischen Teams und neuen Technologien.</p>
+<h2>Aufgaben</h2>
+<p><strong>Prozessanalyse &#x26; Potenzialerkennung:</strong></p>
+<ul>
+<li>Systematische Analyse bestehender Workflows (Kampagnenmanagement, Reporting, Kreation, Sales, Admin) auf Automatisierungs- und KI-Potenzial</li>
+</ul>
+<p><strong>Tool-Scouting &#x26; Evaluation:</strong></p>
+<ul>
+<li>Laufende Recherche, Bewertung und Pilotierung von KI-Tools, Plattformen und APIs, die für adlicious relevant sind</li>
+</ul>
+<p><strong>Implementierung &#x26; Integration:</strong></p>
+<ul>
+<li>Einführung und Konfiguration ausgewählter Lösungen, inklusive Anbindung an bestehende Systeme und die proprietäre Ad-Tech-Infrastruktur</li>
+</ul>
+<p><strong>Enablement &#x26; Training:</strong></p>
+<ul>
+<li>Schulung und Begleitung der Teams im Umgang mit neuen KI-Tools, Erstellung von Best Practices und internen Guides</li>
+</ul>
+<p><strong>Interner AI-Support:</strong></p>
+<ul>
+<li>Erste Anlaufstelle für Mitarbeitende bei KI-bezogenen Fragen, Problemen und Ideen – eine Art "AI Help Desk"</li>
+</ul>
+<p><strong>Effizienz-Tracking:</strong></p>
+<ul>
+<li>Messung und Dokumentation der erzielten Zeitersparnis und Qualitätsverbesserungen durch implementierte Lösungen</li>
+</ul>
+<p><strong>Trend-Monitoring:</strong></p>
+<ul>
+<li>Kontinuierliche Beobachtung des KI-Marktes mit Fokus auf Relevanz für die Digital-Advertising-Branche</li>
+</ul>
+<h2>Qualifikation</h2>
+<p><strong>Fundiertes KI-Verständnis:</strong></p>
+<ul>
+<li>Tiefgehende Kenntnisse aktueller KI-Tools und -Trends wie LLMs, Automatisierung sowie No-Code- und Low-Code-Lösungen zur Identifikation innovativer Einsatzmöglichkeiten.</li>
+</ul>
+<p><strong>Prozess- und Operations-Expertise:</strong></p>
+<ul>
+<li>Erfahrung in der Analyse, Optimierung und Skalierung von Prozessen zur Steigerung von Effizienz und Qualität.</li>
+</ul>
+<p><strong>Kommunikationsstärke:</strong></p>
+<ul>
+<li>Fähigkeit, komplexe technische Inhalte zielgruppengerecht und verständlich zu vermitteln – sowohl für Fachabteilungen als auch für Management.</li>
+</ul>
+<p><strong>Eigeninitiative &#x26; Hands-on-Mentalität:</strong></p>
+<ul>
+<li>Proaktive Arbeitsweise mit hoher Umsetzungsstärke und der Bereitschaft, Themen eigenständig voranzutreiben.</li>
+</ul>
+<p><strong>Digital Marketing / AdTech-Know-how:</strong></p>
+<ul>
+<li>Idealerweise Erfahrung im Digital-Marketing- oder AdTech-Umfeld mit Verständnis für datengetriebene Geschäftsmodelle.</li>
+</ul>
+<p><strong>Technisches Grundverständnis:</strong></p>
+<ul>
+<li>Solide Kenntnisse technischer Grundlagen wie API-Strukturen sowie idealerweise erste Erfahrungen im Scripting.</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li>Abwechslungsreiche Tätigkeit in einem jungen und dynamischen Team</li>
+<li>Übernahme der ÖPNV-Kosten</li>
+<li>JobRad</li>
+<li>Möglichkeiten zur eigenen Entwicklung (interne und externe Weiterbildungen)</li>
+<li>Möglichkeit zu Mobile-Office und Workation</li>
+<li>Modernste Arbeitsausstattung mit der Auswahl zwischen MacBook Pro oder Lenovo Thinkpad als Laptop inkl. Noise-Cancelling-Kopfhörer</li>
+<li>Ergonomische Arbeitsplätze</li>
+<li>Sprachkurse (egal ob Fremdsprache oder Deutsch)</li>
+<li>Viele Teamevents und Barabende in unserer Office-Bar mit leckeren Cocktails</li>
+<li>Firmeneigenes Fitnessstudio mit Cross-Training, Bodybuidling, Cardio, HIIT und Online Workouts</li>
+<li>Office Dogs :)</li>
+</ul>
+<p>Haben wir dein Interesse geweckt? Dann freuen wir uns auf deine Bewerbung.</p>
+<p>Besuch gerne unseren TikTok, Instagram oder Facebook Account um mehr über uns zu erfahren.</p>
+<p>Wir freuen uns auf Dich!</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/adlicious/ai-process-automation-manager-hamburg-466819" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

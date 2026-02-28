@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applied Machine Learning Engineer Wearable Devices (Full Time) Munich, Germany | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">NOXON GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Applied Machine Learning Engineer Wearable Devices (Full Time) Munich, Germany</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Engineering</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>NOXON is a Munich based MedTech startup founded in 2022 with the vision to transform muscle health on every skin. Guided by our purpose – moving what matters – we build technology that improves lives.<br>
+We are building a non-invasive muscle-computer-interface: a medical wearable that translates muscle signals into meaningful movement guidance.<br>
+At NOXON we believe in ownership. We believe in logic and strong partnerships over perceived limits. We believe that extraordinary results come from people who are willing to go the extra mile.</p>
+<h2>Tasks</h2>
+<p><strong>Job Description</strong></p>
+<p>We are hiring a full time Applied ML Engineer to turn complex biological data into reliable algorithms that directly shape product behavior and enable measurable improvements in muscle health. This is challenging work: people differ widely, data is heterogeneous and noisy, and outputs must be interpretable and trustworthy.<br>
+You will bridge data science and human physiology by translating biological data into real-world insights that can be reliably integrated into our products. Rather than optimizing abstract metrics, you will develop physiologically grounded models that provide interpretable and reliable behavior in real-world product use.<br>
+You will take ownership of core algorithm development from hypothesis and experimental design to product integration. By working with hardware and software teams, you will ensure physiological validity, computational feasibility, and reliability in real-world use. Your work will directly influence how people experience measurable improvements in muscle health and quality of life through our technology.</p>
+<p><strong>Your Main Tasks<br>
+-</strong> Translate multimodal biological data into biologically meaningful insights that inform product behavior and muscle health outcomes<br>
+- Develop interpretable models grounded in physiological principles and aligned with real-world constraints<br>
+- Design and iterate experiments to uncover biologically meaningful patterns and translate them into improved product performance<br>
+- Transform experimental and real-world data into reliable representations through rigorous signal processing and principled modeling<br>
+- Build systems that account for variability and uncertainty in human physiology to enable improved device behavior</p>
+<h2>Requirements</h2>
+<p><strong>Must-Have Qualifications<br>
+-</strong> Ability to translate biological data into real-world conclusions and product-ready algorithms<br>
+- Solid experience in biological data handling, including signal processing, feature extraction, and physiologically informed validation<br>
+- Experience contributing to the design and execution of rigorous experimental setups grounded in physiological and biomechanical reasoning<br>
+- Experience in applied machine learning and statistics, with the ability to reason under uncertainty and model biological variability using both classical and modern approaches<br>
+- Strong Python skills with solid software engineering practices and experience building reproducible, end-to-end data and experiment pipelines</p>
+<p><strong>Nice-to-Have Qualifications<br>
+-</strong> Background in biomedical engineering, biomechanics, physiology, mathematics, or physics<br>
+- Experience working with real-world hardware and data collection, such as wearables and user data<br>
+- Experience deploying models beyond research environments into production or embedded systems (e.g. edge/embedded ML)<br>
+- Experience with additional languages and tooling for analysis (e.g., Julia or R)</p>
+<h2>Benefits</h2>
+<p><strong>What you get<br>
+-</strong> Real ownership and freedom to shape experiments with direct product impact in a fast moving, high standards team<br>
+- Building technology that improves people’s muscle health<br>
+- Culture with an ambitious team where your contribution is visible and valued<br>
+- Trust-based working hours, access to lab equipment and offices where you can shape your own workspace<br>
+- Opportunity to grow into technical leadership as we scale</p>
+<p><strong>What sets you apart<br>
+-</strong> You thrive in an environment where you take responsibility for quality and reliability of your outcomes<br>
+- You combine focus, drive, and energy with a strong commitment to delivering high-quality results<br>
+- You think critically and probabilistically about data and uncertainty, seeking biologically meaningful understanding rather than optimizing black box metrics<br>
+- You are comfortable in the intersection of experimentation, modeling, and product constraints, combining scientific rigor with pragmatic, outcome-driven execution</p>
+<p><strong>How to apply</strong></p>
+<p>Are we a match? If you bring high passion, talent, and the ambition to perform at a high-level, we will meet you at the extra mile. Send us your CV and a short description of a real-world oriented ML project you have worked on.</p>
+<p>Tech and Domain: Python, statistics, experiment design, signal processing, feature extraction, biomedical data, wearable devices, digital health<br>
+Related roles: Applied ML Engineer, ML Engineer, Biomedical Data Scientist</p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/noxon-gmbh/applied-machine-learning-engineer-wearable-devices-full-time-munich-germany-471057" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

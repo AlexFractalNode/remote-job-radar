@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controller / Buchhalter (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">INODEQ GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Controller / Buchhalter (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Controlling</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Werde unser strategischer Finanz-Kompass!</strong></p>
+<p><strong>Standort:</strong> Holzgerlingen | <strong>Art:</strong> Vollzeit</p>
+<p>Dein Herz schlägt für Zahlen, Bilanzen und wirtschaftliche Zusammenhänge? Du tauchst gerne tief in Daten ein, hast steuerliche Themen auf dem Schirm und liebst es, durch präzise Analysen die Weichen für den Unternehmenserfolg zu stellen?</p>
+<p>Dann komm zu <strong>INODEQ</strong>! Wir suchen einen erfahrenen und analytisch denkenden Controller (m/w/d), der unser finanzielles Gewissen wird und unsere Geschäftsführung mit fundierten Daten unterstützt.</p>
+<h2>Aufgaben</h2>
+<p>🎯 <strong>Deine Aufgaben – Hier sorgst du für schwarze Zahlen</strong></p>
+<p>In dieser Schlüsselposition bist du für die finanzielle Steuerung und Transparenz unseres Unternehmens verantwortlich:</p>
+<ul>
+<li><strong>Buchhaltung &#x26; Steuern:</strong> Du bist für die gewissenhafte Vorbereitung der laufenden Buchhaltung zuständig und fungierst als zentrales Bindeglied und Ansprechpartner für unseren Steuerberater.</li>
+<li><strong>Zahlungsverkehr &#x26; Provisionen:</strong> Du bereitest den Zahlungsverkehr souverän vor und übernimmst die korrekte und pünktliche Erstellung der Provisionsabrechnungen.</li>
+<li><strong>Finanzplanung:</strong> Du bist Herr/in über unsere Liquiditäts- und Budgetplanung und stellst sicher, dass wir finanziell jederzeit auf einem soliden Fundament stehen.</li>
+<li><strong>Analysen &#x26; Forecasts:</strong> Du führst detaillierte Umsatz- und Kostenanalysen durch, erstellst aussagekräftige Forecasts und zeigst wirtschaftliche Potenziale auf.</li>
+<li><strong>Investitionsplanung:</strong> Du rechnest Business Cases durch und begleitest unsere Investitionsvorhaben mit scharfem wirtschaftlichem Blick.</li>
+<li><strong>Monatsreporting:</strong> Du erstellst verlässliche und transparente Reportings für die Geschäftsführung und bereitest komplexe Zahlen verständlich auf.</li>
+</ul>
+<h2>Qualifikation</h2>
+<p>💼 <strong>Dein Profil – Das bringst du mit</strong></p>
+<ul>
+<li><strong>Fundierte Qualifikation:</strong> Du verfügst zwingend über eine erfolgreich abgeschlossene Weiterbildung zum Controller (z. B. IHK), ein BWL-Studium mit Schwerpunkt Finanzen/Controlling oder eine vergleichbare, tiefergehende finanzwirtschaftliche Ausbildung.</li>
+<li><strong>Berufserfahrung:</strong> Du bringst nachweislich mindestens 3 bis 5 Jahre fundierte Berufserfahrung im Controlling oder in der anspruchsvollen Buchhaltung mit.</li>
+<li><strong>Zahlenverständnis &#x26; Steuern:</strong> Du hast eine ausgeprägte Affinität zu Zahlen, denkst extrem analytisch und bringst ein sehr gutes Verständnis für Steuerthemen und Wirtschaftlichkeit mit.</li>
+<li><strong>IT- &#x26; Tool-Affinität:</strong> Du gehst sicher mit gängigen ERP-Systemen um, kennst dich idealerweise mit Datev aus und Excel ist dein natürlicher Lebensraum.</li>
+<li><strong>Arbeitsweise:</strong> Du arbeitest absolut diskret, detailgenau, strukturiert und extrem eigenverantwortlich.</li>
+<li><strong>Kommunikationsstärke:</strong> Du kannst komplexe finanzielle Sachverhalte verständlich erklären und präsentieren.</li>
+</ul>
+<h2>Benefits</h2>
+<p><strong>Was wir dir bieten:</strong></p>
+<p>🏖️ <strong>30 Tage Urlaub – plus extra Zeit an Feiertagen</strong></p>
+<p>Bei uns kannst du auftanken: 30 Tage Urlaub, zusätzlich je ein halber freier Tag an Heiligabend und Silvester.</p>
+<p>🤝 <strong>Verantwortung &#x26; Vertrauen</strong></p>
+<p>Wir setzen auf Eigenverantwortung, kurze Wege und eine offene Kommunikation. Kontrolle? Brauchen wir nicht – wir verlassen uns aufeinander.</p>
+<p>🌟 <strong>Sinnvolle Aufgaben mit Wirkung</strong></p>
+<p>Dein Beitrag zählt: Du gestaltest mit, hältst den Rücken frei und sorgst für Struktur – ein echter Mehrwert im Tagesgeschäft.</p>
+<p>💬 <strong>Ein starkes Team mit Herz und Humor</strong></p>
+<p>Respektvoll, offen und hilfsbereit – bei uns zählt Miteinander mehr als Hierarchie. Wir arbeiten gemeinsam an klaren Zielen und haben auch Spaß dabei.</p>
+<p>💻 <strong>Moderne Tools &#x26; effiziente Prozesse</strong></p>
+<p>Du arbeitest mit aktuellem Equipment und digitalen Anwendungen, die dir den Arbeitsalltag wirklich erleichtern.</p>
+<p>🏢 <strong>Wohlfühl-Arbeitsplatz in Holzgerlingen</strong></p>
+<p>Unser heller, moderner Flagship-Store bietet nicht nur Stil, sondern auch ein durchdachtes Arbeitsumfeld mit Platz zum Mitdenken.</p>
+<p>☕ <strong>Extras, die den Tag besser machen</strong></p>
+<p>Frischer Kaffee, Wasser – und regelmäßige Team-Events, die verbinden und einfach gut tun.</p>
+<p><strong>Neugierig geworden?</strong></p>
+<p>Dann freuen wir uns darauf, dich kennenzulernen!</p>
+<p>Schick uns deine Bewerbungsunterlagen mit Angabe zum nächstmöglichen Zeitpunkt und Deiner Gehaltsvorstellung.</p>
+<p>Erzähl uns, warum du zu INODEQ passt – und wir melden uns zeitnah bei dir.</p>
+<p><strong>INODEQ GmbH – Premium Outdoor Living beginnt mit starken Menschen im Team.</strong></p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/inodeq-gmbh/controller-buchhalter-holzgerlingen-413764" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

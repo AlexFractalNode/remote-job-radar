@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Werkstudent (m/w/d) Globales Vertragsmanagement | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Flix sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Werkstudent (m/w/d) Globales Vertragsmanagement</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Geschätzt 50k-60k Euro</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Bei Flix erwartet Dich ein dynamisches Arbeitsumfeld mit starken Entwicklungsmöglichkeiten und einem technologieorientierten Ansatz, um Reisen weltweit zugänglicher, nachhaltiger und erschwinglicher zu gestalten. Du hast die Möglichkeit, wettbewerbsfähige Vergütung zu erhalten.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p style="line-height: 1.4;"><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;">Bei Flix erwartet Dich ein dynamisches Arbeitsumfeld mit wettbewerbsfähiger Vergütung, starken Entwicklungsmöglichkeiten und einem technologieorientierten Ansatz, um Reisen weltweit zugänglicher, nachhaltiger und erschwinglicher zu gestalten.</span></p>
+<p style="line-height: 1.4;"><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;">Wir suchen einen motivierten <strong>Werkstudenten (m/w/d) im globalen Vertragsmanagement</strong>, der unser Team bei der Harmonisierung sowie Weiterentwicklung unserer globalen Buspartnerverträge unterstützt und dabei weitgehende Einblicke in unser international geprägtes Geschäftsumfeld erhält.&nbsp;</span></p>
+<p style="line-height: 1.4;"><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;"><strong>Organisatorisches: </strong>16 Stunden pro Woche, einjähriger Vertrag mit Verlängerungsoption, Arbeitsort München (hybrides Modell).</span></p>
+<p style="line-height: 1.4;"><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;"><strong>Über das Team </strong></span></p>
+<p style="line-height: 1.4;"><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;">Du wirst Teil eines internationalen Vertragsmanagement- und Business-Excellence-Teams, das für die Implementierung und Weiterentwicklung globaler Buspartnerverträge verantwortlich ist. Wir arbeiten mit zentralen sowie regionalen Teams weltweit zusammen und sorgen für standardisierte, effiziente und rechtssichere Vertragsprozesse. Mit modernen Tools und klaren Workflows verbessern wir kontinuierlich die Qualität und Transparenz unseres Vertragsmanagements.&nbsp;</span></p>
+<p style="line-height: 1.4;"><span style="font-size: 24pt;"><strong><span style="font-family: helvetica, arial, sans-serif;">Über die Rolle</span></strong></span></p>
+<ul>
+<li><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;">Unterstützung bei der unternehmensweiten Harmonisierung und Implementierung unseres globalen Buspartnervertrags</span></li>
+<li><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;">Mitarbeit an der Automatisierung, Digitalisierung und Standardisierung unseres Vertragsmanagements</span></li>
+<li><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;">Erstellung, Anpassung und Finalisierung von Vertragsdokumenten in enger Zusammenarbeit mit der Rechtsabteilung</span></li>
+<li><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;">Bearbeitung und Integration neuer Vertragsanforderungen und Anpassungswünsche in bestehende Vertragsvorlagen</span></li>
+<li><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;">Austausch mit Teams weltweit, z.B. zu Aktualisierungen, Übersetzungen und lokalen Besonderheiten</span></li>
+<li><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;">Aktive Mitarbeit bei Prozessverbesserungen und der Weiterentwicklung effizienter Workflows<br></span><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;"><br></span></li>
+</ul>
+<p><span style="font-size: 24pt;"><strong><span style="font-family: helvetica, arial, sans-serif;">Über Dich</span></strong></span></p>
+<ul>
+<li style="font-size: 12pt;">Eingeschriebener Bachelor‑ oder Master‑Student*in &nbsp;in einem wirtschafts-, rechtswissenschaftlichen oder vergleichbaren Studiengang, idealerweise mit internationaler Ausrichtung</li>
+<li style="font-size: 12pt;">Sehr gute Deutsch‑ und Englischkenntnisse (jeweils mind. C1)</li>
+<li style="font-size: 12pt;">Freude an Detailarbeit, Struktur und präzisem Arbeiten mit Verträgen</li>
+<li style="font-size: 12pt;">Zuverlässige, eigenständige und sorgfältige Arbeitsweise</li>
+<li style="font-size: 12pt;">Sicherer Umgang mit MS Word, Excel und PowerPoint</li>
+<li style="font-size: 12pt;">Kommunikativ, teamorientiert und offen für neue Themen</li>
+<li style="font-size: 12pt;">Erste Praxiserfahrung (z. B. durch Praktika) ist von Vorteil</li>
+</ul>
+<p style="line-height: 1.4;"><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;">Bei uns zählt der Blick auf das Ganze – auch wenn du nicht alle Anforderungen zu 100 % erfüllst, aber dennoch glaubst, etwas bewegen zu können, freuen wir uns auf deine Bewerbung!  &nbsp;</span></p>
+<p><span style="font-size: 24pt;"><strong><span style="font-family: helvetica, arial, sans-serif;">Was wir Dir bieten &nbsp;– mehr als nur einen Job</span></strong></span></p>
+<ul>
+<li><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;"><strong>Reisevorteile:</strong> 12 kostenlose Flix-Gutscheine + 12 Rabattgutscheine für Freunde &amp; Familie.</span></li>
+<li><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;"><strong>Hybrides Arbeitsmodell: </strong>Wir sind ein Unternehmen mit Bürokultur, bieten jedoch Flexibilität, um Arbeit und Leben in Einklang zu bringen<strong>.</strong></span></li>
+<li><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;"><strong>Gesundheits- und Wohlfühlangebote: </strong>Zugang zu vertraulichen Beratungsangeboten, Kursen und Stressbewältigungsmaßnahmen.</span></li>
+<li><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;"><strong>Lernen &amp; Entwicklung:&nbsp;</strong>Nutze Sprachkurse, Trainings und Experten-Sessions zur fachlichen und persönlichen Weiterentwicklung.</span></li>
+<li><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;"><strong>Mentoring-Programm:&nbsp;</strong>Vernetze Dich mit erfahrenen Kolleg*innen, erhalte Einblicke und beschleunige Deine berufliche Weiterentwicklung.<strong><br></strong></span></li>
+</ul>
+<p style="line-height: 1.4;"><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;">Eine Übersicht über standortspezifische Zusatzleistungen findest Du hier:<strong>&nbsp;<a href="https://flix.careers/locations/">Locations - Flix Career</a></strong></span></p>
+<hr>
+<p style="line-height: 1.4;"><span style="font-size: 18pt; font-family: helvetica, arial, sans-serif;"><strong>Warum Flix?</strong></span></p>
+<p style="line-height: 1.4;" data-renderer-start-pos="12125"><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;">Bei Flix arbeitest Du in Teams, die zusammen Herausforderungen meistern und Kreativität fördern. Wir glauben an eine Ownership Kultur – wir geben Dir die Möglichkeit, Initiative zu ergreifen, etwas zu bewegen und Deinen eigenen Karriereweg zu gestalten.<br>Während wir weltweit weiter wachsen, kannst Du unsere Arbeitsweise &nbsp;aktiv mitgestalten.<br>Wenn Du bereit bist, Dich weiterzuentwickeln und Deine Reise selbst zu gestalten, ist Flix genau das Richtige für Dich!<br></span></p>
+<p><iframe src="https://www.youtube.com/embed/YlHz7TiiRAw" width="560" height="314"></iframe></p>
+<p>&nbsp;</p><p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/flix/werkstudent-globales-vertragsmanagement-munchen-98674" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

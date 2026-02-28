@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(Senior) Produktmanager (m/w/d) in erfolgreichem E-Commerce Unternehmen | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Auguma.digital sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">(Senior) Produktmanager (m/w/d) in erfolgreichem E-Commerce Unternehmen</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Marketing Manager</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Die Start-up-Schmiede auguma digital lebt „Excellence in E-Commerce“. Unser Ziel ist es, in verschiedenen Märkten die digitalen Marktführer von morgen aufzubauen, nachhaltig Geschäftsmodelle zu etablieren und mit unseren Produkten die Lebensqualität möglichst vieler Menschen in Europa zu verbessern. Unsere Stärken liegen in der Produktentwicklung, Marketing, Automatisierung, AI und Operational Excellence.</p>
+<p>Du erhältst auf dieser Stelle die einzigartige Gelegenheit, von Produktentwicklung, über Marketing und Shop-Management bis hin zu Business Development, Logistik und Kundenkommunikation alle Facetten des Produkts zu gestalten. Wir verstehen Produktmanager als “Unternehmer im Unternehmen” mit voller Wirksamkeit und Verantwortung für den eigenen Produktbereich. Der Fokus liegt dabei klar auf E-Commerce und Marketing.</p>
+<h2>Aufgaben</h2>
+<p>Du erhältst einen eigenen Produktbereich, den Du perspektivisch komplett verantwortest und um den Du Dich eigenständig in allen Aspekten kümmerst. Nach einer Einarbeitungsphase wirst Du aktiv in folgende Bereiche eingebunden, sodass Du schnell Verantwortung übernimmst, die sich kontinuierlich steigert. Dadurch kannst Du jederzeit Dein volles Potenzial ausschöpfen und sehr schnell, sehr viel lernen:</p>
+<ul>
+<li>Markt- und Wettbewerbsanalyse: Analysiere Markttrends und Kundenbedürfnisse, um neue Marktchancen zu identifizieren und die Wettbewerbslandschaft zu verstehen.</li>
+<li>Business Development &#x26; strategische Produktentwicklung: Gestalte aktiv den gesamten Produktlebenszyklus von der Ideenfindung über die Konzeption und Pricing bis zum Launch im Shop.</li>
+<li>Marketing: Koordiniere und überwache unsere Marketingaktivitäten, um die Markenpräsenz und Benutzererfahrung kontinuierlich zu optimieren. D.h. unsere Shop-Systeme, Marktplätze und alle wichtigen Online-Marketing-Disziplinen, wie SEA, Social Media und Influencer Marketing.</li>
+<li>Stakeholder-Management: Kommuniziere mit internen und externen Stakeholdern, um eine reibungslose Zusammenarbeit sicherzustellen.</li>
+</ul>
+<p>Bei Deinen Aufgaben stehen Dir die erfahrenen KollegInnen innerhalb von augma digital, sowie einige der besten Freelancer und Agenturen in ihren Bereichen zur Seite.</p>
+<h2>Qualifikation</h2>
+<p>Wir setzen ausschließlich auf erstklassige Mitarbeiter! Daher:</p>
+<ul>
+<li>Du hast mit überdurchschnittlichem Erfolg ein wirtschaftswissenschaftliches Studium an einer sehr guten Universität abgeschlossen</li>
+<li>Du hast mindestens zwei, gerne deutlich mehr Jahre Berufserfahrung in den job-relevanten Bereichen idealerweise im Marketing, Produktmanagement, E-Commerce oder Startup</li>
+<li>Du identifizierst Dich gerne mit Deiner Arbeit und gehst Deine Aufgaben überdurchschnittlich motiviert und engagiert an</li>
+<li>Du trittst selbstsicher gegenüber Geschäftspartnern auf, bist zuverlässig, loyal und konstruktiv-kritisch</li>
+<li>Du verfügst über einen sehr hohen Qualitätsanspruch an Deine Arbeit und kannst Dich selbstständig in Themen einarbeiten</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li>Umfassender Einblick &#x26; maximale Lernkurve: Der Job als Produktmanager ermöglicht es Dir, in einem breit gefächerten Aufgabenfeld eigenständig Verantwortung zu übernehmen und “Hands on” zu arbeiten und Dich stetig weiterzuentwickeln. Denn “Learning by doing” sehen wir als effektivste und nachhaltigste Lernmethode.</li>
+<li>Hoch-relevante Aufgaben: Deine Arbeit trägt maßgeblich zum mittel- und langfristigen Unternehmenserfolg bei. So siehst Du sehr schnell, was Du konkret bewirkst.</li>
+<li>Flache Hierarchien: Bei uns erwarten dich flache Hierarchien, die den direkten Austausch und die Zusammenarbeit fördern, damit du schnell in die Unternehmenskultur integriert wirst.</li>
+<li>Schneller &#x26; einfacher Rekrutierungsprozess: Wenn Dein Profil und Deine Bewerbung zu uns und der Stelle passen, laden wir Dich direkt zum Bewerbungsgespräch mit Case ein. Kannst Du uns überzeugen, erhältst Du wenige Tage später ein konkretes Angebot. Der gesamte Bewerbungsprozess bis zum Vertragsabschluss dauert nur ca. 2 Wochen.</li>
+<li>Individuelle Entwicklung: Wir bieten Dir spannende Weiterentwicklungs- möglichkeiten. So kannst Du Dich beispielsweise zum Country Manager für ein wichtiges Land entwickeln oder die gesamte Verantwortung für eine bestehende Marke übernehmen. Bei besonders guten Leistungen kannst Du auch einen komplett neuen Bereich mit uns aufbauen oder im Rahmen von M&#x26;A eine Übernahme (beg)leiten und anschließend weiterführen.</li>
+<li>Angenehme Arbeitsatmosphäre: Dich erwarten ein freundlicher Umgang, ein hoch-motiviertes, junges Team und schöne, zentral gelegene Büroräume mit Dachgarten und Teich :-) am Neumarkt.</li>
+</ul>
+<p>Du passt zum Profil und könntest Dir vorstellen in einer sehr erfolgreichen E-Commerce Firma zu arbeiten? Dann sollten wir uns kennenlernen!</p>
+<p>Bitte schicke uns Deinen Lebenslauf, Motivationsschreiben, Zeugnisse und Arbeitszeugnisse. Gib bitte auch Deine Gehaltsvorstellung und Deine frühestmögliche Verfügbarkeit an. Dein Ansprechpartner ist August Macke (Geschäftsführer).</p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/augumadigital/senior-produktmanager-in-erfolgreichem-e-commerce-unternehmen-cologne-139478" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
