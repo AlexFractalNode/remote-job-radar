@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Werkstudent*in Beratung PV | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">renerco plan consult GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Werkstudent*in Beratung PV</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 30k-50k</span>
+                    <span class="badge badge-tag">Purchasing</span><span class="badge badge-tag">Materials Administration and Logistics</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Bewirb dich, wenn du Erfahrung im Bereich Beratung und Planung von PV-Projekten suchst und dich für nachhaltige Energien begeistern kannst. Bei renerco plan consult hast du die Möglichkeit, deine Fähigkeiten in einem dynamischen Team einzubringen und dich weiterzuentwickeln.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>renerco plan consult</strong> gestaltet die Energiewende aktiv mit. In den Bereichen Windenergie, Photovoltaik, Netzanschluss und Sektorkopplung. Deutschlandweit und in Europa.<br>
+Unser Anspruch ist es, unseren Kunden nachhaltige, effiziente und qualitativ hochwertige Lösungen in Planung und Beratung zu bieten.</p>
+<p>renerco plan consult ist Teil der Natural-Power-Gruppe mit Niederlassungen in UK, Irland, USA, Frankreich und Italien.</p>
+<p>Für unseren Standort <strong>München</strong> suchen wir eine*n:</p>
+<p><strong>Werkstudent*in Beratung Photovoltaik (m/w/d)</strong></p>
+<h2><strong>Über diese Position</strong></h2>
+<p>Zur Unterstützung unseres Teams im Bereich Photovoltaik-Beratung suchen wir für eine langfristige Zusammenarbeit eine engagierte Persönlichkeit (16–20 Wochenstunden), der die Energiewende ein echtes Anliegen ist.</p>
+<h2><strong>Deine Aufgaben</strong></h2>
+<ul>
+<li>Mitarbeit bei der Erstellung von Ertragsprognosen und Ertragsgutachten</li>
+<li>Datenbasierte Analyse von PV‑Parks und Erarbeitung von Optimierungslösungen</li>
+<li>Weiterentwicklung von Tools für Performance‑ und Betriebsdatenauswertungen</li>
+<li>Beschaffung und Analyse meteorologischer Daten</li>
+<li>Unterstützung bei Recherchen</li>
+<li>Aufbereitung und Verarbeitung von Daten für interne Datenbanken</li>
+<li>Begleitung bei Anlageninspektionen</li>
+</ul>
+<h2><strong>Dein Profil</strong></h2>
+<ul>
+<li>Eingeschriebene*r Student*in der Ingenieur‑, Natur‑ oder Wirtschaftswissenschaften (z. B. Energietechnik, Elektrotechnik, Maschinenbau, Informatik, Data Science o. Ä.)</li>
+<li>Ausgeprägte Datenaffinität und Freude daran, mit großen, komplexen Datensätzen zu arbeiten</li>
+<li>Gute Kenntnisse in der Erstellung und Weiterentwicklung von Skripten (z. B. Python, VBA) zur Analyse‑ und Tooloptimierung</li>
+<li>Erste Erfahrung im Umgang mit Mess‑, Betriebs‑ oder meteorologischen Daten von Vorteil</li>
+<li>Sehr gute MS‑Office‑Kenntnisse, insbesondere Excel, idealerweise ergänzt durch Erfahrung mit Visualisierungstools</li>
+<li>Analytische, strukturierte Arbeitsweise und Motivation, neue technische und datengetriebene Fragestellungen zu erschließen</li>
+<li>Interesse an Ertragsanalysen, Performancebewertungen und Optimierungslösungen von PV‑Systemen</li>
+<li>Teamorientierte und zuverlässige Arbeitsweise sowie Bereitschaft zu gelegentlichen Außenterminen (z. B. Anlageninspektionen)</li>
+</ul>
+<h2>Deine Benefits</h2>
+<ul>
+<li>Langfristige Beschäftigung als Werkstudent*in und Top‑Einstiegsmöglichkeiten in den späteren Beruf</li>
+<li>Du arbeitest an der Gestaltung der Energiewende. Bring deine Ideen ein!</li>
+<li>Du bist Mitglied eines internationalen, bunten Teams – mit flachen Hierarchien und unkompliziertem Miteinander</li>
+<li>Stete Förderung deiner fachlichen Entwicklung und Übernahme von Verantwortung</li>
+<li>Gemeinsame Events wie Weihnachtsfeier, Grillen und unsere jährlichen Klausurtage zur Weiterentwicklung und für gemeinsamen Spaß</li>
+<li>Unser schönes Loft‑Büro in der Nähe der Theresienwiese mit Kicker, Bio‑Kaffee, kleinen Snacks und gutem Münchner Sprudelwasser</li>
+<li>Top ausgestattete Arbeitsplätze mit zusätzlichem Bildschirm, ergonomischem Bürostuhl, höhenverstellbarem Schreibtisch etc.</li>
+</ul>
+<h2><strong>Vielfalt und Chancengleichheit</strong></h2>
+<p>Wir schaffen eine Arbeitsumgebung, die von Respekt und Chancengleichheit geprägt ist, um allen Bewerber*innen und Teammitgliedern dieselben Beschäftigungsmöglichkeiten zu bieten. Entscheidungen treffen wir ausschließlich nach Qualifikation, Potenzial, Leistung und geschäftlichem Bedarf. Diskriminierung jeglicher Art tolerieren wir nicht.</p>
+<p>Wir freuen uns auf deine Bewerbung!</p>
+<p><strong>renerco plan consult GmbH</strong><br>
+Ganghoferstraße 66<br>
+80339 München<br>
+<a href="http://www.renercoplanconsult.com">www.renercoplanconsult.com</a></p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/renerco-plan-consult-gmbh/werkstudentin-beratung-pv-munich-11929" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

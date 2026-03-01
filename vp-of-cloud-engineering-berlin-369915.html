@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VP of Cloud Engineering | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Qdrant sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">VP of Cloud Engineering</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 80k-100k</span>
+                    <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Management</span><span class="badge badge-tag">Team Leader</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Bewerben Sie sich, wenn Sie Erfahrung in der Cloud-Engineering-Branche haben und sich für die Weiterentwicklung von AI-Anwendungen begeistern. In dieser Rolle können Sie die Herausforderung annehmen, die nächste Generation von AI-Anwendungen zu entwickeln und zu skalieren.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Qdrant is the leading open-source V<strong>ector Search Engine</strong> powering the next generation of AI applications. From semantic search and RAG to recommendation systems and AI agents, Qdrant enables developers and enterprises to build intelligent systems that deliver high performance, scalability, and reliability.</p>
+<p>With a fast-growing open-source community and increasing enterprise adoption, we are expanding Qdrant Cloud to deliver a fully managed, production-ready Vector Search platform trusted by startups and global enterprises alike.</p>
+<p>We are seeking a <strong>VP of Cloud Engineering</strong> to lead the next stage of Qdrant Cloud’s evolution.</p>
+<h2>Tasks</h2>
+<p><strong>The Role</strong></p>
+<p>As VP of Cloud Engineering, you will define and execute the strategy for Qdrant Cloud and Enterprise Product. You will lead distributed engineering teams responsible for infrastructure, platform, SRE, DevOps, security, and reliability.</p>
+<p>You will be accountable for delivering a secure, scalable, highly available, and cost-efficient managed service that meets enterprise-grade expectations while preserving the performance and flexibility that define Qdrant.</p>
+<p>This is both a strategic and hands-on leadership role in a high-growth environment.</p>
+<p><strong>Strategy &#x26; Vision</strong></p>
+<ul>
+<li>Define and own the technical vision and roadmap for Qdrant Cloud</li>
+<li>Scale the platform to support enterprise workloads and global deployments</li>
+<li>Drive multi-cloud and cloud-native architecture decisions</li>
+<li>Ensure strong alignment between Cloud Engineering, Core Engineering, Product, and Go-To-Market teams</li>
+</ul>
+<p><strong>Platform &#x26; Infrastructure Leadership</strong></p>
+<ul>
+<li>Lead infrastructure, DevOps, SRE, and platform engineering teams</li>
+<li>Architect for high availability, fault tolerance, scalability, and performance</li>
+<li>Oversee Kubernetes-based orchestration and cloud infrastructure (AWS/GCP/Azure)</li>
+<li>Improve CI/CD, release engineering, and operational excellence</li>
+</ul>
+<p><strong>Reliability, Security &#x26; Compliance</strong></p>
+<ul>
+<li>Establish best-in-class reliability practices (SLOs, SLAs, observability, incident response)</li>
+<li>Lead cloud security initiatives and enterprise compliance (SOC 2, ISO 27001, etc.)</li>
+<li>Build a strong DevSecOps culture and processes</li>
+</ul>
+<p><strong>Cost &#x26; Performance Optimization</strong></p>
+<ul>
+<li>Optimize cloud cost efficiency at scale</li>
+<li>Implement strong FinOps practices</li>
+<li>Balance performance, reliability, and infrastructure spend</li>
+</ul>
+<p><strong>Leadership &#x26; Organizational Growth</strong></p>
+<ul>
+<li>Hire, mentor, and scale a high-performing cloud engineering organization</li>
+<li>Develop engineering managers and technical leaders</li>
+<li>Foster a culture of ownership, accountability, and operational excellence</li>
+<li>Drive cross-functional execution with product and sales teams</li>
+</ul>
+<h2>Requirements</h2>
+<p><strong>Experience</strong></p>
+<ul>
+<li>10+ years in engineering leadership, including senior roles in cloud/platform engineering</li>
+<li>Experience building and scaling B2B SaaS platforms</li>
+<li>Proven track record in managing distributed teams</li>
+<li>Deep experience with Kubernetes and cloud-native architectures</li>
+<li>Experience operating high-scale, production-critical infrastructure</li>
+<li>Experience with enterprise security and compliance frameworks</li>
+</ul>
+<p><strong>Technical Depth</strong></p>
+<ul>
+<li>Strong background in distributed systems</li>
+<li>Experience running large-scale infrastructure in AWS/GCP/Azure</li>
+<li>Deep knowledge of observability, reliability engineering, and automation</li>
+<li>Strong understanding of DevOps, CI/CD, and infrastructure-as-code</li>
+</ul>
+<p><strong>Leadership Traits</strong></p>
+<ul>
+<li>Strategic thinker who can also dive deep technically</li>
+<li>Strong decision-making in high-growth, fast-changing environments</li>
+<li>Clear communicator across technical and business stakeholders</li>
+<li>Data-driven and customer-focused</li>
+</ul>
+<p><strong>Nice to Have</strong></p>
+<ul>
+<li>Experience with search engines, databases, storage systems, or data infrastructure</li>
+<li>Experience in open-source companies</li>
+<li>Familiarity with AI/ML infrastructure or vector search systems</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li>
+<p>Shape the future of AI infrastructure</p>
+</li>
+<li>
+<p>Lead cloud strategy at a fast-growing open-source company</p>
+</li>
+<li>
+<p>Work with a globally distributed, high-talent engineering team</p>
+</li>
+<li>
+<p>Competitive compensation + equity</p>
+</li>
+<li>
+<p>Remote-first culture</p>
+</li>
+<li>
+<p>Candidates, please submit a short non-AI-generated cover letter and explain why you think you are a great fit for this role.</p>
+</li>
+<li>
+<p>It is a remote position, but candidates from Europe will be given preference.</p>
+</li>
+<li>
+<p>Recruiters: we accept candidate profiles from external recruiters and headhunters only via 𝗵𝘁𝘁𝗽𝘀://𝗵𝗶𝗿𝗲𝗯𝘂𝗳𝗳𝗲𝗿.𝗰𝗼𝗺</p>
+</li>
+</ul>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/qdrant/vp-of-cloud-engineering-berlin-369915" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
