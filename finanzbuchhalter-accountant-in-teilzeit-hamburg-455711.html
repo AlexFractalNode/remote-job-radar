@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanzbuchhalter / Accountant (m/w/d) in Teilzeit | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">GALAB Laboratories GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Finanzbuchhalter / Accountant (m/w/d) in Teilzeit</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Controlling</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Bei GALAB haben wir eine wichtige Mission: Sicherstellen, dass die Produkte unserer Kunden unbedenklich sind, um die Endverbraucher:innen zu schützen. Täglich verzehren Menschen Bio-Äpfel aus der Region oder Kokosnussprodukte vom anderen Ende der Welt. Die Kleinsten werden mit Babynahrung, -windeln und Spielzeug versorgt. Egal worum es sich handelt, wir vergewissern uns, dass sich Menschen auf die Sicherheit und Qualität dieser Produkte verlassen können.</p>
+<p>Während unser Analytiklabor 1992 noch in Geesthacht gegründet wurde, ist der heutige Hauptsitz in Hamburg. Als unabhängiges und inhabergeführtes Handelslaboratorium stehen wir für die externe Qualitätskontrolle im nationalen sowie internationalen Raum. Dazu zählen die GALAB-Standorte in China, Peru, Singapur und der Türkei sowie die Repräsentant:innen in den Niederlanden, auf den Philippinen und in der Ukraine. Das Produktportfolio erstreckt sich über die Analyse von Lebensmitteln, Lebensmittelverpackungen, Sanitärprodukten, Industrieprodukten, biopharmazeutischen Produkten bis hin zu Umweltanalysen bezüglich Substanzen und Kontaminanten. Mit über 30 Jahren Marktdasein, jährlich mehr als 1.000.000 Analysen und über 1.000 verschiedenen Analysemethoden gehört GALAB zu den größten Dienstleistungslaboren für die Qualitätskontrolle in ganz Europa.</p>
+<p>Dieser großen Herausforderung begegnet GALAB als starkes Kollektiv aus knapp 250 hervorragenden Mitarbeiter:innen. Von der Probenannahme, den Laboren und der Messtechnik bis hin zu unserem Kundendienst und der Verwaltung sind die Menschen von GALAB der Motor für Innovation, Weiterentwicklung und schließlich unseren Erfolg.</p>
+<p>Wir suchen zum nächstmöglichen Zeitpunkt eine:n</p>
+<p><strong>Finanzbuchhalter / Accountant (m/w/d) in Teilzeit</strong></p>
+<p>Bereich Rechnungswesen | Unbefristet  | Teilzeit</p>
+<h2>Aufgaben</h2>
+<ul>
+<li>Eigenverantwortliche Bearbeitung von Geschäftsvorfällen in der Kreditoren- und Debitorenbuchhaltung</li>
+<li>Erstellung von Zahlläufen und damit verbundene Abstimmungen</li>
+<li>Verbuchen der Bankauszüge sowie von Reisekosten, Kassen- und Kreditkartenabrechnungen</li>
+<li>Bearbeitung und Übermittlung der Umsatzsteuermeldung</li>
+<li>Mitarbeit bei der Erstellung der Jahresabschlüsse</li>
+<li>Enge und vertrauensvolle Zusammenarbeit mit allen internen Schnittstellen</li>
+</ul>
+<h2>Qualifikation</h2>
+<ul>
+<li>abgeschlossene kaufmännische Ausbildung mit mehrjähriger Berufserfahrung in der Buchhaltung</li>
+<li>Sicherer Umgang mit den gängigen Microsoft Office Programmen sowie SAP Business One</li>
+<li>Freude am Umgang mit Zahlen sowie lösungsorientiertes Arbeiten</li>
+<li>Hohes Verantwortungsbewusstsein, schnelle Auffassungsgabe und eine selbstständige, zuverlässige und termingenaue Arbeitsweise</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li><strong>Ausgewogene Work-Life-Balance</strong>: Durch flexible Arbeitszeiten, mobiles Arbeiten, Co-Working-Spaces in der Europa-Passage und keine Schichtarbeit.</li>
+<li><strong>Nachhaltige Mobilität:</strong> Zuschuss zum Deutschlandticket und JobRad, Lade-Stationen für E-Autos und eine sehr gute Verkehrsanbindung an die öffentlichen Verkehrsmittel.</li>
+<li><strong>Get-togethers &#x26; Events:</strong> Das berühmte „Honig-Frühstück“, unsere Sommer- und Weihnachtsfeste, Team-Lunchs, und After Works.</li>
+<li><strong>Verpflegung:</strong> Kostenloser Kaffee, Tee, Wasserspender, frisches Obst, Snack-Box und einer gut ausgestatteten Küchen-Lounge.</li>
+</ul>
+<p>Beginnen Sie jetzt bei uns eine unbefristete Anstellung in einem systemrelevanten und zukunftssicheren Unternehmen.</p>
+<p>Senden Sie uns bitte Ihre vollständigen Bewerbungsunterlagen (inkl. Anschreiben, mögl. Eintrittstermin und Gehaltsvorstellung) per E-Mail in einer PDF-Datei (max. 10 MB) zu.</p>
+<p>Ihr Ansprechpartner ist Marcus Demuth. Haben Sie Fragen? Dann melden Sie sich gern unter der <a>+49 40368077400</a>. Wir freuen uns auf Ihre Bewerbung!</p>
+<p><a href="http://www.galab.com/"><strong><a href="http://www.galab.com">www.galab.com</a></strong></a><br>
+<strong>GALAB Laboratories GmbH</strong><br>
+<strong>Am Schleusengraben 7 • 21029 Hamburg</strong></p>
+<p>Ihre Daten werden gemäß den geltenden Datenschutzbestimmungen verarbeitet und ausschließlich für den Bewerbungsprozess verwendet. Weitere Informationen zum Datenschutz finden Sie in unserer Datenschutzerklärung unter <a href="https://www.galab.com/de/datenschutzerklarung/">Datenschutzerklärung - Galab Laboratories GmbH</a></p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/galab-laboratories-gmbh/finanzbuchhalter-accountant-in-teilzeit-hamburg-455711" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
