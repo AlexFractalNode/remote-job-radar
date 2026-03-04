@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media & Community Manager (FTC - 18 months) - all Genders | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">OLIVER Agency sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Social Media & Community Manager (FTC - 18 months) - all Genders</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Unbekannt</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Als Social Media & Community Manager bei OLIVER Agency hast du die Chance, in einer dynamischen und globalen Umgebung zu arbeiten und deine Fähigkeiten in der Gestaltung und Umsetzung von Social-Media-Strategien zu entwickeln. Du wirst Teil eines erfahrenen Teams und kannst deine Ideen einbringen, um unsere Kunden zu unterstützen und ihre Marken zu stärken.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><div class="content-intro"><p><span data-contrast="auto">Established in 2004, </span><strong><span data-contrast="none">OLIVER</span></strong><span data-contrast="auto"> is the world's first and only specialist in designing, building, and running bespoke in-house agencies and marketing ecosystems for brands. We partner with over 300 clients in 40+ countries and counting. Our unique model drives creativity and efficiency, allowing us to deliver tailored solutions that resonate deeply with audiences.</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">As a part of </span><strong><span data-contrast="none">The Brandtech Group</span></strong><span data-contrast="auto">, we're at the forefront of leveraging cutting-edge AI technology to revolutionise how we create and deliver work. Our </span><strong><span data-contrast="none">AI solutions</span></strong><span data-contrast="auto"> enhance efficiency, spark creativity, and drive insightful decision-making, empowering our teams to produce innovative and impactful results.</span>&nbsp;</p></div><p><strong><span data-contrast="auto">Role: </span></strong><span data-contrast="auto">Social Media &amp; Community Manager (FTC - 18 months) - all Genders</span></p>
+<p><strong><span data-contrast="auto">Location:</span></strong> <span data-contrast="auto">Hamburg, Germany <strong>(Office presence expected at minimum 2 days per week)</strong></span></p>
+<p><span data-ccp-props="{&quot;335559739&quot;:240}">&nbsp;</span></p>
+<p><strong><span data-contrast="auto">About the role:</span></strong><span data-ccp-props="{&quot;335559739&quot;:240}">&nbsp;</span></p>
+<p><span data-contrast="auto">You'll be one of the people who makes Dove's social presence happen, day in, day out. From </span><span data-contrast="auto">content ideation, trend tracking and&nbsp;</span><span data-contrast="auto">scheduling</span><span data-contrast="auto">&nbsp;to community engagement, copy writing, and performance tracking,&nbsp;you'll&nbsp;manage the </span><span data-contrast="auto">daily&nbsp;</span><span data-contrast="auto">rhythm of Dove's social channels and ensure the brand shows up consistently and compellingly across platforms.</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:300}">&nbsp;</span></p>
+<p><span data-contrast="auto">This is a role for someone who is <strong>organised</strong>, <strong>culturally fluent</strong></span><span data-contrast="auto">, and <strong>genuinely enthusiastic about social media as a discipline.</strong> You understand what makes content work on TikTok versus Instagram versus&nbsp;YouTube,&nbsp;you can write copy that fits the tone of each platform, and you notice when something is trending before it peaks.&nbsp;We're&nbsp;looking for someone who is as comfortable managing a content calendar and pulling a performance report as they are drafting a reactive post or briefing a content creator on an emerging format.</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:300,&quot;335559739&quot;:300}">&nbsp;</span></p>
+<p><span data-contrast="auto">Success means channels that run smoothly, content that consistently meets brand and platform standards, a community that feels listened to and engaged, and performance data that shows steady growth in reach, engagement, and brand affinity.</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:300,&quot;335559739&quot;:300}">&nbsp;</span></p>
+<p><span data-ccp-props="{&quot;335559739&quot;:240}">&nbsp;</span></p>
+<p><strong><span data-contrast="auto">What you will be doing:</span></strong><span data-ccp-props="{&quot;335559739&quot;:240}">&nbsp;</span></p>
+<p><strong><span data-contrast="auto">Content Planning and Publishing</span></strong><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:300}">&nbsp;</span></p>
+<ul>
+<li><span data-contrast="auto">Create and&nbsp;</span><span data-contrast="auto">M</span><span data-contrast="auto">anage client's social content calendars across TikTok</span><span data-contrast="auto">&nbsp;and</span><span data-contrast="auto">,</span><span data-contrast="auto">&nbsp;Instagram</span><span data-contrast="auto">, </span><span data-contrast="auto">and&nbsp;emerging&nbsp;platforms, ensuring a consistent cadence of planned, campaign, and reactive content</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Schedule and publish content across platforms, ensuring every post meets brand guidelines, platform specifications, and accessibility standards (captions, alt text, format requirements)</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Write and adapt social copy for each platform, ensuring Dove's tone of voice is consistent, compelling, and native to the channel</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Coordinate with the creative team and content creators to ensure assets are delivered on time, correctly formatted, and ready to publish</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Support the Senior Social Media Manager in planning always-on content, campaign activations, and seasonal or product-launch moments</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+</ul>
+<p><strong><span data-contrast="auto">Community Management and Engagement</span></strong><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:300,&quot;335559739&quot;:300}">&nbsp;</span></p>
+<ul>
+<li><span data-contrast="auto">Monitor Dove's social channels daily, responding to comments, messages, and mentions in&nbsp;a timely, on-brand, and thoughtful manner</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Engage proactively with Dove's audience, fostering a sense of community and connection that reflects the brand's values of inclusivity and real beauty</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Track trending topics, hashtags, cultural moments, and platform features, flagging relevant opportunities to the wider team and, where&nbsp;appropriate, drafting reactive content</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Identify&nbsp;opportunities to surprise and delight Dove's audience through creative engagement,&nbsp;timely&nbsp;responses, and community-building moments</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+</ul>
+<p><strong><span data-contrast="auto">Performance Tracking and Reporting</span></strong><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:300,&quot;335559739&quot;:300}">&nbsp;</span></p>
+<ul>
+<li><span data-contrast="auto">Track and report on social content performance across platforms, compiling regular reports on key metrics including reach, engagement, saves, shares, and audience growth</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Use native platform analytics and social management tools to&nbsp;monitor&nbsp;content effectiveness,&nbsp;identify&nbsp;trends, and flag insights that can inform future content decisions</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Support the Senior Social Media Manager and Data Analyst in building a continuous learning loop between content output and performance data</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+</ul>
+<p><strong><span data-contrast="auto">Collaboration and Coordination</span></strong><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:300,&quot;335559739&quot;:300}">&nbsp;</span></p>
+<ul>
+<li><span data-contrast="auto">Collaborate with content creators, designers, and copywriters to ensure social assets align with the content calendar and campaign objectives</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Support the coordination of influencer and creator content within the publishing schedule, ensuring assets are approved, scheduled, and tracked</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Work closely with the Dove brand team on day-to-day social activity, keeping stakeholders informed of what's publishing,&nbsp;what's&nbsp;performing, and&nbsp;what's&nbsp;coming next</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Support briefing processes, helping to translate client briefs and campaign&nbsp;objectives&nbsp;into clear direction for the creative team</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+</ul>
+<p><strong><span data-contrast="auto">Platform Expertise and Trends</span></strong><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:300,&quot;335559739&quot;:300}">&nbsp;</span></p>
+<ul>
+<li><span data-contrast="auto">Stay current with social platform updates, algorithm changes, new features, and emerging content formats, sharing relevant developments with the team</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Contribute ideas for&nbsp;new content&nbsp;formats, series, and engagement approaches based on platform evolution and audience&nbsp;behaviour</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Ensure the studio's content approach reflects the latest platform best practices for organic reach and engagement</span> &nbsp;</li>
+</ul>
+<p><strong><span data-contrast="auto">What you need to be great in this role:</span></strong><span data-ccp-props="{&quot;134233117&quot;:true,&quot;134233118&quot;:true}">&nbsp;</span></p>
+<ul>
+<li><span data-contrast="auto">3-5 years of experience in social media management for consumer brands,<strong> ideally in beauty, personal care, wellness, or FMCG</strong></span><strong><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></strong></li>
+<li style="font-weight: bold;"><strong><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">Native in German (C2) and fluent in English (spoken and written)&nbsp;</span></strong></li>
+<li><span data-contrast="auto">Strong platform fluency across TikTok, Instagram, YouTube, and emerging social channels, including an understanding of content formats, algorithms, audience&nbsp;behaviours, and publishing best practices</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li style="font-weight: bold;"><strong><span data-contrast="auto">Experience managing social content calendars and publishing workflows across multiple platforms</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></strong></li>
+<li><span data-contrast="auto">Solid copywriting skills, with the ability to write platform-native social copy that reflects a brand's tone of voice and connects with diverse audiences</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li style="font-weight: bold;"><strong><span data-contrast="auto">Experience with community management, including responding to comments and messages, engaging with audiences, and&nbsp;maintaining&nbsp;a consistent, on-brand presence</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></strong></li>
+<li><span data-contrast="auto">Familiarity with social media management tools (such as Sprinklr, Hootsuite, Sprout Social, or similar) and native platform analytics</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">The ability to track and report on social performance metrics, with a good understanding of what the numbers mean and how they inform content decisions</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Strong&nbsp;organisational&nbsp;skills, with the ability to manage multiple workstreams, competing deadlines, and day-to-day publishing demands without losing attention to detail</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">A genuine interest in social culture, digital trends, and the evolving beauty and personal care landscape</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">A collaborative, proactive working style, with the confidence to flag opportunities, raise issues, and contribute ideas</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+</ul>
+<p><strong><span data-contrast="auto">Gen AI and Agentic Thinking:</span></strong><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:300,&quot;335559739&quot;:300}">&nbsp;</span></p>
+<ul>
+<li><span data-contrast="auto">Basic&nbsp;proficiency&nbsp;with Gen AI tools (such as ChatGPT, Claude, Copy.ai, Grammarly) to support copy drafting, content ideation, trend research, and reporting</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">An agentic approach to your work: ability to self-organise, manage priorities, find efficient solutions, and take initiative across a busy, multi-platform workload</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Willingness to experiment with AI tools as part of the social workflow, understanding when they add value and when human creativity, cultural nuance, and community instinct are needed</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Understanding of AI limitations, with an eye for outputs that feel authentic and&nbsp;on-brand&nbsp;versus generic</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+</ul>
+<p><strong><span data-contrast="auto">Qualifications:</span></strong><span data-contrast="auto">&nbsp;Formal degrees are welcome but not&nbsp;required. Equivalent experience counts. Experience can be gained through work, study, volunteering, or self-directed learning.</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:300,&quot;335559739&quot;:300}">&nbsp;</span></p>
+<p><strong><span data-contrast="auto"><span data-ccp-parastyle="heading 2">NICE TO HAVE</span></span></strong><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;134245418&quot;:true,&quot;134245529&quot;:true,&quot;335559738&quot;:192,&quot;335559739&quot;:96}">&nbsp;</span></p>
+<ul>
+<li><span data-contrast="auto">Experience working on Dove or Unilever brands</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Experience in an in-house agency, embedded studio, or social-specialist environment</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">An editorial background or experience writing long-form and short-form content for social</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Experience working with influencer or creator content within a publishing workflow</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Familiarity with social listening tools and basic audience research</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Experience with accessibility in social publishing (captions, alt text, inclusive content practices)</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">An interest in or experience with brand purpose, inclusivity, or social impact in a marketing context</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+<li><span data-contrast="auto">Familiarity with paid social amplification and how organic and paid content work together</span><span data-ccp-props="{&quot;134233117&quot;:false,&quot;134233118&quot;:false,&quot;335559738&quot;:0,&quot;335559739&quot;:0}">&nbsp;</span></li>
+</ul>
+<p><span data-ccp-props="{}">&nbsp;</span><span data-contrast="auto">Req ID:</span><span data-ccp-props="{}"> 16640</span></p>
+<p><span data-contrast="auto"><span style="color: rgb(255, 255, 255);">#LI-AB1 #LI-HYBRID #LI-MIDSENIOR</span></span></p>
+<p>&nbsp;</p><div class="content-conclusion"><p><span data-contrast="auto">Our values shape everything we do:</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">Be</span><strong><span data-contrast="auto"> Ambitious</span></strong><span data-contrast="auto"> to succeed &nbsp;</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">Be </span><strong><span data-contrast="auto">Imaginative</span></strong><span data-contrast="auto"> to push the boundaries of what's possible &nbsp;</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">Be </span><strong><span data-contrast="auto">Inspirational</span></strong><span data-contrast="auto"> to do groundbreaking work &nbsp;</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">Be </span><strong><span data-contrast="auto">always learning and listening</span></strong><span data-contrast="auto"> to understand &nbsp;</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">Be </span><strong><span data-contrast="auto">Results-focused </span></strong><strong> </strong><span data-contrast="auto">to exceed expectations &nbsp;</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">Be </span><strong><span data-contrast="auto">actively pro-inclusive and anti-racist</span></strong><span data-contrast="auto"> across our community, clients and creations  </span>&nbsp;<br><span data-ccp-props="{}">&nbsp;</span></p>
+<p><em><span data-contrast="auto">OLIVER,</span></em><em> </em><em><span data-contrast="auto">a part of the Brandtech Group, is an equal opportunity employer committed to creating an inclusive working environment where all employees are encouraged to reach their full potential, and individual differences are valued and respected. All applicants shall be considered for employment without regard to race, ethnicity, religion, gender, sexual orientation, gender identity, age, neurodivergence, disability status, or any other characteristic protected by local laws. &nbsp;</span></em><span data-ccp-props="{}">&nbsp;</span></p>
+<p><em><span data-contrast="auto"> OLIVER has set ambitious environmental goals around sustainability, with science-based emissions reduction targets. Collectively, we work towards our mission, embedding sustainability into every department and through every stage of the project lifecycle.</span></em></p></div><p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/oliver-agency/social-media-community-manager-ftc-18-months-all-genders-hamburg-349419" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Developer (Billing Team) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">TripleTen sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Backend Developer (Billing Team)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 80k-100k</span>
+                    <span class="badge badge-tag">Remote</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Bewirb dich auf diese Position, wenn du Erfahrung in Backend-Entwicklung suchst und dich für die Herausforderung eines Teams interessierst, das IT-Professionen ausbildet. Bei TripleTen hast du die Möglichkeit, deine Fähigkeiten in einem dynamischen Umfeld zu entwickeln und dich weiterzubilden.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><br></p><p><a href="https://tripleten.com" target="_blank" rel="noopener noreferrer">*TripleTen</a> is a service that empowers individuals, regardless of their prior experience, to embark on the exciting and challenging journey of mastering IT professions such as software engineering, data science, business intelligence analytics, and QA engineering in a feasible and accessible way, ultimately leading to employment opportunities.*</p><p><em>Our mission is to ensure that every student has the opportunity to master a new profession successfully and become a valuable member of the IT industry. We are successfully producing highly desirable tech professionals in the most competitive EdTech market in the world — the US market.</em></p><p>In this role, you'll enhance learning experiences at TripleTen, focusing on service development and platform improvement for global expansion.</p><br/><br/>What you will do: <br/><p><br></p><ul><li>Build and improve internal tools for the payment operations team</li><li>Integrate and maintain external systems and providers for payments, taxes, and financial reporting</li><li>Develop and evolve the billing system to make it easy to scale and adapt to new product requirements</li></ul><p><br></p><p><strong>Tech stack:</strong></p><ul><li>Python, FastAPI, LangChain, Golang</li><li>Postgres, Kafka</li><li>Kubernetes, Helm</li><li>GitLab CI</li></ul><br/><br/>What we can offer you: <br/><p><br></p><ul><li>Fully remote and full-time collaboration with professional freedom and minimal micromanagement;</li><li>Dynamic Team: Join a diverse, global team with experience across tech, ed-tech, and various industries;</li><li>We use digital tools like Miro, Notion, and Google Workspace for seamless collaboration;</li></ul><p><br></p><p><br></p><p><em>*At this time, we are unable to offer H-1B, L-1A/B sponsorship opportunities.</em></p><p><br></p><p><em>**This job description is not designed to contain a comprehensive listing of activities, duties, or responsibilities that are required. Nothing in this job description restricts management's right to assign or reassign duties and responsibilities at any time.</em></p><p><em>﻿</em></p><p><em>**TripleTen is an equal employment opportunity/affirmative action employer and considers qualified applicants for employment without regard to race, color, religion, sex, national origin, age, religion, disability, marital status, sexual orientation, gender identity/expression, protected military/veteran status, or any other legally protected factor.</em></p><br><strong>Requirements</strong><br><p><br></p><ul><li>Experienced in any of Python, Golang, C#, Java, Kotlin;</li><li>Experience applying DDD and Clean Architecture in real projects and/or willingness to learn;</li><li>High performance of writing high-quality, well-documented code;</li><li>Write unit and integration tests, experience in TDD is advantage;</li><li>Willingness to work in a team and invest in team processes;</li><li>Knowledge and acceptance of Agile principles.</li></ul><p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/tripleten/remote-backend-developer-billing-team-berlin-185691" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Payroll Specialist (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">SoftENGINE Holding GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">HR Payroll Specialist (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 55k-65k</span>
+                    <span class="badge badge-tag">Administration</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Als HR Payroll Specialist bei SoftENGINE Holding GmbH kannst du deine Expertise in Entgeltabrechnung einbringen und die HR-Strukturen eines wachsenden Tech-Unternehmens mitgestalten. Du übernimmst Verantwortung für die Lohnbuchhaltung und professionalisierst den Prozess.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Du bist Experte für Entgeltabrechnung, liebst klare Prozesse und willst die HR-Strukturen eines wachsenden Tech-Unternehmens aktiv mitgestalten?</strong></p>
+<p>Du suchst mehr als nur reine Datenpflege? Du willst Verantwortung übernehmen, die Lohnbuchhaltung von Grund auf professionalisieren und den Weg zum Inhouse-Payroll-Modell ebnen? Dann komm zu SoftENGINE!</p>
+<p>**Wer wir sind - Innovation trifft auf 30 Jahre Erfolg<br>
+**Als technologisch führendes ERP-Unternehmen liefert SoftENGINE seit über 30 Jahren kaufmännische Komplettlösungen. Mit unserer ERP-SUITE, modernsten KI-Tools und einem starken Partnernetzwerk digitalisieren wir den Mittelstand, von Warenwirtschaft über Finanzwesen bis E-Commerce. Wir stehen für Sicherheit und Wachstum.</p>
+<p>Für unser HR-Team suchen wir zum nächstmöglichen Zeitpunkt eine:n engagierte:n <strong>HR Payroll Specialist (m/w/d)</strong>, der/die Lust hat, unsere Abrechnungsprozesse zu zentralisieren und als kompetente:r Ansprechpartner:in für alle Entgeltthemen zu wirken.</p>
+<h2>Aufgaben</h2>
+<ul>
+<li>Du verantwortest die vorbereitende Lohn- und Gehaltsabrechnung für unsere verschiedenen Gesellschaften und stellst eine termingerechte Abwicklung sicher.</li>
+<li>Du treibst das Projekt „Inhouse-Payroll“ maßgeblich voran, indem du die Abrechnung von externen Dienstleistern schrittweise zu uns ins Haus holst.</li>
+<li>Du bist die zentrale Schnittstelle zu Sozialversicherungsträgern, Finanzämtern und Krankenkassen und klärst eigenständig lohnsteuer- und sozialversicherungsrechtliche Fragestellungen.</li>
+<li>Du übernimmst die administrative Betreuung des gesamten Mitarbeiter-Lifecycles, von der Erstellung der Arbeitsverträge über Vertragsänderungen bis hin zu Zeugnissen.</li>
+<li>Du prüfst und optimierst unsere bestehenden Abrechnungsprozesse und begleitest die Auswahl sowie Implementierung künftiger Payroll-Systeme.</li>
+<li>Du agierst als vertrauensvolle:r Ansprechpartner:in für unsere Mitarbeitenden und die Geschäftsführung in allen abrechnungsrelevanten Belangen.</li>
+</ul>
+<h2>Qualifikation</h2>
+<ul>
+<li>Du verfügst über eine erfolgreich abgeschlossene kaufmännische Ausbildung, idealerweise mit einer Weiterbildung zum/zur Lohn- und Gehaltsbuchhalter:in oder einer vergleichbaren Qualifikation.</li>
+<li>Du bringst fundierte Berufserfahrung in der Entgeltabrechnung mit und bist sicher im Umgang mit dem aktuellen Lohnsteuer- und Sozialversicherungsrecht.</li>
+<li>Du besitzt die nötige Eigeninitiative, dich zügig in neue Systeme (z. B. EDlohn, DATEV) einzuarbeiten, und bringst eine hohe Affinität zu digitalen HR-Prozessen sowie Excel mit.</li>
+<li>Du zeichnest dich durch eine sehr gewissenhafte, strukturierte und diskrete Arbeitsweise aus, auch wenn es um die Verwaltung mehrerer Gesellschaften geht.</li>
+<li>Du hast Freude daran, Strukturen nicht nur zu verwalten, sondern aktiv aufzubauen und zu professionalisieren.</li>
+<li>Du überzeugst durch eine klare Kommunikation und eine ausgeprägte Dienstleistungsorientierung gegenüber unseren Mitarbeitenden.</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li>Maximale Flexibilität: Arbeiten an einem unserer modernen Standorte, in Hauenstein oder Berlin - passend zu Deiner Lebenssituation.</li>
+<li>Echter Impact: Kurze Entscheidungswege und flache Hierarchien Deine Analysen bewirken etwas!</li>
+<li>Stabilität &#x26; Wachstum: Ein krisensicherer Arbeitsplatz in einem wachsenden Unternehmen mit über 30 Jahren Marktpräsenz.</li>
+<li>Top-Ausstattung &#x26; Benefits: Modernste Hard- und Software, attraktives Gehaltspaket und individuelle Weiterbildungsmöglichkeiten.</li>
+<li>Teamkultur: Ein kollegiales Miteinander, offene Türen und eine Unternehmenskultur, die Eigeninitiative wertschätzt und fördert.</li>
+</ul>
+<p>Bewirb Dich jetzt und gestalte unseren Erfolg mit!</p>
+<p>Werde Teil unseres Finance-Teams und nimm eine Schlüsselrolle in unserer Unternehmenssteuerung ein.</p>
+<p><em>Wenn du dich für diese Rolle begeisterst, aber nicht jede Qualifikation erfüllst, ermutigen wir dich, dich trotzdem zu bewerben!</em></p>
+<p>SoftEngine ist ein Arbeitgeber, der Chancengleichheit fördert. Wir setzen uns für ein vielfältiges und inklusives Umfeld ein, in dem Empathie und Respekt unser Miteinander leiten.</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/softengine-holding-gmbh/hr-payroll-specialist-berlin-480878" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

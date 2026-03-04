@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Manager (FTC - 18 months) - all Genders | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">OLIVER Agency sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Social Media Manager (FTC - 18 months) - all Genders</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Unbekannt</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Als Social Media Manager bei OLIVER Agency hast du die Chance, Teil eines innovativen Teams zu werden und deine Fähigkeiten in der Gestaltung und Umsetzung von Marketingstrategien einzusetzen. Du wirst Teil eines globalen Netzwerks und kannst deine Erfahrungen in einem dynamischen Umfeld erweitern.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><div class="content-intro"><p><span data-contrast="auto">Established in 2004, </span><strong><span data-contrast="none">OLIVER</span></strong><span data-contrast="auto"> is the world's first and only specialist in designing, building, and running bespoke in-house agencies and marketing ecosystems for brands. We partner with over 300 clients in 40+ countries and counting. Our unique model drives creativity and efficiency, allowing us to deliver tailored solutions that resonate deeply with audiences.</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">As a part of </span><strong><span data-contrast="none">The Brandtech Group</span></strong><span data-contrast="auto">, we're at the forefront of leveraging cutting-edge AI technology to revolutionise how we create and deliver work. Our </span><strong><span data-contrast="none">AI solutions</span></strong><span data-contrast="auto"> enhance efficiency, spark creativity, and drive insightful decision-making, empowering our teams to produce innovative and impactful results.</span>&nbsp;</p></div><p><strong><span data-contrast="auto">Role: </span></strong><span data-contrast="auto">Social Media Manager (FTC - 18 months) - all Genders&nbsp;</span></p>
+<p><strong><span data-contrast="auto">Location: </span></strong><span data-contrast="auto">Hamburg, Germany<span class="Apple-converted-space">&nbsp;</span></span><strong><span data-contrast="auto">(O<span class="TextRun SCXW38752764 BCX0" lang="EN-US" data-contrast="none"><span class="NormalTextRun SCXW38752764 BCX0">ffice</span><span class="NormalTextRun SCXW38752764 BCX0"><span class="Apple-converted-space">&nbsp;</span>presence</span><span class="NormalTextRun SCXW38752764 BCX0"><span class="Apple-converted-space">&nbsp;</span>expected at minimum 2 days per wee</span></span><span class="TextRun Highlight SCXW38752764 BCX0" lang="EN-US" data-contrast="none"><span class="NormalTextRun SCXW38752764 BCX0">k)</span></span></span></strong></p>
+<p><span data-ccp-props="{&quot;335559739&quot;:240}">&nbsp;</span></p>
+<p><strong>THE OPPORTUNITY<span class="Apple-converted-space">&nbsp;</span></strong></p>
+<p>This is an opportunity to join U-Studio, OLIVER's award-winning in-house agency for Unilever, as a <strong>Social Media Manager driving social-first strategies across major Personal Care brands.</strong> You'll be managing the social conversations of some of the world's leading brands, as well as hunting out "golden nugget" opportunities for content creation and social engagement that'll make these brands look really damn good.<span class="Apple-converted-space">&nbsp;</span></p>
+<p>You'll develop distinctive brand voices and compelling content that drives engagement. Your creative approach and trend-spotting abilities will ensure our Personal Care brands remain culturally relevant and impossible to ignore.<span class="Apple-converted-space">&nbsp;</span></p>
+<p><strong>THE ROLE<span class="Apple-converted-space">&nbsp;</span></strong></p>
+<p>You'll be the social catalyst behind conversations that elevate everyday personal care products into memorable brand experiences. Working at the intersection of brand strategy and cultural relevance, you'll translate strategic briefs into compelling social content that resonates with audiences. We're looking for someone who understands brand personality and can easily translate it into conversations on social media. Success means creating distinctive social moments that make our brands stand out in crowded feeds.<span class="Apple-converted-space">&nbsp;</span></p>
+<p><strong>WHAT YOU'LL DO<span class="Apple-converted-space">&nbsp;</span></strong></p>
+<ul>
+<li style="font-weight: bold;"><strong>Lead and execute social-first content strategy across assigned Personal Care brands<span class="Apple-converted-space">&nbsp;</span></strong></li>
+<li>Develop and execute <strong>"Always On"</strong> social approaches across paid and organic channels<span class="Apple-converted-space">&nbsp;</span></li>
+<li>Identify and capitalise on cultural moments to maximise brand relevance<span class="Apple-converted-space">&nbsp;</span></li>
+<li>Work with insights teams to identify trends and inform creative direction<span class="Apple-converted-space">&nbsp;</span></li>
+<li>Manage social communities and embed brands in relevant conversations<span class="Apple-converted-space">&nbsp;</span></li>
+<li>Collaborate with in-house Content Creators and GenAI designers to develop and optimise content at scale<span class="Apple-converted-space">&nbsp;</span></li>
+<li style="font-weight: bold;"><strong>Oversee content creation and optimisation across multiple social platforms<span class="Apple-converted-space">&nbsp;</span></strong></li>
+<li>Implement messaging hierarchy for social communities<span class="Apple-converted-space">&nbsp;</span></li>
+<li>Ensure content aligns with brand guidelines while maintaining cultural relevance<span class="Apple-converted-space">&nbsp;</span></li>
+<li style="font-weight: bold;"><strong>Receive and interrogate briefs from clients and support in brief development<span class="Apple-converted-space">&nbsp;</span></strong></li>
+<li>Coordinate with the Personal Care Centre of Excellence team, sharing highlights and results for your market<span class="Apple-converted-space">&nbsp;</span></li>
+<li>Help to craft Tone of Voice guidance for FAQ and copy for brand's social channels<span class="Apple-converted-space">&nbsp;</span></li>
+<li>Support in development in social channel strategy work streams<span class="Apple-converted-space">&nbsp;</span></li>
+<li style="font-weight: bold;"><strong>Plan and create social content calendars<span class="Apple-converted-space">&nbsp;</span></strong></li>
+<li>Present content ideas and brand <strong>social strategy </strong>to clients<span class="Apple-converted-space">&nbsp;</span></li>
+</ul>
+<p><strong>WHAT YOU BRING<span class="Apple-converted-space">&nbsp;</span></strong></p>
+<ul>
+<li>Proven experience in social media management for consumer brands<span class="Apple-converted-space">&nbsp;</span></li>
+<li style="font-weight: bold;"><strong>Native in German (C2) and fluent in English (spoken and written)<span class="Apple-converted-space">&nbsp;</span></strong></li>
+<li><strong>Strong understanding of social-first content development<span class="Apple-converted-space">&nbsp;</span></strong></li>
+<li>Creative flair and excellent written communications skills and great copywriting<span class="Apple-converted-space">&nbsp;</span></li>
+<li style="font-weight: bold;"><strong>Strong expertise in video content creation (TikTok, Reels, YouTube shorts)<span class="Apple-converted-space">&nbsp;</span></strong></li>
+<li>Experience / familiarity with AI-powered content creation tools and optimisation<span class="Apple-converted-space">&nbsp;</span></li>
+<li>Deep knowledge of social platform best practices and emerging trends<span class="Apple-converted-space">&nbsp;</span></li>
+<li>Excellent project management and stakeholder communication skills<span class="Apple-converted-space">&nbsp;</span></li>
+<li>Understanding of social listening and trend identification<span class="Apple-converted-space">&nbsp;</span></li>
+<li>Experience in managing influencer marketing campaigns<span class="Apple-converted-space">&nbsp;</span></li>
+<li>Ability to analyse social performance data and optimise accordingly<span class="Apple-converted-space">&nbsp;</span></li>
+<li>Knowledge of paid social media planning and execution<span class="Apple-converted-space">&nbsp;</span></li>
+<li>Cultural awareness and trend-spotting capabilities<span class="Apple-converted-space">&nbsp;</span></li>
+<li>Works well under pressure<span class="Apple-converted-space">&nbsp;</span></li>
+<li style="font-weight: bold;"><strong>Ideally, experience and understanding in FMCG/beauty/personal care brand categories<span class="Apple-converted-space">&nbsp;</span></strong></li>
+<li>Strong stakeholder management skills across departments<span class="Apple-converted-space">&nbsp;</span></li>
+<li>Knowledge of social commerce and conversion strategies<span class="Apple-converted-space">&nbsp;</span></li>
+<li>Experience managing multiple brand voices simultaneously</li>
+</ul>
+<p><span data-contrast="auto">Req ID:</span><span data-ccp-props="{}"> 16644</span></p>
+<p><span data-contrast="auto"><span style="color: rgb(255, 255, 255);">#LI-AB1 #LI-HYBRID #LI-MIDSENIOR</span></span></p>
+<p>&nbsp;</p><div class="content-conclusion"><p><span data-contrast="auto">Our values shape everything we do:</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">Be</span><strong><span data-contrast="auto"> Ambitious</span></strong><span data-contrast="auto"> to succeed &nbsp;</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">Be </span><strong><span data-contrast="auto">Imaginative</span></strong><span data-contrast="auto"> to push the boundaries of what's possible &nbsp;</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">Be </span><strong><span data-contrast="auto">Inspirational</span></strong><span data-contrast="auto"> to do groundbreaking work &nbsp;</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">Be </span><strong><span data-contrast="auto">always learning and listening</span></strong><span data-contrast="auto"> to understand &nbsp;</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">Be </span><strong><span data-contrast="auto">Results-focused </span></strong><strong> </strong><span data-contrast="auto">to exceed expectations &nbsp;</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">Be </span><strong><span data-contrast="auto">actively pro-inclusive and anti-racist</span></strong><span data-contrast="auto"> across our community, clients and creations  </span>&nbsp;<br><span data-ccp-props="{}">&nbsp;</span></p>
+<p><em><span data-contrast="auto">OLIVER,</span></em><em> </em><em><span data-contrast="auto">a part of the Brandtech Group, is an equal opportunity employer committed to creating an inclusive working environment where all employees are encouraged to reach their full potential, and individual differences are valued and respected. All applicants shall be considered for employment without regard to race, ethnicity, religion, gender, sexual orientation, gender identity, age, neurodivergence, disability status, or any other characteristic protected by local laws. &nbsp;</span></em><span data-ccp-props="{}">&nbsp;</span></p>
+<p><em><span data-contrast="auto"> OLIVER has set ambitious environmental goals around sustainability, with science-based emissions reduction targets. Collectively, we work towards our mission, embedding sustainability into every department and through every stage of the project lifecycle.</span></em></p></div><p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/oliver-agency/social-media-manager-ftc-18-months-all-genders-hamburg-442500" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

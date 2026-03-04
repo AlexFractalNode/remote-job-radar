@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controller (w/m/d) in Dresden | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Additive Drives GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Controller (w/m/d) in Dresden</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Controlling</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Gestalten Sie mit uns die Zukunft der Elektromobilität.</strong></p>
+<p>Wir entwickeln hochinnovative Elektromotoren für Kunden aus Luftfahrt, Motorsport und Industrie. Zur Unterstützung unseres wachsenden Unternehmens suchen wir einen erfahrenen <strong>Controller (w/m/d)</strong> mit Schwerpunkt ESG.</p>
+<h2>Aufgaben</h2>
+<ul>
+<li>Erstellung von <strong>Monats‑ und Quartalsanalysen</strong> sowie kaufmännischen Berichten</li>
+<li>Durchführung von <strong>Abweichungsanalysen</strong> und Ableitung von Handlungsempfehlungen</li>
+<li>Aufbau und Pflege von <strong>Controlling‑Strukturen</strong>, Forecasts und KPI‑Dashboards</li>
+<li>Unterstützung bei <strong>Budgetplanung</strong> und Mittelbedarfsberechnungen</li>
+<li>Analyse von <strong>Projekt‑ und Produktkosten</strong> zur Entscheidungsunterstützung</li>
+<li>Erstellung von <strong>Investitionsrechnungen</strong> und Business Cases</li>
+<li>Enge Zusammenarbeit mit <strong>Geschäftsführung, Buchhaltung und Projektleitung</strong></li>
+<li>Weiterentwicklung interner <strong>Controlling‑Prozesse</strong> und Reporting‑Tools</li>
+<li>Aufbau und Betreuung von <strong>ESG‑Reportingstrukturen</strong> sowie Monitoring relevanter Nachhaltigkeitskennzahlen</li>
+<li>Unterstützung bei <strong>ESG‑Dokumentationen</strong>, Nachweisen und Reportingpflichten</li>
+</ul>
+<h2>Qualifikation</h2>
+<ul>
+<li>Kaufmännische Ausbildung, abgeschlossenes betriebswirtschaftliches Studium oder vergleichbare Qualifikation,</li>
+<li>Mindestens 2 Jahre Erfahrung im Controlling, idealerweise in einem technischen oder projektorientierten Umfeld</li>
+<li>Erste Erfahrungen im Bereich ESG‑Reporting wünschenswert</li>
+<li>Deutschkenntnisse auf C1-Niveau und sehr gute Englischkenntnisse in Wort und Schrift</li>
+<li>Sicherer Umgang mit MS Office, insbesondere Excel; Erfahrung mit ERP‑ oder BI‑Tools von Vorteil</li>
+<li>Analytisches Denkvermögen, strukturierte Arbeitsweise und hohe Zahlenaffinität</li>
+<li>Fähigkeit, komplexe Sachverhalte verständlich aufzubereiten</li>
+<li>Selbstständiges Arbeiten, Verlässlichkeit und Teamorientierung</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li>flexible Arbeitszeitmodelle mit Gleitzeitregelung</li>
+<li>Möglichkeit auf Homeoffice-Tage</li>
+<li>30 Urlaubstage pro Jahr bei einer 5-Tage-Woche</li>
+<li>persönliche und fachliche Weiterentwicklung</li>
+<li>abwechslungsreiche Tätigkeit im Umfeld innovativer Elektromotoren-Entwicklung</li>
+<li>In-House Fertigung mit modernster Anlageninfrastruktur</li>
+<li>offenes und kollegiales Arbeitsklima mit kurzen Entscheidungswegen</li>
+<li>Zuschuss zum Mittagessen in einer naheliegenden Kantine</li>
+<li>regelmäßige Firmenfeiern, Teamevents und sportliche Angebote</li>
+</ul>
+<p><strong>Ihr Arbeitsort:</strong></p>
+<p>01189 Dresden (Coschütz/Gittersee)</p>
+<p><strong>Ihre Arbeitszeit:</strong></p>
+<p>20-40 Wochenstunden möglich</p>
+<p><strong>Unser Kontakt:</strong></p>
+<p>Wir haben Sie überzeugt und Sie möchten Teil unseres Teams werden? Dann senden Sie Ihre Bewerbung mit Lebenslauf, Zeugnissen und Gehaltsvorstellung unter dem Stichwort "Controller“ an unsere E-Mail-Adresse, welche Sie auf unserer Website finden oder bewerben Sie sich direkt über das Kurzformular.</p>
+<p>Bei Fragen steht Ihnen unsere HR-Managerin Lisa Buchmann gerne jederzeit unter 01741644573 zur Verfügung.</p>
+<p>Wir freuen uns darauf, Sie kennen zu lernen!</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/additive-drives-gmbh/controller-in-dresden-460791" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
