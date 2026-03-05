@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Engineer - Sales & Orders | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">SumUp sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Backend Engineer - Sales & Orders</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 60k-80k</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Bewerben Sie sich, wenn Sie ein leidenschaftlicher Backend-Entwickler sind, der an der Entwicklung von Core-Systemen interessiert ist. In dieser Rolle können Sie Ihre Fähigkeiten einsetzen, um die Core-Sales-API und die Receipt-Engine zu entwickeln und zu verbessern.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>About the team</strong></p>
+<p>In the Sales &amp; Order team we build the core Sales API and Receipt engines that power the SumUp ecosystem - from hardware like POS to Solo Card Reader, from software like Online Store to Online Payments. Our mission is to translate complex transaction data into a unified "Sales" language, enabling other teams to build features independently. By connecting sales to reporting, accounting, and fiscalization, we provide the infrastructure merchants need to scale globally.</p>
+<p>You'll collaborate with a dynamic, cross-functional team of Product Manager, Engineering Manager, fellow engineers, and occasionally Product Designers and Data Analysts.&nbsp;</p>
+<p><strong>About the role</strong></p>
+<p>As a Backend Engineer, you'll be a hands-on contributor delivering initiatives that span multiple products. You won't just be "writing code"; you'll be architecting how different SumUp products talk to each other.</p>
+<p>We are a team that believes in extreme collaboration. This means daily pair programming, high-quality "clean" engineering, and an "AI-native" mindset where we use agents and tools to accelerate our delivery.</p>
+<p><strong>What You'll Do</strong></p>
+<ul>
+<li>Develop and evolve high-performance Sales APIs and receipt engines using Kotlin and Spring Boot, ensuring they are scalable and resilient.</li>
+<li>Design and maintain robust data schemas and database interactions to handle complex transaction and sales data accurately at scale.</li>
+<li>Build and document clean, public-facing APIs that allow other engineering squads to integrate their features with the Sales Platform independently.</li>
+<li>Work on initiatives that connect transaction data with vital business systems like reporting, accounting, and global fiscalization.</li>
+<li>Spend a significant portion of your day pair programming to solve complex concurrency and architectural challenges while maintaining high code quality.</li>
+<li>Take full ownership of the development lifecycle, including writing automated tests, managing CI/CD pipelines, and monitoring service health in production.</li>
+<li>Actively use AI coding agents to automate repetitive tasks and increase the team's shipping velocity.</li>
+<li>Refactor and migrate mission-critical domain logic from other systems to centralize and simplify the "Sales" experience within the ecosystem.</li>
+</ul>
+<p><strong>You'll thrive in this role if:</strong></p>
+<ul>
+<li>You have 2+ years of experience in backend engineering with the JVM stack (preferably Kotlin and Spring Boot) .</li>
+<li>You have a solid understanding of software design patterns, principles, and basic concurrency.</li>
+<li>You have experience working in cloud-based environments (AWS).</li>
+<li>You enjoy and actively seek out daily pair programming as a primary way of working.</li>
+<li>You are open to using and experimenting with AI tools and agents to optimize your coding process.</li>
+<li>You are a fast learner who values quality, detail, and effective time management.</li>
+<li>You have good written and spoken English skills and a collaborative work style.</li>
+</ul>
+<h4><strong>Nice to have:</strong></h4>
+<ul>
+<li>Familiarity with distributed systems and high-scale applications.</li>
+<li>Knowledge of different programming paradigms (like functional, object-oriented).</li>
+<li>Experience with Kubernetes, SQL/NoSQL, and observability/monitoring tools.</li>
+<li>Experience working with systems involving many concurrent processes.</li>
+<li>A willingness to constantly learn and share knowledge with the wider engineering community.</li>
+</ul>
+<p class="cui-body-o5xe cui-body-m-mwmz cui-body-regular-hd7o cui-body-normal-pvqj css-k4eprn"><strong class="cui-body-o5xe cui-body-m-mwmz cui-body-semibold-pt76 cui-body-normal-pvqj cui-body-highlight-kmah css-10dm8y e173j6r82">Why you should join SumUp</strong></p>
+<p class="cui-body-o5xe cui-body-m-mwmz cui-body-regular-hd7o cui-body-normal-pvqj css-k4eprn">🌎 Opportunity to work with SumUppers globally on large-scale fintech products used by millions of businesses worldwide, from our Berlin office. This involves an office-first setup</p>
+<p class="cui-body-o5xe cui-body-m-mwmz cui-body-regular-hd7o cui-body-normal-pvqj css-k4eprn">🌈 Commitment to Diversity and Inclusion: be part of a workplace that values and promotes diversity, fostering an inclusive environment where everyone's perspectives are respected and embraced</p>
+<p class="cui-body-o5xe cui-body-m-mwmz cui-body-regular-hd7o cui-body-normal-pvqj css-k4eprn">🚀 Enrolment onto our Virtual Stock Option programme: you will own a stake in SumUp's future success</p>
+<p class="cui-body-o5xe cui-body-m-mwmz cui-body-regular-hd7o cui-body-normal-pvqj css-k4eprn">📚 A dedicated annual L&amp;D budget of €2000 for your individual development, which you can be used to attend conferences and/or advancing your career through further education</p>
+<p class="cui-body-o5xe cui-body-m-mwmz cui-body-regular-hd7o cui-body-normal-pvqj css-k4eprn">💶 A corporate pension scheme where we match up to 20% of your contributions</p>
+<p class="cui-body-o5xe cui-body-m-mwmz cui-body-regular-hd7o cui-body-normal-pvqj css-k4eprn">🏖️ Generous time off: enjoy 28 days of paid leave plus public holidays and special leave days</p>
+<p class="cui-body-o5xe cui-body-m-mwmz cui-body-regular-hd7o cui-body-normal-pvqj css-k4eprn">🚵🏾‍♂️ Numerous other benefits such as Urban Sports Club subsidy, Kita placement assistance, subsidised office lunches</p>
+<p class="cui-body-o5xe cui-body-m-mwmz cui-body-regular-hd7o cui-body-normal-pvqj css-k4eprn">🌴 Break4me: 1-month sabbatical after 3 years of service 🔗 Referral Bonus: earn additional rewards by referring talented individuals to join the SumUp team</p>
+<p class="cui-body-o5xe cui-body-m-mwmz cui-body-regular-hd7o cui-body-normal-pvqj css-k4eprn"><strong class="cui-body-o5xe cui-body-m-mwmz cui-body-semibold-pt76 cui-body-normal-pvqj cui-body-highlight-kmah css-10dm8y e173j6r82">About SumUp</strong></p>
+<p class="cui-body-o5xe cui-body-m-mwmz cui-body-regular-hd7o cui-body-normal-pvqj css-k4eprn">We believe in the everyday hero.</p>
+<p class="cui-body-o5xe cui-body-m-mwmz cui-body-regular-hd7o cui-body-normal-pvqj css-k4eprn">Small business owners are at the heart of all we do, so we're creating tools that help them run their businesses. With a founder's mentality and a 'team-first' attitude, our diverse teams across Europe, South America and the United States work together to ensure that the small business owners we partner with can be successful doing what they love.&nbsp;</p>
+<p class="cui-body-o5xe cui-body-m-mwmz cui-body-regular-hd7o cui-body-normal-pvqj css-k4eprn"><em class="cui-body-o5xe cui-body-m-mwmz cui-body-regular-hd7o cui-body-normal-pvqj css-x0oz0e e173j6r83">SumUp is an Equal Employment Opportunity employer that proudly pursues and hires a diverse workforce. SumUp does not make hiring or employment decisions on the basis of race, colour, religion or religious belief, ethnic or national origin, nationality, sex, gender, gender identity, sexual orientation, disability, age or any other basis protected by applicable laws or prohibited by company policy. SumUp also strives for a healthy and safe workplace and strictly prohibits harassment of any kind.</em></p>
+<p class="cui-body-o5xe cui-body-m-mwmz cui-body-regular-hd7o cui-body-normal-pvqj css-k4eprn"><em class="cui-body-o5xe cui-body-m-mwmz cui-body-regular-hd7o cui-body-normal-pvqj css-x0oz0e e173j6r83">SumUp will not accept unsolicited resumes from any source other than directly from a candidate.</em></p>
+<p class="cui-body-o5xe cui-body-m-mwmz cui-body-regular-hd7o cui-body-normal-pvqj css-k4eprn"><strong class="cui-body-o5xe cui-body-m-mwmz cui-body-semibold-pt76 cui-body-normal-pvqj cui-body-highlight-kmah css-10dm8y e173j6r82">Job Application Tip</strong></p>
+<p class="cui-body-o5xe cui-body-m-mwmz cui-body-regular-hd7o cui-body-normal-pvqj css-k4eprn">We recognise that candidates feel they need to meet 100% of the job criteria in order to apply for a job. Please note that this is only a guide. If you don't tick every box, it's ok too because it means you have room to learn and develop your career at SumUp.</p><div class="content-conclusion"><p><strong>Job Application Tip</strong></p>
+<p><span style="font-weight: 400;">We recognise that candidates feel they need to meet 100% of the job criteria in order to apply for a job. Please note that this is only a guide. If you don't tick every box, it's ok too because it means you have room to learn and develop your career at SumUp.</span></p></div><p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/sumup/backend-engineer-sales-orders-berlin-98527" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

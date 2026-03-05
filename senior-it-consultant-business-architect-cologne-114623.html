@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(Senior) It-Consultant & Business Architect (M/W/D) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">crossbuilders GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">(Senior) It-Consultant & Business Architect (M/W/D)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Consulting</span><span class="badge badge-tag">Engineering</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><ul>
+<li><strong>Fokus</strong>: Financial Services &#x26; AI Delivery</li>
+<li><strong>Bereich</strong>: Business Consulting/ Facharchitektur/ Implementation</li>
+<li><strong>Einsatzort</strong>: Köln/ Dein Standort/ Remote-Anteil</li>
+</ul>
+<p><strong>crossbuilders ist ein Company Builder im Herzen von Köln mit Fokus auf Financial Services und Insurance. Unsere Mission? Technologie so zu gestalten, dass sie den Alltag der Menschen einfacher und effizienter macht. Als eingespieltes Team aus Visionären, Tüftlern und talentierten Köpfen entwickeln wir kreative digitale Geschäftsmodelle und führen diese bis in die technische Umsetzung für unsere Kunden fort.</strong></p>
+<p>Als <strong>IT-Consultant &#x26; Business Architect</strong> bist Du der strategische Partner unserer Kunden bei der Neugestaltung ihrer Prozess- und IT-Landschaft. Du berätst Finanzdienstleister bei der Vorbereitung großer Transformationen. Das Besondere bei uns: Du denkst nicht nur strategisch, sondern nutzt modernste <strong>KI-Tools</strong>, um den Sprung von der Facharchitektur in die technische Delivery aktiv mitzugestalten und Konzepte schneller in greifbare Ergebnisse zu verwandeln.</p>
+<h2>Aufgaben</h2>
+<p>Was Dich erwartet: Beraten, Strukturieren, Umsetzen</p>
+<ul>
+<li><strong>Strategische Fachberatung</strong>: Du analysierst und definierst Geschäftsprozesse und Facharchitekturen als Fundament für komplexe Systemwechsel</li>
+<li><strong>Methodische Prozessgestaltung:</strong> Du optimierst End–to–End–Prozesse und leitest daraus belastbare Zielbilder für die IT–Architektur ab</li>
+<li><strong>AI–supported</strong> <strong>Delivery:</strong> Du nutzt KI–gestützte Entwicklungswerkzeuge, um bei der technischen Umsetzung zu unterstützen – sei es bei der Erstellung von API–Spezifikationen, Datenmappings oder dem Prototyping von Systemkomponenten</li>
+<li><strong>Architektur–Design:</strong> Du entwickelst Systemarchitekturen unter Berücksichtigung von API–isierung, Microservices und Security–Standards wie OAuth 2.0</li>
+<li><strong>Workshop–Leadership:</strong> Du moderierst Termine auf Augenhöhe mit Fachbereichen und den IT–Entscheidern, um Konsens über fachliche und technische Anforderungen zu erzielen</li>
+<li><strong>Dualer Mehrwert</strong>: Deine Beratung ist ein eigenständiges Geschäftsmodell, dient aber gleichzeitig dazu, unsere eigenen Lösungen im Markt optimal zu positionieren</li>
+</ul>
+<h2>Qualifikation</h2>
+<p>Dein Profil: Analytisch stark und technologiebegeistert</p>
+<ul>
+<li><strong>Erfahrung</strong>: Mehrjährige praktische Erfahrung in Beratung, Business Analyse oder Facharchitektur im Umfeld von Financial Services</li>
+<li><strong>Domänenwissen</strong>: Du verstehst die fachlichen und regulatorischen Herausforderungen (z. B. Funktionstrennung) der Finanzwelt</li>
+<li><strong>Tech–Affinität &#x26; KI</strong>: Du findest IT &#x26; Technik spannend und bist motiviert, KI–Tools (z. B. claude cowork/ code oder openai frontier) einzusetzen, um die Effizienz in der technischen Dokumentation oder im Delivery–Prozess zu steigern</li>
+<li><strong>Methodik</strong>: Sicherer Umgang mit Prozessmodellierung und der Ableitung von technischen Anforderungen aus fachlichen Needs</li>
+<li><strong>Persönlichkeit</strong>: Du bist ein souveräner Kommunikator mit „Hands–on“–Mentalität, der gerne innovative Wege in der Beratung geht</li>
+</ul>
+<h2>Benefits</h2>
+<p>Warum wir?</p>
+<ul>
+<li><strong>Eigenständiges Consulting</strong>: Beratung ist bei uns ein echtes Produkt, kein reiner Pre–Sales</li>
+<li><strong>AI–First Culture</strong>: Wir geben Dir die Werkzeuge an die Hand, um die Grenzen zwischen Consulting und technischer Umsetzung durch KI–Unterstützung aufzuweichen</li>
+<li><strong>Best–in–Class Lösungen</strong>: Du hast ein starkes Produktportfolio im Rücken, das Du als optimalen Lösungsbaustein einbringen kannst</li>
+</ul>
+<p><strong>Werde</strong> <strong>ein</strong> <strong>Teil</strong> <strong>von</strong> <strong>crossbuilders</strong> <strong>und</strong> <strong>schreibe</strong> <strong>gemeinsam</strong> <strong>mit</strong> <strong>uns</strong> <strong>unsere</strong> <strong>Erfolgsgeschichte</strong> <strong>fort!</strong> Wenn Du interessiert bist, freuen wir uns auf Deinen Lebenslauf inkl. einer kurzen Erläuterung, wieso ausgerechnet Du Teil unseres Teams werden solltest. Für Fragen vorab steht Dir Daniela unter 0174 1512561 gerne zur Verfügung.</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/crossbuilders-gmbh/senior-it-consultant-business-architect-cologne-114623" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
