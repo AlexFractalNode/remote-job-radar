@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sexualcoach (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Lovebetter Gesellschaft für männliche Sexualität mbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Sexualcoach (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 40k-60k</span>
+                    <span class="badge badge-tag">Business Consulting</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Wir suchen einen engagierten Sexualcoach, der unsere Klienten telefonisch begleitet und ihnen auf ihrem Weg zur Lösung ihrer sexuellen Probleme hilft. Die Lovebetter Gesellschaft bietet eine einzigartige Chance, in einem dynamischen Umfeld zu arbeiten und Menschen zu unterstützen.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><h2>Jobbeschreibung</h2>
+<h2></h2>
+<h2>Warum es diese Rolle gibt – und warum jetzt</h2>
+<p>Wir bei der Lovebetter Gesellschaft für männliche Sexualität wachsen und suchen neue, engagierte und empathische Mitarbeiter (m/w/d), die unsere bestehenden Klienten im Coaching-Prozess telefonisch begleiten, ihre Fortschritte im Blick behalten, sie fachlich sowie emotional auf dem Weg zur Lösung ihrer sexuellen Problematik unterstützen und ihnen dabei auch durch gezieltes, inhaltliches Coaching zur Seite stehen.</p>
+<h2><strong>Unsere Mission – und dein Beitrag</strong></h2>
+<p>Wir bei der Lovebetter Gesellschaft für männliche Sexualität sind die erfolgreichste Sexualberatung im DACH-Raum und arbeiten tagtäglich gemeinsam mit Motivation, Struktur und Empathie daran, dass niemand im deutschsprachigen Raum mehr unter sexuellen Problemen leiden muss.<br>
+Als Sexualcoach bist du <strong>direkt am Kern dieser Mission</strong>.<br>
+Du arbeitest mit Männern und du sorgst dafür, dass sie <strong>nicht hängen bleiben</strong>, sondern weitergehen und ihre sexuelle Problematik auflösen.</p>
+<h2><strong>Deine Aufgaben – klar, fokussiert, wirksam</strong></h2>
+<p>Du übernimmst Verantwortung für echte Ergebnisse:</p>
+<ul>
+<li>Du führst eigenständig <strong>Screening- und Coaching-Calls</strong> mit bestehenden Klienten und erkennst präzise, wo sie im Prozess stehen – und wo sie sich selbst blockieren</li>
+<li>Du identifizierst Männer, die ins Stocken geraten sind, und bringst sie <strong>konsequent zurück in Umsetzung</strong></li>
+<li>Du kombinierst <strong>inhaltliche Klarheit mit emotionaler Präsenz</strong></li>
+<li>Du gibst konkrete Impulse, die dazu führen, dass sexuelle Blockaden <strong>aufgelöst statt analysiert</strong> werden</li>
+<li>Du trägst aktiv zu <strong>hochqualitativen Kundenbewertungen, Interviews und Feedbacks</strong> bei – weil deine Arbeit wirkt</li>
+</ul>
+<h2>Stellenanforderungen</h2>
+<h2></h2>
+<h2>Wen wir suchen – und wen nicht</h2>
+<p>Wir suchen keinen Motivationscoach.</p>
+<h2><strong>Du passt zu uns, wenn:</strong></h2>
+<ul>
+<li>du empathisch bist, <strong>ohne dich zu verlieren</strong></li>
+<li>du ruhig bleibst, wenn Männer ausweichen, rationalisieren oder sich selbst belügen</li>
+<li>du Verantwortung trägst, statt sie zu verteilen</li>
+<li>du strukturiert arbeitest und Prozesse nicht als Einschränkung, sondern als Verstärker verstehst</li>
+<li>du klar, fehlerfrei und präzise auf Deutsch kommunizierst – mündlich wie schriftlich</li>
+<li>du Lust hast, täglich mit Männern zu sprechen und <strong>wirklich Einfluss zu nehmen</strong></li>
+</ul>
+<h2><strong>Must-haves:</strong></h2>
+<ul>
+<li>ausgeprägte emotionale Intelligenz und mentale Stabilität</li>
+<li>lösungsorientiertes Denken statt Problem-Verliebtheit</li>
+<li>Beharrlichkeit: du bleibst dran, auch wenn es zäh wird</li>
+<li>Gewissenhaftigkeit und Verlässlichkeit</li>
+<li>Bereitschaft, bestehenden Prozessen zu folgen und sie aktiv zu verbessern</li>
+</ul>
+<h2><strong>Nice-to-haves:</strong></h2>
+<ul>
+<li>Coaching-, Sexualtherapie- oder psychologische Weiterbildung</li>
+<li>nachweisbare Erfahrung in der Arbeit mit Klienten in sensiblen Lebensbereichen</li>
+</ul>
+<h2><strong>Was diese Rolle besonders macht</strong></h2>
+<ul>
+<li>Du arbeitest an einem der <strong>intimsten und folgenreichsten Bereiche</strong> im Leben von Männern</li>
+<li>Deine Arbeit hilft nicht nur beim Auflösen von sexuellen Problemstellungen, sondern rettet <strong>Beziehungen, Ehen und Familienstrukturen</strong></li>
+<li>Du bist Teil einer <strong>High-Performance-Kultur</strong>, in der Klarheit, Leistung und Ownership Standard sind</li>
+<li>Du wächst fachlich und persönlich durch interne Weiterbildungen mit jahrelang erfahrenen <strong>Experten</strong></li>
+</ul>
+<h2><strong>Diese Rolle ist nichts für dich, wenn …</strong></h2>
+<ul>
+<li>du mit wiederkehrenden Aufgaben schlecht klarkommst</li>
+<li>du unstrukturiert arbeitest und Chaos romantisierst</li>
+<li>du Verantwortung lieber teilst, statt sie zu tragen</li>
+</ul>
+<h2><strong>Dein nächster Schritt</strong></h2>
+<p>Wenn du spürst, dass du <strong>nicht nur helfen</strong>, sondern <strong>wirklich führen</strong> willst,<br>
+wenn du bereit bist, Männern ehrlich zu begegnen – und dir selbst auch –,<br>
+dann freuen wir uns, dich kennenzulernen.</p>
+<p>Bewirb dich nicht, um Teil von Lovebetter zu sein.<br>
+Bewirb dich, wenn du <strong>einen echten Unterschied machen willst</strong>.</p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/lovebetter-gesellschaft-fur-mannliche-sexualitat-mbh/sexualcoach-berlin-322158" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
