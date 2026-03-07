@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Founders Associate Intern (GTM) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">alago sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Founders Associate Intern (GTM)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Software Development</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Die Bauindustrie verliert jährlich <strong>1,6 Billionen USD</strong> durch Ineffizienzen. Einer der Hauptgründe: <strong>Dieselben Fehler wiederholen sich immer wieder</strong>, weil entscheidende Informationen noch immer in Papierdokumenten und unstrukturierten Dateien verborgen sind.</p>
+<p><strong>Genau hier setzt alago an.</strong> Wir sind ein Team von elf Personen und entwickeln <strong>KI-gestütztes Projektmanagement für die Baubranche</strong>. Bereits heute vertrauen uns <strong>mehr als 15 Kunden</strong>. Unsere Vision ist es, <strong>Risiken in Bauprojekten frühzeitig sichtbar zu machen</strong> – damit Großprojekte nicht mehr Jahrzehnte dauern oder scheitern.</p>
+<p>Kürzlich haben wir eine <strong>Pre-Seed-Finanzierung von über 1 Mio. €</strong> von führenden VCs der Baubranche sowie einem der größten Projektentwickler Deutschlands abgeschlossen.</p>
+<p><strong>75 % der Infrastruktur, die im Jahr 2050 existieren wird, ist heute noch nicht gebaut.</strong> Lasst uns sie von Anfang an richtig bauen.</p>
+<h2>Aufgaben</h2>
+<p><strong>Deine Verantwortlichkeiten:</strong></p>
+<p><strong>1. Du bist ein GTM Engineer: Du baust Wachstumskanäle auf</strong></p>
+<ol>
+<li><strong>Aufbau skalierbarer GTM-Systeme:</strong> Kombination von Tools, Automationen und Daten, um Wachstumskanäle systematisch aufzubauen, zu testen, zu optimieren und zu skalieren.</li>
+<li><strong>Kontinuierliche Experimente und Optimierung:</strong> Entwicklung neuer Ansätze für Wachstumskanäle, strukturiertes Testen und iterative Verbesserung.</li>
+<li><strong>Schnelles, selbstständiges Lernen:</strong> Nutzung der Wissenspower des Internets, um neue Fähigkeiten von Grund auf aufzubauen – entscheidend, da du einige unserer <strong>19+ Wachstumskanäle</strong> verantwortest und weiterentwickelst.</li>
+</ol>
+<p><strong>2. Du bist unser</strong> <strong>Gesicht zum Kunden</strong></p>
+<ol>
+<li><strong>Aufbau starker Beziehungen:</strong> Du lernst einen echten „Life Hack“: Wie man Menschen gewinnt und starke Beziehungen aus dem Nichts aufbaut – selbst im schwierigsten Umfeld.</li>
+<li><strong>Aufbau einer Umsatzpipeline:</strong> Gewinnung neuer Kunden durch strukturiertes Outbound-Prospecting.</li>
+<li><strong>Direkter Kundenzugang:</strong> Als erstes Gesicht zum Kunden entscheidend dafür, zu verstehen, was notwendig ist, damit unsere Kunden noch erfolgreicher werden.</li>
+</ol>
+<h2>Qualifikation</h2>
+<p><strong>Berufliche Erfahrung</strong></p>
+<ul>
+<li>Du hast bereits <strong>praktische Berufserfahrung</strong> gesammelt, z. B. im Rahmen eines Praktikums</li>
+<li><strong>Standort München</strong> oder Bereitschaft, dauerhaft von hier aus zu arbeiten</li>
+<li><strong>Deutsch auf Muttersprach-Niveau</strong></li>
+</ul>
+<p><strong>Persönlicher Hintergrund</strong></p>
+<ul>
+<li>Du bist extrovertiert und findest eine gute Balance zwischen People- und Task-Fokus</li>
+<li>Idealerweise bist du über eine <strong>persönliche Empfehlung aus unserem AAA-Netzwerk</strong> (Founders, Team, Partner, VCs etc.) auf uns aufmerksam geworden</li>
+<li>Du bist <strong>deiner Leidenschaft gefolgt</strong> und hast dir in einem kompetitiven Umfeld (z. B. Projekte, Sport, Musik, Kunst o. Ä.) <strong>messbare Erfolge erarbeitet</strong></li>
+</ul>
+<p><strong>Pluspunkte</strong></p>
+<ul>
+<li>Du hast bereits für schnell wachsende Unternehmen gearbeitet.</li>
+<li>Du hast schon in der Baubranche gearbeitet oder hast einen engen Bezug zu ihr.</li>
+<li>Du hast bereits Glaubwürdigkeit aufgebaut: Du hast in (Teilen) der Revenue Engine – Vertrieb, Marketing und Customer Success – Ergebnisse aufgebaut und erzielt</li>
+<li>Du hast einen technischen Hintergrund, verstehst, wie Software gebaut wird, und hast selbst bereits KI-Automatisierungen entwickelt.</li>
+</ul>
+<p>Wenn du dich nicht in jedem Punkt wiederfindest, aber überzeugt bist, dass du gut zu alago passt, bewirb dich trotzdem. <strong>Entscheidend sind dein Potenzial und deine Lernkurve.</strong></p>
+<h2>Benefits</h2>
+<p><strong>Warum Alago?</strong></p>
+<p>Als eine unserer <strong>ersten Hires</strong> arbeitest du nicht nur mit – du gestaltest <strong>aktiv</strong>, wie Alago funktioniert: unsere Kultur, unsere Prozesse und unsere Wachstumsstrategie.</p>
+<p>Du arbeitest eng mit den Foundern zusammen, bekommst Einblicke in alle Unternehmensbereiche und setzt Projekte um, die <strong>sofort messbaren Impact</strong> haben.</p>
+<p><strong>Deine Rolle</strong></p>
+<p>Baue deine eigene Marke – und vervielfache deinen Marktwert</p>
+<ul>
+<li>Du entwickelst deine Persönlichkeit, Haltung und Prinzipien gezielt weiter</li>
+<li>Du stärkst deine Glaubwürdigkeit und Wirkung im Markt</li>
+<li>Du begleitest unser Wachstum von <strong>10 auf 30 Mitarbeitende in zwei Jahren</strong></li>
+<li>Du lernst, wie Revenue-Funktionen <strong>vorhersehbar und wiederholbar</strong> aufgebaut werden</li>
+<li>Du entwickelst deinen eigenen Revenue-Blueprint</li>
+</ul>
+<p><strong>Beschleunige deine persönliche &#x26; berufliche Entwicklung</strong></p>
+<ul>
+<li>Egal ob dein Ziel die eigene Gründung oder eine Rolle als <strong>Head of Revenue</strong> ist: Durch halbjährliche Performance-Reviews kannst du mit <strong>konkreten Entwicklungsschritten alle ~9 Monate</strong> rechnen</li>
+<li>Zugang zu erfahrenen Coaches, Trainern und Mentor:innen</li>
+<li>Wöchentliche Trainings- und Coaching-Sessions</li>
+<li>Eine kuratierte Wissensbibliothek mit den besten Frameworks und Denkmodellen von außergewöhnlichen Persönlichkeiten</li>
+</ul>
+<p><strong>Arbeite direkt mit den Foundern</strong></p>
+<ul>
+<li>Du arbeitest täglich eng mit <strong>Janick (Go-to-Market &#x26; Strategy)</strong> und<br>
+<strong>Ann-Christin (Product &#x26; Domain)</strong> zusammen</li>
+</ul>
+<p>Wir bauen für <strong>Skalierung</strong> – aber aktuell sind wir noch in einer frühen Phase. Das bedeutet: viel Eigenverantwortung, kurze Feedback-Zyklen und die Freiheit, in die Rolle hineinzuwachsen, die am besten zu deinen Stärken passt – ob <strong>Operations, Product, Growth</strong> oder eines Tages sogar die <strong>eigene Gründung</strong>.</p>
+<p><strong>Weiterführende Lektüren (optional, aber sehr empfohlen):</strong></p>
+<ul>
+<li><em>Read This Before Joining as Employee 1 to 20 at a Startup</em> von Stacy La (Employee #3 bei Clover Health)</li>
+<li><em>First Startup Employees</em> – Erfahrungsberichte von frühen Mitarbeitenden bei Wise, GoCardless, Gusto und weiteren Unternehmen</li>
+</ul>
+<p><strong>Zusätzlich dazu bieten wir:</strong></p>
+<ul>
+<li><strong>Perks</strong>: Wellpass-Mitgliedschaft, zweimal pro Woche gemeinsames Team-Dinner sowie Unterstützung beim Relocation-Prozess</li>
+<li><strong>Standort WERK1</strong>: Arbeiten in einem der aktivsten Innovations- und Startup-Hubs Münchens mit direktem Zugang zur Startup-Community</li>
+<li><strong>Wachstum:</strong> Arbeite in einem schnell wachsenden Early-Stage-Startup mit viel Verantwortung und klaren Entwicklungsmöglichkeiten</li>
+<li><strong>Enge Zusammenarbeit mit Gründern</strong>: Du erlebst Entscheidungen aus erster Hand und gestaltest Aufbau und Richtung des Unternehmens aktiv mit</li>
+</ul>
+<p><strong>Bewerbungsprozess</strong></p>
+<p><strong>1. Schick uns deine Bewerbung</strong></p>
+<p>Neben deinem Lebenslauf freuen wir uns über ein kurzes Beispiel, in dem du Verantwortung übernommen hast.</p>
+<p><strong>2. Erstgespräch</strong></p>
+<p>Ein kurzes Kennenlernen, um deinen Hintergrund und deine Motivation zu verstehen. Wir erklären dir die Rolle, zeigen das Produkt und beantworten erste Fragen.</p>
+<p><strong>3. Case Study</strong></p>
+<p>Besuche uns in München und arbeite mit uns an einer realistischen Aufgabe. Mögliche Schwerpunkte:</p>
+<ul>
+<li><strong>Kunden &#x26; Support:</strong> Bearbeitung einer fiktiven Kundensituation, Analyse einer Anfrage oder Strukturierung eines Onboardings.</li>
+<li><strong>Strategie &#x26; Abläufe:</strong> Verbesserung eines internen Prozesses oder Analyse eines Kundenworkflows.</li>
+<li><strong>Produkt &#x26; Umsetzung:</strong> Rückmeldung aus Kundensicht bewerten und nächste Schritte für das Produkt ableiten.</li>
+</ul>
+<p>Dieser Tag gibt dir ein gutes Gefühl für die tatsächliche Arbeit bei alago – und uns ein klares Bild davon, wie du denkst, kommunizierst und Probleme löst.</p>
+<p><strong>4. Entscheidung:</strong></p>
+<p>Du erhältst innerhalb von <strong>24 Stunden</strong> Rückmeldung. Wenn es für beide Seiten passt – freuen wir uns sehr auf die Zusammenarbeit! 🎉</p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/alago/founders-associate-intern-gtm-munich-118303" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

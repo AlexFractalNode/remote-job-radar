@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Frontend Engineer (all genders) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Distribusion Technologies GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Senior Frontend Engineer (all genders)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Engineering</span><span class="badge badge-tag">bachelor's degree</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Distribusion</strong> is the world’s leading ground transportation marketplace and gives travelers seamless access to ground transportation online, from search to ticket purchase. We have built a cutting-edge B2B technology platform that connects bus, rail, and ferry operators in 70+ countries with the biggest online retailers, including Google Maps and Booking.com.<br /></p><p>We are shaping the future of travel and building the largest global network of transport providers and retailers. Having grown 10x in the past year, we are one of the fastest-growing startups in travel. Backed by three leading VCs (Creandum, Northzone, and Lightrock), and now, following our recent €30 m Series B, we are ready to push beyond.<br /></p><p><br /></p><p>We are looking for a <strong>Senior Frontend Engineer</strong> to join our <strong>eCommerce Solutions team</strong>. You will contribute to improving an <strong><a rel="noopener" target="_blank" href="https://careers.distribusion.com/tech-product-teams#list-203d6b27">Online Booking Engine</a></strong> that our partners use to allow their users to search, book, and manage their ground transportation tickets. This is a great chance for you to impact products with a great market fit and high demand.<br /></p><p><br /></p><p><strong>What you'll do</strong></p><ul><li><p>Deliver new features in our eCommerce solutions</p></li><li><p>Actively participate in efforts on frontend architecture initiatives</p></li><li><p>Understand, plan and execute maintenance of existing codebase</p></li><li><p>Create tests for frontend code</p></li><li><p>Mentor and guide other team members<br /></p></li></ul><p><strong><br />Workplace: </strong>Berlin or Europe</p><p>We are a remote-first company, with teams located around the Globe and our HQ office in Berlin, where the team often meets in the office.<br /></p><br /><br /><p><strong>Who you are:</strong></p><ul><li><p>Bachelor’s or Master’s degree in Computer Science, Software Engineering, or a related field</p></li><li><p>5-7+ years of software engineering experience with a minimum of 4+ years of professional experience working with TypeScript and React.js</p></li><li><p>Experience testing with Cypress</p></li><li><p>Experience working with public cloud providers (GCP is preferred)</p></li><li><p>You are driven, ambitious, and willing to get hands-on in shaping the future of ground transportation travel</p></li><li><p>You show ownership and responsibility for your problem space</p></li><li><p>You are fluent in English, both verbal and written</p></li></ul><p><br /></p><p><strong>What you can expect:</strong></p><ul><li><p>You will join a fast-paced travel tech company and take on a rapidly growing industry.</p></li><li><p>You will take on ownership and responsibility from day one and have a direct impact on the success of the company.</p></li><li><p>We value agility! We’re constantly updating our tech stack and offer the best possible tools to ensure all of our in-house engineers, partners, and carriers benefit from cutting-edge, efficient solutions.</p></li><li><p>You will work with global companies. Our product attracts the biggest names in travel technology, such as Booking.com and Google Maps, and national carriers like Amtrak, Deutsche Bahn, Renfe, and SNCF.</p></li><li><p>You will join an international team of talented and driven people with a clear mission. Expect your colleagues to inspire, support and challenge you every day!</p></li><li><p>We offer flexible and remote working conditions, relocation opportunities and career growth in a small and developing company.</p></li></ul><p><strong><em><br /></em></strong></p><p><strong>Our hiring team for this role:</strong></p><p><em>Your Talent Partner (TP) and point of contact is Paul Davies, and the Hiring Manager (HM) is Roger Sindreu. </em><br /><em>For any queries, please reach out to your Talent Partner at (</em><a rel="noopener" target="_blank" ---------- /></em></p><p><em>Do you want to work on a product that is used by millions of people daily with a high load, availability and scalability and the most advanced technology?</em></p><p><em>Come join us!</em></p><p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/distribusion-technologies-gmbh/senior-frontend-engineer-all-genders-berlin-87189" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

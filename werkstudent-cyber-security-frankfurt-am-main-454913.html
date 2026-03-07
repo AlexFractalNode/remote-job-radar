@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Werkstudent Cyber Security (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Jamorie Consulting GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Werkstudent Cyber Security (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Consulting</span><span class="badge badge-tag">Engineering</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Du möchtest Cyber Security nicht nur aus dem Skript kennen, sondern in echten Projekten erleben? Du hast Lust, Verantwortung zu übernehmen, Dinge auszuprobieren und dabei schnell zu lernen? Dann bist du bei uns genau richtig!</p>
+<p>Bei <strong>JAMORIE</strong> suchen wir motivierte Studierende, die mit uns neue Wege gehen und unser junges Unternehmen aktiv mitgestalten wollen.</p>
+<h2>Aufgaben</h2>
+<p>Als Werkstudent:in bei JAMORIE unterstützt du unser Consulting-Team bei Kundenprojekten und internen Themen rund um Informationssicherheit. Dabei bekommst du Einblicke in verschiedene Bereiche und kannst dich Schritt für Schritt spezialisieren. Typische Aufgaben sind z. B.:</p>
+<ul>
+<li>Unterstützung bei <strong>Security-Analysen</strong> und der Strukturierung von Anforderungen</li>
+<li>Mitarbeit bei <strong>Dokumentation &#x26; Konzepten</strong> (z. B. Policies, Prozesse, Richtlinien, Sicherheitskonzepte)</li>
+<li>Unterstützung bei <strong>Risk Assessments</strong> (z. B. Risiko-Workshops vorbereiten, Risiko-Listen pflegen)</li>
+<li>Ausbau unserer internen <strong>Lab Struktur</strong></li>
+<li>Mitarbeit an unseren <strong>Digitalen Produkten</strong></li>
+</ul>
+<h2>Qualifikation</h2>
+<p>Wir suchen keine „fertigen Seniors“, sondern Menschen mit Drive und Lernbereitschaft.</p>
+<p><strong>Mindset &#x26; Arbeitsweise</strong></p>
+<p>Eine „<strong>Lass uns das machen</strong>“-Mentalität</p>
+<ul>
+<li><strong>Ehrliche, klare Kommunikation</strong> und keine Scheu, Fragen zu stellen</li>
+<li>Teamgeist: „<strong>Einer für alle und alle für Einen</strong>“</li>
+<li>Strukturierte, lösungsorientierte Arbeitsweise und eigenständiges Arbeiten (mit Support, wenn nötig)</li>
+</ul>
+<p><strong>Rahmen &#x26; Studium</strong></p>
+<ul>
+<li>Du bist <strong>immatrikuliert</strong> (z. B. Informatik, Wirtschaftsinformatik, IT-Security, Cyber Security, Elektrotechnik o. ä.)</li>
+<li>Idealerweise hast du bereits erste Berührungspunkte mit IT (z. B. Studium, Werkstudentenjob, Praktikum, Homelab, CTFs, Uni-Projekte)</li>
+</ul>
+<p><strong>Engagement</strong></p>
+<ul>
+<li>Interesse an Fachgruppen, Community, Verbänden, CTFs oder Uni-Security-Gruppen ist gerne gesehen</li>
+</ul>
+<h2>Benefits</h2>
+<p>Wir geben dir drei Gründe, warum <strong>JAMORIE</strong> genau der richtige Ort für dich ist:</p>
+<ul>
+<li><strong>Ehrlich und fair auf allen Ebenen – „RealTalk“:</strong> Bei uns zählt nicht, welche Position du hast, sondern wer du bist. Integrität ist uns wichtig und das leben wir.</li>
+<li><strong>Menschen im Mittelpunkt – „Play to your Strengths“:</strong> Wir fördern deine Stärken und geben dir Raum, dich auszuprobieren und zu wachsen.</li>
+<li><strong>Arbeit soll Spaß machen – „Have Fun at Work“:</strong> Wir glauben, dass Freude an der Arbeit ein echter Erfolgsfaktor ist – und leben das als Team.</li>
+</ul>
+<p>Und dazu kommen noch handfeste Vorteile:</p>
+<p>Flexible <strong>Remote-Regelung</strong> (Deutschlandweit)</p>
+<ul>
+<li>Flexible Arbeitszeiten passend zu deinem Studium</li>
+<li>Transparente Vergütung</li>
+<li>Regelmäßige, spaßige Team-Events</li>
+<li>Mentoring, Feedback, schnelle Lernkurve durch echte Projekte</li>
+<li>Möglichkeit, langfristig zu bleiben (z. B. Abschlussarbeit, Übernahme, Einstieg nach dem Studium)</li>
+</ul>
+<p>Perfektion ist nicht unser Anspruch – wir sind auf der Reise, machen Fehler und lernen kontinuierlich. Was uns antreibt, ist eine Arbeitsumgebung, die positiv ist, echten Mehrwert stiftet und einen sinnvollen Beitrag leistet.</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/jamorie-consulting-gmbh/werkstudent-cyber-security-frankfurt-am-main-454913" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

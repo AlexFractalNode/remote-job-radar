@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Manager, Digital Marketing & Channel | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Spire sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Senior Manager, Digital Marketing & Channel</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 80k-100k</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Als erfahrener Digital Marketing-Experte mit Führungsverantwortung wirst du Spire bei der Stärkung und Expansion ihres Marktpositions unterstützen. Du wirst Teil des Wachstumsmarketing- und Go-To-Market-Leadership-Teams und wirst deine Fähigkeiten einsetzen, um Spire auf globalen Märkten erfolgreich zu machen.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><span data-contrast="auto">As an integral member of Spire's Growth Marketing and Go-To-Market Leadership team, you will play a pivotal role in strengthening and expanding Spire's market position across global commercial and governmental segments.</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">You are a hands-on team leader: someone who sets the strategic digital direction and personally executes high-impact activities across Spire's digital ecosystem. You lead by doing,&nbsp;driving excellence, mentoring colleagues through expertise, and elevating the performance of Spire's digital and channel engine through operational mastery.</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">In this role, you will own Spire's&nbsp;full&nbsp;digital and channels ecosystem, including paid and owned channels, inbound engines, and conversion paths. You will directly lead the Junior&nbsp;Social Media&nbsp;Marketing Manager and the SDR (Sales Development Representative) working within the digital pipeline flow. You will also have a dotted-line leadership responsibility for the Website Lead, ensuring alignment across performance, and conversion initiatives.</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">You will build and operate the digital engine that drives Spire's pipeline objectives, brand visibility, and customer acquisition across Business Lines&nbsp;Commercial&nbsp;and Government.</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">This role is fundamental in executing our Marketing Activation, Brand, Digital Strategy, and Sales Ops responsibilities in close collaboration with Sales and cross-functional partners. You will ensure alignment of digital activities with SPIRE's corporate strategy, Growth Marketing objectives, and regional go-to-market needs.</span><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-ccp-props="{}">&nbsp;</span></p>
+<p><strong><span data-contrast="auto">Your responsibilities</span></strong><span data-ccp-props="{}">&nbsp;</span></p>
+<ul>
+<li><span data-contrast="auto">Digital Channel Strategy: </span>Design, implement, and optimize multi-channel strategies tailored to commercial decision-makers and governmental buyers. This includes SEO/SEM, SEA, paid media, programmatic, social channels, email nurturing, and persona-based journeys aligned to enterprise and public-sector buying cycles.<span data-ccp-props="{}">&nbsp;</span></li>
+<li><span data-contrast="auto">Leadership of Channels &amp; Digital Pipeline Operations:&nbsp;</span>You will own all digital&nbsp;channels:&nbsp;paid, owned, earned and optimize them end-to-end for awareness, engagement, and conversion.<span data-ccp-props="{}">&nbsp;</span></li>
+<li data-leveltext="" data-font="Symbol" data-listid="3" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;multilevel&quot;}" data-aria-posinset="1" data-aria-level="1"><span data-contrast="auto">Leading and mentoring the Junior&nbsp;Social Media&nbsp;Marketing Manager on channel operations, campaign execution, and performance optimization.</span></li>
+<li data-leveltext="" data-font="Symbol" data-listid="3" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;multilevel&quot;}" data-aria-posinset="1" data-aria-level="1">Overseeing the SDR Manager and the channel push strategy e.g., lead routing, qualification standards, follow-up sequences.</li>
+<li data-leveltext="" data-font="Symbol" data-listid="3" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;multilevel&quot;}" data-aria-posinset="1" data-aria-level="1">Ensuring seamless channel-to-SDR handover and improving funnel velocity across all business lines.</li>
+<li><span data-contrast="auto">Website Experience Optimization (with dotted-line leadership)</span></li>
+<li>Own, manage, and continuously improve the global Spire website.</li>
+<li>You will work in a dotted-line leadership capacity with the Website Lead to:</li>
+<li>Ensure UX and content align with digital acquisition strategy, i<span data-contrast="auto">mprove conversion paths across commercial and government journeys</span></li>
+<li>Support product launches and high-value landing pages</li>
+<li>Establish a performance-driven roadmap and operational cadence</li>
+<li><span data-contrast="auto">Performance Analytics &amp; KPI Leadership</span></li>
+<li>Together with SalesOps, you will define and monitor the KPIs that drive digital excellence. You will extract insights, continuously optimize campaigns, increase demand capture, and deliver measurable pipeline impact across markets.<span data-ccp-props="{}">&nbsp;</span></li>
+<li><span data-contrast="auto"> Hands-on Digital Execution (Core to the Role)</span></li>
+<li>As a hands-on leader, you will personally execute and oversee critical digital marketing activities to ensure high technical quality and operational speed:</li>
+<li>Building and optimizing landing pages for campaigns and government programs</li>
+<li>Managing and improving HubSpot campaigns, workflows, email journeys, and lead scoring</li>
+<li>Running paid advertising campaigns (search, display, LinkedIn, retargeting)</li>
+<li>Executing SEO optimizations, technical fixes, and structural enhancements</li>
+<li>Creating and testing email journeys and nurture sequences</li>
+<li>Running A/B tests for messaging, CTAs, layouts, and creative</li>
+<li>Publishing and maintaining digital content in coordination with Brand &amp; Content</li>
+<li>Coaching your team on digital best practices and operational excellence</li>
+<li>Your leadership is rooted in expertise: you show what "great" looks like through hands-on mastery.<span data-ccp-props="{}">&nbsp;</span></li>
+<li><span data-contrast="auto"> Cross-Functional Collaboration &amp; Leadership</span></li>
+<li>You will collaborate with Marketing Activation, Brand, SalesOps, Sales, IT, Compliance, and regional field teams to ensure digital marketing supports all stages of the lifecycle, from awareness to conversion to expansion.</li>
+<li>You lead cross-functional digital initiatives and act as the subject-matter expert for all digital and channel topics. You guide stakeholders and support team members through influence, expertise, and results-driven direction.<span data-ccp-props="{}">&nbsp;</span></li>
+</ul>
+<p><span data-ccp-props="{}">&nbsp;</span></p>
+<p><strong><span data-contrast="auto">Desired skillset</span></strong><span data-ccp-props="{}">&nbsp;</span></p>
+<ul>
+<li data-leveltext="" data-font="Symbol" data-listid="6" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;multilevel&quot;}" data-aria-posinset="1" data-aria-level="1"><span data-contrast="auto">A strategic thinker who leads through hands-on execution and digital craftsmanship.</span></li>
+<li data-leveltext="" data-font="Symbol" data-listid="6" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;multilevel&quot;}" data-aria-posinset="1" data-aria-level="1">5–8+ years of experience in digital B2B marketing within SaaS, analytics, aerospace, or other technology-driven industries.</li>
+<li data-leveltext="" data-font="Symbol" data-listid="6" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;multilevel&quot;}" data-aria-posinset="1" data-aria-level="1">Proven success building digital strategies that engage commercial buyers and governmental audiences.</li>
+<li data-leveltext="" data-font="Symbol" data-listid="6" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;multilevel&quot;}" data-aria-posinset="1" data-aria-level="1">Strong experience with marketing automation, CRM integration, analytics tools, paid media, and Martech ecosystems.</li>
+<li data-leveltext="" data-font="Symbol" data-listid="6" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;multilevel&quot;}" data-aria-posinset="1" data-aria-level="1">Demonstrated ability to manage and optimize websites, improve technical content, and drive measurable pipeline growth.</li>
+<li data-leveltext="" data-font="Symbol" data-listid="6" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;multilevel&quot;}" data-aria-posinset="1" data-aria-level="1">Deep analytical skills and a data-driven approach to testing, optimization, and insights.</li>
+<li data-leveltext="" data-font="Symbol" data-listid="6" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;multilevel&quot;}" data-aria-posinset="1" data-aria-level="1">Strong leadership skills with experience mentoring team members and cross-functional partners.</li>
+<li data-leveltext="" data-font="Symbol" data-listid="6" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;multilevel&quot;}" data-aria-posinset="1" data-aria-level="1">Experience coordinating SDR workflows or demand-to-SDR handover processes is a plus.</li>
+<li data-leveltext="" data-font="Symbol" data-listid="6" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;multilevel&quot;}" data-aria-posinset="1" data-aria-level="1">Innovative, self-driven, and comfortable in a fast-paced, global organization.</li>
+<li data-leveltext="" data-font="Symbol" data-listid="6" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559685&quot;:720,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;multilevel&quot;}" data-aria-posinset="1" data-aria-level="1">Fluent in German and English; additional languages are a plus.<span data-ccp-props="{}">&nbsp;</span></li>
+</ul>
+<p><span data-ccp-props="{}">&nbsp;</span></p>
+<p><strong><span data-contrast="auto">Shape the future with us</span></strong><span data-ccp-props="{}">&nbsp;</span></p>
+<p><span data-contrast="auto">Join SPIRE on an exciting growth journey, shaping how we communicate, engage, and inspire audiences around the globe. Your work will directly influence how our space-based data products are perceived and will strengthen our global brand presence.</span></p><div class="content-conclusion"><p><strong><br>Global Perks</strong></p>
+<p>🛰️ Name Your Satellite Program (NYSP)<br>🚀 Launch Attendance<br>🌴 Generous Time Off Policy<br>🎓 Education Assistance Program<br>🥰 Employee Assistance Program (EAP)<br>📈 Employee Stock Purchase Program (ESPP)<br>👣 Family Leave<br>💪 Fitness Reimbursement<br>🧡 Employee Referral Program<br>🍉 Healthy snacks &amp; beverages in every office</p>
+<p style="text-align: center;">&nbsp;</p>
+<p style="text-align: left;"><strong>About Spire</strong></p>
+<p style="text-align: left;"><em>We</em>&nbsp;<em>improve life on Earth with data from space.</em></p>
+<p>Spire Global is a space-to-cloud analytics company that owns and operates the largest multi-purpose constellation of satellites. Its proprietary data and algorithms provide the most advanced maritime, aviation, and weather tracking in the world. In addition to its constellation, Spire's data infrastructure includes a global ground station network and 24/7 operations that provide real-time global coverage of every point on Earth.<br><br></p>
+<hr>
+<p><em><br>Spire is Global and our success draws upon the diverse viewpoints, skills and experiences of our employees. We are proud to be an equal opportunity employer and are committed to equal employment opportunity regardless of race, color, ancestry, religion, sex, national origin, sexual orientation, age, marital status, disability, gender identity or veteran status.</em></p>
+<p><em><span class="NormalTextRun SCXW208825983 BCX0">To help </span><span class="NormalTextRun SCXW208825983 BCX0">maintain</span><span class="NormalTextRun SCXW208825983 BCX0"> a safe and secure workplace for Spire employees, all candidates who receive a conditional offer will </span><span class="NormalTextRun SCXW208825983 BCX0">be required</span> <span class="NormalTextRun SCXW208825983 BCX0">to complete a background check</span><span class="NormalTextRun SCXW208825983 BCX0">. This </span><span class="NormalTextRun SCXW208825983 BCX0">may include criminal history and employment verification.</span></em></p>
+<p><em>Please take a moment to review <a href="https://spire.com/global-data-privacy-notice/">Spire's Global Data Privacy Notice for Employees, Contractors, Candidates and Visitors</a>, as well as</em><em>&nbsp;<a href="https://spire.com/privacy-policy/">Spire's Privacy Policy.</a><br><br></em></p>
+<hr>
+<p><em><br>Kindly be advised that communication regarding your application may come from ----- ----- or from Candidate.fyi (our scheduling tool).<br><br><br></em></p></div><p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/spire/senior-manager-digital-marketing-channel-munich-63939" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
