@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experte Instandhaltungsprozesse und Betrieb (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Flix sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Experte Instandhaltungsprozesse und Betrieb (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 60k-80k</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Gestalte die Instandhaltung einer neuen Flotte mit modernen Technologien und bahnpower. Beteilige dich an der Entwicklung einer zukunftsfähigen Instandhaltungslandschaft für FlixTrain.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><span style="font-family: helvetica, arial, sans-serif;"><strong><span style="font-size: 12pt;">Gestalte die Instandhaltung unserer neuen Flotte – mit echter Bahnpower</span></strong></span></p>
+<p><span style="font-size: 12pt;"><span style="font-family: helvetica, arial, sans-serif;">Bei FlixTrain bauen wir eine moderne, effiziente und zukunftsfähige Instandhaltungslandschaft für unsere neue Flotte auf. Dafür suchen wir erfahrene Bahner:innen, die Lust haben, ihr Know-how einzubringen und gleichzeitig neue Wege zu gehen.</span></span></p>
+<p style="line-height: 1.4;"><strong><span style="font-size: 24pt;">Über die Rolle</span></strong></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">In dieser Schlüsselposition verantwortest du den Aufbau und die Implementierung einer ganzheitlichen Instandhaltungs-Prozesslandschaft, die den sicheren, regelkonformen und wirtschaftlichen Betrieb unserer Flotte gewährleistet.</span></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;"><strong>Konkret bedeutet das:</strong></span></p>
+<ul>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Gemeinsam mit unseren Partnern entwickelst du ein vollständiges Instandhaltungssystem für neue Flotten – im Einklang mit EBO, ECM-Regelwerk, CSM-RA und weiteren relevanten Vorgaben</span></li>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Hierfür definierst du Standards, Workflows und Schnittstellen für alle <strong>Instandhaltungsprozesse </strong>– von der präventiven Wartung bis zur Störungsbehebung und Unfallsanierung</span></li>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Du etablierst ein professionelles <strong>Schnittstellenmanagement </strong>zwischen Instandhaltungsdienstleistern, Werkstätten, Herstellern und dem EVU</span></li>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Zudem entwickelst du das <strong>Anforderungsmanagement </strong>für unsere Instandhaltungsinfrastruktur und vertrittst die Instandhaltungsinteressen im Bau- und Beschaffungsprozess</span></li>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Darüber hinaus stellst du sicher, dass das entwickelte <strong>Instandhaltungssystem </strong>vollständig und nahtlos bei unseren Partnern sowie intern implementiert, integriert und nachhaltig verankert wird – inklusive klarer Verantwortlichkeiten, Datenflüsse und Prozessschnittstellen</span></li>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Du bringst deine Bahnerfahrung ein, um Prozesse praxistauglich, sicher und effizient zu gestalten</span></li>
+</ul>
+<p><strong><span style="font-size: 24pt;">Über dich</span></strong></p>
+<ul>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Du hast ein abgeschlossenes Studium oder eine vergleichbare Qualifikation</span></li>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Zudem bringst du mehrjährige Erfahrung in der <strong>Eisenbahninstandhaltung </strong>mit – z. B. aus Werkstätten, ECM-Organisationen, Fahrzeugherstellern oder EVU.</span></li>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Darüber hinaus hast du Erfahrung in der <strong>Modellierung, Optimierung und Implementierung von Instandhaltungsprozessen</strong> sowie im Aufbau von Instandhaltungssystemen</span></li>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Du arbeitest strukturiert, eigenverantwortlich und behältst auch bei komplexen Themen den Überblick</span></li>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Du kommunizierst klar und verbindlich – auf Deutsch und Englisch (C1), Spanisch ist ein nice-to-have</span></li>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Reisebereitschaft ist für dich selbstverständlich</span></li>
+</ul>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;"><em>Bei uns zählt der Blick auf das Ganze – auch wenn du nicht alle Anforderungen zu 100 % erfüllst, aber dennoch glaubst, etwas bewegen zu können, freuen wir uns auf deine Bewerbung!&nbsp;</em></span></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;"><strong>Warum FlixTrain für Bahner spannend ist</strong></span></p>
+<ul>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Du gestaltest ein Instandhaltungssystem von Anfang an – ohne veraltete Strukturen</span></li>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Du arbeitest in einem Umfeld, das Entscheidungen schnell trifft und Innovationen zulässt</span></li>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Du hast echten Einfluss auf Sicherheit, Verfügbarkeit und Qualität unserer Flotte</span></li>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Deine Bahnerfahrung bringst du ein, um etwas Neues aufzubauen – statt nur bestehende Prozesse zu verwalten</span></li>
+</ul>
+<p><span style="font-size: 18pt; font-family: helvetica, arial, sans-serif;"><strong>Was Wir Bieten</strong></span></p>
+<ul>
+<li style="font-size: 12pt; font-family: helvetica, arial, sans-serif;" data-start="3507" data-end="3602"><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;"><strong data-start="3507" data-end="3525">Reisevorteile:</strong>&nbsp;12 kostenlose Flix-Gutscheine + 12 Rabattgutscheine für Freunde &amp; Familie.</span></li>
+<li style="font-size: 12pt; font-family: helvetica, arial, sans-serif;" data-start="3507" data-end="3602"><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;"><strong data-start="3604" data-end="3629">Arbeiten von Überall:</strong>&nbsp;Je nach Rolle kannst du bis zu 60 Tage pro Jahr von einem anderen Standort aus arbeiten.</span></li>
+<li style="font-size: 12pt; font-family: helvetica, arial, sans-serif;" data-start="3722" data-end="3864"><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;"><strong data-start="3722" data-end="3749">Hybrides Arbeitsmodell:</strong>&nbsp;Wir sind ein Unternehmen mit Bürokultur, bieten jedoch Flexibilität, um Arbeit und Leben in Einklang zu bringen.</span></li>
+<li style="font-size: 12pt; font-family: helvetica, arial, sans-serif;" data-start="3866" data-end="4034"><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;"><strong data-start="3866" data-end="3904">Gesundheits- und Wohlfühlangebote:</strong>&nbsp;Zugang zu vertraulichen Einzelberatungen, Kursen und Stressbewältigungsmaßnahmen – für dich und bis zu vier Familienangehörige.</span></li>
+<li style="font-size: 12pt; font-family: helvetica, arial, sans-serif;" data-start="4036" data-end="4149"><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;"><strong data-start="4036" data-end="4061">Lernen &amp; Entwicklung:</strong>&nbsp;Nutze Sprachkurse, Schulungen und Experten-Sessions, um deine Fähigkeiten auszubauen.</span></li>
+<li style="font-size: 12pt; font-family: helvetica, arial, sans-serif;" data-start="4151" data-end="4277"><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;"><strong data-start="4151" data-end="4174">Mentoring-Programm:</strong>&nbsp;Vernetze dich mit erfahrenen Kollegen, um Einblicke zu gewinnen und deine Karriere zu beschleunigen.</span></li>
+</ul>
+<hr>
+<p data-renderer-start-pos="26715"><span style="font-size: 24pt; font-family: helvetica, arial, sans-serif;"><strong data-renderer-mark="true">Warum Teil von Flix werden?</strong>&nbsp;</span></p>
+<p data-renderer-start-pos="26745"><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;">Bei Flix konzentrieren wir uns darauf, Reisen einfach, sicher und erschwinglich zu gestalten – sowohl für unsere Passagiere als auch für unsere Mitarbeiter. Hier geht es schnell voran, und es gibt viel Raum, etwas zu bewegen. Wir wachsen und entwickeln uns täglich weiter und suchen Menschen, die bereit sind, sich einzubringen und die Art und Weise, wie wir arbeiten, mitzugestalten.&nbsp;</span></p>
+<p data-renderer-start-pos="27132"><span style="font-size: 12pt; font-family: helvetica, arial, sans-serif;">Wenn du einen Job suchst, in dem du wachsen und etwas bewirken kannst, dann bist du bei FlixTrain genau richtig. Hier kannst du Teil eines Teams werden, in dem dein Beitrag zählt und du deine Reise selbst gestalten kannst!&nbsp;</span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt; color: #353535;">&nbsp;</p>
+<p style="line-height: 1.4;"><iframe src="https://www.youtube.com/embed/YlHz7TiiRAw" width="560" height="314"></iframe></p>
+<p>&nbsp;</p><p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/flix/experte-instandhaltungsprozesse-und-betrieb-munich-29741" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

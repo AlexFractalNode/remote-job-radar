@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Manager (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Flora Food Group sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">HR Manager (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 60k-80k</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Als HR-Manager bei Flora Food Group in Pratau hast du die Chance, die People & Organisation-Agenda zu leiten und eine positive Kultur zu fördern. Du wirst in enger Partnerschaft mit der lokalen Führungsteam arbeiten, um die Menschenexcellenz und die Einhaltung von Vorschriften zu steigern.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><div class="content-intro"><p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p></div><p style="text-align: center;"><strong>As our HR Manager (m/w/d) in Pratau, you will lead the People &amp; Organisation agenda for the site, partnering with local leadership to drive culture, compliance, and people excellence.<br></strong></p>
+<p style="text-align: left;"><strong><br>Position: </strong>HR Manager (m/w/d)<br><strong>Location: </strong>Pratau, Germany – Hybrid</p>
+<p><strong>About the Position</strong><br><br>As HR Manager – Pratau, you'll play a central role in leading People &amp; Organisation (P&amp;O) delivery for our local manufacturing site. This is a hands‑on, high‑impact role where you'll partner closely with site leadership, manage local HR operations, ensure compliance with German labour law, and bring Flora Food Group's people agenda to life on the ground.<br><br>You'll oversee all core HR processes, lead interactions with Works Councils and Trade Unions, and ensure our policies, culture, and ways of working are embedded effectively. This role requires strong operational HR expertise, excellent judgement, and the ability to balance strategic priorities with day‑to‑day execution.<br><br>The role is hybrid, based from our Pratau site, with regular collaboration across P&amp;O and the wider business.</p>
+<p><strong>Key Responsibilities Include:</strong><br><br><strong>People &amp; Organisation Strategy &amp; Execution</strong></p>
+<ul>
+<li>Ensure compliance with Flora Food Group's Code of Conduct and promote a culture of integrity and accountability.</li>
+<li>Implement P&amp;O plans aligned to business needs, ensuring objectives, timelines, and costs are met.</li>
+<li>Develop work plans for P&amp;O projects, including actions, resources, and performance indicators.</li>
+<li>Propose and design procedures that drive continuous improvement across the site.</li>
+<li>Coordinate the administrative management of the P&amp;O function, ensuring accuracy and efficiency.</li>
+</ul>
+<p><strong>Compliance, Governance &amp; Labour Relations</strong></p>
+<ul>
+<li>Ensure compliance with all legal requirements, labour regulations, and internal policies.</li>
+<li>Act as the primary point of contact for Works Councils, Trade Unions, and other employee representative bodies.</li>
+<li>Manage all aspects of labour relations, including meetings, negotiations, and documentation.</li>
+<li>Oversee the integrated Quality, Safety, and Environment procedures relevant to P&amp;O.</li>
+</ul>
+<p><strong>Business Partnering &amp; Stakeholder Engagement</strong></p>
+<ul>
+<li>Partner with local leadership to understand business needs and provide proactive HR solutions.</li>
+<li>Develop channels to identify workforce needs and ensure timely, effective responses.</li>
+<li>Lead annual planning and budgeting for P&amp;O, monitoring progress and proposing preventive measures.</li>
+<li>Manage relationships with P&amp;O suppliers, including sourcing, negotiation, and contract management.</li>
+</ul>
+<p><strong>Talent, Development &amp; Employee Experience</strong></p>
+<ul>
+<li>Lead and coordinate HR processes in alignment with Flora Food Group corporate policies and local co‑determination requirements (recruitment, onboarding, compensation and benefits, training, performance review, talent review, engagement surveys, communication).</li>
+<li>Promote strong internal communication, ensuring alignment with corporate guidelines and local needs.</li>
+<li>Support leadership capability, team development, and a positive employee experience across the site.</li>
+</ul>
+<p><strong>What Does It Take to Be Successful?</strong><br><br>We're looking for an experienced, confident, and proactive HR professional who can lead local HR operations with autonomy and impact. You should have:</p>
+<ul>
+<li>5+ years of experience in HR roles, ideally within the food or FMCG manufacturing sector.</li>
+<li>Strong knowledge of German labour law and experience working with Works Councils or Trade Unions.</li>
+<li>Advanced HR expertise across the full employee lifecycle.</li>
+<li>Strong Microsoft Office skills and comfort working with HR systems.</li>
+<li>Fluent English (mandatory) and strong communication skills.</li>
+<li>Proven ability to manage conflict, negotiate effectively, and build trusted relationships.</li>
+<li>A high sense of responsibility, strong leadership, and the ability to work both independently and collaboratively.</li>
+<li>Rigor, attention to detail, and a proactive, solutions‑oriented mindset.</li>
+</ul>
+<p><strong>Qualifications</strong></p>
+<ul>
+<li>Master's degree in Human Resources, Labour Law, Management, or related field (required).</li>
+<li>Train‑the‑Trainer certification or strong digital literacy (preferred).</li>
+</ul>
+<p><strong>What's Next?</strong><br><br>If you're ready to lead HR for our Pratau site and help shape the future of Flora Food Group, we'd love to hear from you.<br><br>For questions, you can reach out to Richard Hodgson, Talent Acquisition, via WhatsApp at +44(0)7884 603 724 or email at <a ---------- Join us at Flora Food Group, where we are pioneering the next generation of delicious, natural, nutritious food.</strong></p><div class="content-conclusion"><p><span data-contrast="auto">We understand your resume might not be up to date and recommend that you apply with what you have or your LinkedIn Profile. Flora Food Group is dedicated to building an inclusive and diverse workplace, we understand that you might not meet all the requirements stated in the description, but we encourage you to apply anyway. You might be the right candidate for this role or other roles. </span><span data-ccp-props="{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335559740&quot;:240}">&nbsp;</span></p>
+<p><em><span data-contrast="auto">Flora Food Group is an employer committed to diversity and inclusion in the workplace and equal opportunities for all. We recruit based only on values, qualifications, performance, skills, behaviours, experience, and knowledge. We ensure job advertisements are free from unintentional bias. </span></em><span data-ccp-props="{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335559740&quot;:240}">&nbsp;</span></p>
+<p><em><span data-contrast="auto">No personal characteristics should be a barrier to joining Flora Food Group. We prohibit discrimination and harassment based on race, color, sex, religion, sexual orientation, national origin, disability, genetic information, pregnancy, or other personal characteristics.</span></em><span data-ccp-props="{&quot;134233117&quot;:true,&quot;134233118&quot;:true,&quot;201341983&quot;:0,&quot;335559740&quot;:240}">&nbsp;</span></p>
+<p>&nbsp;</p></div><p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/flora-food-group/hr-manager-pratau-479983" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
