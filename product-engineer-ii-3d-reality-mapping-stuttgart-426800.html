@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Engineer II - 3D Reality Mapping (m/f/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Esri sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Product Engineer II - 3D Reality Mapping (m/f/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">IT</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Overview</strong></p>
+<p>Are you an investigative character — someone who truly wants to understand mechanics through data analysis? 3D reality capture and models unlock the power of the geospatial industry. Are you passionate about improving the user experience and translating customers’ needs into technical requirements? An eye for detail empowers user success through testing and structured validation. Do you enjoy training people personally and in written form? Our user documentation and presentations make complex topics simple to understand. Join us in developing the leading photogrammetry software worldwide!</p>
+<p>We are on a mission to develop cutting-edge software solutions that empower users to harness the full potential of 3D data. You'll have the opportunity to work with a diverse group of talented individuals who are committed to pushing boundaries and driving advancements in the geospatial industry. Together, we create software that meets the needs of our users and contributes to social and environmental progress. Your expertise will help shape the future of our products and the experiences of our growing community of users.</p>
+<p>Our culture values curiosity, growth, and collaboration. Let's embark on this exciting journey together!</p>
+<p><strong>What we offer</strong></p>
+<ul>
+<li>Responsibility and impact</li>
+<li>Passionate and supportive working culture</li>
+<li>Flat hierarchies</li>
+<li>Emphasis on team and personal growth through personal coaching and staff development events</li>
+<li>Strong focus on company culture: appreciative, compassionate communication, enabling and embracing diversity</li>
+<li>High-profile team that is driven by the pursuit of excellent results</li>
+<li>Active ambition to become a technology leader in 3D reconstruction technology</li>
+<li>Well-appointed office environment and equipment in the center of Stuttgart</li>
+<li>Part of Esri, a global organization based in California focused on GIS and spatial analytics to enable global change</li>
+<li>Attractive compensation including benefits like public transport, leased e-bikes, and fitness</li>
+</ul>
+<p><strong>Who we are</strong></p>
+<p>We are an international team of young and enthusiastic individuals passionate about creating professional photogrammetry software and providing value for our customers. Embracing a high diversity of skills and cultures, curiosity and an urge for excellence drive us. Municipalities and leading companies in the mapping industry use our unique technology for countrywide data production. We have built a strong reputation in the market for us, this is just the beginning. Facing an evolving market and many fascinating technological challenges, we need your expertise to help us reach the next level.</p>
+<p>The Esri R&#x26;D Center-Stuttgart develops the software technology Reality Engine, which is used worldwide to reconstruct 3D surface models from images and lidar. As one of the leading solutions in this domain, it focuses on high accuracy and large-scale applications such as aerial mapping of entire cities and countries. The resulting data empowers various applications in areas such as smart cities, infrastructure, 5G planning, change detection, environment monitoring, cadaster mapping, or VR.</p>
+<p><strong>Responsibilities</strong></p>
+<ul>
+<li>Collaborate in a team to create industry-leading software for 3D reconstruction from images and lidar, scene understanding, as well as visualization solutions</li>
+<li>Contribute to the long-term product and short-term development roadmaps</li>
+<li>Analyze, test, release, and support our products to enhance overall product quality</li>
+<li>Use your analytical and problem-solving skills to improve development, integration, and deployment workflows</li>
+<li>Manage bugs found through in-house testing as well as those reported by customers</li>
+<li>Contribute to development by pushing the limits of the software with creative workflows and evaluate and analyze data to empower future product development</li>
+<li>Create compelling product examples, blogs, articles, documentation, and tutorials to showcase new features</li>
+<li>Establish and define customer requirements; translate them into potential product improvements and new software designs</li>
+<li>Prepare and present demonstrations, talks, and workshops for international conferences</li>
+<li>Shape a product directly for a growing community of reality capture users</li>
+</ul>
+<p><strong>Requirements</strong></p>
+<ul>
+<li>2+ years of professional industry experience with relevant technology such as geospatial applications</li>
+<li>Excellent written and verbal communication and presentation skills</li>
+<li>Passion for quality and detail</li>
+<li>Know how to break software by finding bugs</li>
+<li>Drive to get to the bottom of complex projects involving real-world data &#x26; always striving for sustainable solutions</li>
+<li>Bachelor's in engineering field; preferably geomatics engineering, computer science, or related</li>
+<li>Existing work authorization for Germany</li>
+</ul>
+<p><strong>Recommended Qualifications</strong></p>
+<ul>
+<li>Knowledge of software development (C++, C#, Java, Python, and more)</li>
+<li>Expertise in efficient handling of spatial data including automation with scripting</li>
+<li>Familiarity with 3D modeling</li>
+<li>Familiarity with GIS applications and technologies, ideally ArcGIS</li>
+</ul>
+<p>#LI-JO1</p>
+<p>#LI-Onsite</p>
+<p><strong>The Company</strong></p>
+<p><strong>If you don’t meet all of the preferred qualifications for this position, we encourage you to still apply!</strong></p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/esri/product-engineer-ii-3d-reality-mapping-stuttgart-426800" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

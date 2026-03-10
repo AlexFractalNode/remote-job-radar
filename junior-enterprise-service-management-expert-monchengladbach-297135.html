@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junior Enterprise Service Management Expert (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Labtagon GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Junior Enterprise Service Management Expert (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Consulting</span><span class="badge badge-tag">Engineering</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Starte bei Labtagon als Junior ESM Expert (m/w/d).</strong> Arbeite an der technischen Umsetzung von Matrix42 Projekten, übernimm eigenverantwortlich Aufgaben und entwickle dich Schritt für Schritt zum Experten für Enterprise Service Management.</p>
+<p><strong>Standort:</strong> Mönchengladbach (HQ) / Mobile Office</p>
+<p><strong>Umfang:</strong> Vollzeit</p>
+<p>Du möchtest im Enterprise Service Management arbeiten und dich technisch zu einem echten Spezialisten entwickeln?</p>
+<p>Bei Labtagon realisierst du gemeinsam mit unserem Professional-Service-Team digitale Serviceprozesse für große Organisationen. Dabei arbeitest du an der technischen Umsetzung von Lösungen auf Basis der Matrix42 Plattform.</p>
+<p>Du übernimmst eigenverantwortlich definierte Aufgaben in Projekten, setzt technische Anforderungen um und entwickelst dich Schritt für Schritt zum Experten für Enterprise Service Management.</p>
+<p>Wenn du Systeme nicht nur betreiben, sondern verstehen und gestalten möchtest, sollten wir uns kennenlernen.</p>
+<h2>Aufgaben</h2>
+<p><strong>Deine Verantwortung: Technische Umsetzung und Entwicklung zum ESM-Spezialisten</strong></p>
+<p><strong>Technische Umsetzung von ESM-Projekten</strong></p>
+<ul>
+<li>Technische Konfiguration und Weiterentwicklung von Matrix42-Umgebungen</li>
+<li>Eigenverantwortliche Umsetzung definierter Anforderungen innerhalb der Plattform</li>
+<li>Integration von Systemen und Schnittstellen in bestehende IT-Landschaften</li>
+<li>Durchführung von Tests und Qualitätssicherung vor Produktivsetzung</li>
+</ul>
+<p><strong>Projektarbeit &#x26; Zusammenarbeit</strong></p>
+<ul>
+<li>Mitarbeit in Kundenprojekten gemeinsam mit erfahrenen ESM-Consultants</li>
+<li>Unterstützung bei der Strukturierung und technischen Umsetzung von Arbeitspaketen</li>
+<li>Mitwirkung bei Workshops und der technischen Übersetzung von Anforderungen</li>
+<li>Übernahme klar definierter Aufgaben im Managed-Service Umfeld</li>
+</ul>
+<p><strong>Wissensaufbau &#x26; Entwicklung</strong></p>
+<ul>
+<li>Aufbau von Expertise im Enterprise Service Management</li>
+<li>Aktiver Austausch mit unserem Projektteam zu technischen Lösungen</li>
+<li>Kontinuierliche Weiterentwicklung im Matrix42-Umfeld zum technischen ESM-Spezialisten</li>
+</ul>
+<h2>Qualifikation</h2>
+<p><strong>Dein Profil: Technische Kompetenz und Kundenorientierung</strong></p>
+<p><strong>Technisches Fundament</strong></p>
+<ul>
+<li>Studium der Informatik, Wirtschaftsinformatik oder vergleichbare technische Ausbildung</li>
+<li>Erste praktische Erfahrung im IT-Umfeld oder in IT-Projekten</li>
+</ul>
+<p><strong>Technische Kenntnisse</strong></p>
+<ul>
+<li>Grundverständnis von ITSM- oder Service-Management-Plattformen</li>
+<li>Erfahrung mit Windows-Servern, IIS und MS SQL (T-SQL)</li>
+<li>Kenntnisse in PowerShell oder C# sind ein Plus</li>
+</ul>
+<p><strong>Arbeitsweise</strong></p>
+<ul>
+<li>Strukturierte und lösungsorientierte Arbeitsweise</li>
+<li>Interesse an komplexen IT-Systemlandschaften</li>
+<li>Freude daran, technische Lösungen eigenständig umzusetzen und weiterzuentwickeln</li>
+<li>Sehr gute Deutschkenntnisse sowie gute Englischkenntnisse</li>
+</ul>
+<h2>Benefits</h2>
+<p><strong>Warum Labtagon? Dein Umfeld für Bestleistungen</strong></p>
+<p>Wir bieten dir den Freiraum und die Sicherheit, die du für anspruchsvolle Projekte benötigst. Bei uns triffst du auf ein Team, das Professionalität mit einer menschlichen Kultur verbindet.</p>
+<ul>
+<li><strong>Flexibilität &#x26; Vertrauen:</strong> Wir setzen auf Ergebnisse, nicht auf Präsenzzeit. Nutze unsere flexiblen Arbeitszeitmodelle und die Möglichkeit zum Mobile Office für eine Work-Life-Balance.</li>
+<li><strong>Umfassendes Vorsorgepaket:</strong> Deine Sicherheit ist uns wichtig. Wir unterstützen dich mit einer betrieblichen Altersvorsorge (überdurchschnittliche Zuschüsse), einer privaten Krankenzusatzversicherung (Zahn/Klinik) und einer privaten Unfallversicherung.</li>
+<li><strong>Innovationsgeist &#x26; Gestaltung:</strong> Bei uns gibt es keinen Stillstand. In unseren legendären <strong>Hackweeks</strong> entwickeln wir gemeinsam neue Lösungen. Wir bieten dir klare Entwicklungspfade und den Raum, deine eigenen Ideen direkt in die Tat umzusetzen.</li>
+<li><strong>Moderne Arbeitsausstattung:</strong> Du erhältst High-End-Equipment (Laptop, Smartphone und Zubehör), das dir selbstverständlich auch zur privaten Nutzung zur Verfügung steht.</li>
+<li><strong>Zusatzleistungen:</strong> Profitiere von Corporate Benefits, Fitness-Zuschüssen, einem festen Parkplatz am Headquarter sowie Zuschüssen zur Bildschirmarbeitsplatzbrille.</li>
+<li><strong>Gelebte Augenhöhe:</strong> Wir pflegen eine Kultur der kurzen Wege und des ehrlichen Austauschs. Hier zählt die beste Lösung, nicht das hierarchische Level.</li>
+</ul>
+<p><em>Du bringst Erfahrungen aus anderen Bereichen mit? Dann erzähle uns davon!</em></p>
+<p>Wir freuen uns, von Dir zu hören und Dich kennenzulernen.</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/labtagon-gmbh/junior-enterprise-service-management-expert-monchengladbach-297135" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

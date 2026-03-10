@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talent Strategy Intern | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Consultport sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Talent Strategy Intern</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">HR</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>About Us</strong></p>
+<p>Consultport is a global platform that connects companies with top-tier freelance consultants, enabling businesses to advance critical projects more efficiently and effectively than ever before. Since 2018, we’ve grown to a network of 10,000+ pre-vetted experts delivering impactful projects across 50 + countries. Trusted by over 100 leading companies, we provide tailored expertise to corporates, consultancies, private equity firms, and scale-ups. At Consultport, we redefine how businesses and consultants collaborate to drive success.</p>
+<p><strong>The Role</strong></p>
+<p>As a <strong>Talent Strategy Intern</strong> at Consultport, you will be responsible for attracting, retaining, and developing top talent. As we are rapidly growing, this is an extremely critical aspect of Consultport.</p>
+<h2>Tasks</h2>
+<ul>
+<li><strong>Talent Strategy</strong>: Identify, attract, and engage with top talent to join the Consultport team using channels, such as LinkedIn, professional networks, and community events, ensuring a positive end-to-end candidate experience.</li>
+<li><strong>End-to-End Recruiting</strong>: Manage an entire recruitment process, from writing job descriptions, and conducting interviews, to making an offer.</li>
+<li><strong>Employer Branding</strong>: Grow Consultport's employer brand by driving new initiatives, building an employer brand, strengthening relationships with our partners (recruiting sites, universities, etc), and serving as a company ambassador at events.</li>
+</ul>
+<h2>Requirements</h2>
+<ul>
+<li>You are a <strong>people person</strong>. You thrive on speaking with candidates from various backgrounds.</li>
+<li>You are <strong>naturally curious</strong>. You are comfortable asking questions, and eager to dive deep into understanding people and their motivations.</li>
+<li>You embrace <strong>ownership</strong>. You welcome responsibility and take the initiative to drive projects forward.</li>
+<li>You are <strong>resilient</strong>. You can face uncertain, and sometimes stressful situations with confidence.</li>
+</ul>
+<p><strong>Your Profile</strong></p>
+<ul>
+<li>About to graduate from university in HR, Business, Psychology, or a similar field.</li>
+<li>Top academic performance (Top 20% of your class based on grades)</li>
+<li>Can complete a mandatory internship (i.e. you are required to do an internship to graduate OR can receive university credit for internship experience.)</li>
+<li>Previous experience in recruiting or talent acquisition is great but not required.</li>
+<li>Fluency in English is a must, German or French are nice to have.</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li>Learn quickly by doing. Interns at Consultport dive into real projects very early, allowing for a steep learning curve.</li>
+<li>Company-sponsored support for your public transportation ticket and gym membership.</li>
+<li>Have a direct impact on Consultport's growth. You will hire new joiners during your internship.</li>
+<li>A role with great career opportunities, in a high-growth company in a future-proof industry.</li>
+<li>Work in the heart of Berlin with a driven, international team.</li>
+</ul>
+<p><strong>Does this sound like the next challenge for you?</strong></p>
+<p>Then we look forward to hearing from you!</p>
+<p><em>Consultport is committed to building an inclusive and diverse workplace where everyone is treated with respect and fairness. All qualified applicants will receive consideration for employment without regard to race, color, religion, gender, sexual orientation, gender identity or expression, national origin, age, disability, or any other characteristic protected by applicable law. At Consultport, we believe that diverse perspectives drive innovation and that fostering a culture of inclusion is key to our success.</em></p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/consultport/talent-strategy-intern-berlin-475173" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

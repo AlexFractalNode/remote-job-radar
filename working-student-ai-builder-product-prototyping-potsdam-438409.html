@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working Student - AI Builder & Product Prototyping (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">SensitHaptics sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Working Student - AI Builder & Product Prototyping (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">IT</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>SensitHaptics — The #1 Haptics Platform in SimRacing</strong></p>
+<p><strong>About Us</strong></p>
+<p>SensitHaptics builds the most advanced high-fidelity haptics in SimRacing and competitive gaming — a category we currently lead, as confirmed by countless industry influencers and top-tier reviewers. We’re a DeepTech startup with real commercial momentum: strong revenue traction across the EU and US, rapidly expanding OEM integrations, and a product that has become the benchmark in the eSports sim hardware scene.</p>
+<p>We are looking for an FPGA engineer who not only implements VHDL, but also simulates, tests and systematically debugs designs – right down to the hardware/board level.</p>
+<h2>Tasks</h2>
+<p><strong>Role Overview</strong><br>
+We are looking for a hands-on Working Student who enjoys experimenting with modern AI tools and building fast software prototypes. Your role is to explore, build, and test AI-driven solutions that automate workflows and help us rapidly validate new product ideas.</p>
+<p><strong>Key Responsibilities</strong></p>
+<ul>
+<li><strong>Build AI-driven automations</strong></li>
+</ul>
+<p>Design and implement automations that connect tools, APIs, and workflows to reduce manual work.</p>
+<ul>
+<li><strong>AI-assisted software prototyping</strong></li>
+</ul>
+<p>Use modern AI coding tools to rapidly create software prototypes, internal tools, and proof-of-concepts.</p>
+<ul>
+<li><strong>Experiment with AI-generated code</strong></li>
+</ul>
+<p>Test, evaluate, and improve software created with AI tools to validate functionality and usability.</p>
+<ul>
+<li><strong>Explore new AI tools and workflows</strong></li>
+</ul>
+<p>Continuously identify and test new AI tools that can accelerate development or improve internal processes.</p>
+<ul>
+<li><strong>Rapid product experimentation</strong></li>
+</ul>
+<p>Quickly build and iterate on ideas to test whether a concept works technically and from a user perspective.</p>
+<ul>
+<li><strong>Document learnings and best practices</strong></li>
+</ul>
+<p>Capture useful workflows, prompts, and automation structures so the team can reuse them.</p>
+<h2>Requirements</h2>
+<p><strong>What You Should Bring</strong></p>
+<ul>
+<li>Interest in <strong>AI tools, automation, and modern software development</strong></li>
+<li>Curiosity to <strong>experiment, build quickly, and try new technologies</strong></li>
+<li>Basic understanding of <strong>software development or scripting</strong></li>
+<li>Experience with tools like <strong>AI coding assistants, APIs, or automation platforms</strong> is a plus</li>
+<li>Hands-on mindset: <strong>build first, improve later</strong></li>
+</ul>
+<h2>Benefits</h2>
+<p><strong>What You’ll Gain</strong></p>
+<ul>
+<li>Hands-on experience building with <strong>state-of-the-art AI tools</strong></li>
+<li>Exposure to <strong>rapid product development and experimentation</strong></li>
+<li>Opportunity to shape how <strong>AI-driven workflows and software are built inside the company</strong></li>
+</ul>
+<p>We are looking forward to meeting you!</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/sensithaptics/working-student-ai-builder-product-prototyping-potsdam-438409" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
