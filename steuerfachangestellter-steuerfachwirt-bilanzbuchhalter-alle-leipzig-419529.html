@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steuerfachangestellter / Steuerfachwirt / Bilanzbuchhalter (alle m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">CONSULTIA STEUERBERATUNGSGESELLSCHAFT MBH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Steuerfachangestellter / Steuerfachwirt / Bilanzbuchhalter (alle m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Finance</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Beratung macht den Unterschied.</strong></p>
+<p>Die Consultia Unternehmensgruppe betreut seit knapp 20 Jahren komplexe Mandate ganzheitlich in allen wirtschaftlichen und steuerlichen Belangen auf nationaler und internationaler Ebene. An den vier Standorten Berlin, Hamburg, Leipzig und Kleinmachnow arbeiten über 40 hoch engagierte Mitarbeiter gemeinsam an vollumfänglichen Lösungen für unsere Mandanten.</p>
+<p>Consultia ist keine klassische Steuerberatungskanzlei. Wir sind vielmehr eine Beratungskanzlei für den gehobenen Mittelstand – mit einem klaren Fokus auf hochwertige steuerliche und betriebswirtschaftliche Beratung. Dabei setzen wir bewusst auf <strong>digitale Prozesse und papierloses Arbeiten</strong>, um Effizienz, Nachhaltigkeit und zeitgemäßen Mandantenservice zu vereinen.</p>
+<p>Der Schwerpunkt unserer Tätigkeiten im Bereich Steuern liegt in der Beratung: sei es in den Bereichen Immobilienberatung, der Beratung bei Transaktionen oder Restrukturierungen. Darüber hinaus betreuen wir ausländische Unternehmen und Personen mit Aktivitäten in Deutschland (Inbound-Beratung). Unserem Anspruch „Beratung macht den Unterschied” werden wir durch persönliche und umfassende Beratung auf Augenhöhe und mit hoher Fachexpertise gerecht.</p>
+<h2>Aufgaben</h2>
+<p><strong>Steuerberatung kann mehr.</strong></p>
+<p>Ganzheitliche Beratung bedeutet für unsere Mitarbeiter, dass sich ein Großteil der monotonen Aufgabengebiete unserer Branche erübrigt. Der Arbeitsalltag unserer Spezialisten besteht aus abwechslungsreichen und anspruchsvollen Projekten sowie spannenden Sachverhalten. Der Schwerpunkt Ihrer Tätigkeiten liegt in der Beratung – beispielsweise in den Bereichen Immobilien, Transaktionen oder Restrukturierung. Zudem hält unser Team konstant Ausschau nach neuen Effizienzpotentialen durch die Digitalisierung und Automatisierung. Abwechslung und Vielschichtigkeit statt Trott und Monotonie – diese Aufgaben könnten Sie schon bald durch Ihren Arbeitsalltag begleiten:</p>
+<ul>
+<li><strong>Intensive und individuelle Mandantenberatung:</strong> Sie sind verstärkt in persönliche Gespräche und strategische Beratung involviert, um maßgeschneiderte Lösungen für komplexe steuerliche Fragestellungen zu erarbeiten</li>
+<li><strong>Gestaltung von Steuerstrategien:</strong> Arbeiten Sie aktiv an der Entwicklung von steuerlichen Optimierungsmöglichkeiten für Ihre Mandanten</li>
+<li><strong>Umgang mit komplexen Steuerfällen</strong> dank unserer teils <strong>internationalen</strong> Mandantschaft</li>
+<li>Erstellung von <strong>Jahresabschlüssen</strong> und <strong>Steuererklärungen</strong></li>
+<li>Mitwirken bei der <strong>Prozessoptimierung</strong> und <strong>Digitalisierung</strong></li>
+<li>Optional: Erstellung von <strong>vielschichtigen, digitalen Finanzbuchhaltungen</strong></li>
+<li><strong>Weitere Tätigkeiten</strong>, die Ihnen Freude bereiten</li>
+</ul>
+<h2>Qualifikation</h2>
+<p><strong>So passen Sie zu uns.</strong></p>
+<p>Wir arbeiten in einem dynamischen Arbeitsumfeld mit einem hohen Digitalisierungsgrad und anspruchsvollen Mandaten. Daraus resultiert ein spannendes und attraktives Arbeitsumfeld, allerdings auch eine gewisse Erwartungshaltung an neue Teammitglieder. Wir legen großen Wert auf kontinuierliche persönliche und fachliche Weiterentwicklung. Auf diesem Weg unterstützen wir jeden Mitarbeiter individuell, jedoch setzen wir auch ein hohes Maß an Eigeninitiative voraus. Bei Consultia sind alle richtig, die vorankommen und am Puls der Zeit sein wollen.</p>
+<p>Darüber hinaus sollten Sie sich in den folgenden Punkten wiederfinden:</p>
+<ul>
+<li>Eine <strong>abgeschlossene Berufsausbildung</strong> zum Steuerfachangestellten, Steuerfachwirt oder Bilanzbuchhalter (alle m/w/d), idealerweise mit <strong>mehrjähriger Berufserfahrung</strong></li>
+<li><strong>Fundierte Kenntnisse im Umgang mit DATEV</strong> und den gängigen MS Office-Programmen</li>
+<li>Eine <strong>zukunftsorientierte Denkweise</strong> und der Wunsch, <strong>digital und modern</strong> zu arbeiten</li>
+<li>Eine <strong>lösungsorientierte, zuverlässige und eigenständige</strong> Arbeitsweise</li>
+<li><strong>Ausgeprägte Teamfähigkeiten</strong> – Sie bevorzugen es, Hand in Hand zu arbeiten, statt Ihre Ellbogen auszufahren</li>
+<li><strong>Sehr gutes Deutsch</strong> in Wort und Schrift</li>
+<li>Optional: <strong>gute</strong> <strong>Englischkenntnisse</strong> – if you’re able to understand this sentence, the odds are already in your favor!</li>
+</ul>
+<h2>Benefits</h2>
+<p><strong>Arbeitsbedingungen, die keine Wünsche übriglassen.</strong></p>
+<p>Unser Anspruch ist es, für unser Team das bestmögliche Arbeitsumfeld mit individuellen Entwicklungsmöglichkeiten zu schaffen. Dabei gehen wir neue Wege: sei es mit der geplanten Einführung einer 4-Tage-Woche, einer eigenen Auswahl von Mandanten oder kanzleiweiten Umsatzzielen statt personenbezogenen Zielen. Freuen Sie sich auf die folgenden Annehmlichkeiten:</p>
+<ul>
+<li><strong>Spürbar überdurchschnittliche Vergütung &#x26; Zusatzleistungen:</strong> Attraktive Gehälter über dem Branchenschnitt und weitere Zusatzleistungen wie ein 13. Gehalt oder unsere betriebliche Altersvorsorge</li>
+<li><strong>Kanzleiweite Umsatzziele statt personenbezogener Ziele:</strong> Alle ziehen an einem Strang</li>
+<li><strong>Die Option auf eine 4-Tage-Woche:</strong> Wir lassen gerne mit uns reden</li>
+<li><strong>Möglichkeit zur Spezialisierung</strong>: Möglichkeiten zur fachlichen Vertiefung und Spezialisierung (z.B. in den Bereichen Immobilien, Transaktionen oder Restrukturierungen)</li>
+<li><strong>Interdisziplinäre Projekte</strong>: Betreuung von Projekten, welche die Expertise aus verschiedenen Fach- und Kompetenzbereichen erfordern</li>
+<li><strong>Transparente Aufstiegschancen:</strong> Klar definierte Karrierepfade</li>
+<li><strong>Moderne und stilvoll eingerichtete Räumlichkeiten:</strong> Die Umgebung ist die halbe Miete</li>
+<li><strong>Teamzusammenhalt:</strong> Förderung des Miteinanders durch hohe Priorisierung des „Personal Fits“ neuer Teammitglieder und regelmäßigen Events</li>
+<li><strong>Zahlreiche Fort- und Weiterbildungsangebote:</strong> Weil Stillstand für Sie keine Option ist</li>
+<li><strong>Eigenverantwortung &#x26; Vertrauen:</strong> Viel Freiraum für eigene Entscheidungen und Arbeitsweisen statt starrer Prozesse und Einschränkungen</li>
+<li><strong>Flexible Arbeitszeiten- und Modelle:</strong> Egal ob Familie oder intensives Hobby, mit unserer Arbeitszeitgestaltung findet jeder die „Work-Life-Balance“</li>
+<li><strong>Home-Office:</strong> Variable Mischung aus Präsenz- und Mobilarbeit, soweit es mit den Aufgaben vereinbar ist</li>
+<li><strong>Hoher Digitalisierungsstandard:</strong> Die Zukunft ist jetzt</li>
+</ul>
+<p><strong>Ihr Weg zu uns.</strong></p>
+<p>Wenn Ihnen gefällt, was Sie lesen, sollten wir uns kennenlernen. Bitte senden Sie uns Ihren Lebenslauf sowie Ihre relevanten Zeugnisse. Ein Anschreiben ist willkommen, aber nicht zwingend erforderlich.</p>
+<p>Auch beantworten wir gerne Ihre offenen Fragen – melden Sie sich einfach. Wir freuen uns auf Sie!</p>
+<p>Consultia Steuerberatungsgesellschaft GmbH<br>
+Kurfürstendamm 33<br>
+10719 Berlin<br>
+<a>+49 (0)30 / 308 38 91 – 0</a></p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/consultia-steuerberatungsgesellschaft-mbh/steuerfachangestellter-steuerfachwirt-bilanzbuchhalter-alle-leipzig-419529" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

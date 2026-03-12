@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controller (m/w/d) - Controlling & Performance Management im Hamburger Hafen | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Port of Work Personalservice GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Controller (m/w/d) - Controlling & Performance Management im Hamburger Hafen</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Controlling</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Die <strong>Port of Work Personalservice GmbH</strong> ist der Personaldienstleister mit starker Verankerung im Hamburger Hafen. Wir unterstützen Unternehmen aus Logistik, Industrie und Dienstleistung dabei, qualifizierte Fachkräfte genau dort einzusetzen, wo sie gebraucht werden – zuverlässig, partnerschaftlich und mit klarem Blick für nachhaltige Personalstrategien.</p>
+<p>Für ein etabliertes Unternehmen im <strong>Hamburger Hafenumfeld</strong> suchen wir im Rahmen der <strong>Arbeitnehmerüberlassung mit perspektivischer Übernahme</strong> einen erfahrenen <strong>Controller (m/w/d)</strong>, der das Controlling aktiv weiterentwickelt und als Impulsgeber für Transparenz, Effizienz und datenbasierte Entscheidungen agiert.</p>
+<h2>Aufgaben</h2>
+<ul>
+<li>Verantwortung für definierte Aufgabenbereiche und Prozesse im <strong>Controlling</strong>, insbesondere Reporting, Kennzahlensteuerung und Planung</li>
+<li>Erstellung von <strong>Monats- und Jahresabschlüssen</strong>, Budgetplanung sowie Durchführung fundierter <strong>Ad-hoc-Analysen</strong></li>
+<li>Analyse von <strong>Abweichungen</strong> sowie adressatengerechte Berichterstattung inklusive Einforderung von Maßnahmen</li>
+<li>Entwicklung, Erstellung und Analyse von <strong>KPIs zur Performancesteuerung</strong></li>
+<li>Impulsgeber für <strong>Optimierungs- und Effizienzmaßnahmen</strong> im Finanz- und Performance-Management</li>
+<li><strong>Weiterentwicklung und Digitalisierung</strong> bestehender Controlling-Prozesse</li>
+<li>(Teil-)Projektleitung bei der Einführung neuer <strong>Kennzahlensysteme, Prozessstandards oder IT-Lösungen</strong> – auch bereichsübergreifend</li>
+</ul>
+<h2>Qualifikation</h2>
+<ul>
+<li>erfolgreich abgeschlossenes Studium im Bereich <strong>Betriebswirtschaft, Wirtschaftsingenieurwesen</strong> oder vergleichbare Qualifikation mit Schwerpunkt Controlling</li>
+<li>mehrjährige Berufserfahrung im <strong>Controlling</strong>, idealerweise im Umfeld <strong>Service, Instandhaltung oder Produktion</strong></li>
+<li>sehr gute Kenntnisse in <strong>SAP FI/CO</strong>, idealerweise mit <strong>Key-User-Erfahrung</strong></li>
+<li>wünschenswert: Erfahrung mit den Modulen <strong>PM / CS / EAM sowie MM oder SD</strong></li>
+<li>sehr gute Kenntnisse in <strong>MS Excel</strong> sowie den gängigen Office-Anwendungen</li>
+<li>analytisches Denkvermögen, strukturierte Arbeitsweise und ausgeprägte Kommunikationsstärke</li>
+<li>Bereitschaft zu <strong>anlassbezogenen Reisen zu deutschen Unternehmensstandorten</strong></li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li>Einsatz bei einem <strong>renommierten Unternehmen im Hamburger Hafenumfeld</strong></li>
+<li>verantwortungsvolle Aufgabe mit <strong>hoher Gestaltungsmöglichkeit im Controlling</strong></li>
+<li>Einbindung in strategische Projekte rund um <strong>Prozessoptimierung und Digitalisierung</strong></li>
+<li><strong>Überdurchschnittliches Gehalt</strong></li>
+<li>Sonderzahlungen <strong>Urlaubs- und Weihnachtsgeld</strong> (Unternehmensabhängig)</li>
+<li><strong>Homeoffice</strong> (Unternehmensabhängig)</li>
+<li>flexible Arbeitszeiten und <strong>Work-Life-Balance</strong></li>
+<li>einen <strong>Zuschuss zur betrieblichen Altersvorsorge</strong> (Unternehmensabhängig)</li>
+<li>Eigenverantwortung und <strong>Mitgestaltungsmöglichkeiten</strong></li>
+<li>ein <strong>internationales Arbeitsumfeld</strong></li>
+</ul>
+<p>Du möchtest gemeinsam mit uns was bewegen? Schick uns einfach ganz unkompliziert deinen Lebenslauf per E-Mail oder per WhatsApp</p>
+<p>Herr Büttner freut sich über deinen Anruf oder E-Mail montags bis freitags unter der<br>
++49 179 686 1064 <strong>/</strong> 040 180 24 306 7 oder bewerbung(at)portofwork.(de)</p>
+<p>Wir freuen uns auf DICH!</p>
+<p>BEWIRBDICHJETZT #WIRBILDENAUS #KARRIERE #NEWCHAPTER</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/port-of-work-personalservice-gmbh/controller-controlling-performance-management-im-hamburger-hafen-136938" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

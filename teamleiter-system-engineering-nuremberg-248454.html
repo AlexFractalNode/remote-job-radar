@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teamleiter System Engineering (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Hirscher Datentechnik GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Teamleiter System Engineering (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Management</span><span class="badge badge-tag">Team Leader</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Als IT-Systemhaus betreuen wir seit 1987 mittelständische Unternehmen in der Metropolregion Nürnberg mit persönlicher und kompetenter IT-Unterstützung. Unser Fokus liegt auf leistungsfähiger IT-Infrastruktur, sicherem Systembetrieb, Virtualisierung, Managed Services und IT-Security.</p>
+<p>Zur Verstärkung unseres Teams suchen wir einen <strong>Teamleiter System Engineering (m/w/d)</strong>, der neben fundierter technischer Erfahrung auch Verantwortung für die fachliche Führung unseres Engineering-Teams übernimmt und perspektivisch weitere technische Verantwortung im Unternehmen übernehmen kann.</p>
+<h2>Aufgaben</h2>
+<p><strong>Teamleitung &#x26; Engineering</strong></p>
+<ul>
+<li>Fachliche Führung und Unterstützung unseres System-Engineering-Teams</li>
+<li>Koordination technischer Aufgaben sowie Unterstützung bei komplexen Incidents</li>
+<li>Analyse wiederkehrender Betriebsprobleme und Entwicklung nachhaltiger Lösungen</li>
+<li>Sicherstellung einer sauberen technischen Dokumentation und klarer Betriebsprozesse</li>
+</ul>
+<p><strong>Infrastruktur &#x26; Managed Services</strong></p>
+<ul>
+<li>Betrieb und Weiterentwicklung unserer Server- und Virtualisierungsplattformen (VMware / Hyper-V)</li>
+<li>Weiterentwicklung unserer Managed-Service-Plattformen für Monitoring, Patch-Management und Automatisierung</li>
+<li>Sicherstellung zuverlässiger Backup- und Recovery-Prozesse (z. B. Veeam)</li>
+<li>Unterstützung bei der Weiterentwicklung unserer internen IT-Infrastruktur</li>
+</ul>
+<p><strong>IT-Security &#x26; Kundenberatung</strong></p>
+<ul>
+<li>Durchführung technischer Abstimmungen und Sicherheitsgespräche mit Bestandskunden</li>
+<li>Analyse bestehender IT-Infrastrukturen und Ableitung von Verbesserungsmaßnahmen</li>
+<li>Unterstützung bei der Entwicklung sicherer und stabiler IT-Architekturen für unsere Kunden</li>
+</ul>
+<h2>Qualifikation</h2>
+<ul>
+<li>Mehrjährige Erfahrung im Betrieb von IT-Infrastrukturen, idealerweise im Systemhaus- oder Managed-Service-Umfeld</li>
+<li>Fundierte Kenntnisse in Windows Server, Active Directory und Virtualisierung (VMware / Hyper-V)</li>
+<li>Erfahrung mit Backup- und Recovery-Lösungen sowie Monitoring-Systemen</li>
+<li>Sehr gute Kenntnisse im Bereich IT-Sicherheit</li>
+<li>Strukturierte, lösungsorientierte Arbeitsweise und ausgeprägtes Verantwortungsbewusstsein</li>
+<li>Erste Erfahrung in der fachlichen Führung von Teams oder Projekten von Vorteil</li>
+<li>Sehr gute Deutschkenntnisse in Wort und Schrift</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li>Mobiles Arbeiten für mehr Flexibilität im Arbeitsalltag</li>
+<li>Bis zu <strong>30 Tage Urlaub</strong> sowie Freizeitausgleich bei Mehrarbeit</li>
+<li><strong>Weihnachts- und Urlaubsgeld</strong> als zusätzliche finanzielle Anerkennung</li>
+<li><strong>Betriebliche Altersvorsorge</strong> mit 20 % Arbeitgeberzuschuss</li>
+<li>Monatlicher steuerfreier <strong>Sachbezug (50 €)</strong></li>
+<li><strong>Deutschlandticket</strong> für deinen Arbeitsweg</li>
+<li><strong>Fitness- &#x26; Wellpass</strong> für deine Gesundheit</li>
+<li>Umfangreiche <strong>Weiterbildungs- und Entwicklungsmöglichkeiten</strong></li>
+<li>Regelmäßige <strong>Team-Events</strong></li>
+<li>Täglich frisch gekochtes <strong>Mittagessen</strong></li>
+<li>Kostenfreie <strong>Getränke und Kaffee</strong> im Büro</li>
+<li><strong>Mitarbeiterparkplätze</strong> direkt am Standort</li>
+</ul>
+<p>Sie übernehmen eine verantwortungsvolle Rolle mit großem Gestaltungsspielraum und haben die Möglichkeit, unsere technischen Standards, Plattformen und Prozesse aktiv mitzuentwickeln und weiter auszubauen. Dabei arbeiten Sie eng und direkt mit der Geschäftsführung zusammen und bringen Ihre technische Expertise in strategische Entscheidungen und die Weiterentwicklung unserer Managed Services ein.</p>
+<p>Die Position ist langfristig angelegt und bietet Ihnen die Perspektive, weitere technische Verantwortung im Unternehmen zu übernehmen und sich schrittweise in eine führende technische Rolle zu entwickeln.</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/hirscher-datentechnik-gmbh/teamleiter-system-engineering-nuremberg-248454" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
