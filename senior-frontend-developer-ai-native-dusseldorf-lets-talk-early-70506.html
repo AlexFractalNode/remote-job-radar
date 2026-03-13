@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Frontend Developer & AI-Native (m/w/d), Düsseldorf – let’s talk early! | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">TOWA - the digital growth company sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Senior Frontend Developer & AI-Native (m/w/d), Düsseldorf – let’s talk early!</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Software Development</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><h2>Wofür wir stehen:</h2>
+<p><strong>“We drive digital transformation end-to-end - from strategy to execution. Creating measurable progress and real impact for our clients.”</strong></p>
+<p>Stillstand? Nicht mit uns. Wir glauben: <strong>Alles ist BETA und genau darin liegt die Chance für Fortschritt.</strong> Darum hinterfragen wir Bestehendes, wagen Neues und gestalten die digitale Transformation unserer Kunden aktiv mit.<br>
+<strong>Was uns auszeichnet?</strong> Wir denken ganzheitlich. Von der strategischen Beratung bis zur Implementierung begleiten wir unsere Kunden End-to-End – mit Kreativität, technologischer Exzellenz und einem tiefen Verständnis für ihre Geschäftsmodelle. So entstehen messbarer Fortschritt und nachhaltiger Impact.</p>
+<p><strong>Und jetzt kommst du:</strong> Wir suchen Menschen mit Neugier, Ambition und dem Mut, Verantwortung zu übernehmen. Menschen, die Lust haben, Neues zu lernen, unsere Kunden zu begeistern und gemeinsam mit uns zu wachsen.</p>
+<h2>Deine Aufgaben:</h2>
+<p><strong>Deine Mission:</strong> Du entwickelst skalierbare, performante Frontends für komplexe Web-, DXP- und Commerce-Projekte im B2B-Umfeld – von Corporate Websites bis zu E-Commerce-Plattformen.<br>
+Dabei arbeitest du eng mit UX, Design und Consulting zusammen und übersetzt fachliche Anforderungen in durchdachte, modulare Frontend-Architekturen.<br>
+Du denkst Entwicklung AI-first:<br>
+Bevor du Code schreibst, prüfst du bewusst, wie AI-Tools deinen Workflow effizienter, strukturierter und qualitativ besser machen können von Spezifikation über Code-Generierung bis Testing.</p>
+<ul>
+<li>Architektur und Umsetzung moderner Frontends mit<br>
+<strong>Vue / Nuxt.js</strong>, <strong>React / Next.js</strong> oder Alpine.js</li>
+<li>Integration von CMS- und DXP-Systemen wie <strong>Pimcore</strong> oder <strong>Storyblok</strong></li>
+<li>API-basierte Anbindungen an Backend-, CRM-, Commerce- und Drittsysteme</li>
+<li>Performance-Optimierung (Pagespeed, Core Web Vitals)</li>
+<li>Saubere Komponentenarchitektur und Design-System-Integration
+Du arbeitest mit modernen Dev-Stacks:</li>
+<li>HTML / Twig / Blade / PHTML</li>
+<li>CSS / Tailwind</li>
+<li>JavaScript / TypeScript</li>
+<li>MySQL, PostgreSQL, Redis</li>
+<li>Git, CI/CD, Docker, Nginx, Apache
+Du etablierst Qualitätsstandards durch:</li>
+<li>Unit- &#x26; Integration Tests (Jest, Vitest)</li>
+<li>E2E-Tests (Playwright)</li>
+<li>Code Reviews &#x26; Guidelines</li>
+<li>Saubere Architekturprinzipien</li>
+</ul>
+<h2>Damit kannst Du punkten:</h2>
+<p>Du hast mindestens 5 Jahre Erfahrung in der professionellen Frontend-Entwicklung mit modernen JS-Frameworks wie React, Vue oder vergleichbaren Technologien.</p>
+<p>Du bringst fundiertes Verständnis mit für:</p>
+<ul>
+<li>Clean Code &#x26; SOLID-Prinzipien</li>
+<li>Separation of Concerns</li>
+<li>Modulare Komponentenarchitektur</li>
+<li>Performance-Optimierung</li>
+<li>Test-Driven Thinking
+Du fühlst dich sicher in:</li>
+<li>TypeScript</li>
+<li>API-Integration (REST)</li>
+<li>CI/CD-Workflows</li>
+<li>Docker-basierten Setups</li>
+<li>Git &#x26; professioneller Team-Kollaboration
+Außerdem:</li>
+<li>Du hast Erfahrung mit CMS-/DXP-Umfeldern wie Storyblok, Pimcore oder ähnlichen Systemen.</li>
+<li>Du verstehst nicht nur „wie“ man etwas baut – sondern „warum“.</li>
+<li>Du denkst in Lösungen, in Business Impact und in skalierbaren Strukturen.</li>
+<li>Du bringst erste praktische Erfahrung mit AI-Tools wie Cursor, GitHub Copilot oder Claude Code mit und bist bereit, AI als festen Bestandteil moderner Entwicklungsprozesse zu integrieren.</li>
+<li>Du arbeitest strukturiert, übernimmst Verantwortung, gibst konstruktives Feedback und willst aktiv an der Weiterentwicklung unserer technologischen Standards mitwirken. Die eigene Arbeitsweise wird regelmäßig hinterfragt und durch den Einsatz neuer AI-Tools oder Mechanismen verbessert.</li>
+</ul>
+<h2>Was wir von Dir benötigen:</h2>
+<p><strong>Mission started?!</strong> Dann brauchen wir von Dir:</p>
+<ul>
+<li>Deinen <strong>CV</strong></li>
+<li>Welche <strong>Vergütung</strong> Du Dir für Deine Performance vorstellst</li>
+<li>Deine <strong>Kündigungsfrist</strong> bzw. möglicher <strong>Starttermin</strong></li>
+</ul>
+<h2>Warum wir?</h2>
+<p>Wir glauben: <strong>Wer viel gibt, soll auch viel zurückbekommen</strong>. Deshalb erwarten dich bei uns Benefits, die über „Extras“ hinausgehen. Sie geben dir Freiheit, Flexibilität und die Möglichkeit, dich fachlich wie persönlich weiterzuentwickeln, und machen deinen Arbeitsalltag einfach besser.</p>
+<ul>
+<li><strong>T</strong> <strong>eamspirit pur</strong>: Kollegiale Teams mit echtem Zusammenhalt, Hilfsbereitschaft und einer guten Portion Humor.</li>
+<li><strong>Transparente Strukturen</strong>: Flache Hierarchien und eine gelebte Open-Door-Mentalität - Austausch auf Augenhöhe ist selbstverständlich.</li>
+<li><strong>Open Vacation Policy</strong>: Neben deinen gesetzlichen Urlaubstagen kannst du dir mit unserer „Above &#x26; Beyond“-Regelung zusätzliche freie Tage gönnen.</li>
+<li><strong>Work from anywhere</strong>: Ob Home-Office oder temporär im Ausland - du entscheidest, wo du am produktivsten bist.</li>
+<li><strong>Flexible Arbeitszeiten</strong>: Großer Gleitzeitrahmen - du bestimmst deinen Rhythmus, mit Verlässlichkeit bei Kunden- und Teammeetings.</li>
+<li><strong>Modelle, die zu deinem Leben passen</strong>: Vollzeit oder Teilzeit, fix oder zeitlich begrenzt – wir finden gemeinsam die passende Lösung.</li>
+<li><strong>Top-Equipment</strong>: Premium-Hardware, die du weitgehend selbst auswählen kannst.</li>
+<li><strong>Spannende Projekte,</strong> innovativ, abwechslungsreich und mit steiler Lernkurve – bei uns gestaltest du echten Fortschritt mit.</li>
+<li><strong>Wachstum garantiert</strong>: Individuelles Weiterbildungsbudget für Workshops, Zertifizierungen oder Coachings.</li>
+<li><strong>Karrierepfade</strong>: Auch bei flachen Hierarchien sorgen klare Strukturen für deine Weiterentwicklung.</li>
+<li><strong>Mobility &#x26; Events</strong>: Bis zu 365 € fürs Öffi- oder Deutschlandticket, regelmäßige Teamevents und Besuche von Messen &#x26; Conventions.</li>
+<li><strong>Loft-Offices</strong>: Zentral gelegen, modern ausgestattet, kreativ – mit Raum für Austausch, Ideen und natürlich Snacks &#x26; Drinks.</li>
+<li><strong>Rewards</strong>:Prämiensystem für deine persönlichen und unternehmerischen Erfolge.</li>
+</ul>
+<p><em>Das Gehalt für diese Position liegt zwischen €54.000 und €80.000 brutto/Jahr.Wir erstellen dir im Falle, dass du und wir zusammenarbeiten wollen, ein individuelles Angebot. Die konkrete Vergütung richtet sich nach deiner Erfahrung, deinen Qualifikationen sowie den für die Position relevanten Skills.</em></p>
+<h2>Vorgesetzter</h2>
+<p>Your Teamlead is Matthias Frank - click to get to know him.</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/towa-the-digital-growth-company/senior-frontend-developer-ai-native-dusseldorf-lets-talk-early-70506" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
