@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invigilators (Aufsichtspersonal) as Working Students, Part-timers and Interns (m/f/d) in Duisburg, Essen, Gelsenkirchen and Bochum | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Manifesta 16 Ruhr gGmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Invigilators (Aufsichtspersonal) as Working Students, Part-timers and Interns (m/f/d) in Duisburg, Essen, Gelsenkirchen and Bochum</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">HR</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Invigilators are key members of the Manifesta 16 Ruhr team. They ensure that the operations in and around all exhibition venues are well organised whilst actively engaging with visitors and enhancing their experience.</p>
+<p>Beyond safeguarding artworks and installations, invigilators act as welcoming hosts and informed points of contact. A central aspect of the role is interacting with visitors: initiating conversations, providing information about venues, artworks and participants, explaining exhibition concepts, and supporting meaningful engagement with the exhibition. Invigilators are the welcoming face of the biennial</p>
+<p>Invigilators contribute to creating an open and dialogue-oriented atmosphere in which visitors feel informed, welcomed and comfortable.</p>
+<h2>Tasks</h2>
+<ul>
+<li>Supervise exhibition spaces to ensure the protection of artworks, installations, and technical equipment</li>
+<li>Ensure visitors comply with exhibition rules and intervene professionally and respectfully when necessary</li>
+<li>Welcome visitors and provide orientation within the venue</li>
+<li>Proactively engage visitors in conversation about artworks, artists, and exhibition themes</li>
+<li>Answer questions and offer clear, accessible information about the exhibition</li>
+<li>Foster a positive, inclusive and dialogue-oriented atmosphere</li>
+<li>Monitor visitor flow and contribute to a safe and orderly environment</li>
+<li>Carry out opening and closing procedures, including securing exhibition spaces and artworks</li>
+<li>Act appropriately in the event of incidents or emergencies, following Manifesta 16 Ruhr protocols</li>
+<li>Report damages, incidents, or unusual situations to the responsible coordinators</li>
+<li>Collaborate with coordination teams, technicians, and security staff as required</li>
+<li>Welcome and coordinate arrivals of groups and individuals attending activities in close coordination with other team members</li>
+<li>Check the validity of tickets and bookings of Public Walks​, Group Walks​, School Walks​.</li>
+</ul>
+<h2>Requirements</h2>
+<ul>
+<li>Fluent in German and English; additional languages are a strong asset</li>
+<li>Strong communication skills and enjoyment of engaging with diverse audiences</li>
+<li>Confident in approaching visitors and initiating conversations</li>
+<li>Responsible, attentive and comfortable setting boundaries when necessary</li>
+<li>Interest in contemporary art and cultural environments</li>
+<li>Ability to remain calm, alert and professional in challenging or unexpected situations</li>
+<li>Reliable, punctual, and comfortable working independently within assigned spaces</li>
+<li>Experience in museums, exhibitions, cultural institutions, visitor services, mediation, or invigilation is an advantage</li>
+<li>Willingness to follow procedures and use internal communication tools.</li>
+</ul>
+<p><strong>Working Conditions</strong></p>
+<ul>
+<li>Candidates must be based in the Ruhr Area for the duration of the contract</li>
+<li>The temporary employment, including training days, runs from 08 June to 4 October 2026</li>
+<li>Part timers and Interns work between 33 and 35 hrs per week with three days off per week</li>
+<li>Working Students work 17 hours (2 days of work) during the semester. The amount of hours could be increased during the semester break to a maximum of 40 hours per week.</li>
+</ul>
+<p><strong>How to Apply</strong></p>
+<p>Please apply by using <a href="https://forms.monday.com/forms/c1de4e26b458bbc719ec8295b8fe4378?r=euc1">this form</a>. Deadline 30th of April.</p>
+<p><em>Diversity and inclusion are firmly anchored in our corporate culture. Therefore, we welcome all applications, regardless of gender, age, disability, religion/belief, ethnic</em> <em>origin</em> <em>or sexual identity.</em></p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/manifesta-16-ruhr-ggmbh/invigilators-aufsichtspersonal-as-working-students-part-timers-and-interns-in-duisburg-essen-gelsenkirchen-and-bochum-433372" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

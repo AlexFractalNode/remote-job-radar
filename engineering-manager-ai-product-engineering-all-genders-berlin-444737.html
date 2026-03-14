@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Manager - AI & Product Engineering (all genders) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Aroundhome sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Engineering Manager - AI & Product Engineering (all genders)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Software Development</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><h2>Responsibilities</h2>
+<p>We are looking for an ambitious and passionate Engineering Manager to strengthen our Tech Leadership team (team of six leaders). As Technical Leader you are managing your team (Houseowner &#x26; Service Request Acquisition) being responsible for enabling it to ensure high quality and performance. Simultaneously, you play a crucial role in influencing the Technical landscape.</p>
+<p>The Houseowner &#x26; Service Request Acquisition team is the engine behind how Aroundhome attracts high-intent homeowners (for instance via organic traffic). We are operating in a rapidly changing landscape where AI-driven search and AI-overviews are fundamentally altering how users access information.</p>
+<p>Our mission is to build a resilient acquisition strategy beyond the traditional Search Engine results page by positioning Aroundhome as the authoritative, structured source for home projects in the DACH region— not just for human users, but as a preferred data source for the AI systems that consume and rank content.</p>
+<ul>
+<li><strong>Product Engineering Leadership</strong>: You will lead a team of four engineers evolving toward a full-stack Product Engineering mindset where engineers are close to the product discovery process, allowing a better understanding of the Why, as well as the available data and its meaning.</li>
+<li><strong>AI-Assisted Development</strong>: You will champion the adoption of AI-assisted development workflows, ensuring your team leverages modern tooling (e.g. Cursor, CodeRabbit, AgentOS) to increase velocity and maintain high standards of code quality and performance.</li>
+<li><strong>AI Transformation Leader</strong>: You will guide your team through the shift toward AI-integrated search, ensuring our technical infrastructure (content scaling, structured data, and machine readability) is optimized for both current SEO and future AI-agent ecosystems.</li>
+<li><strong>Outcome-Focused Delivery</strong>: You prioritize lean, efficient execution over rigid process, focusing on rapid iteration and the measurable success of our acquisition channels.</li>
+<li><strong>Strategic Collaboration</strong>: You collaborate closely with various departments (e.g. Marketing, Content, and Brand) ensuring our scaling efforts across the DACH region are technically sound and data-driven.</li>
+<li><strong>People Development</strong>: You identify and promote talent through targeted coaching, ensuring team growth and high-performance standards align with the department vision.</li>
+<li><strong>Tech Leadership</strong>: You are part of the tech leadership team, report directly to the Director of Technology and are actively involved in the further design and scaling of Tech.</li>
+</ul>
+<h2>Skills</h2>
+<ul>
+<li><strong>Proven Leadership</strong>: You have several years (5+) of practical experience leading high-performing teams and have a track record of building and scaling engineering teams.</li>
+<li><strong>Transformation Expertise</strong>: You have demonstrated experience navigating teams through periods of significant technical and platform transformation—specifically regarding AI and other technology shifts.</li>
+<li><strong>Product Mindset</strong>: You thrive with a goal-focused approach, effectively guiding your teams to connect technology with user value while taking full ownership of the entire delivery process.</li>
+<li><strong>Technical Fluency</strong>: You have a deep understanding of modern engineering practices, supporting the team through difficulties and unpredictability, backed by solid data-driven decision-making.</li>
+<li><strong>Mindset &#x26; Drive</strong>: You are a people-first leader with a clear, persuasive communication style and a healthy dose of humor to keep the team energized through complex technical shifts.</li>
+</ul>
+<h2>What we offer</h2>
+<p><strong>Hybrid Work // Stay flexible</strong>: Decide freely whether you want to work from our office in Berlin, from home throughout Germany, or fully remote from Portugal. Additionally, we offer you the possibility to work up to 30 days per year from selected EU countries</p>
+<p><strong>Room to grow // Stay curious</strong>: In regular/annual feedback meetings, you design your own personal development path together with your team lead. In addition, we offer monthly Tech Talks, an annual training budget, as well as great workshops to seek new input and specific training for your personal development.</p>
+<p><strong>Mental &#x26; physical health // Stay healthy &#x26; active</strong>: We care about your well-being and support your health with a discounted membership at Urban Sports Club. In addition, our cooperation partner “Fürstenberg Institute” is available to you and your family members with advice and support when it comes to mental health &#x26; coaching.</p>
+<p><strong>Taking responsibility // We #care</strong>: We care for our planet and the people who are living on it. To make our world a little bit better, our ESG Team (Environmental, Social &#x26; Governance) promotes our awareness for environmentally friendly behavior. In addition, we work with JobRad, offer a discounted BVG ticket, and actively support social projects in Berlin at our annual Social Day to give something back.</p>
+<p><strong>Teamspirit // Stay connected</strong>: What drives us is our sense of community. That's why we celebrate our Company Day once a month in our office at Potsdamer Platz, where everyone gets together in person. In addition to a comprehensive update of our C-Board, the main focus is on togetherness and the exchange of ideas over lunch and dinner together.</p>
+<p><strong>Transparency // We want to be transparent</strong> - also when it comes to salary: If you have any questions about a possible salary range for this position, feel free to send us an email at . We will get back to you as soon as possible.</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/aroundhome/engineering-manager-ai-product-engineering-all-genders-berlin-444737" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

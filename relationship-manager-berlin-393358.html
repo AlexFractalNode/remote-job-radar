@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relationship Manager (w/m/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Freedom Finance Germany GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Relationship Manager (w/m/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 60k-80k</span>
+                    <span class="badge badge-tag">Private Banking</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Als Relationship Manager bei Freedom Finance Germany GmbH kannst du deine Fähigkeiten einsetzen, um Kunden zu beraten und zu unterstützen. Du wirst Teil eines dynamischen Teams und hast die Möglichkeit, deine Karriere zu entwickeln.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Bei Freedom24 sind wir überzeugt: Investieren sollte für alle zugänglich, transparent und empowernd sein.</strong></p>
+<p>Wir bieten direkten Zugang zu den Aktienmärkten in den USA, Europa und Asien.</p>
+<p>Freedom24 gehört zu den größten Brokern unter Aufsicht der CySEC. Als stolzes Mitglied von Euroclear, mit einem B+ Rating von S&#x26;P Global Ratings und Teil der Financial Markets Association, garantieren wir höchste Standards in Transparenz und finanzieller Integrität.</p>
+<p>Wir sind Teil von Freedom Holding Corp., einer schnell wachsenden internationalen Finanzgruppe, die an der NASDAQ (FRHC) gelistet ist und mehr als 7.000 Mitarbeiter*innen in 22 Ländern beschäftigt. Die Erfolgsgeschichte der Holding begann vor 15 Jahren mit einer mutigen Idee: die Aktienmärkte einfach und für alle zugänglich zu machen. Diese Mission verfolgen wir bis heute mit Leidenschaft.</p>
+<p>Über 350.000 Anleger vertrauen bereits Freedom24. Warum? Weil sie bei uns einen umfassenden All-Inclusive-Service erhalten:<br>
+● Zugang zu US-, europäischen und asiatischen Börsen<br>
+● Ausgewählte Investmentideen und Marktanalysen<br>
+● Qualitativ hochwertige Betreuung durch einen persönlichen Manager*in<br>
+● Eine intuitive App und eine moderne Trading-Plattform</p>
+<p>Wir schaffen ein Umfeld, in dem sich Kund*innen sicher fühlen und in dem unsere Teams wachsen, Verantwortung übernehmen und ihre Ambitionen verwirklichen können.</p>
+<p>Zur Verstärkung unseres Teams in Berlin suchen wir einen engagierten <strong>Relationship Manager (m/w/d)</strong>, der uns beim Aufbau langfristiger Kundenbeziehungen unterstützt und unsere Geschäftsentwicklung in der Region aktiv mitgestaltet.</p>
+<h2>Tasks</h2>
+<ul>
+<li>Erster Ansprechpartner für unsere deutschsprachigen Kunden: Unterstützung beim Onboarding, Beantwortung von Fragen zu Produkten und Plattform sowie Lösung von Kundenanfragen</li>
+<li>Vorstellung unserer Investmentplattform und Dienstleistungen in Einführungsgesprächen mit neuen Kunden</li>
+<li>Aufbau langfristiger und vertrauensvoller Kundenbeziehungen und Sicherstellung der Kundenzufriedenheit</li>
+<li>Ermittlung von Kundenbedürfnissen und Angebot entsprechender investmentbezogener Beratung</li>
+<li>Beobachtung der Finanzmärkte und Weitergabe relevanter Informationen an Kunden</li>
+<li>Pflege präziser Kundendaten und Unterstützung bei operativen Aufgaben</li>
+<li>Zusammenarbeit mit internen Teams (Support, Vertrieb, Produkt, Compliance), um einen reibungslosen Service sicherzustellen</li>
+<li>Sammlung und Weitergabe von Kundenfeedback zur Verbesserung von Service und Prozessen.</li>
+</ul>
+<h2>Requirements</h2>
+<ul>
+<li>Mindestens 2 Jahre Erfahrung in der Finanzdienstleistungsbranche oder bei einem Broker – idealerweise in einer kundenorientierten B2C-Rolle</li>
+<li>Echtes Interesse an Finanzmärkten (z. B. durch aktives Informieren über Finanzthemen oder eigene Investments)</li>
+<li>Hervorragende Kommunikations- und zwischenmenschliche Fähigkeiten</li>
+<li>Bewerber mit starkem Kundenservice-Hintergrund im Bereich Investment sind willkommen</li>
+<li>Gute Englischkenntnisse für die interne Kommunikation</li>
+<li>Proaktive, lösungsorientierte Denkweise mit starkem Fokus auf Kundenzufriedenheit und Servicequalität.</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li>Wettbewerbsfähiges Gehalt;</li>
+<li>Monatlicher Sales-Bonus;</li>
+<li>Jährlicher Performance-Bonus: bis zu drei Bruttomonatsgehälter (abhängig von der Entscheidung des Managements);</li>
+<li>Remote-Work-Option: bis zu 10 % der jährlichen Arbeitszeit remote (nach der Probezeit);</li>
+<li>Professionelle Weiterentwicklung durch interne und externe Schulungen, Zertifizierungen, Workshops und Seminare;</li>
+<li>Exklusive Marketing- und Networking-Events für Top-Performer;</li>
+<li>Jährliche Teambuilding-Events an inspirierenden internationalen Aufenthaltsorten;</li>
+<li>Motivierende Teamwettbewerbe mit attraktiven Prämien</li>
+</ul>
+<p><strong>Hinweis zur Sprache:</strong><br>
+Aus Gründen der besseren Lesbarkeit wird in diesem Text teilweise auf eine durchgängigegendergerechte Sprache verzichtet. Selbstverständlich sind alle Geschlechter gleichermaßen angesprochen.</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/freedom-finance-germany-gmbh/relationship-manager-berlin-393358" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
