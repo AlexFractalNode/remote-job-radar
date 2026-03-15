@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Java Backend Engineer (m/f/x) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Atolls sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Senior Java Backend Engineer (m/f/x)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><div class="content-intro"><p><img style="display: block; max-width: 100%;" src="https://atolls.com/wp-content/uploads/2025/10/Atolls-Banner_01_Greenhouse_1400x200-scaled.jpg" alt="Atolls top banner"></p>
+<hr>
+<h3 class="mb-2 whitespace-pre-wrap"><strong>Atolls is the world's largest community-driven shopping platform, active in 20+ markets.&nbsp;</strong></h3>
+<p class="mb-2 whitespace-pre-wrap">We help millions make smarter spending decisions across discovery, evaluation, and (re-)purchase by connecting people with the right brands and retailers.</p>
+<p class="mb-2 whitespace-pre-wrap">Our 1,000+ team across 10 countries builds products used every day at global scale, where you'll have real ownership and see your impact. Want to shape the destinations people rely on to shop with confidence? Keep reading.</p></div><section>
+<section><hr>
+<h3><strong>About This Role:</strong></h3>
+<p>We are looking for a <strong>Senior Java Backend Engineer</strong> to join our growing engineering team in <strong>Munich</strong>. You will play a key role in designing, building, and scaling high-performance backend systems using modern Java technologies and cloud-native architectures. This role is ideal for someone who enjoys working on complex systems, cares deeply about code quality and has a strong architectural mindset.</p>
+<hr>
+<h3><strong>Our Benefits:</strong></h3>
+<p>At Atolls, we believe in nurturing both your professional and personal growth. Here's what you can expect:</p>
+<ul>
+<li>A culture that values personal and professional development, with internal mobility opportunities.</li>
+<li>A supportive and open-minded team that embraces diverse perspectives and innovative ideas.</li>
+<li>32 days of paid vacation plus your birthday off, giving you the time you need to recharge.</li>
+<li>A flexible hybrid working scheme to balance work and life.</li>
+<li>Access to a learning budget and internal training to help you grow in your role.</li>
+<li>Mental health coaching to support your well-being.</li>
+<li>Regular global and local get-togethers to celebrate successes and build connections.</li>
+<li>The possibility of taking a sabbatical after three years with the company.</li>
+<li>A cloud-based company setup, providing flexibility and collaboration opportunities no matter where you are.</li>
+</ul>
+<p><em>*These are global benefits that apply to all employees, with additional local perks based on your location.</em></p>
+<hr>
+<h3><strong>Responsibilities:</strong></h3>
+<p>As a <strong>Senior Java Backend Engineer</strong>, you will:</p>
+<ul data-pm-slice="3 1 []">
+<li class="css-v55p23"><strong>Design</strong>, develop, and maintain scalable backend services using&nbsp;<strong>Java 17 </strong>or other recent versions (<strong>11+</strong>).</li>
+<li class="css-v55p23">Build and evolve <strong>microservice-based and event-driven architectures</strong></li>
+<li class="css-v55p23">Develop APIs using<strong> GraphQL</strong></li>
+<li class="css-v55p23">Work with <strong>Spring Boot</strong> and <strong>Spring Reactive (WebFlux)</strong></li>
+<li class="css-v55p23">Design and optimize data models using <strong>MySQL</strong> and <strong>NoSQL databases</strong> (DynamoDB or MongoDB)</li>
+<li class="css-v55p23">Ensure high performance, reliability, and scalability of backend systems</li>
+<li class="css-v55p23">Write <strong>clean, maintainable, and well-tested code</strong></li>
+<li class="css-v55p23">Implement <strong>performance testing</strong> and <strong>end-to-end testing</strong></li>
+<li class="css-v55p23">Collaborate closely with product managers, frontend engineers, and DevOps</li>
+<li class="css-v55p23">Contribute to architectural decisions and technical best practices</li>
+<li class="css-v55p23">Mentor junior engineers and provide technical leadership when needed</li>
+<li class="css-v55p23">Collaborate on AI-enabled features, including <strong>prompt engineering</strong> and backend integrations</li>
+</ul>
+<hr>
+<h3><strong>&nbsp;</strong><strong>Your Profile:</strong></h3>
+<ul data-pm-slice="3 3 []">
+<li class="css-v55p23"><strong>8+ years</strong> of professional experience in backend development</li>
+<li class="css-v55p23">Strong expertise in <strong>Java 17</strong> or other recent versions (<strong>11+</strong>)</li>
+<li class="css-v55p23">Extensive experience with <strong>Spring Boot</strong> and <strong>Spring Reactive</strong></li>
+<li class="css-v55p23">Solid knowledge of <strong>MySQL</strong> and experience with <strong>NoSQL databases</strong> (DynamoDB or MongoDB)</li>
+<li class="css-v55p23">Hands-on experience with <strong>Kubernetes</strong></li>
+<li class="css-v55p23">Strong understanding of <strong>microservice architecture</strong> and <strong>event-driven systems</strong></li>
+<li class="css-v55p23">Experience building and consuming <strong>GraphQL APIs</strong></li>
+<li class="css-v55p23">Proven experience with <strong>performance optimization and testing</strong></li>
+<li class="css-v55p23">Experience with <strong>end-to-end testing strategies</strong></li>
+<li class="css-v55p23"><strong>Experience with prompt engineering</strong> for AI-powered applications</li>
+<li class="css-v55p23"><strong>Experience with Python or strong willingness to learn Python</strong></li>
+<li class="css-v55p23">Excellent understanding of <strong>software design and architectural patterns</strong></li>
+<li class="css-v55p23">Ability to design <strong>elegant, scalable, and maintainable system architectures</strong></li>
+<li class="css-v55p23">Strong communication skills and <strong>excellent English proficiency</strong></li>
+</ul>
+<h3>&nbsp;<strong>Bonus points:&nbsp;</strong></h3>
+<ul>
+<li class="css-v55p23">Cloud experience (AWS/GCP/Azure)</li>
+<li class="css-v55p23">Experience with CI/CD pipelines</li>
+<li class="css-v55p23">Experience building AI-integrated backend systems</li>
+</ul>
+<hr>
+<h3><strong>Our hiring process</strong>:</h3>
+<ol>
+<li><strong>TA Call</strong>: Meet one of our Talent Experts and get to know Atolls better.</li>
+<li><strong>Technical Round</strong>: Focus on the technical aspects of the role <em>(Through a Live Case)</em>, and meet your potential manager.</li>
+<li><strong>Final Round</strong>: Meet other Atollians 🏝️<br><em>It varies from 1 to 3 interviews</em></li>
+</ol>
+<p><em>*Some processes might slightly change according to needs</em></p>
+<hr>
+<h4><strong>Ready to apply?</strong></h4>
+<p>Be part of a destination where your work helps millions of people make better decisions every day.<strong> </strong>One focused application is all we need. If you truly fit more than one role, you're welcome to apply to <strong>up to three. </strong>This helps us match you with the right opportunity faster.<br><strong><br>We review every application with equal care and will reach out if your profile aligns. Apply now with your CV in English.</strong><br><span style="color: rgb(255, 255, 255);">#LI-AK1</span></p>
+</section>
+</section><div class="content-conclusion"><hr>
+<p><span style="font-weight: 400;">At Atolls, we want to ensure that all employees can thrive in an inclusive environment. Our employment opportunities are open to every gender, race, religion, age, sexual orientation, ability, place of origin, or socioeconomic status. We remain committed to a culture of diversity, equity and belonging, where all employees are welcomed, respected, connected, and engaged.&nbsp;</span></p>
+<h6><span style="color: rgb(255, 255, 255);"><sub><em><span style="font-family: -apple-system, system-ui, 'system-ui', 'Segoe UI', Roboto, 'Helvetica Neue', 'Fira Sans', Ubuntu, Oxygen, 'Oxygen Sans', Cantarell, 'Droid Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Lucida Grande', Helvetica, Arial, sans-serif; font-style: normal; letter-spacing: normal; text-align: left; word-spacing: 0px; white-space: normal; float: none; display: inline !important;">#LI-Hybrid</span></em></sub></span></h6>
+<p style="text-align: center; margin: 0;"><img style="display: block; margin: 0 auto; max-width: 100%;" src="https://atolls.com/wp-content/uploads/2025/09/Email-banner-bottom-2.jpg" alt="Atolls bottom banner" width="1000"></p></div><p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/atolls/senior-java-backend-engineer-munich-219116" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Manager / Product Operations Manager (Startup, Remote) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Louco Event Media GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Project Manager / Product Operations Manager (Startup, Remote)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Project Management</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Location:</strong> Remote<br>
+<strong>Start:</strong> Immediately<br>
+<strong>Type:</strong> Freelance / Contract (Full-time project)</p>
+<p>Louco is building a new generation event discovery platform that connects users, creators and the entertainment industry. Our goal is not just to build another event app – we want to rethink how people find &#x26; attend events.</p>
+<p>We are looking for a <strong>hands-on Project Manager / Product Operations Manager</strong> who can work closely with our engineering team, coordinate delivery, and ensure that product development runs smoothly and efficiently.</p>
+<p>This role is focused on <strong>execution, coordination, and delivery</strong> rather than high-level product strategy.</p>
+<h2>Tasks</h2>
+<p>Delivery &#x26; Roadmap Execution</p>
+<ul>
+<li>Ensure smooth delivery of product features across backend, frontend, and mobile teams</li>
+<li>Track progress of development tasks and ensure deadlines are met</li>
+<li>Maintain and execute the product roadmap in alignment with company strategy</li>
+<li>Identify risks, blockers, and dependencies early and resolve them quickly</li>
+</ul>
+<p>Engineering Team Coordination</p>
+<ul>
+<li>Work closely with backend, frontend, and mobile developers</li>
+<li>Coordinate daily development processes and maintain transparency across the team</li>
+<li>Ensure tasks are clearly defined, prioritized, and documented</li>
+<li>Support engineers in removing blockers and maintaining focus</li>
+</ul>
+<p>Agile Process &#x26; Meetings</p>
+<ul>
+<li>Facilitate Agile ceremonies (standups, sprint planning, retrospectives, demos)</li>
+<li>Organize and lead product and technical workshops with engineers and stakeholders</li>
+<li>Ensure productive collaboration between Product Owner, CEO, and engineering team</li>
+</ul>
+<p>Documentation &#x26; Product Structure</p>
+<ul>
+<li>Maintain clear documentation for product features, technical decisions, and workflows</li>
+<li>Structure and manage product backlog, tasks, and requirements</li>
+<li>Ensure all product requirements are clearly documented and understood by the team</li>
+</ul>
+<p>Communication</p>
+<ul>
+<li>Act as the central coordination point between product, engineering, and leadership</li>
+<li>Provide regular updates on progress, risks, and delivery timelines</li>
+</ul>
+<h2>Requirements</h2>
+<p>Experience</p>
+<ul>
+<li>4+ years of experience in <strong>Project Management, Product Operations, or Delivery Management</strong></li>
+<li>Proven experience working <strong>directly with software engineering teams</strong></li>
+<li>Experience coordinating <strong>backend, frontend, and mobile development teams</strong></li>
+<li>Experience leading <strong>workshops, sprint planning sessions, and cross-functional meetings</strong></li>
+</ul>
+<p>Technical Understanding</p>
+<p>You do not need to be a developer, but you must understand:</p>
+<ul>
+<li>Web and mobile product development</li>
+<li>APIs and backend/frontend collaboration</li>
+<li>Agile development processes</li>
+<li>Product delivery workflows</li>
+</ul>
+<p>Skills</p>
+<ul>
+<li>Strong organizational and prioritization skills</li>
+<li>Excellent communication and stakeholder management</li>
+<li>Ability to manage multiple workstreams simultaneously</li>
+<li>Comfortable working in fast-moving startup environments</li>
+</ul>
+<p>Tools</p>
+<p>Experience with tools such as:</p>
+<ul>
+<li>Jira / Linear / ClickUp</li>
+<li>Notion / Confluence</li>
+<li>Slack</li>
+<li>Figma</li>
+<li>Miro</li>
+</ul>
+<p>We are looking for someone who:</p>
+<ul>
+<li>Is <strong>delivery-focused and pragmatic</strong></li>
+<li>Can keep engineers productive and unblock them quickly</li>
+<li>Understands <strong>startup speed and iteration</strong></li>
+<li>Can structure chaos into clear execution</li>
+<li>Is comfortable working closely with founders and engineers</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li>Opportunity to join a <strong>startup at an early stage</strong></li>
+<li>Work directly with <strong>founders</strong></li>
+<li>Remote work</li>
+<li>Competitive compensation</li>
+<li>Performance-based bonuses</li>
+<li>Opportunity for <strong>long-term collaboration</strong></li>
+</ul>
+<p>We are building a product with <strong>significant potential in the event and entertainment industry</strong>, and we are looking for people who want to build something meaningful from the beginning.</p>
+<p>This is a chance to join at an early stage and help build a product with enormous potential that could significantly reshape the event industry.</p>
+<p>We are building a small but strong team, and people who join us now will play a key role in shaping both the product and the technology behind it.</p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/louco-event-media-gmbh/project-manager-product-operations-manager-startup-remote-offenbach-270249" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

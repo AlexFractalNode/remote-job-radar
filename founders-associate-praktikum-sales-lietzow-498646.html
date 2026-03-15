@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Founders Associate (Praktikum) - SALES (d/w/m) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Project Bay Workation Hotel UG (haftungsbeschränkt) sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Founders Associate (Praktikum) - SALES (d/w/m)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Keine Angabe</span>
+                    <span class="badge badge-tag">Remote</span><span class="badge badge-tag">Marketing Manager</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Du solltest dich bewerben, wenn du Innovation und Natur kombinieren möchtest und Erfahrungen in der Verbindung von Digitalisierung, Nachhaltigkeit und regionaler Entwicklung sammeln möchtest.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Project Bay – Deine Karriere an der Küste</strong></p>
+<p>Willst du Innovation und Natur verbinden? Project Bay ist Europas führendes Netzwerk für Workation und CoWorking mit direktem Zugang zur Ostsee und Standorten in ganz Europa. Wir sind Vorreiter in der Verbindung von Digitalisierung, Nachhaltigkeit und regionaler Entwicklung.</p>
+<p>Unsere Mission: Ländliche Regionen durch smarte Arbeitsmodelle und moderne Technologien stärken. Von flexiblen Arbeitsplätzen über Breakout-Sessions bis hin zu Übernachtungsmöglichkeiten und Fortbildungen – wir bieten alles, was Teams und Einzelpersonen brauchen, um produktiv und inspiriert zu arbeiten.</p>
+<p><strong>Unsere Highlights:</strong></p>
+<ul>
+<li><strong>Workation und CoWorking</strong> an über 20 Standorten in Europa, darunter auf Sylt, Usedom und Mallorca.</li>
+<li><strong>Nachhaltige Startup-Förderung</strong> durch unseren Accelerator Founders Bay, der sich auf Innovationen in den Bereichen Mobilität, Tourismus und Digitalisierung spezialisiert hat.</li>
+<li><strong>MakerSpace auf Rügen</strong>: Hier verbinden wir Kreativität mit modernster Technologie und schaffen einen Ort für Handwerk, Startups und Visionäre.</li>
+<li><strong>Regionale Synergien</strong>: Enge Zusammenarbeit mit Hochschulen, Kammern und lokalen Partnern, um nachhaltige Innovationen zu fördern.</li>
+</ul>
+<p>Du möchtest Teil dieses einzigartigen Ökosystems werden und neue Projekte mitgestalten? Egal, ob IT-Lösungen, CarSharing, Expansion oder Tiny Houses – bei uns hast du die Chance, echte Veränderungen zu bewirken.</p>
+<p><strong>Werde Teil unseres Teams und gestalte die Zukunft von Workation und Nachhaltigkeit in Europa mit!</strong></p>
+<h2>Aufgaben</h2>
+<ul>
+<li>Du unterstützt beim Aufbau und der Entwicklung neuer Geschäftsbereiche und verfolgst selbstständig die Erreichung der Ziele.</li>
+<li>Du unterstützt die Geschäftsleitung in allen organisatorischen und administrativen Aufgaben.</li>
+<li>Fokusthema: Sales - Du wirst gemeinsam mit uns dem Bereich SALES für B2B -Kunden sowie B2C-Strategien entwickeln</li>
+<li>Du übernimmst eigene Sales-Projekte</li>
+<li>Du unterstützt die Geschäftsführung bei allen Unterfirmen/neuen Projekten</li>
+<li>Du erstellst Entscheidungsvorlagen sowie Präsentationen und Grafiken inkl. Analysen.</li>
+<li>Du fungierst als Kommunikationsschnittstelle zwischen der Geschäftsleitung und externen Geschäftspartnern sowie Mitarbeitern in deutscher und englischer Sprache</li>
+</ul>
+<h2>Qualifikation</h2>
+<ul>
+<li>Du studierst Wirtschaftswissenschaften, Rechtswissenschaften, Ingenieurwesen oder Ähnliches</li>
+<li>Du hast sehr gute Deutsch- und sichere Englischkenntnisse</li>
+<li>Du zeichnest dich durch eine zuverlässige und vor allem eigenständige Arbeitsweise aus</li>
+<li>Du hast Lust auf hohes Tempo, Leidenschaft Dinge zu bewegen sowie strukturiertes und gewissenhaftes Arbeiten</li>
+<li>Du hast für das Praktikum 40 Stunden pro Woche Zeit</li>
+<li>Es ist von Vorteil, wenn du bereits erste Erfahrungen in Startups, Agenturen oder Beratungen gesammelt hast</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li>Du hast die Chance in einem dynamischen Gründerteam zu arbeiten und mit deinen Ideen unsere<br>
+Marketing-Kampagnen zu bestimmen</li>
+<li>Flache Hierarchien und kurze Kommunikationswege in einem hoch motivierten und kreativen Team</li>
+<li>Wir bieten dir abwechslungsreiche und anspruchsvolle Aufgaben mit großer Entfaltungsmöglichkeit</li>
+<li>Du wirst als vollwertiges Teammitglied aufgenommen und kannst alle deine Ideen/ Vorschläge mit uns besprechen</li>
+</ul>
+<p>Klingt nach dem perfekten Arbeitsplatz für dich? Dann bewirb dich jetzt und werde Teil unseres Teams!</p>
+<p>Wir schätzen Bescheidenheit und sind an Deinem Charakter ebenso interessiert wie an Deinem Talent. Bitte bewerbe Dich, auch wenn nicht alle der aufgeführten Kriterien erfüllt sind. Vielfalt fördert Innovation, und wir bieten ein internationales und freundliches Arbeitsumfeld mit einer dynamischen Unternehmenskultur.</p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/project-bay-workation-hotel-ug-haftungsbeschrankt/founders-associate-praktikum-sales-lietzow-498646" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
