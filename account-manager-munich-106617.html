@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Manager | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Kaseya Careers sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Account Manager</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><div class="content-intro"><p>Kaseya<sup>®</sup> is the leading provider of complete IT infrastructure and security management solutions for Managed Service Providers (MSPs) and internal IT organizations worldwide powered by AI. Kaseya's best-in-breed technologies allow organizations to efficiently manage and secure IT to drive sustained business success. Kaseya has achieved sustained, strong double-digit growth over the past several years and is backed by Insight Venture Partners <a href="https://www.insightpartners.com/">www.insightpartners.com</a>), a leading global private equity firm investing in high-growth technology and software companies that drive transformative change in the industries they serve.</p>
+<p>Founded in 2000, Kaseya currently serves customers in over 20 countries across a wide variety of industries and manages over 15 million endpoints worldwide. To learn more about our company and our award-winning solutions, go to <a href="https://www.kaseya.com/">www.Kaseya.com</a> and for more information on Kaseya's culture.</p>
+<p>Kaseya is not your typical company. We are not afraid to tell you exactly who we are and our expectations. The thousands of people that succeed at Kaseya are prepared to go above and beyond for the betterment of our customers.</p></div><p data-start="30" data-end="545">Sind Sie eine proaktive, ergebnisorientierte Persönlichkeit und möchten Ihre Karriere im Softwarevertrieb beschleunigen? Wenn Sie in einer beratungsorientierten Vertriebskultur mit starken Entwicklungsmöglichkeiten und Unterstützung durch das Executive-Team aufblühen, dann ist Kaseya genau das Richtige für Sie. Die Tausenden von Menschen, die bei Kaseya erfolgreich sind, sind bereit, die Extrameile zu gehen – für den Erfolg unserer Kunden und für ihre eigene Karriere sowie langfristige finanzielle Perspektive.</p>
+<p data-start="547" data-end="601">Als Account Manager bei Kaseya werden Sie:</p>
+<ul data-start="603" data-end="1683">
+<li data-start="603" data-end="927">
+<p data-start="605" data-end="927">Proaktiv mit Kunden in Kontakt treten, um deren sich wandelnde Bedürfnisse und Geschäftsziele zu verstehen. Dazu gehört, sich in das Geschäft des Kunden einzuarbeiten, regelmäßige Kommunikation zu initiieren, Herausforderungen frühzeitig zu erkennen und proaktiv Lösungen anzubieten, um das Kundenerlebnis zu verbessern.</p>
+</li>
+<li data-start="928" data-end="1107">
+<p data-start="930" data-end="1107">Eng mit Kunden zusammenarbeiten, um Cross-Sell- und Up-Sell-Potenziale zu identifizieren und zusätzliche Funktionen oder Services zu platzieren, um Umsatzwachstum zu erzielen.</p>
+</li>
+<li data-start="1108" data-end="1258">
+<p data-start="1110" data-end="1258">Erweiterungs-/Growth-Möglichkeiten innerhalb bestehender Accounts erkennen und gemeinsam mit Kunden Strategien für gegenseitigen Erfolg abstimmen.</p>
+</li>
+<li data-start="1259" data-end="1488">
+<p data-start="1261" data-end="1488">Nutzungskennzahlen überwachen und mögliche Hürden bei der Adoption proaktiv adressieren – unter Einhaltung von Sales-Checklisten, Prozessen und Timelines, um Cross-Sell-, Up-Sell- und Expansion-Strategien effektiv umzusetzen.</p>
+</li>
+<li data-start="1489" data-end="1683">
+<p data-start="1491" data-end="1683">Kommunikation, Beziehungen und Vertrieb als zentrale Treiber verstehen. Sie wissen: Die Qualität Ihrer Kundenbeziehungen steht in direktem Zusammenhang mit der Erreichung Ihrer Vertriebsziele.</p>
+</li>
+</ul>
+<p data-start="1685" data-end="2188">Um in dieser Rolle erfolgreich zu sein, bauen Sie ein tiefes Verständnis unserer Produkte und deren Integrationen auf, um Kunden den Mehrwert überzeugend zu vermitteln. Sie informieren Kunden proaktiv über neue Features, Updates und Best Practices und bieten individualisierte Sessions an, damit sie das volle Potenzial von IT Complete optimal ausschöpfen. Die Zusammenarbeit mit Spezialisten und anderen Teams ist essenziell, um Kunden vom Produktwert zu überzeugen und den Vertrieb voranzutreiben.</p>
+<p data-start="2190" data-end="2649">Darüber hinaus arbeiten Sie funktionsübergreifend mit internen Teams zusammen, um Kundenanforderungen zu erfüllen, und agieren als „Voice of the Customer", um kontinuierliche Verbesserungen zu beeinflussen. Sie nehmen an proaktiven Abstimmungen teil, um Strategien zu harmonisieren und Kundenerlebnisse zu verbessern, unterstützen das Onboarding neuer Kunden und treiben eine proaktive Produktadoption durch maßgeschneiderte Strategien und Aktionspläne voran.</p>
+<p data-start="2651" data-end="2854">Diese Position bietet ein dynamisches Umfeld, in dem Sie kontinuierlich lernen und wachsen können – inklusive Trainings- und Weiterbildungsangeboten zur Stärkung Ihrer Sales-Skills und Product Expertise.</p>
+<p data-start="2856" data-end="2874">Anforderungen:</p>
+<ul data-start="2876" data-end="3666">
+<li data-start="2876" data-end="2907">
+<p data-start="2878" data-end="2907">Fließende Deutschkenntnisse</p>
+</li>
+<li data-start="2908" data-end="2944">
+<p data-start="2910" data-end="2944">2+ Jahre Erfahrung im DACH-Markt</p>
+</li>
+<li data-start="2945" data-end="3057">
+<p data-start="2947" data-end="3057">Vertriebsorientiert, leidenschaftlich, leistungsgetrieben und motiviert, hohe Sales-Provisionen zu verdienen</p>
+</li>
+<li data-start="3058" data-end="3154">
+<p data-start="3060" data-end="3154">Ausgeprägte Inside-Sales-Erfahrung in einem kennzahlengetriebenen, schnellen Vertriebsumfeld</p>
+</li>
+<li data-start="3155" data-end="3223">
+<p data-start="3157" data-end="3223">Nachweisliche Erfolgsbilanz beim Übertreffen von Vertriebszielen</p>
+</li>
+<li data-start="3224" data-end="3356">
+<p data-start="3226" data-end="3356">Motiviert, coachbar und wettbewerbsorientiert – resilient, erfolgsgetrieben und mit starkem Willen zu gewinnen und zu überzeugen</p>
+</li>
+<li data-start="3357" data-end="3466">
+<p data-start="3359" data-end="3466">Teamplayer mit sehr guten organisatorischen Fähigkeiten sowie starker Kommunikations- und Sozialkompetenz</p>
+</li>
+<li data-start="3467" data-end="3550">
+<p data-start="3469" data-end="3550">Erstellung wöchentlicher, monatlicher und rollierender 6-Wochen-Sales-Forecasts</p>
+</li>
+<li data-start="3551" data-end="3666">
+<p data-start="3553" data-end="3666">Erfahrung mit CRM-Systemen (z. B. Salesforce) zur erfolgreichen Steuerung von Leads, Opportunities und Accounts</p>
+</li>
+</ul>
+<p data-start="3668" data-end="4087">Wenn Sie ein resilienter High-Performer sind, der gewinnen und wachsen will, und die oben genannten Qualifikationen mitbringt, möchte Kaseya mit Ihnen sprechen. Werden Sie Teil unseres Teams und befähigen Sie unsere Kunden, Effizienz, Profitabilität und Erfolg zu steigern – mit unserer mehrfach ausgezeichneten IT Complete™ Plattform aus Produkten und Lösungen – und unterstützen Sie unsere Hyper-Growth-Strategie.</p>
+<p data-start="3668" data-end="4087">&nbsp;</p>
+<p data-start="3668" data-end="4087"><span data-teams="true">#IND525</span></p>
+<p>&nbsp;</p><div class="content-conclusion"><p>Join the Kaseya growth rocket ship and see how we are #ChangingLives !</p>
+<p><strong>Additional information</strong><br><em>Kaseya provides equal employment opportunity to all employees and applicants without regard to race, religion, age, ancestry, gender, sex, sexual orientation, national origin, citizenship status, physical or mental disability, veteran status, marital status, or any other characteristic protected by applicable law.</em></p></div><p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/kaseya-careers/account-manager-munich-106617" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

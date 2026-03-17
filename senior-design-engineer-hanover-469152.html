@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(Senior) Design Engineer (m/w/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Neoskop GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">(Senior) Design Engineer (m/w/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Media</span><span class="badge badge-tag">Screen and Web Design</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Heartworking in Hannover. In Voll- oder Teilzeit. Hybrid.</strong></p>
+<p>Wir suchen jemanden, der/die Interfaces gestaltet und baut – und Verantwortung für das Produkt übernimmt, bis es im Browser genauso gut funktioniert wie in der Vorstellung. Tarifrechner, Kundenportale, Antragsflows, Konfiguratoren, Websites – Anwendungen, bei denen hunderttausende Menschen nicht merken sollen, wie komplex "das unter der Haube" ist. Die WordPress-Landingpage von der Stange gibt's woanders.</p>
+<h2>Aufgaben</h2>
+<p><strong>So sieht dein Alltag aus</strong></p>
+<ul>
+<li><strong>Du entwirfst und baust Interfaces</strong> – vom Konzept über den visuellen Entwurf bis in den funktionierenden Code. Du kannst ein Feature von der Idee bis in den Browser bringen, ohne es abgeben zu müssen. Das heißt nicht, dass du alles alleine machst – im Team arbeiten Entwickler:innen mit dir im selben Codebase. Aber du bist nicht abhängig davon, dass jemand anderes deinen Entwurf interpretiert.</li>
+<li><strong>Du arbeitest mit modernen Tools</strong>, die die Grenze zwischen Design und Code auflösen – Nordcraft, Cursor, v0 und was sonst in der Praxis taugt. Genauso selbstverständlich schreibst du eigenen Code, wenn das die bessere Lösung ist. Du evaluierst neue Ansätze mit Neugier, aber ohne Hype: nicht jedes Tool, das in der Community trendet, verdient deine Zeit.</li>
+<li><strong>Du baust und pflegst Design-Systeme</strong> dort, wo sie hingehören: im Code. Tokens, Komponenten, Varianten, Dokumentation – als lebendiges System, das direkt im Produkt funktioniert.</li>
+<li><strong>Du sitzt mit den Entwickler:innen zusammen</strong> – wirklich, nicht bildlich. Ihr arbeitet im selben Codebase, reviewed euch gegenseitig, diskutiert Architektur und Umsetzung auf Augenhöhe.</li>
+<li><strong>Du arbeitest in interdisziplinären Kundenteams</strong> (ca. 4–8 Personen aus Beratung, PM, Design und Development) – direkt am Kunden. Du bist nicht nur für deinen Teil zuständig, sondern denkst über den gesamten Produktkontext mit. Auch nach dem Go-Live.</li>
+<li><strong>Du denkst in messbarer Wirkung:</strong> Analytics, Heatmaps, Conversion-Daten – du nutzt sie, um deine Designentscheidungen zu validieren und das Produkt kontinuierlich besser zu machen.</li>
+<li><strong>Du machst andere besser:</strong> Design-Reviews, Code-Reviews, ehrliches Feedback, Wissenstransfer. Du bewegst dich zwischen Design- und Dev-Welt und bringst beide Seiten näher zusammen – durch gemeinsame Sprache, nicht nur durch Tools.</li>
+<li><strong>AI ist für dich Werkzeug im Alltag.</strong> Du nutzt Cursor für Code-Generierung, v0 für schnelle UI-Exploration, Claude oder ChatGPT für Prototyping und Konzeptvalidierung. Und du weißt, dass gute AI-Ergebnisse davon abhängen, wie präzise du den Kontext definierst: Design-System-Regeln, technische Constraints, Markensprache. Sauber denken, bevor du loslegst.</li>
+</ul>
+<h2>Qualifikation</h2>
+<p><strong>Das bringst du mit</strong></p>
+<ul>
+<li><strong>Mehrjährige Erfahrung an der Schnittstelle von Design und Frontend-Entwicklung.</strong> Du kommst entweder aus dem Design und hast dir Code beigebracht, oder aus der Entwicklung und hast ein starkes Gespür für Gestaltung entwickelt. Beides ist willkommen.</li>
+<li><strong>Du kannst Interfaces entwerfen UND bauen:</strong> HTML, CSS/SCSS, JavaScript/TypeScript. Du fühlst dich in Figma genauso wohl wie in VS Code oder Cursor.</li>
+<li><strong>Konzeptionelles Denken:</strong> Du verstehst, wie Informationsarchitekturen und User Flows funktionieren, und kannst diese in deinen Entwürfen und deinem Code gleichermaßen abbilden.</li>
+<li><strong>Du arbeitest sicher mit modernen Frontend-Technologien</strong> – React/Next.js bevorzugt, aber wenn du aus einem anderen Ökosystem kommst und schnell lernst: gerne. Erfahrung mit Nordcraft oder vergleichbaren visuellen Development-Plattformen ist ein Plus.</li>
+<li><strong>Design-Systeme lebst du im Code:</strong> Tokens, Komponenten, Varianten – aufbauen, dokumentieren, weiterentwickeln.</li>
+<li><strong>Visuelles Gespür:</strong> Typografie, Farbe, Spacing, Responsive Design, Animationen – du erkennst, wenn etwas nicht stimmt, und du kannst es selbst fixen. Accessibility (WCAG) gehört für dich zur Grundhaltung.</li>
+<li><strong>Kommunikation:</strong> Du kannst Designentscheidungen gegenüber dem Team und Kunden argumentieren. Und du sprichst die Sprache beider Seiten – du erklärst Entwickler:innen, warum ein Detail wichtig ist, und Designer:innen, warum eine technische Einschränkung kein Kompromiss sein muss.</li>
+<li><strong>Du hast echte Erfahrung mit AI-Tools im Arbeitsalltag</strong> – nicht als Experiment, sondern als festen Teil deines Workflows. Du weißt, wo sie echten Mehrwert bringen und wo du besser selbst baust. Und du verstehst, dass die Qualität der Ergebnisse von der Qualität deines Denkens abhängt – nicht vom Tool.</li>
+<li><strong>Du kannst dich in komplexe Fachlichkeiten einarbeiten</strong> und bleibst auch bei langfristigen Kundenbeziehungen neugierig, statt auf Autopilot zu schalten.</li>
+<li><strong>Deutsch auf C1-Niveau</strong> – unsere Kunden und Workshops sind deutschsprachig. Englisch im Code und in der Dokumentation ist selbstverständlich</li>
+</ul>
+<p><strong>Du entsprichst nicht zu 100% allen Anforderungen, aber die Chemie stimmt? Kein Problem! Richtig Bock auf Digitales ist uns wichtiger als ein shiny Lebenslauf.</strong></p>
+<h2>Benefits</h2>
+<p><strong>Darauf kannst du dich bei uns freuen</strong></p>
+<ul>
+<li><strong>Gehalt:</strong> Wir zahlen marktgerecht und transparent – den konkreten Gehaltsrahmen besprechen wir offen im Erstgespräch. Kein Pokern, kein Rätselraten.</li>
+<li>Gelebte <strong>Work-Life-Integration</strong>. Viele von uns haben Familie oder zeitintensive Hobbys. Wir sind überzeugt, dass nachhaltige Ausgeglichenheit uns viel weiter bringt als Mitarbeiter:innen mehr Zeit abzuverlangen.</li>
+<li><strong>Hybrides Arbeiten:</strong> 3 Tage remote, 2 Tage gemeinsam vor Ort am Hanomaghof. Nicht wegen Kontrolle, sondern weil wir glauben, dass echte Kreativität vom Austausch in einem Raum lebt – vom Miteinander zwischen Menschen, das kein Call ersetzen kann. Jeden zweiten Dienstag: Agentur-Standup und gemeinsames (veganes) Mittagessen mit Catering.</li>
+<li>Das, was andere nur <strong>„flache Hierarchien"</strong> nennen – und wir tatsächlich meinen: Dein Team Lead hat immer eine offene Tür, du sprichst direkt mit Kunden statt über drei Ecken, und wenn du eine Idee hast, brauchst du kein Ticket dafür.</li>
+<li><strong>Fort- und Weiterbildung</strong> ohne Deckel: Konferenzen, Kurse, Bücher, Zertifizierungen – du suchst aus, wir zahlen.</li>
+<li><strong>Moderne Tools:</strong> GitHub, Linear, Slack, Figma. Und ja, wir setzen AI-Tools im Arbeitsalltag ein – kein Verbot, kein Hype, sondern pragmatischer Einsatz.</li>
+<li><strong>Mitdenken und Mitgestalten.</strong> Du hast von Anfang an die Möglichkeit, Verantwortung zu übernehmen und Dinge zu verändern.</li>
+<li>Ob <strong>macOS oder Linux</strong> – du suchst dir deine Hard- und Software selbst aus. Auch für den privaten Gebrauch.</li>
+<li><strong>Mobilität:</strong> Deutschlandticket (geht auf uns) und Jobrad-Leasing.</li>
+<li><strong>Und sonst:</strong> Siebträger-Espresso, frisches Obst, Softdrinks, betriebliche Altersvorsorge, VWL, Sommerfest, Weihnachtsfeier, Teamevents und Agentur-Offsite.</li>
+</ul>
+<p><strong>Dein Weg zu uns</strong></p>
+<ul>
+<li>Bewirb dich mit deinem <strong>Lebenslauf</strong> und optional einem Portfolio, Case Studies oder Arbeitsproben. Kein Anschreiben nötig.</li>
+<li>Unser erstes <strong>Kennenlerngespräch</strong> geht auch per Video – aber persönlich ist netter, und unser Kaffee ist wirklich sehr gut. ☕ Mit dabei: Du, jemand aus dem Design-Team und Jan-Christoph (Geschäftsführer).</li>
+<li>It's a match? Beim <strong>Kennenlerntag</strong> lernst du das Team, die Projekte und den Hanomaghof kennen. Gemeinsames Mittagessen, offene Fragen, echtes Beschnuppern.</li>
+<li>Ein „JA!" von allen Beteiligten? Dann schicken wir dir den Entwurf für deinen <strong>Arbeitsvertrag</strong> rüber und besprechen alle Details.</li>
+<li>Ab Tag 1: persönliches <strong>Onboarding</strong> mit fachlicher Einarbeitung, Buddy-System und regelmäßigem Feedback durch die ersten Monate. 🥳</li>
+</ul>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/neoskop-gmbh/senior-design-engineer-hanover-469152" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

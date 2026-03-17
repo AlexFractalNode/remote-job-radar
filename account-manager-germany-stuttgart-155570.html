@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Manager, Germany | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Wolt - English sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Account Manager, Germany</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><div class="content-intro"><h2><span data-sheets-root="1">About Wolt</span></h2>
+<p><span data-sheets-root="1">At Wolt, we create technology that brings joy, simplicity and earnings to the neighborhoods of the world. In 2014 we started with delivery of restaurant food. Now we're building the delivery of (almost) everything and you'll find us in over 500 cities in 30 countries around the world. In 2022 we joined forces with DoorDash and together we keep on dreaming big and expanding across the globe.<br><br>Working at Wolt isn't always easy, but it's definitely exciting. Here you'll learn more, build more, and ship more than in most other companies. You'll be challenged a lot, but also have a lot of fun on the way. So, if you're a self-starter with drive and entrepreneurial spirit, this could be the ride of your life.</span></p></div><p>Unser Mass Account Management Team bildet das Herzstück von Wolts Restaurant-Operations in Deutschland und betreut ein umfangreiches, stetig wachsendes Partner<em data-start="406" data-end="441">innnen-Portfolio. Wir suchen eine</em>n Mass Account Manager<em data-start="463" data-end="472">in, der</em>die die Verantwortung für den Erfolg einer Vielzahl von Partner*innen übernimmt – durch die Verbesserung ihrer operativen Performance, die Reduzierung von Churn sowie die Skalierung der Nutzung unserer kommerziellen Tools.</p>
+<h2>Deine Aufgaben</h2>
+<p data-start="716" data-end="934">Als Mass Account Manager*in übernimmst du die vollständige Verantwortung für ein großes Restaurant-Portfolio und arbeitest daran, dessen operative Performance durch strategische und skalierbare Maßnahmen zu verbessern.</p>
+<p data-start="936" data-end="1331">Du nutzt Daten, um Verbesserungsmöglichkeiten zu identifizieren, Partnerinnen-Churn zu reduzieren und wichtige Hebel wie Deals, Promotions und Ads gezielt voranzutreiben. Diese Rolle eignet sich ideal für Personen, die gerne analytisch arbeiten, Herausforderungen im großen Maßstab lösen und Prozesse entwickeln, die sowohl Wolt als auch unseren Partnerinnen nachhaltiges Wachstum ermöglichen.</p>
+<p data-start="1333" data-end="1370"><strong>Im Arbeitsalltag übernimmst du dabei:</strong></p>
+<ul>
+<li data-start="1374" data-end="1476">Monitoring zentraler KPIs im Partner*innen-Portfolio (Verfügbarkeit, Aktivitätsrate, Ablehnungsrate)</li>
+<li data-start="1479" data-end="1566">Führung von Initiativen zur Churn-Reduktion und zur Steigerung des Partner*innenwerts</li>
+<li data-start="1569" data-end="1667">Konzeption und Durchführung von Kampagnen zur Erhöhung der Nutzung von Ads, Deals und Promotions</li>
+<li data-start="1670" data-end="1760">Entwicklung von Automatisierungstools, E-Mail-Vorlagen oder Dashboards für interne Teams</li>
+<li data-start="1763" data-end="1825">Weitergabe von Best Practices sowie Mentoring von Associates</li>
+<li data-start="1828" data-end="1916">Zusammenarbeit mit anderen Teams zur Lösung von Problemen oder Eskalation von Blockern</li>
+</ul>
+<h3 data-start="1918" data-end="1948">Wichtige Kennzahlen / KPIs</h3>
+<ul>
+<li data-start="1952" data-end="2003">Verbesserung der Verfügbarkeit und Aktivitätsrate</li>
+<li data-start="2006" data-end="2038">Reduzierung der Ablehnungsrate</li>
+<li data-start="2041" data-end="2094">Erfolgreiche Vermeidung und Rückgewinnung von Churn</li>
+<li data-start="2097" data-end="2151">Nutzung kommerzieller Tools (Ads, Deals, Promotions)</li>
+<li data-start="2154" data-end="2195">Datenqualität und Reporting-Genauigkeit</li>
+</ul>
+<h3 data-start="2197" data-end="2219">Unsere Erwartungen</h3>
+<ul>
+<li data-start="2223" data-end="2322">3+ Jahre Erfahrung im Account Management, in Partner Operations oder vergleichbaren Growth-Rollen</li>
+<li data-start="2325" data-end="2368">Fließende Deutsch- und Englischkenntnisse</li>
+<li data-start="2371" data-end="2446">Ausgeprägte analytische Fähigkeiten sowie ein Prozessoptimierungs-Mindset</li>
+<li data-start="2449" data-end="2559">Erfahrung in der Steuerung von Performance-Kennzahlen und in der Umsetzung von Initiativen im großen Maßstab</li>
+<li data-start="2562" data-end="2629">Exzellente Kommunikations- und Stakeholder-Management-Fähigkeiten</li>
+<li data-start="2632" data-end="2717">Bachelor- oder Masterabschluss in Business, Analytics oder einem verwandten Bereich</li>
+</ul>
+<h3 data-start="2719" data-end="2749">Bevorzugte Qualifikationen</h3>
+<ul>
+<li data-start="2753" data-end="2805">Erfahrung mit BI-Tools (Looker, Tableau, Power BI)</li>
+<li data-start="2808" data-end="2874">Hintergrund in Marktplätzen, SaaS oder Food-Delivery-Plattformen</li>
+</ul>
+<h3 data-start="2876" data-end="2894">Was wir bieten</h3>
+<ul>
+<li data-start="2898" data-end="2996">Dynamisches Umfeld: Arbeiten in einem schnell wachsenden Tech-Unternehmen mit Startup-Mentalität</li>
+<li data-start="2999" data-end="3104">Impact: Die Möglichkeit, maßgeblich zum Wachstum und Erfolg unserer Restaurantpartner*innen beizutragen</li>
+<li data-start="3107" data-end="3216">Teamkultur: Ein unterstützendes, inklusives Umfeld, das Innovation und kontinuierliche Verbesserung fördert</li>
+<li data-start="3219" data-end="3334">Weiterentwicklung: Vielfältige persönliche und berufliche Entwicklungsmöglichkeiten in einem globalen Unternehmen</li>
+<li data-start="3337" data-end="3470">Benefits: Rabatt auf Wolt-Bestellungen, kostenlose Getränke, Kaffee und Obst im Büro, Zuschuss zur Urban Sports Club Mitgliedschaft</li>
+<li data-start="3473" data-end="3545">Arbeitszeiten: Flexible Arbeitszeitregelung + 30 Tage bezahlter Urlaub</li>
+</ul>
+<h3 data-start="3547" data-end="3567">Nächste Schritte</h3>
+<ul>
+<li data-start="3571" data-end="3637">Kennenlerngespräch (Einführung: Du über Wolt und Wolt über dich)</li>
+<li data-start="3640" data-end="3688">Gespräch mit deiner potenziellen Führungskraft</li>
+<li data-start="3691" data-end="3766">Assignment: Zeige uns, warum du die beste Besetzung für diese Rolle bist!</li>
+</ul>
+<p>&nbsp;</p>
+<p><iframe src="https://www.youtube.com/embed/GoL541_xj9w" width="560" height="314"></iframe></p><div class="content-conclusion"><h2><span data-sheets-root="1">Our Commitment to Diversity and Inclusion</span></h2>
+<p><span data-sheets-root="1">We're committed to growing and empowering a more inclusive community within our company, industry, and cities. That's why we hire and cultivate diverse teams of people from all backgrounds, experiences, and perspectives. We believe that true innovation happens when everyone has room at the table and the tools, resources, and opportunity to excel.</span></p></div><p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/wolt-english/account-manager-germany-stuttgart-155570" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
