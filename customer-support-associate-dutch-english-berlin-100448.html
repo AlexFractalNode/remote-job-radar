@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Support Associate - Dutch & English (m/f/x) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">SIDES (SimplyDelivery GmbH) sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Customer Support Associate - Dutch & English (m/f/x)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Customer Service</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><h2>Your mission</h2>
+<p>We are looking for an experienced Customer Support Associate - Dutch &#x26; English (m/f/x) to join our dynamic team. The ideal candidate will be responsible for delivering excellent customer service and providing seamless support to our customers in using our POS and e-commerce software solutions. This role requires a strong background in customer service, a solid understanding of IT, and knowledge of online hardware and networks. You can work from our office in Breda (Netherlands) or in Berlin (Germany).</p>
+<p>Key Responsibilities:</p>
+<ul>
+<li>Customer Service: Act as the first point of contact for customer inquiries and issues, maintain strong customer relationships, and ensure customer satisfaction.</li>
+<li>Technical Support: Provide technical support for our POS and e-commerce software, troubleshoot technical issues, and guide customers in using our products.</li>
+<li>Coordination: Collaborate with internal teams, including Product, Development, Sales, and IT, to ensure all customer requests and issues are handled efficiently.</li>
+<li>Training: Develop and deliver training programs to help customers use our software solutions effectively.</li>
+<li>Documentation: Create and maintain comprehensive documentation, including user manuals, FAQs, and support tickets.</li>
+<li>Problem Solving: Identify potential issues and risks in the use of our products and develop strategies to resolve them quickly.</li>
+<li>Feedback: Collect and communicate customer feedback and feature requests to the product team to continuously improve our software.</li>
+<li>Continuous Improvement: Continuously evaluate and improve support processes to optimize efficiency and enhance the customer experience.</li>
+</ul>
+<h2>Your profile</h2>
+<p>Qualifications:</p>
+<ul>
+<li>At least 3 years of experience in customer service, preferably in the software or IT sector.</li>
+<li>Solid understanding of IT infrastructure, online hardware, and networks. Experience with POS and e-commerce systems is a strong plus.</li>
+<li>Excellent verbal and written communication skills; able to explain complex technical concepts clearly to non-technical stakeholders.</li>
+<li>Strong analytical skills and a proactive approach to identifying and resolving issues.</li>
+<li>Proven ability to manage and exceed customer expectations, with a strong focus on delivering exceptional service.</li>
+<li>Ability to efficiently manage multiple tasks and priorities.</li>
+<li>Able to collaborate effectively within a multidisciplinary team to find the best possible solutions for our customers.</li>
+<li>Preferably a native Dutch speaker, fluent in English (German is a plus).</li>
+</ul>
+<h2>Perks &#x26; Benefits</h2>
+<p>Our Benefits:</p>
+<ul>
+<li>A recipe for success: With over a decade of experience in the gastronomy and delivery industry, SIDES is known as a true specialist in this field. Join a leading player and help shape the future of the market.</li>
+<li>Ownership &#x26; impact: We give you the space to bring in your ideas, grow your strengths, and take real responsibility. You’ll work independently while being supported by a strong and collaborative team.</li>
+<li>High-quality work setup: Modern hardware, ergonomic workstations, and a professional office environment ensure you can do your best work.</li>
+<li>Hungry for growth: Continuous learning matters to us. Through regular feedback cycles, we actively support your personal and professional development.</li>
+<li>A positive workplace culture: Expect a well-connected office environment, a welcoming team atmosphere, and a workplace designed to help you do your best work every day.</li>
+</ul>
+<p>Workplace Environment Perks:</p>
+<ul>
+<li>Fruit basket, snacks, and drinks in the office</li>
+<li>Dog-friendly workplace</li>
+</ul>
+<p>Your Benefits:</p>
+<ul>
+<li>Sport &#x26; wellbeing: Access to sport and wellbeing options to support your health and daily balance.</li>
+<li>Pension scheme: A pension plan that supports your long-term financial security.</li>
+<li>Instahelp: Professional mental health support, available whenever you need it.</li>
+<li>Travel &#x26; home office allowance: Financial support for commuting and for days working from home.</li>
+<li>Babbel: Free access to Babbel for flexible language learning.</li>
+<li>INCENT &#x26; Corporate Benefits: Attractive employee discounts and exclusive partner offers.</li>
+<li>Hybrid work: A balanced mix of office and home office, depending on your role and team setup.</li>
+<li>Flexible working hours: Working hours that fit your daily life and offer real flexibility.</li>
+<li>December 24th &#x26; 31st off: Fully off without deducting vacation days.</li>
+<li>Company events: Our annual highlights - the SIDES Summer Event and our Christmas Party.</li>
+</ul>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/sides-simplydelivery-gmbh/customer-support-associate-dutch-english-berlin-100448" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

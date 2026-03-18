@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cluster HR Manager (m/w/d) (für Rügen und Usedom) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">IFA Rügen Hotel & Ferienpark sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Cluster HR Manager (m/w/d) (für Rügen und Usedom)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">HR</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Über uns:</strong></p>
+<p><strong>IFA Rügen Hotel &#x26; Ferienpark</strong></p>
+<p>Wir begrüßen Sie in unserem IFA Rügen Hotel &#x26; Ferienpark! Die verkehrsfreie Promenade führt vom historischen Ortskern mit seiner Seebrücke und den eindrucksvollen Bauten im Stil der Bäderarchitektur direkt zum IFA Rügen Hotel &#x26; Ferienpark. Hier erwarten Sie neben modernen Hotelzimmern und großzügigen Appartements auch komfortable Suiten auf einer sieben Hektar großen Parkanlage in den Häusern "Ostseeblick", "Ostseeperle" und "Strandidyll". Für den kulinarischen Streifzug stehen verschiedene Möglichkeiten zur Wahl. Egal, ob reichhaltiges Frühstück und Abendbuffet oder ein ausgedehntes Langschläfer Frühstück im Promenadenrestaurant "Seestern“.</p>
+<p>Als Teil der LOPESAN Hotelgruppe mit Hauptsitz auf Gran Canaria betreuen wir die IFA Hotels in Deutschland und Österreich regional über unsere neue Zentrale in Berlin/Schönefeld. Dieser Schritt bedeutet eine umfassende Modernisierung, um Prozesse, Standards und Qualität in den einzelnen Hotels effizient zu unterstützen. Gleichzeitig wird unser Büro der Dreh- und Angelpunkt für zukünftiges Wachstum auf dem mitteleuropäischen Markt sein.</p>
+<p><strong>Join our Team!</strong></p>
+<p>Als Mitglied unseres Teams hast Du die einmalige Gelegenheit, die Zukunft der IFA Hotels aktiv mitzugestalten und maßgeblich zum Erfolg des Unternehmens beizutragen. Wir möchten, dass Du Dich bei uns als Teil einer besonderen Gemeinschaft fühlst, und die Chance hast, Dich persönlich und beruflich weiterzuentwickeln.</p>
+<p>Für unser Team suchen wir ab sofort nach einem <strong>Cluster HR Manager (w/m/d) (für Rügen und Usedom)</strong></p>
+<h2>Aufgaben</h2>
+<ul>
+<li>Du gestaltest und veröffentlichst ansprechende Stellenanzeigen sowie klare und transparente Stellenbeschreibungen.</li>
+<li>Du erstellst qualifizierte Arbeitszeugnisse für unsere Mitarbeitenden, Auszubildenden und Praktikanten.</li>
+<li>Du organisierst und entwickelst unsere inner- und außerbetrieblichen Weiterbildungsangebote aktiv weiter.</li>
+<li>Du arbeitest vertrauensvoll mit externen Partnern und Behörden wie z. B. Berufsgenossenschaft und Arbeitsagentur zusammen.</li>
+<li>Du bist Ansprechpartner:in für unsere Mitarbeitenden – von Onboarding über die Begleitung im Arbeitsalltag bis hin zum Offboarding. Auch unsere Auszubildenden betreust du mit viel Engagement.</li>
+<li>Du wirkst bei der Erstellung des Personalbudgets sowie der Planung und Kontrolle der Personalkosten mit.</li>
+<li>Du arbeitest eng mit unserem zentralen Office in Berlin-Schönefeld zusammen und bringst dich aktiv in spannende HR-Projekte ein.</li>
+<li>Du übernimmst vorbereitende Aufgaben in der Lohnbuchhaltung.</li>
+<li>Du berätst unseren Hoteldirektor sowie unsere Führungskräfte in allen personalrelevanten sowie arbeits- und sozialrechtlichen Themen.</li>
+<li>Du entwickelst Maßnahmen zur kontinuierlichen Verbesserung der Mitarbeiterqualität und setzt diese erfolgreich um.</li>
+</ul>
+<h2>Qualifikation</h2>
+<ul>
+<li>Ein abgeschlossenes Studium oder eine Ausbildung im Bereich Personalwesen/Hotellerie/ Betriebswirtschaft.</li>
+<li>Mindestens 2 Jahre Erfahrung im Human Resources oder in ähnlicher Position – gerne auch in der Hotellerie.</li>
+<li>Fachkenntnisse im Lohnsteuer-, Sozialversicherungs- und Arbeitsrecht.</li>
+<li>Organisationstalent, Verantwortungsbewusstsein und Teamgeist.</li>
+<li>Reisebereitschaft (Dein fester Arbeitsplatz ist im IFA Rügen Hotel in Binz),</li>
+<li>Sehr gute Deutschkenntnisse, Englischkenntnisse sind von Vorteil.</li>
+</ul>
+<h2>Benefits</h2>
+<p><strong>Unsere Wohlfühlfaktoren:</strong></p>
+<p><strong>Mobiles Arbeiten</strong> - Du arbeitest aus einem Büro in Rügen, ansonsten ist Home Office Arbeit auch möglich. Du bist in unserem Büro in Berlin-Schönefeld auch sehr herzlich willkommen.</p>
+<p><strong>Lebens- und Arbeitsqualität</strong> - Uns ist Flexibilität sehr wichtig, deswegen versuchen wir uns immer an Deinen Lebensstil anzupassen.</p>
+<p><strong>Schnell und einfach unterwegs sein</strong> – Wir passen die Transportmittel an deinen Reisestil an. z.B. mit dem Dienstwagen.</p>
+<p><strong>Deine berufliche Entwicklung</strong> - Wir bieten Dir Weiterbildungsmöglichkeiten und berufliche Entwicklung.</p>
+<p><strong>Deine Freizeit und Sicherheit ist uns wichtig</strong> - Du bekommst von vornherein einen unbefristeten Arbeitsvertrag und 30 Tage Urlaub und zusätzlich an deinem Geburtstag und am 24.12. und 31.12. einen halben Tag Urlaub geschenkt. Zusätzlich bieten wir lukrative Mitarbeiter-Rabatte in allen IFA-Häusern weltweit.</p>
+<p><strong>Partnerschaft</strong>- Wir feiern die offene Unternehmenskultur und egal ob Manager*in oder Direktor*in, wir sind alle per „Du“. Bei uns wirst Du in einem Hands-On Team arbeiten, das auf Teamwork, Kreativität und offene Kommunikation setzt.</p>
+<p><strong>Wuff wuff! - Hunde im Office</strong> - In unserem Büro in Berlin-Schönefeld sind Hunde und andere „Feel-Good-Manager“ sehr gerne willkommen.</p>
+<p>Kontakt:</p>
+<p>Wenn Du Teil unseres Teams werden möchtest und uns tatkräftig bei dieser tollen Herausforderung unterstützen möchtest, bewirb Dich bei uns:</p>
+<p>Tomasz Gajec</p>
+<p>IFA by Lopesan Hotels</p>
+<p>Recruiting</p>
+<p><strong>Hinweis:</strong></p>
+<p>Wir wertschätzen Vielfalt und begrüßen daher alle Bewerbungen - unabhängig von Geschlecht, Nationalität, ethnischer und sozialer Herkunft, Religion/Weltanschauung, Behinderung, Alter sowie sexueller Orientierung und Identität. Die Auswahl der Bewerber*innen erfolgt ausschließlich anhand von Qualifikationen.</p>
+<p><strong>Wir heißen Sie recht herzlich Willkommen im Team des IFA Rügen Hotel &#x26; Ferienparks!</strong></p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/ifa-rugen-hotel-ferienpark/cluster-hr-manager-fur-rugen-und-usedom-binz-450656" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

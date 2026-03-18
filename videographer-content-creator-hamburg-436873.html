@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videographer / Content Creator | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Ambulante Pflege La Vela sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Videographer / Content Creator</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 50k-70k</span>
+                    <span class="badge badge-tag">Media</span><span class="badge badge-tag">Screen and Web Design</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Bewerben Sie sich, wenn Sie kreativ, visuell denken und Erfahrung im Content-Creation haben. Die Firma bietet eine Chance, eine Social-Media-Firma von Grund auf aufzubauen und Ihre kreativen Fähigkeiten zu entfalten.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Für den Aufbau einer Social-Media-Firma ab dem 1.5.26 suche ich genau DICH :-) Jemanden, der nicht nur Videos produziert, sondern Bilder sieht, Geschichten erkennt und<br>
+visuell denken und um die Ecke denken kann. Ich suche nicht<br>
+irgendjemanden, sondern wirklich jemanden, der zu mir passt und mit mir<br>
+eine Social Media Firma aufbauen kann. Ich suche keinen Freelancer oder Agentur<br>
+sondern einen festangestellten Mitarbeiter In Teilzeit (25-30h/Woche)</p>
+<p>Der Content, den wir<br>
+produzieren, soll sich bewusst von klassischem Social-Media-Content<br>
+unterscheiden. Statt schnellen, lauten Videos geht es bei mir um<br>
+cinematic, ruhigen und reflektierenden Content, der Geschichten erzählt<br>
+und Menschen berührt.</p>
+<p>Was mir wichtig ist:</p>
+<ul>
+<li>Ich suche keine Person, die nur technisch Videos schneidet</li>
+</ul>
+<p>Mir ist wichtig, dass du:</p>
+<ul>
+<li>ein gutes Auge für Bildgestaltung hast und die Sensibilität besitzt dich in andere Menschen hineinzuversetzen</li>
+<li>kritikfähig bist und offen mit Feedback umgehen kannst</li>
+<li>schnell verstehst, was wir umsetzen wollen</li>
+<li>effizient arbeitest und Verantwortung übernehmen kannst</li>
+</ul>
+<p>Da das Konzept bewusst anders ist als klassischer Social-Media-Content,<br>
+solltest du offen dafür sein, gemeinsam etwas Neues zu entwickeln.<br>
+Vertrauen und eine gute kreative Zusammenarbeit sind mir sehr wichtig.<br>
+Es ist ein absolutes Herzensprojekt, d.h. du solltest sensibel genug<br>
+sein die Personalbrand (Maria Rabe, also mich) zu "sehen".</p>
+<p>Arbeitsweise</p>
+<ul>
+<li>Ein Großteil der Arbeit kann remote von zu Hause erfolgen</li>
+<li>Für Drehs werden wir jedoch gemeinsam an verschiedenen Orten filmen. (zB Henstedt-Ulzburg)</li>
+<li>Ein Auto ist hilfreich, aber nicht zwingend notwendig.</li>
+</ul>
+<p>-Gelegentlich arbeiten wir auch im Büro in Henstedt-Ulzburg</p>
+<ul>
+<li>Wichtig ist, dass du in Hamburg wohnst, damit Drehs und persönliche Abstimungen unkompliziert möglich sind.</li>
+</ul>
+<p>---</p>
+<p>Arbeitszeiten</p>
+<ul>
+<li>Montag bis Freitag ca. 9:00 bis 17:00 Uhr</li>
+<li>Gelegentlich kann es vorkommen, dass wir auch mal am Wochenende bei einer Veranstaltung filmen</li>
+</ul>
+<h2>Aufgaben</h2>
+<p>Du solltest ein gutes Auge für Bildsprache haben, kreativ arbeiten wollen und Freude daran haben, Dinge auszuprobieren.</p>
+<p>Deine Aufgaben</p>
+<p>-Du übernimmst neben den kreativen Aufgaben auch operative Aufgaben</p>
+<p>-Du übernimmst den gesamten Prozess rund um unsere Video-Produktion:</p>
+<ul>
+<li>Filmen und Kameraführung (Iphone/Blackmagix App) mit einem starken visuellen Blick</li>
+<li>Schnitt und Postproduktion für Social-Media-Content</li>
+<li>Entwicklung und Umsetzung visueller Ideen</li>
+<li>Aufbau von Storylines aus verschiedenen Video-Materialien</li>
+<li>Color Grading und visuelle Gestaltung</li>
+<li>Storytelling: aus Rohmaterial emotionale und starke Inhalte entwickeln</li>
+</ul>
+<p>Einen kleinen Teil des Contents wird für einen Pflegedienst in Henstedt-Ulzburg<br>
+produziert. Dabei entstehen Geschichten über Mitarbeiterinnen,<br>
+Mitarbeiter und Pflegebedürftige.</p>
+<p>Aber der größere Teil der Arbeit besteht darin, eine Personal Brand aufzubauen.</p>
+<p>Du kannst dir den Account auf Instagram gerne vorab anschauen: mariara. be (ohne Leerzeichen)</p>
+<p>Überlege bitte, ob du dir vorstellen kannst, diesen Stil und diese Inhalte weiterzuentwickeln.</p>
+<h2>Qualifikation</h2>
+<p>Was du mitbringen solltest</p>
+<ul>
+<li>sehr gute Kameraführung und filmisches Verständnis (gefilmt wird erstmal mit dem neues Iphone und der Blackmagic App)</li>
+<li>unterschiedliche Erfahrung im Videoschnitt wäre wünschenswert (Adobe Premiere)</li>
+<li>gutes Verständnis für Licht, Schatten und Bildkomposition</li>
+<li>Kenntnisse im Color Grading, gutes Auge für Lichtkomponenten</li>
+<li>starkes Storytelling-Verständnis</li>
+<li>Bereitschaft, dich kreativ und technisch weiterzuentwickeln</li>
+<li>tiefe Liebe für diesen Job!!</li>
+<li>Deutsch musst du fließend bzw. verhandlungssicher können</li>
+<li>Ausbildung/Weiterbildung im Social Media und Video Editor Bereich</li>
+</ul>
+<h2>Benefits</h2>
+<p>Was ich biete</p>
+<p>Ich suche eine Person, der ich vertrauen können und mit der ich langfristig<br>
+zusammenarbeiten möchte. Für die richtige Person biete ich daher auch<br>
+eine sehr gute Bezahlung, Mir ist aber vorab<br>
+wichtig, dass du einen Probeschnitt machst, damit ich sehen kann, ob es<br>
+passt.</p>
+<p>Ich suche ab frühestens 1.Mai 2026 jemanden.</p>
+<p>Wenn du Lust hast, Content zu produzieren, der anders ist als das, was man<br>
+täglich auf Social Media sieht und du Lust hast auf eine<br>
+Leitungsposition, freue ich mich auf deine Bewerbung! Bewirb dich gerne<br>
+so wie du magst, haupsache ich bekomme einen kleinen Eindruck von dir.<br>
+;-)</p>
+<p>PS: Die Social Media Firma wird ab Mai 2026 gegründet, deswegen erfolgt die Ausschreibung über den Pflegedienst.</p>
+<p>LG</p>
+<p>Maria</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/ambulante-pflege-la-vela/videographer-content-creator-hamburg-436873" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

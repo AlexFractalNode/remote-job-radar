@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Data Scientist (m/f/x) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Makersite GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Senior Data Scientist (m/f/x)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Information technology</span><span class="badge badge-tag">master's degree</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p>Data Scientist (m/f/x) </p><p>Location: Germany or UK </p><p>(Remote) </p><p> </p><h4><strong><span style="color: #000000">Who You’ll Work For</span><span style="">:</span></strong><span style=""> </span></h4><p> </p><p><span style="color: #000000">At Makersite, we're pioneering the future of sustainable product development and digital collaboration. As a leading platform for product lifecycle management (PLM), we empower companies to make smarter, more sustainable decisions across their entire supply chain. Our cutting-edge software enables teams to design, prototype, and manufacture with transparency, efficiency, and responsibility—reducing environmental impact while optimizing performance. </span></p><p><span style="color: #000000">We're a fast-growing, innovative company that thrives on creativity, collaboration, and continuous learning. If you're passionate about technology, sustainability, and creating meaningful impact, we’d love to hear from you. Join us and be a part of shaping the future of manufacturing and product innovation. </span></p><p><span style=""> </span></p><h4><strong><span style="color: #000000">Who we're looking for:</span></strong><span style="color: #000000"> </span></h4><p> </p><p><span style="color: #000000">As part of our growing team, you will play a key role in shaping the future of sustainable product development. We’re looking for innovative, driven Data Scientists who are passionate about technology and sustainability to join us in building tools that enable companies to make smarter, more responsible decisions. In this role, you’ll have the opportunity to collaborate with talented professionals, contribute to cutting-edge projects, and help drive the digital transformation of industries worldwide. Ifyou're ready to make an impact and contribute to meaningful change, we want to hear from you! </span></p><p><span style="color: #000000">This role is a fixed, permanent position. All successful applicants will receive a permanent employment contract regardless of location.  </span></p><p><span style=""> </span></p><h4><strong><span style="color: #000000">The role: </span></strong><span style="color: #000000"> </span></h4><p><strong><span style="color: #000000">Develop and Deploy Production-Grade AI Systems</span></strong><span style="color: #000000"> </span></p><ul><li><p><span style="color: #000000">Build, deploy, and maintain scalable APIs that serve AI/ML models in production environments </span></p></li></ul><ul><li><p><span style="color: #000000">Own end-to-end delivery of AI solutions, from prototyping to fully productionized systems </span></p></li></ul><p><strong><span style="color: #000000">Design Advanced AI Architectures</span></strong><span style="color: #000000"> </span></p><ul><li><p><span style="color: #000000">Design and implement Retrieval-Augmented Generation (RAG) systems using vector databases </span></p></li></ul><ul><li><p><span style="color: #000000">Build and orchestrate AI agents using frameworks such as LangGraph, CrewAI, or similar </span></p></li></ul><ul><li><p><span style="color: #000000">Evaluate and select appropriate large language models (LLMs) and foundation models based on specific use cases </span></p></li></ul><p><strong><span style="color: #000000">Optimize Performance and Scalability</span></strong><span style="color: #000000"> </span></p><ul><li><p><span style="color: #000000">Continuously optimize model inference for latency, cost efficiency, and throughput at scale </span></p></li></ul><ul><li><p><span style="color: #000000">Identify bottlenecks and implement improvements to ensure high-performing systems </span></p></li></ul><p><strong><span style="color: #000000">Ensure Reliability and Observability</span></strong><span style="color: #000000"> </span></p><ul><li><p><span style="color: #000000">Implement robust monitoring, logging, and alerting for deployed models and services </span></p></li></ul><ul><li><p><span style="color: #000000">Ensure system reliability, uptime, and performance through best practices in production ML systems </span></p></li></ul><p><strong><span style="color: #000000">Establish Engineering Best Practices</span></strong><span style="color: #000000"> </span></p><ul><li><p><span style="color: #000000">Build and maintain CI/CD pipelines for seamless testing, deployment, and iteration of AI systems </span></p></li></ul><ul><li><p><span style="color: #000000">Contribute to evolving engineering standards as the company transitions from rapid experimentation to more structured, scalable operations </span></p></li></ul><p><strong><span style="color: #000000">Collaborate Cross-Functionally</span></strong><span style="color: #000000"> </span></p><ul><li><p><span style="color: #000000">Work closely with product and engineering teams to integrate AI capabilities into core products </span></p></li></ul><ul><li><p><span style="color: #000000">Translate business problems into technical solutions and clearly communicate trade-offs </span></p></li></ul><p><strong><span style="color: #000000">Drive Structure in a Fast-Paced Environment</span></strong><span style="color: #000000"> </span></p><ul><li><p><span style="color: #000000">Help bring stability and structure to AI development processes during a high-growth, scale-up phase </span></p></li></ul><ul><li><p><span style="color: #000000">Balance speed of execution with the need for maintainable, well-documented, and scalable systems </span></p></li></ul><ul><li><p><span style="color: #000000">Take ownership of ambiguous problems and drive them through to practical, production-ready outcomes </span></p></li></ul><p style=";"></p><br /><br /><p><strong><em><span style="color: #000000">Core Experience</span></em></strong><em><span style="color: #000000"> </span></em></p><ul><li><p><span style="color: #000000">5+ years of experience in Python, with ~10 years of overall software engineering or data experience (candidates transitioning from backend engineering are welcome) </span></p></li></ul><ul><li><p><span style="color: #000000">Proven experience building and deploying production-grade APIs (preferably with FastAPI; REST/GraphQL experience is a plus) </span></p></li></ul><ul><li><p><span style="color: #000000">Hands-on experience working with large language models (LLMs) and LLMOps, including prompt engineering, fine-tuning, and evaluation (e.g., GPT, Claude) </span></p></li></ul><ul><li><p><span style="color: #000000">Strong experience fine-tuning open-source models (e.g., Hugging Face ecosystem) </span></p></li></ul><ul><li><p><span style="color: #000000">Practical experience designing and working with vector databases (e.g., Pinecone, Weaviate, Chroma, pgvector) </span></p></li></ul><ul><li><p><span style="color: #000000">Experience building AI agents using frameworks such as LangGraph, LangChain, CrewAI, or similar </span></p></li></ul><ul><li><p><span style="color: #000000">Solid understanding of model deployment and serving (e.g., vLLM, TGI, or managed endpoints) </span></p></li></ul><ul><li><p><span style="color: #000000">Experience with CI/CD pipelines and modern deployment practices (Docker, Kubernetes, GitHub Actions) </span></p></li></ul><ul><li><p><span style="color: #000000">Strong experience working with and processing large-scale text datasets </span></p></li></ul><p><strong><em><span style="color: #000000">Preferred Experience</span></em></strong><em><span style="color: #000000"> </span></em></p><ul><li><p><span style="color: #000000">Experience with MLOps platforms such as MLflow or Weights &amp; Biases </span></p></li></ul><ul><li><p><span style="color: #000000">Familiarity with cloud AI ecosystems (e.g., AWS Bedrock, GCP Vertex AI, Azure OpenAI) </span></p></li></ul><ul><li><p><span style="color: #000000">Contributions to open-source AI/ML projects </span></p></li></ul><ul><li><p><span style="color: #000000">Experience in the sustainability or climate/product domain </span></p></li></ul><ul><li><p><span style="color: #000000">Background in B2B SaaS environments </span></p></li></ul><ul><li><p><span style="color: #000000">Prior experience in a startup or scale-up environment (approximately 100–300 employees) </span></p></li></ul><ul><li><p><span style="color: #000000">Residing in and legally permitted to work in the Germany or the UK </span></p></li></ul><p><strong><em><span style="color: #000000">Key Attributes</span></em></strong><em><span style="color: #000000"> </span></em></p><ul><li><p><strong><span style="color: #000000">Builder mindset:</span></strong><span style="color: #000000"> Comfortable owning systems end-to-end, from experimentation through to production </span></p></li></ul><ul><li><p><strong><span style="color: #000000">Bias for action:</span></strong><span style="color: #000000"> Operates effectively in a fast-paced, evolving environment with shifting priorities </span></p></li></ul><ul><li><p><strong><span style="color: #000000">Systems thinker:</span></strong><span style="color: #000000"> Designs solutions with scalability, reliability, and maintainability in mind </span></p></li></ul><ul><li><p><strong><span style="color: #000000">Pragmatic decision-making:</span></strong><span style="color: #000000"> Balances technical excellence with speed and business impact </span></p></li></ul><ul><li><p><strong><span style="color: #000000">Ownership &amp; accountability:</span></strong><span style="color: #000000"> Takes responsibility for outcomes, not just outputs </span></p></li></ul><ul><li><p><strong><span style="color: #000000">Clear communicator:</span></strong><span style="color: #000000"> Able to articulate complex technical concepts to both technical and non-technical stakeholders </span></p></li></ul><p><span style=""> </span></p><h4><strong><span style="color: #000000">What We Offer:</span></strong><span style="color: #000000"> </span></h4><p><span style="color: #000000"> </span></p><ul><li><p><strong><span style="color: #000000">Competitive Salary</span></strong><span style="color: #000000"> – We reward your skills and experience with a compensation package that reflects your value. </span></p></li></ul><ul><li><p><strong><span style="color: #000000">30 Days Paid Time Off</span></strong><span style="color: #000000"> – Take the time you need to recharge and maintain a healthy work-life balance. </span></p></li></ul><ul><li><p><strong><span style="color: #000000">Remote-First Flexibility</span></strong><span style="color: #000000"> – Work from anywhere in the EU, with the option to collaborate in person at our offices in Stuttgart, Berlin (role dependent). </span></p></li></ul><ul><li><p><strong><span style="color: #000000">Generous Learning &amp; Development Budget</span></strong><span style="color: #000000"> – We invest in your growth, providing ample resources for personal and professional development. </span></p></li></ul><ul><li><p><strong><span style="color: #000000">Choose Your Ideal Work Equipment</span></strong><span style="color: #000000"> – Whether you prefer Apple or Microsoft, we’ll equip you with the tools you need to excel. </span></p></li></ul><p><span style=""> </span></p><p><span style=""> </span></p><h4><strong><span style="color: #000000">The Experience:</span></strong><span style="color: #000000"> </span></h4><p><span style="color: #000000"> </span></p><ul><li><p><strong><span style="color: #000000">Purpose-Driven Work</span></strong><span style="color: #000000"> – Build something meaningful. Here, you’re not just creating another app; you’re contributing to a transformative vision that you can be proud of. </span></p></li></ul><ul><li><p><strong><span style="color: #000000">Great Colleagues</span></strong><span style="color: #000000"> – Join a team that’s open, transparent, and international. We value inclusivity and foster a culture of collaboration and mutual respect. </span></p></li></ul><ul><li><p><strong><span style="color: #000000">Work-Life Balance</span></strong><span style="color: #000000"> – As a remote-first company, we trust you to do your best work, your way. You have the flexibility to work when it suits you, ensuring a healthy balance between personal and professional life. </span></p></li></ul><ul><li><p><strong><span style="color: #000000">Pride in Impact</span></strong><span style="color: #000000"> – We're already making a significant difference with global, well-known customers who share our vision. Be part of something that matters. </span></p></li></ul><ul><li><p><strong><span style="color: #000000">Stability with Ambition</span></strong><span style="color: #000000"> – With realistic growth plans, we’re committed to changing the way things are made—without sacrificing our ambitious goals for innovation and impact. </span></p></li></ul><p><span style="">If you want to find out more about what it’s like to work at Makersite, check out our </span><strong><span style="">Careers Page</span></strong><span style=""> </span><strong><u><a rel="noopener" target="_blank" href="https://makersitegmbh.recruitee.com/"><span style="color: #467886">here</span></a></u></strong><span style=""> </span></p><p><span style="">  </span></p><h4><strong><span style="">Diversity and Inclusion</span></strong><span style=""> </span></h4><p style=";"></p><p><span style="">If you have a medical condition or an individual need for an adjustment to our process, and you believe this may affect your ability to be at your best – please let us know so we can talk about how we can best support you and make any adjustments that may be needed.  </span></p><p><span style=""> </span></p><p><span style="color: #000000">At Makersite, we are dedicated to fostering an environment that champions diversity, equity, inclusion, and belonging. We believe that diverse teams drive innovation and success, and we are proud to be an equal opportunity employer. We welcome applicants from all backgrounds and will consider all applications regardless of age, disability, gender identity, marital status, pregnancy or maternity, race, nationality, religion, sex, sexual orientation, or any other status protected by applicable law. Rest assured, all applications will be handled with the utmost confidentiality. </span></p><p style=";"></p><p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/makersite-gmbh/senior-data-scientist-germany-353885" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
