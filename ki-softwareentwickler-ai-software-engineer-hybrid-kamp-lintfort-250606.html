@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KI Softwareentwickler / AI Software Engineer - hybrid (w/m/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Coduct Solutions GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">KI Softwareentwickler / AI Software Engineer - hybrid (w/m/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Software Development</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Über uns</strong></p>
+<p>Bei Coduct Solutions verbinden wir Technologie und unternehmerisches Denken, um anderen Unternehmen einen digitalen Impact zu verschaffen. Wir unterstützen insbesondere andere Software-Unternehmen im Umbau ihrer Applikationen zu Cloud- und SaaS-Lösungen. Dabei steigern wir den Wert für deren Kunden, Partner und Eigentümer. Hier bauen wir auch vermehrt eigene KI-Lösungen ein. Dabei definieren wir die Lösungsarchitektur, wählen die Modelle, trainieren ggf. und bringen alles für eine vollständige Lösung zusammen. Nur ein LLM anschließen und trainieren reicht hier nicht.</p>
+<p><strong>Deine Rolle</strong></p>
+<p>In deiner Rolle als KI-Software-Engineer*in oder KI-Architekt*in entwickelst du leistungsfähige KI-Anwendungen, trägst aktiv zur Gestaltung der Architektur bei und arbeitest eng mit anderen Entwickler*innen sowie Projektteams zusammen. Du begleitest unsere Projekte durch alle Phasen – von der ersten Idee bis hin zur Auslieferung eines stabilen, skalierbaren KI-Modells.</p>
+<p>Wichtig ist, dass du wirklich Lust hast, tief in die KI-Welt einzutauchen und die KI-Optionen und Modelle (inkl. Repräsentanzmodelle) verstehst, zerlegst und zu einer effizienten Lösung mit LLM etc. zusammensetzt. Deutsch und Englisch sprichst du fließend (C1 / Muttersprache).</p>
+<h2>Aufgaben</h2>
+<ul>
+<li>Entwicklung und Implementierung moderner, skalierbarer KI-gestützter Anwendungen und Systeme – von der Datenvorverarbeitung bis zur Integration von KI-Modellen.</li>
+<li>Als Teil des Teams entwickelst du cloud-native KI-Lösungen und nutzt dafür bevorzugt Plattformen wie Azure, AWS oder Google Cloud.</li>
+<li>In enger Zusammenarbeit mit unseren Softwarearchitekt*innen bringst du dein Fachwissen im Bereich KI ein und gestaltest leistungsfähige, skalierbare und durchdachte Lösungen und KI-Architekturen von Anfang an mit.</li>
+<li>Die Dokumentation der Architektur, Modelle, Prozesse und Abläufe erfolgt durch dich präzise und nachvollziehbar – als Grundlage für langfristige Wartbarkeit und Teamarbeit.</li>
+<li>Durch das Erstellen von Testfällen für KI-Modelle und deren kontinuierliche Validierung trägst du aktiv zur Qualitätssicherung unserer KI-Lösungen bei.</li>
+<li>Mit technischem Know-how unterstützt du unsere Projektteams in spannenden und komplexen Kundenprojekten, insbesondere bei der Entwicklung und Integration von KI-Lösungen.</li>
+<li>Eigenverantwortliches Arbeiten mit hohem Qualitätsanspruch gehört für dich selbstverständlich dazu – ebenso wie der klare Blick für deine Aufgaben und das kontinuierliche Streben nach Verbesserung der Modelle und Systeme.</li>
+<li>Optimierung und kontinuierliche Weiterentwicklung bestehender KI-Modelle und -Algorithmen, um deren Performance und Genauigkeit zu maximieren.</li>
+<li>Integration und Anpassung von externen KI-basierten Schnittstellen und APIs, wie z. B. von Drittanbieter-Modellen oder Cloud-Diensten.</li>
+</ul>
+<h2>Qualifikation</h2>
+<ul>
+<li>Du hast ein abgeschlossenes Studium in Informatik, Software Engineering oder eine vergleichbare Qualifikation im Bereich der KI-Entwicklung.</li>
+<li>Mehrjährige Erfahrung in der Softwareentwicklung (insbesondere im Backend-Bereich und mit modernen Technologien).</li>
+<li>Bereits erste Erfahrung in der Implementierung von KI-Lösungen und Generativer KI (wie z.B. Sprachmodellen von OpenAI, Claude, etc.)</li>
+<li>Erfahrung mit Python &#x26; Node.js ist wünschenswert, Kenntnisse in Frameworks wie Langfuse, GraphRAG und FastAPI sind ein Bonus.</li>
+<li>Erfahrung in der Integration von KI-Modellen in bestehende Systeme und der Entwicklung von Lösungsansätzen, die die geschäftlichen Anforderungen durch den Einsatz von KI unterstützen.</li>
+<li>Architektur, Implementierung und Integration von LLMs für verschiedene Anwendungsfelder.</li>
+<li>Analyse und Evaluierung von aktuellen Ansätzen in der Conversational AI (z.B. Chatbots, Dialogsysteme).</li>
+<li>Du hast ein gutes Verständnis für die Risiken bei der Entwicklung von KI-Lösungen und bist in der Lage, potenzielle Risiken zu erkennen und Lösungen zur Risikominderung zu entwickeln.</li>
+<li>Die enge Zusammenarbeit mit Kunden, anderen Entwickler*innen und dem Team bereitet dir Freude.</li>
+<li>Du beherrschst Deutsch (Sprachlevel mind. C1) und Englisch fließend und kannst komplexe technische und KI-bezogene Konzepte sowohl intern als auch gegenüber Kunden und Stakeholder*innen verständlich kommunizieren.</li>
+</ul>
+<p><strong>Reisebereitschaft</strong></p>
+<ul>
+<li>Sehr seltene Dienstreisen in der DACH-Region (nach Vereinbarung mit den Kund*innen)</li>
+</ul>
+<p><strong>Location &#x26; mobiles Arbeiten</strong></p>
+<ul>
+<li>Wir haben eine flexible Aufteilung zwischen Büro und mobilem Arbeitsplatz, diese kann individuell nach Absprache festgelegt werden.</li>
+<li>Du kommst mind. 2–3 Mal pro Woche in eines unserer Offices in Kamp-Lintfort oder Berlin (Pendeldistanz pro Richtung sollte &#x3C; 2h sein).</li>
+<li>Arbeitsmodell: Hybrid (überwiegend mobiles Arbeiten) oder vor Ort</li>
+</ul>
+<p><strong>Sonstiges</strong></p>
+<ul>
+<li>Arbeitszeit: 32-40 h, werktags, gerne 40 h</li>
+<li>Startzeitpunkt: asap</li>
+<li>Vertragsart: unbefristet</li>
+</ul>
+<p><strong>Einstellungsprozess</strong></p>
+<ul>
+<li>Vorauswahl durch unseren Recruiter*in (optional)</li>
+<li>Technisches Vorstellungsgespräch</li>
+<li>Vorstellungsgespräch mit unserem Geschäftsführer</li>
+</ul>
+<h2>Benefits</h2>
+<ul>
+<li>Du hast die Möglichkeit, mit den neuesten KI-Technologien und aktuellen Entwicklungen zu arbeiten.</li>
+<li>Ein Unternehmen mit kurzen Entscheidungswegen und Reaktionszeiten, in dem du die Freiheit hast, eigene Ideen einzubringen und deinen individuellen Fingerabdruck in der Gestaltung und Umsetzung von Projekten zu hinterlassen.</li>
+<li>Hybrides Arbeitsmodell mit Flexibilität zwischen Büro und Remote</li>
+<li>Direkter Einfluss: dein Erfolg prägt das Wachstum und die Ausrichtung</li>
+<li>Frühe Verantwortung und Freiraum für eigene Ideen</li>
+<li>Ein kollegiales, internationales Team mit flachen Hierarchien und offener Kultur</li>
+<li>Kontinuierliche Weiterbildung und Entwicklungsmöglichkeiten</li>
+<li>Moderne Ausstattung, flexible Arbeitszeiten und regelmäßige Teamevents</li>
+</ul>
+<p><em>Bei uns findest du ein Team, das sich gegenseitig unterstützt und gemeinsam seine Ziele verfolgt. Wir setzen auf ehrliche Kommunikation, pragmatische Lösungen und eine Atmosphäre, in der Arbeiten Freude macht. Werde Teil unseres Teams und gestalte mit uns die Zukunft innovativer Projekte!</em></p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/coduct-solutions-gmbh/ki-softwareentwickler-ai-software-engineer-hybrid-kamp-lintfort-250606" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

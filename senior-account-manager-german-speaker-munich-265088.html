@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Account Manager (m/f/x) - German Speaker | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Atolls sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Senior Account Manager (m/f/x) - German Speaker</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><div class="content-intro"><p><img style="display: block; max-width: 100%;" src="https://atolls.com/wp-content/uploads/2025/10/Atolls-Banner_01_Greenhouse_1400x200-scaled.jpg" alt="Atolls top banner"></p>
+<hr>
+<h3 class="mb-2 whitespace-pre-wrap"><strong>Atolls is the world's largest community-driven shopping platform, active in 20+ markets.&nbsp;</strong></h3>
+<p class="mb-2 whitespace-pre-wrap">We help millions make smarter spending decisions across discovery, evaluation, and (re-)purchase by connecting people with the right brands and retailers.</p>
+<p class="mb-2 whitespace-pre-wrap">Our 1,000+ team across 10 countries builds products used every day at global scale, where you'll have real ownership and see your impact. Want to shape the destinations people rely on to shop with confidence? Keep reading.</p></div><section>
+<section><hr>
+<h3><strong>About This Role:</strong></h3>
+<p data-pm-slice="1 1 []">We are looking for a <strong>Senior Account Manager </strong>(m/f/x)<strong> - German Speaker </strong>to join our <strong>Account Management </strong>team in <strong>Berlin </strong>or<strong> Munich.</strong> At Atolls, your role will be instrumental in helping us <strong>to grow our German Market for the Publisher Verticals Cashback, Community and Voucher</strong>, creating exceptional user experiences and empowering consumers to make informed and confident shopping decisions. As a key part of our team, you'll be directly involved in building and enhancing the digital destinations our users rely on throughout their shopping journeys.</p>
+<p>Your contributions will help shape how millions of consumers interact with our platforms, guiding them to make smart, fair, and rewarding choices.</p>
+<hr>
+<h3><strong>Our Benefits:</strong></h3>
+<p>At Atolls, we believe in nurturing both your professional and personal growth. Here's what you can expect:</p>
+<ul>
+<li>A culture that values personal and professional development, with internal mobility opportunities.</li>
+<li>A supportive and open-minded team that embraces diverse perspectives and innovative ideas.</li>
+<li>32 days of paid vacation plus your birthday off, giving you the time you need to recharge.</li>
+<li>A flexible hybrid working scheme to balance work and life.</li>
+<li>Access to a learning budget and internal training to help you grow in your role.</li>
+<li>Mental health coaching to support your well-being.</li>
+<li>Regular global and local get-togethers to celebrate successes and build connections.</li>
+<li>The possibility of taking a sabbatical after three years with the company.</li>
+<li>A cloud-based company setup, providing flexibility and collaboration opportunities no matter where you are.</li>
+</ul>
+<p><em>*These are global benefits that apply to all employees, with additional local perks based on your location.</em></p>
+<hr>
+<h3><strong>Responsibilities:</strong></h3>
+<p data-pm-slice="1 3 []">In this senior role, you will:</p>
+<ul>
+<li>Own and lead <strong>strategic, long-term partnerships</strong>, including the development, negotiation, and renewal of complex commercial agreements.</li>
+<li>Act as a <strong>trusted advisor</strong> to your retailers by deeply understanding their business models, growth ambitions, and challenges.</li>
+<li>Translate data and market insights into <strong>clear strategic recommendations</strong> to optimize partner performance and long-term value.</li>
+<li>Proactively identify and drive <strong>revenue growth opportunities</strong>, including solution expansions, innovative campaign setups, and cross-vertical initiatives.</li>
+<li>Represent the company as a <strong>senior commercial stakeholder</strong> in high-level negotiations, industry events, and conferences.</li>
+<li>Lead the <strong>education and enablement</strong> of partners on advanced use cases, new solutions, and product innovations.</li>
+<li>Take full ownership of <strong>performance steering</strong>, including KPI definition, regular business reviews, forecasting, and performance reporting.</li>
+<li>Anticipate challenges early and manage escalations with a <strong>solution-oriented, commercial mindset</strong>.</li>
+<li>Provide <strong>clear visibility and strategic input</strong> on account performance, risks, and opportunities to your vertical lead and senior stakeholders.</li>
+<li>Take responsibility for <strong>champion roles or project ownership</strong> within the team, actively contributing to best practices, onboarding, and knowledge sharing.</li>
+<li>Act as a <strong>role model</strong> for junior team members by sharing expertise, coaching where needed, and fostering a high-performance culture.</li>
+</ul>
+<br><hr>
+<h3><strong>&nbsp;</strong><strong>Your Profile:</strong></h3>
+<ul>
+<li><strong>5+ years of experience</strong> in account management, business development, or a comparable commercial role.</li>
+<li>Fluent in <strong>German and English</strong>, with strong communication skills on both operational and executive level.</li>
+<li>Solid experience in <strong>affiliate marketing, performance marketing, or digital commerce</strong> is highly desirable.</li>
+<li>Proven ability to <strong>negotiate complex, high-value agreements</strong> and build sustainable long-term partnerships.</li>
+<li>Highly <strong>structured, self-driven, and resilient</strong>, with confidence in fast-paced, dynamic environments.</li>
+<li>Strong portfolio management skills, with the ability to prioritize, scale, and grow multiple strategic accounts in parallel.</li>
+<li>Strategic, forward-thinking mindset with the ability to develop <strong>mid- to long-term growth strategies</strong>.</li>
+<li>Strong analytical skills and confidence in <strong>data-driven storytelling</strong>, enabling you to create compelling business cases, pitches, and proposals.</li>
+<li>Natural ownership mentality combined with a collaborative and open leadership style.</li>
+</ul>
+<hr>
+<h3><strong>Our hiring process</strong>:</h3>
+<p><strong>TA Call</strong>: Meet one of our Talent Experts and get to know Atolls better.</p>
+<p><strong>Technical Round</strong>: Focus on the technical aspects of the role <em>(Through a Live Case)</em>, and meet your potential manager.</p>
+<p><strong>Final Round</strong>: Meet other Atollians 🏝️<br><em>It varies from 1 to 3 interviews</em></p>
+<p><em>*Some processes might slightly change according to needs</em></p>
+<hr>
+<h4><strong>Ready to apply?</strong></h4>
+<p>Be part of a destination where your work helps millions of people make better decisions every day.<strong> </strong>One focused application is all we need. If you truly fit more than one role, you're welcome to apply to <strong>up to three. </strong>This helps us match you with the right opportunity faster.<br><strong><br>We review every application with equal care and will reach out if your profile aligns. Apply now with your CV in English.</strong><br><em>*Portfolios, writing samples, or certifications may be requested based on the role.</em><br><br><span style="color: rgb(255, 255, 255);">#LI-CT1</span></p>
+</section>
+</section><div class="content-conclusion"><hr>
+<p><span style="font-weight: 400;">At Atolls, we want to ensure that all employees can thrive in an inclusive environment. Our employment opportunities are open to every gender, race, religion, age, sexual orientation, ability, place of origin, or socioeconomic status. We remain committed to a culture of diversity, equity and belonging, where all employees are welcomed, respected, connected, and engaged.&nbsp;</span></p>
+<h6><span style="color: rgb(255, 255, 255);"><sub><em><span style="font-family: -apple-system, system-ui, 'system-ui', 'Segoe UI', Roboto, 'Helvetica Neue', 'Fira Sans', Ubuntu, Oxygen, 'Oxygen Sans', Cantarell, 'Droid Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Lucida Grande', Helvetica, Arial, sans-serif; font-style: normal; letter-spacing: normal; text-align: left; word-spacing: 0px; white-space: normal; float: none; display: inline !important;">#LI-Hybrid</span></em></sub></span></h6>
+<p style="text-align: center; margin: 0;"><img style="display: block; margin: 0 auto; max-width: 100%;" src="https://atolls.com/wp-content/uploads/2025/09/Email-banner-bottom-2.jpg" alt="Atolls bottom banner" width="1000"></p></div><p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/atolls/senior-account-manager-german-speaker-munich-265088" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
