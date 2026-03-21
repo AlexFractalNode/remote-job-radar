@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Marketing Manager (m/f/d) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">KoRo Handels GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Product Marketing Manager (m/f/d)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Marketing and Communication</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><h2>Your tasks</h2>
+<p>As a <em>Product Marketing Manager (m/f/d)</em>, you will play a key role in connecting product development, brand strategy, and commercial success. You will shape how KoRo products are positioned in the market, develop compelling product narratives, and support both direct-to-consumer (D2C) and retail growth.</p>
+<p>In this role, you will develop go-to-market strategies, define product positioning and messaging, and ensure our communication resonates with clearly defined customer segments across all channels and stakeholders. Your responsibilities will include:</p>
+<ul>
+<li><strong>Product Positioning, USPs &#x26; Packaging Insights</strong>
+<ul>
+<li>Translate product attributes and consumer insights into <strong>clear customer benefits and compelling storytelling.</strong></li>
+<li>Define <strong>key selling points (USPs) and product narratives</strong> that differentiate KoRo products in the market.</li>
+<li>Develop <strong>product messaging frameworks and key insights</strong> that guide marketing communication.</li>
+<li>Provide input for <strong>key product information and claims on packaging</strong>, ensuring that the most relevant benefits and differentiators are clearly communicated to customers both on online and on retail shelves.</li>
+</ul>
+</li>
+<li><strong>D2C Product Launches</strong>
+<ul>
+<li>Define key product messages and launch angles that drive <strong>customer engagement and conversion.</strong></li>
+<li>Inform the <strong>marketing preparation for product launches on KoRo’s D2C channels</strong>, including the website and owned marketing channels. Collaborate with advertising, content, SEO, and social teams to ensure <strong>consistent product storytelling across all D2C touchpoints.</strong></li>
+</ul>
+</li>
+<li><strong>Retail Product Pitch Development</strong>
+<ul>
+<li>Create <strong>compelling product pitch materials</strong> to support KoRo’s retail expansion.</li>
+<li>Develop clear <strong>product selling stories, category insights, and key product benefits</strong> tailored for retail buyers.</li>
+<li>Collaborate with commercial and sales teams to ensure pitches effectively communicate <strong>KoRo’s product value and brand differentiation.</strong></li>
+</ul>
+</li>
+<li><strong>Cross-Functional Collaboration</strong>
+<ul>
+<li>Work closely with <strong>Product Development, Category Management, Marketing and Commercial teams</strong> to align on product communication and priorities.</li>
+<li>Act as the <strong>bridge between these teams</strong>, ensuring product insights translate into effective market messaging.</li>
+</ul>
+</li>
+</ul>
+<h2>Your profile</h2>
+<ul>
+<li><strong>3-6 years of experience</strong> in Product, Brand, or Category Marketing with a strong execution track record</li>
+<li>Industry experience in FMCG, Food, D2C, or Retail environments preferred</li>
+<li>Demonstrated success in <strong>driving product launches end-to-end</strong></li>
+<li>Proven ability to develop high-impact retail and buyer-facing materials</li>
+<li><strong>Exceptional storytelling</strong> and product positioning capabilities</li>
+<li>Expertise in crafting <strong>persuasive product narratives and presentations</strong></li>
+<li>Strong ability to translate product features and consumer insights into differentiated customer value</li>
+<li>Highly <strong>effective stakeholder management</strong> and cross-functional collaboration skills</li>
+<li>Outstanding written and verbal communication skills in <strong>English</strong></li>
+<li>Based in <strong>Berlin</strong> or willing to relocate</li>
+</ul>
+<h2>What you can expect from us</h2>
+<ul>
+<li>Our diverse team is ready to be enriched and inspired by your ideas: help building the future of food retailing in our fast-growing start-up!</li>
+<li>Extensive <strong>onboardings</strong> which will prepare you for your various and challenging tasks.</li>
+<li><strong>Flexible working hours</strong> and <strong>home office options</strong> to ensure a good work-life balance.</li>
+<li>A beautiful and modern office in Berlin Schöneberg, easy to reach by public transport – and we cover the costs of your monthly BVG (public transport Berlin) ticket.</li>
+<li>Find your way (back) to the gym thanks to <strong>fitness cooperations</strong> with Urban Sports Club or FitX.</li>
+<li>Optimal performance thanks to a <strong>modern MacBook.</strong></li>
+<li>Well equipped office kitchen with fresh fruit, delicious KoRo snacks, coffee and tea.</li>
+<li><strong>20 % discount</strong> in our KoRo online store.</li>
+<li>Regular team events and joint activities as well as legendary company parties.</li>
+</ul>
+<h2>Sounds good?</h2>
+<p>Then apply with your application documents (<strong>CV and letter of motivation</strong>) via the application form on our website. We are looking for real team members – let us know who you are and what motivates you!</p>
+<p>Find more <a href="https://www.arbeitnow.com/english-speaking-jobs">English Speaking Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/koro-handels-gmbh/product-marketing-manager-berlin-164543" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

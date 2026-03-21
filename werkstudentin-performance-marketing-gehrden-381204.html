@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Werkstudent:in (m/w/d) Performance Marketing | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">BRACHIAL KRAWALL - Brutal Growth Agency sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Werkstudent:in (m/w/d) Performance Marketing</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Online Marketing</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Wir sind BRACHIAL KRAWALL – Brutal Growth Agency aus der Region Hannover.</strong></p>
+<p>Wir skalieren Marken mit Performance Marketing, Social Media und Influencer-Kampagnen und suchen dich als Werkstudent:in, der/die Bock auf echte Zahlen, Ads und Wachstum hat.</p>
+<p><strong>Deine Rolle</strong></p>
+<p>Du unterstützt unser Performance-Team im Tagesgeschäft rund um Meta Ads, Google Ads und Social Ads und bekommst einen ehrlichen Einblick, wie man Kampagnen plant, aufsetzt, analysiert und skaliert. Schritt für Schritt übernimmst du eigene Teilbereiche und entwickelst dich in Richtung Junior Performance Marketer.</p>
+<h2>Aufgaben</h2>
+<p><strong>Deine Aufgaben</strong></p>
+<ul>
+<li>Unterstützung beim Setup und der Pflege von Kampagnen (Meta, Google, ggf. TikTok/LinkedIn) unter Anleitung.</li>
+<li>Auswertung von Kampagnen-KPIs (CTR, CPC, CPA, ROAS etc.) und Ableitung erster Optimierungsvorschläge.</li>
+<li>Unterstützung bei A/B-Tests (Creatives, Zielgruppen, Placements, Landingpages).</li>
+<li>Mitarbeit an Reportings und Präsentationen für Kund:innen.</li>
+<li>Recherche zu Trends, Best Practices, Creatives und neuen Features in Paid Social &#x26; SEA.</li>
+<li>Optional: Unterstützung im Zusammenspiel mit Social Media &#x26; Influencer-Kampagnen (z.B. Tracking, UTM, Auswertung).</li>
+</ul>
+<h2>Qualifikation</h2>
+<p><strong>Was du mitbringen solltest</strong></p>
+<ul>
+<li>Laufendes Studium im Bereich Marketing, BWL, Medien, Kommunikation o.ä.</li>
+<li>Erste Berührungspunkte mit Online- oder Performance Marketing (Uni, Praktikum, eigene Projekte, Side Hustle).</li>
+<li>Analytisches Mindset und keine Angst vor Zahlen, Reports und Tabellen.</li>
+<li>Saubere, strukturierte Arbeitsweise und Verlässlichkeit im Team.</li>
+<li>Interesse an Paid Social, Funnels und datengetriebenem Marketing – du willst wirklich lernen, wie Performance funktioniert.</li>
+<li>Sehr gute Deutschkenntnisse, gute Englischkenntnisse von Vorteil.</li>
+</ul>
+<p><strong>Nice to have</strong></p>
+<ul>
+<li>Erste Erfahrung mit Meta Business Manager, Google Ads oder Analytics.</li>
+<li>Erfahrung mit Tools wie Google Sheets, Notion, awork oder ähnlichem.</li>
+<li>Interesse an Creatives (Hooks, Thumbnails, Ad-Visuals) und Copy.</li>
+</ul>
+<p><strong>Rahmenbedingungen</strong></p>
+<ul>
+<li>Werkstudentenstelle (ca. 15–20 Stunden/Woche), flexibel an dein Studium angepasst.</li>
+<li>Hybrid möglich: Vor Ort in Gehrden/Hannover + Remote-Anteile nach Absprache.</li>
+</ul>
+<h2>Benefits</h2>
+<p><strong>Benefits</strong></p>
+<ul>
+<li>Arbeit in einem kleinen, direkten Team mit kurzer Entscheidungsstrecke und ehrlichem Feedback.</li>
+<li>Steile Lernkurve: Direkter Zugriff auf reale Accounts, echte Budgets und Mentoring durch erfahrene Performance Marketer.</li>
+<li>Perspektive: Bei guter Zusammenarbeit ist eine spätere Übernahme als Junior Performance Marketer ausdrücklich gewünscht.</li>
+</ul>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/brachial-krawall-brutal-growth-agency/werkstudentin-performance-marketing-gehrden-381204" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junior Campaign Manager, DACH | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">Whalar Group sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Junior Campaign Manager, DACH</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 €45k-55k</span>
+                    
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>Bewerben Sie sich, wenn Sie Erfahrung im Campaign Management haben und sich für die Kultur der Whalar Group begeistern können. Die Position bietet eine gute Möglichkeit, Ihre Fähigkeiten in einem renommierten Unternehmen zu entwickeln.</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><p><strong>Job Title:</strong> Jr. Campaign Manager (Executive)</p>
+<p><strong>Work Location:&nbsp;</strong>Berlin, DE (Hybrid)</p>
+<p><strong>Start Date</strong>: ASAP</p>
+<h2>&nbsp;</h2>
+<p>Whalar is the leading, most awarded, independent Creator and Social agency.&nbsp; We transform brands into cultural drivers by unlocking the full creative power of Creators.&nbsp;</p>
+<p>We go beyond the conventional social and influencer strategy. We have the technology and methodology to tap into the beating pulse of communities, listen to nuances that move culture, and connect brands in ways that make them unforgettable.</p>
+<p>With hubs in London, Berlin, New York, and Los Angeles, our reach is global. Learn more:&nbsp;<a href="https://www.whalar.com/">https://www.whalar.com/</a></p>
+<h2><strong>About the role:</strong></h2>
+<p data-start="237" data-end="475"><span class="BZ_Pyq_fadeIn">We're </span><span class="BZ_Pyq_fadeIn">looking </span><span class="BZ_Pyq_fadeIn">for </span><span class="BZ_Pyq_fadeIn">a <strong>Jr. Campaign Manager</strong></span>&nbsp;<span class="BZ_Pyq_fadeIn">to </span><span class="BZ_Pyq_fadeIn">join </span><span class="BZ_Pyq_fadeIn">our </span><span class="BZ_Pyq_fadeIn">team, </span><span class="BZ_Pyq_fadeIn">someone </span><span class="BZ_Pyq_fadeIn">who </span><span class="BZ_Pyq_fadeIn">is </span><span class="BZ_Pyq_fadeIn">passionate </span><span class="BZ_Pyq_fadeIn">about </span><span class="BZ_Pyq_fadeIn">the </span><span class="BZ_Pyq_fadeIn">creator </span><span class="BZ_Pyq_fadeIn">economy, </span><span class="BZ_Pyq_fadeIn">deeply </span><span class="BZ_Pyq_fadeIn">connected </span><span class="BZ_Pyq_fadeIn">to </span><span class="BZ_Pyq_fadeIn">social </span><span class="BZ_Pyq_fadeIn">media </span><span class="BZ_Pyq_fadeIn">culture, </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">excited </span><span class="BZ_Pyq_fadeIn">to </span><span class="BZ_Pyq_fadeIn">work </span><span class="BZ_Pyq_fadeIn">at </span><span class="BZ_Pyq_fadeIn">the </span><span class="BZ_Pyq_fadeIn">intersection </span><span class="BZ_Pyq_fadeIn">of </span><span class="BZ_Pyq_fadeIn">brands </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">creators.</span></p>
+<p data-start="477" data-end="796"><span class="BZ_Pyq_fadeIn">In </span><span class="BZ_Pyq_fadeIn">this </span><span class="BZ_Pyq_fadeIn">role, </span><span class="BZ_Pyq_fadeIn">you'll </span><span class="BZ_Pyq_fadeIn">act </span><span class="BZ_Pyq_fadeIn">as </span><span class="BZ_Pyq_fadeIn">a </span><span class="BZ_Pyq_fadeIn">key </span><span class="BZ_Pyq_fadeIn">link </span><span class="BZ_Pyq_fadeIn">between </span><span class="BZ_Pyq_fadeIn">creators </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">the </span><span class="BZ_Pyq_fadeIn">business, </span><span class="BZ_Pyq_fadeIn">helping </span><span class="BZ_Pyq_fadeIn">bring </span><span class="BZ_Pyq_fadeIn">campaigns </span><span class="BZ_Pyq_fadeIn">to </span><span class="BZ_Pyq_fadeIn">life </span><span class="BZ_Pyq_fadeIn">from </span><span class="BZ_Pyq_fadeIn">idea </span><span class="BZ_Pyq_fadeIn">through </span><span class="BZ_Pyq_fadeIn">execution. </span><span class="BZ_Pyq_fadeIn">You'll </span><span class="BZ_Pyq_fadeIn">work </span><span class="BZ_Pyq_fadeIn">closely </span><span class="BZ_Pyq_fadeIn">with </span><span class="BZ_Pyq_fadeIn">our </span><span class="BZ_Pyq_fadeIn">Associate </span><span class="BZ_Pyq_fadeIn">Director </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">wider </span><span class="BZ_Pyq_fadeIn">team </span><span class="BZ_Pyq_fadeIn">to </span><span class="BZ_Pyq_fadeIn">ensure </span><span class="BZ_Pyq_fadeIn">campaigns </span><span class="BZ_Pyq_fadeIn">run </span><span class="BZ_Pyq_fadeIn">smoothly, </span><span class="BZ_Pyq_fadeIn">content </span><span class="BZ_Pyq_fadeIn">meets </span><span class="BZ_Pyq_fadeIn">the </span><span class="BZ_Pyq_fadeIn">highest </span><span class="BZ_Pyq_fadeIn">standards, </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">creators </span><span class="BZ_Pyq_fadeIn">feel </span><span class="BZ_Pyq_fadeIn">supported </span><span class="BZ_Pyq_fadeIn">every </span><span class="BZ_Pyq_fadeIn">step </span><span class="BZ_Pyq_fadeIn">of </span><span class="BZ_Pyq_fadeIn">the </span><span class="BZ_Pyq_fadeIn">way.</span></p>
+<p data-start="798" data-end="998"><span class="BZ_Pyq_fadeIn">This </span><span class="BZ_Pyq_fadeIn">is </span><span class="BZ_Pyq_fadeIn">a </span><span class="BZ_Pyq_fadeIn">great </span><span class="BZ_Pyq_fadeIn">opportunity </span><span class="BZ_Pyq_fadeIn">for </span><span class="BZ_Pyq_fadeIn">someone </span><span class="BZ_Pyq_fadeIn">who </span><span class="BZ_Pyq_fadeIn">is </span><span class="BZ_Pyq_fadeIn">both </span><strong data-start="850" data-end="893"><span class="BZ_Pyq_fadeIn">highly </span><span class="BZ_Pyq_fadeIn">organised </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">creatively </span><span class="BZ_Pyq_fadeIn">curious,</span></strong><span class="BZ_Pyq_fadeIn">&nbsp;</span><span class="BZ_Pyq_fadeIn">someone </span><span class="BZ_Pyq_fadeIn">who </span><span class="BZ_Pyq_fadeIn">enjoys </span><span class="BZ_Pyq_fadeIn">structure </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">detail, </span><span class="BZ_Pyq_fadeIn">but </span><span class="BZ_Pyq_fadeIn">also </span><span class="BZ_Pyq_fadeIn">thrives </span><span class="BZ_Pyq_fadeIn">in </span><span class="BZ_Pyq_fadeIn">a </span><span class="BZ_Pyq_fadeIn">fast-</span><span class="BZ_Pyq_fadeIn">moving, </span><span class="BZ_Pyq_fadeIn">collaborative </span><span class="BZ_Pyq_fadeIn">environment.</span></p>
+<h2><strong>Here's what you'll do day-to-day:</strong></h2>
+<ul>
+<li data-start="1040" data-end="1098"><span class="BZ_Pyq_fadeIn">Source </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">evaluate </span><span class="BZ_Pyq_fadeIn">creators </span><span class="BZ_Pyq_fadeIn">across </span><span class="BZ_Pyq_fadeIn">key </span><span class="BZ_Pyq_fadeIn">social </span><span class="BZ_Pyq_fadeIn">platforms</span></li>
+<li data-start="1101" data-end="1159"><span class="BZ_Pyq_fadeIn">Manage </span><span class="BZ_Pyq_fadeIn">creator </span><span class="BZ_Pyq_fadeIn">relationships </span><span class="BZ_Pyq_fadeIn">end-</span><span class="BZ_Pyq_fadeIn">to-</span><span class="BZ_Pyq_fadeIn">end </span><span class="BZ_Pyq_fadeIn">across </span><span class="BZ_Pyq_fadeIn">campaigns</span></li>
+<li data-start="1162" data-end="1214"><span class="BZ_Pyq_fadeIn">Write </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">deliver </span><span class="BZ_Pyq_fadeIn">clear, </span><span class="BZ_Pyq_fadeIn">inspiring </span><span class="BZ_Pyq_fadeIn">creative </span><span class="BZ_Pyq_fadeIn">briefs</span></li>
+<li data-start="1217" data-end="1284"><span class="BZ_Pyq_fadeIn">Review </span><span class="BZ_Pyq_fadeIn">content </span><span class="BZ_Pyq_fadeIn">to </span><span class="BZ_Pyq_fadeIn">ensure </span><span class="BZ_Pyq_fadeIn">quality, </span><span class="BZ_Pyq_fadeIn">brand </span><span class="BZ_Pyq_fadeIn">alignment, </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">compliance</span></li>
+<li data-start="1287" data-end="1351"><span class="BZ_Pyq_fadeIn">Coordinate </span><span class="BZ_Pyq_fadeIn">timelines, </span><span class="BZ_Pyq_fadeIn">content </span><span class="BZ_Pyq_fadeIn">schedules, </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">campaign </span><span class="BZ_Pyq_fadeIn">delivery</span></li>
+<li data-start="1354" data-end="1408"><span class="BZ_Pyq_fadeIn">Track </span><span class="BZ_Pyq_fadeIn">performance </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">support </span><span class="BZ_Pyq_fadeIn">reporting </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">insights</span></li>
+<li data-start="1411" data-end="1470"><span class="BZ_Pyq_fadeIn">Stay </span><span class="BZ_Pyq_fadeIn">on </span><span class="BZ_Pyq_fadeIn">top </span><span class="BZ_Pyq_fadeIn">of </span><span class="BZ_Pyq_fadeIn">trends </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">bring </span><span class="BZ_Pyq_fadeIn">fresh </span><span class="BZ_Pyq_fadeIn">ideas </span><span class="BZ_Pyq_fadeIn">into </span><span class="BZ_Pyq_fadeIn">the </span><span class="BZ_Pyq_fadeIn">team</span></li>
+</ul>
+<h2><strong>Here's what we're looking for:</strong></h2>
+<ul>
+<li data-start="1510" data-end="1604"><span class="BZ_Pyq_fadeIn">1+ </span><span class="BZ_Pyq_fadeIn">years </span><span class="BZ_Pyq_fadeIn">of </span><span class="BZ_Pyq_fadeIn">experience </span><span class="BZ_Pyq_fadeIn">in </span><span class="BZ_Pyq_fadeIn">project </span><span class="BZ_Pyq_fadeIn">management, </span><span class="BZ_Pyq_fadeIn">influencer </span><span class="BZ_Pyq_fadeIn">marketing, </span><span class="BZ_Pyq_fadeIn">or </span><span class="BZ_Pyq_fadeIn">the </span><span class="BZ_Pyq_fadeIn">creator </span><span class="BZ_Pyq_fadeIn">landscape</span></li>
+<li data-start="1607" data-end="1698"><span class="BZ_Pyq_fadeIn">Strong </span><span class="BZ_Pyq_fadeIn">organisational </span><span class="BZ_Pyq_fadeIn">skills </span><span class="BZ_Pyq_fadeIn">with </span><span class="BZ_Pyq_fadeIn">the </span><span class="BZ_Pyq_fadeIn">ability </span><span class="BZ_Pyq_fadeIn">to </span><span class="BZ_Pyq_fadeIn">manage </span><span class="BZ_Pyq_fadeIn">multiple </span><span class="BZ_Pyq_fadeIn">priorities </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">deadlines</span></li>
+<li data-start="1701" data-end="1761"><span class="BZ_Pyq_fadeIn">Confident </span><span class="BZ_Pyq_fadeIn">communicator </span><span class="BZ_Pyq_fadeIn">with </span><span class="BZ_Pyq_fadeIn">excellent </span><span class="BZ_Pyq_fadeIn">interpersonal </span><span class="BZ_Pyq_fadeIn">skills</span></li>
+<li data-start="1764" data-end="1835"><span class="BZ_Pyq_fadeIn">A </span><span class="BZ_Pyq_fadeIn">proactive, </span><span class="BZ_Pyq_fadeIn">solution-</span><span class="BZ_Pyq_fadeIn">oriented </span><span class="BZ_Pyq_fadeIn">mindset </span><span class="BZ_Pyq_fadeIn">with </span><span class="BZ_Pyq_fadeIn">a </span><span class="BZ_Pyq_fadeIn">high </span><span class="BZ_Pyq_fadeIn">level </span><span class="BZ_Pyq_fadeIn">of </span><span class="BZ_Pyq_fadeIn">ownership</span></li>
+<li data-start="1838" data-end="1903"><span class="BZ_Pyq_fadeIn">Genuine </span><span class="BZ_Pyq_fadeIn">passion </span><span class="BZ_Pyq_fadeIn">for </span><span class="BZ_Pyq_fadeIn">social </span><span class="BZ_Pyq_fadeIn">media, </span><span class="BZ_Pyq_fadeIn">creators, </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">digital </span><span class="BZ_Pyq_fadeIn">culture</span></li>
+<li data-start="1906" data-end="1994"><span class="BZ_Pyq_fadeIn">Strong </span><span class="BZ_Pyq_fadeIn">attention </span><span class="BZ_Pyq_fadeIn">to </span><span class="BZ_Pyq_fadeIn">detail, </span><span class="BZ_Pyq_fadeIn">particularly </span><span class="BZ_Pyq_fadeIn">when </span><span class="BZ_Pyq_fadeIn">reviewing </span><span class="BZ_Pyq_fadeIn">content </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">managing </span><span class="BZ_Pyq_fadeIn">processes</span></li>
+<li data-start="1997" data-end="2072"><span class="BZ_Pyq_fadeIn">Comfortable </span><span class="BZ_Pyq_fadeIn">working </span><span class="BZ_Pyq_fadeIn">with </span><span class="BZ_Pyq_fadeIn">data, </span><span class="BZ_Pyq_fadeIn">tracking </span><span class="BZ_Pyq_fadeIn">performance, </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">managing </span><span class="BZ_Pyq_fadeIn">budgets</span></li>
+<li data-start="2075" data-end="2151"><span class="BZ_Pyq_fadeIn">A </span><span class="BZ_Pyq_fadeIn">collaborative </span><span class="BZ_Pyq_fadeIn">team </span><span class="BZ_Pyq_fadeIn">player </span><span class="BZ_Pyq_fadeIn">who </span><span class="BZ_Pyq_fadeIn">is </span><span class="BZ_Pyq_fadeIn">flexible </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">willing </span><span class="BZ_Pyq_fadeIn">to </span><span class="BZ_Pyq_fadeIn">take </span><span class="BZ_Pyq_fadeIn">initiative</span></li>
+<li data-start="2154" data-end="2201"><span class="BZ_Pyq_fadeIn">Thrives </span><span class="BZ_Pyq_fadeIn">in </span><span class="BZ_Pyq_fadeIn">a </span><span class="BZ_Pyq_fadeIn">fast-</span><span class="BZ_Pyq_fadeIn">paced, </span><span class="BZ_Pyq_fadeIn">evolving </span><span class="BZ_Pyq_fadeIn">environment</span></li>
+<li data-start="2154" data-end="2201"><span class="BZ_Pyq_fadeIn">A strong appreciation for <strong data-start="917" data-end="940">creative excellence</strong>, with an eye for high-quality, culturally relevant content</span></li>
+<li data-start="2154" data-end="2201"><span class="BZ_Pyq_fadeIn">Experience leveraging <strong data-start="1026" data-end="1063">AI tools or emerging technologies</strong> to improve productivity, workflows, or campaign performance</span></li>
+<li data-start="2154" data-end="2201">Must possess native-level German language skills and be fluent (written and spoken) in English.</li>
+</ul>
+<h2 data-section-id="1lcs53b" data-start="2321" data-end="2339"><strong data-start="2324" data-end="2339"><span class="BZ_Pyq_fadeIn">Why </span><span class="BZ_Pyq_fadeIn">Join </span><span class="BZ_Pyq_fadeIn">Us</span></strong></h2>
+<ul>
+<li data-start="2343" data-end="2436"><span class="BZ_Pyq_fadeIn">Work </span><span class="BZ_Pyq_fadeIn">at </span><span class="BZ_Pyq_fadeIn">the </span><span class="BZ_Pyq_fadeIn">forefront </span><span class="BZ_Pyq_fadeIn">of </span><span class="BZ_Pyq_fadeIn">the </span><strong data-start="2372" data-end="2391"><span class="BZ_Pyq_fadeIn">creator </span><span class="BZ_Pyq_fadeIn">economy</span></strong><span class="BZ_Pyq_fadeIn">, </span><span class="BZ_Pyq_fadeIn">partnering </span><span class="BZ_Pyq_fadeIn">with </span><span class="BZ_Pyq_fadeIn">leading </span><span class="BZ_Pyq_fadeIn">brands </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">talent</span></li>
+<li data-start="2439" data-end="2536"><span class="BZ_Pyq_fadeIn">Be </span><span class="BZ_Pyq_fadeIn">part </span><span class="BZ_Pyq_fadeIn">of </span><span class="BZ_Pyq_fadeIn">a </span><strong data-start="2452" data-end="2489"><span class="BZ_Pyq_fadeIn">collaborative, </span><span class="BZ_Pyq_fadeIn">international </span><span class="BZ_Pyq_fadeIn">team</span></strong> <span class="BZ_Pyq_fadeIn">with </span><span class="BZ_Pyq_fadeIn">a </span><span class="BZ_Pyq_fadeIn">strong </span><span class="BZ_Pyq_fadeIn">culture </span><span class="BZ_Pyq_fadeIn">of </span><span class="BZ_Pyq_fadeIn">trust </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">ownership</span></li>
+<li data-start="2539" data-end="2639"><span class="BZ_Pyq_fadeIn">Gain </span><span class="BZ_Pyq_fadeIn">exposure </span><span class="BZ_Pyq_fadeIn">to </span><span class="BZ_Pyq_fadeIn">end-</span><span class="BZ_Pyq_fadeIn">to-</span><span class="BZ_Pyq_fadeIn">end </span><span class="BZ_Pyq_fadeIn">campaign </span><span class="BZ_Pyq_fadeIn">delivery </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">develop </span><span class="BZ_Pyq_fadeIn">both </span><strong data-start="2602" data-end="2637"><span class="BZ_Pyq_fadeIn">creative </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">operational </span><span class="BZ_Pyq_fadeIn">skills</span></strong></li>
+<li data-start="2642" data-end="2712"><span class="BZ_Pyq_fadeIn">Contribute </span><span class="BZ_Pyq_fadeIn">to </span><span class="BZ_Pyq_fadeIn">shaping </span><span class="BZ_Pyq_fadeIn">work </span><span class="BZ_Pyq_fadeIn">that </span><span class="BZ_Pyq_fadeIn">is </span><span class="BZ_Pyq_fadeIn">culturally </span><span class="BZ_Pyq_fadeIn">relevant </span><span class="BZ_Pyq_fadeIn">and </span><span class="BZ_Pyq_fadeIn">impactful</span></li>
+</ul>
+<p><em>We are an office-based company located in Kurfürstendamm, Berlin, with a flexible approach to in-office days. Employees are asked to work from the office three days a week, choosing the days that suit them best. However, we come together every Thursday as a team to collaborate, connect, and celebrate the vibrant and unique Whalar culture!</em></p>
+<h2><strong>Our values:</strong></h2>
+<p>At Whalar, diversity, equity, and inclusion (DEI) isn't just a statement, it's our collective strength. Our people are our superpower. A diverse team and inclusive leadership have shaped Whalar since our inception in 2016, fueling a constant evolution of growth. We champion a culture of respect and empathy, fostering a sense of belonging that transcends demographics. We hire individuals of all backgrounds and empower them to thrive, challenge stereotypes, and actively break societal barriers.&nbsp;</p>
+<h2><strong>The perks:</strong></h2>
+<p>Whalar provides flexible benefits and collaborative work environments/experiences, so employees can work productively in a setting that best and uniquely suits their needs.</p>
+<ul>
+<li>25 days of PTO + winter break</li>
+<li>Monthly phone/internet reimbursement</li>
+<li>New joiner's home office allowance&nbsp;</li>
+<li>Professional development stipend</li>
+<li>Up to 16 weeks of paid maternity/paternity leave</li>
+<li>Monthly Well-being Allowance</li>
+<li>Volunteer days</li>
+<li>Social programs</li>
+</ul>
+<p>&nbsp;</p><p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/whalar-group/junior-campaign-manager-dach-berlin-292833" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>

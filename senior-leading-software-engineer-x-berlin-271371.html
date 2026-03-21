@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior/Leading Software Engineer (f/m/d/x) | RemoteRadar 📡</title>
+    
+<style>
+    :root { 
+        --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+        --border: #e2e8f0; --card-bg: #ffffff;
+    }
+    body { background: var(--bg); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Nav */
+    nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 1rem 2rem 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); letter-spacing: -1px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Chips */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 900px; }
+    .filter-btn { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* GRID FIX: Hier verhindern wir das Überlappen! */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box; }
+    #job-grid { 
+        display: grid; 
+        gap: 2rem; /* Mehr Platz zwischen den Boxen */
+        /* Automatische Spalten, aber mindestens 320px breit -> Kein Quetschen mehr */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    }
+
+    /* Card */
+    .job-card { 
+        background: var(--card-bg); 
+        border: 1px solid var(--border); 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+        text-decoration: none; 
+        color: inherit; 
+        display: flex; 
+        flex-direction: column; 
+        height: 100%; /* Wichtig für gleiche Höhe */
+        transition: all 0.2s; 
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .job-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    
+    .job-title { margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+    .company-name { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 5px; }
+    
+    .ai-summary { background: #f8fafc; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 3px solid var(--primary); line-height: 1.5; }
+    
+    /* Footer & Meta */
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; /* Drückt Tags nach unten */ }
+    
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-salary { background: #ecfdf5; color: #047857; border: 1px solid #d1fae5; }
+    .badge-tag { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+    footer { text-align: center; margin-top: auto; padding: 4rem 0; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid var(--border); background: white; }
+    footer a { color: #64748b; margin: 0 10px; text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+    
+    /* Legal Pages */
+    .legal-content h1 { margin-bottom: 2rem; }
+    .legal-content h2 { margin-top: 2rem; font-size: 1.2rem; }
+    .legal-content p { margin-bottom: 1rem; color: #475569; }
+    
+    /* Detail Page */
+    article { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .apply-btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 2rem; transition: background 0.2s; }
+    .apply-btn:hover { background: #4338ca; }
+</style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">📡 RemoteRadar 📡</a>
+            <div class="nav-links"><a href="index.html">← Zur Übersicht</a></div>
+        </div>
+    </nav>
+    <main class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <article>
+            <header>
+                <div style="color:var(--text-muted); font-weight:600; margin-bottom: 0.5rem;">EMIL Group GmbH sucht:</div>
+                <h1 style="font-size:2rem; margin:0 0 1rem 0;">Senior/Leading Software Engineer (f/m/d/x)</h1>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 1.5rem;">
+                    <span class="badge badge-salary">💰 Auf Anfrage</span>
+                    <span class="badge badge-tag">Project Management</span>
+                </div>
+                <div class="ai-summary"><strong>🤖 KI-Einschätzung:</strong><br>KI-Analyse folgt...</div>
+            </header>
+            <hr style="border:0; border-top:1px solid #eee; margin:2rem 0;">
+            <div style="line-height: 1.8; color: #334155;"><h2>YOUR ROLE</h2>
+<p>We are building a cloud-native insurance platform designed for a future where humans and AI collaborate to create, configure, and operate insurance products.</p>
+<p>Insurance systems are traditionally complex, rigid, and difficult to change. Our mission is to make them structured, versioned, and programmable so that product teams, engineers, and eventually AI systems can work with them safely and efficiently.</p>
+<p>As a <strong>Senior / Leading Software Engineer (f/m/d/x) AI-Enabled Insurance Platform</strong>, you will help design and build the core platform capabilities that power this vision. You will work on distributed systems, platform architecture, and developer tooling that enable teams and customers to build insurance products faster while maintaining correctness, transparency, and reliability.</p>
+<p>This role sits at the intersection of platform engineering, domain modeling, and AI-enabled software development.</p>
+<h2>WHAT YOU WILL BE CHALLENGED WITH</h2>
+<ul>
+<li>Design and build core platform services for a cloud-native insurance system</li>
+<li>Architect scalable, reliable microservices running on AWS container infrastructure</li>
+<li>Design APIs, metadata models, and workflows that support complex insurance products</li>
+<li>Help shape systems that are structured and versioned, enabling safe automation and future AI-assisted workflows</li>
+<li>Use modern AI-assisted development tools to accelerate design, coding, and testing</li>
+<li>Collaborate with Product, Customer Delivery, and Solution Architects to turn complex business requirements into robust platform capabilities</li>
+<li>Review code and mentor other engineers, contributing to a culture of strong engineering fundamentals and continuous learning</li>
+<li>Continuously improve our platform architecture, infrastructure, and developer productivity</li>
+</ul>
+<h2>WHAT WE ARE LOOKING FOR</h2>
+<ul>
+<li>Strong experience building complex production systems or platform services</li>
+<li>Comfort designing distributed systems and service architectures</li>
+<li>Experience with Golang, Python, and/or Node.js / TypeScript</li>
+<li>Hands-on experience running systems on modern cloud infrastructure (AWS or similar)</li>
+<li>Familiarity with microservices, containers, and CI/CD pipelines</li>
+<li>A strong focus on system design, data modeling, and long-term maintainability</li>
+<li>Regular use of AI tools as part of the engineering workflow, while maintaining full ownership of system correctness</li>
+<li>Clear communication and a collaborative mindset when working with engineering, product, and customer teams</li>
+<li>Curiosity and enjoyment in tackling complex problems without predefined playbooks</li>
+</ul>
+<p>Nice to Know: Our Tech-Stack:</p>
+<ul>
+<li>AWS cloud infrastructure</li>
+<li>Containerized microservices architecture</li>
+<li>gRPC and event-driven communication</li>
+<li>Golang, Python, Node.js / TypeScript</li>
+<li>React-based administrative interfaces</li>
+</ul>
+<h2>WHAT WE OFFER</h2>
+<ul>
+<li>An attractive salary package based on your experience, qualifications and responsibilities</li>
+<li>A remote-friendly working model with occasional trips to our Berlin office</li>
+<li>30 days of holiday leave, plus extra half-days off on 24 and 31 December</li>
+<li>A personal training budget of at least €500, or more if necessary, which we will invest together in your further development</li>
+<li>Exciting opportunities for internal development through a fixed role development model, fixed feedback cycles and performance reviews.</li>
+<li>A company subsidy for Urban Sports Club membership to support your well-being outside of work</li>
+<li>A generously subsidised company pension scheme, which we use to work together to make optimal provisions for your future</li>
+<li>A VSOP programme that lets you benefit from the company's success additionally</li>
+<li>We provide you with modern hardware; you decide whether you want Windows or iOS</li>
+<li>With weekly company lunches and a well-stocked snack bar, everything you need for a quick bite to eat is right there</li>
+<li>Three times a year, we invite you to Homecoming Week, either in Berlin or at off-site locations in nature / warmer countries</li>
+<li>As part of a dynamic and motivated team of experts, you benefit directly from the knowledge of your colleagues, because team spirit and mutual support are an essential part of our culture</li>
+</ul>
+<h2>WHAT'S NEXT?</h2>
+<p>If you application impresses us, we will contact you to arrange an initial interview with our HR manager.</p>
+<p>Find <a href="https://www.arbeitnow.com/">Jobs in Germany</a> on Arbeitnow</a></div>
+            <a href="https://www.arbeitnow.com/jobs/companies/emil-group-gmbh/senior-leading-software-engineer-x-berlin-271371" target="_blank" class="apply-btn">Jetzt bewerben ↗</a>
+        </article>
+    </main>
+    <footer><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></footer>
+</body>
+</html>
